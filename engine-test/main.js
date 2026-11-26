@@ -16,14 +16,14 @@ function state(value){
 }
 async function boot(){
   attempt?.abort();app?.destroy();app=null;attempt=new AbortController();$('status').hidden=false;$('retry').hidden=true;$('gate').hidden=true;$('generate').disabled=true;$('randomize').disabled=true;$('activate').disabled=true;$('message').textContent='Constructing and checking the arena…';
-  try{app=await createEngine(canvas,{signal:attempt.signal,seed:parameters.has('seed')?+parameters.get('seed'):27011984,testing:parameters.has('test'),onState:state,onError:message=>{document.exitPointerLock();keys=0;$('status').hidden=false;$('message').textContent=message;$('retry').hidden=false;}});view();}
+  try{app=await createEngine(canvas,{signal:attempt.signal,seed:parameters.has('seed')?+parameters.get('seed'):27011984,testing:parameters.has('test'),onState:state,onError:message=>{document.exitPointerLock?.();keys=0;$('status').hidden=false;$('message').textContent=message;$('retry').hidden=false;}});view();}
   catch(error){if(error.name!=='AbortError'&&!disposed){$('message').textContent=error.message;$('retry').hidden=false;}}
 }
 Object.defineProperty(window,'__ENGINE_TEST',{get:()=>app});
 async function enter(){try{await canvas.requestPointerLock({unadjustedMovement:false});}catch{$('gate').hidden=false;$('gate').querySelector('.eyebrow').textContent=typeof canvas.requestPointerLock==='function'?'Mouse capture declined · click Enter arena to retry':'Mouse capture unavailable · use H for scene inspection';}}
 function toggle(){
   controls.hidden=!controls.hidden;keys=0;app?.input(0);
-  if(!controls.hidden){document.exitPointerLock();app?.play(false);$('gate').hidden=true;diagnostics();}
+  if(!controls.hidden){document.exitPointerLock?.();app?.play(false);$('gate').hidden=true;diagnostics();}
   else $('gate').hidden=!app?.ready;
 }
 function diagnostics(){

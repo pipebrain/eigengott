@@ -18,7 +18,7 @@ The user authorized making `pipebrain/eigengott` public and enabling GitHub Page
 
 The build stamp includes the full commit, short commit, repository URL, and build date. It appears on the hub and inside each H menu. Engine and DOS diagnostics include the same deployment metadata; benchmark report exports carry it as well. `build.json` identifies the deployment, and `manifest.json` records staged file sizes and SHA-256 hashes. The H-menu metadata and `?tools=1` behavior are hosting additions; simulation, geometry, rendering defaults, and the accepted small baseline's buffers are unchanged.
 
-`?tools=1` opens the existing H menu at startup, allowing inspection from touch devices without a physical H key. Engine movement still requires keyboard/mouse; touch movement is not implemented. The landing page identifies whether the browser exposes WebGPU. This is not a claim that every WebGPU browser/device has passed physical testing.
+`?tools=1` opens the existing H menu at startup, allowing inspection from touch devices without a physical H key. Engine UI paths tolerate a missing Pointer Lock exit API; inspection does not require mouse capture. Engine movement still requires keyboard/mouse; touch movement is not implemented. The landing page identifies whether the browser exposes WebGPU. This is not a claim that every WebGPU browser/device has passed physical testing.
 
 ## Local and live verification
 
