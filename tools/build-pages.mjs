@@ -8,7 +8,7 @@ const root=fileURLToPath(new URL('../',import.meta.url)),out=path.join(root,'_si
 const commit=process.env.GITHUB_SHA||execFileSync('git',['rev-parse','HEAD'],{cwd:root,encoding:'utf8'}).trim();
 if(!/^[a-f0-9]{40}$/.test(commit))throw new Error('Pages requires a full source commit identifier.');
 const build={commit,short:commit.slice(0,7),builtAt:new Date().toISOString(),repository:'https://github.com/pipebrain/eigengott'};
-const applications=['engine-test','engine-benchmark','arena-fold','arena-fold-2','dos-maze','vector-labyrinth'];
+const applications=['engine-test','engine-benchmark','arena-fold','arena-fold-2','arena-sweep','dos-maze','vector-labyrinth'];
 const extensions=new Set(['.html','.css','.js','.wasm','.json','.gz','.bin','.wgsl']);
 const subdirectories=new Set(['assets','shaders','presets']);
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});

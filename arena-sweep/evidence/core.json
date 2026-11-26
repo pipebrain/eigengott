@@ -1,0 +1,147 @@
+{
+  "passed": true,
+  "wasmBytes": 92172,
+  "memoryBytes": 33554432,
+  "containmentSteps": 7680,
+  "reports": [
+    {
+      "profile": 1,
+      "width": 75,
+      "sectors": 572,
+      "clumps": 49,
+      "protectedCount": 4,
+      "deleted": 45,
+      "enemies": 4,
+      "release": 2
+    },
+    {
+      "profile": 2,
+      "width": 196,
+      "sectors": 2136,
+      "clumps": 169,
+      "protectedCount": 4,
+      "deleted": 165,
+      "enemies": 4,
+      "release": 2
+    }
+  ],
+  "clumpProfiles": [
+    {
+      "profile": 1,
+      "span": 1,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 1,
+      "span": 1,
+      "movement": 1,
+      "protected": 1
+    },
+    {
+      "profile": 1,
+      "span": 2,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 1,
+      "span": 2,
+      "movement": 1,
+      "protected": 1
+    },
+    {
+      "profile": 1,
+      "span": 8,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 1,
+      "span": 8,
+      "movement": 1,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 1,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 1,
+      "movement": 1,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 2,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 2,
+      "movement": 1,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 8,
+      "movement": 0,
+      "protected": 1
+    },
+    {
+      "profile": 2,
+      "span": 8,
+      "movement": 1,
+      "protected": 1
+    }
+  ],
+  "cadences": [
+    {
+      "fps": 30,
+      "position": [
+        -0.00009523475455353037,
+        -23.859596252441406,
+        1.7343307733535767
+      ]
+    },
+    {
+      "fps": 60,
+      "position": [
+        -0.00009523475455353037,
+        -23.859596252441406,
+        1.7343307733535767
+      ]
+    },
+    {
+      "fps": 120,
+      "position": [
+        -0.00009523475455353037,
+        -23.859596252441406,
+        1.7343307733535767
+      ]
+    },
+    {
+      "fps": 240,
+      "position": [
+        -0.00009523475455353037,
+        -23.859596252441406,
+        1.7343307733535767
+      ]
+    }
+  ],
+  "checks": [
+    "Actual medium / large procedural arena validation and sector ownership",
+    "Clumped capture across exact grid intersections",
+    "3D body / weapon field sweeps without escape or teleport",
+    "Outward deletion / inward insertion ordering",
+    "Per-deletion body cleanup, protected-body retention until return",
+    "Shared enemy / player field release and loot closure",
+    "Old protected geometry retention and bounded resource ownership",
+    "FPS-independent transitions; atomic invalid-overlay rejection",
+    "Bounded non-silent procedural audio signals"
+  ]
+}

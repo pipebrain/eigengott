@@ -1,0 +1,467 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:59142/arena-sweep/",
+  "checks": [
+    "Native entry, H tools and user-gesture Web Audio activation",
+    "Four-clump capture, fixed origin, contact response and transparent fields isolated from feedback",
+    "Inward enemy staging keeps fields until one shared loot-close / release boundary",
+    "196 m arena generated and staged while the current 75 m world remained active",
+    "Aborted wave preparation cannot cancel a newer sweep",
+    "Colour, orthogonal and diagonal feedback with real large-arena coverage",
+    "GPU loss restores current procedural geometry, protected clumps and exact wave state",
+    "Resize, page freezing, bounded positional audio and no transition catch-up",
+    "Repeated large-arena sweeps retain valid physics and bounded GPU / audio resources",
+    "Inspection tools remain usable without Pointer Lock",
+    "Missing WebGPU exposes retry state"
+  ],
+  "isolation": {
+    "world": {
+      "hash": 2958496599,
+      "nonzero": 289684,
+      "alpha": 18467355,
+      "width": 645,
+      "height": 360
+    },
+    "history": {
+      "hash": 599925519,
+      "nonzero": 506947,
+      "alpha": 0,
+      "width": 645,
+      "height": 360
+    },
+    "fieldWorld": {
+      "hash": 2958496599,
+      "nonzero": 289684,
+      "alpha": 18467355,
+      "width": 645,
+      "height": 360
+    },
+    "fieldHistory": {
+      "hash": 599925519,
+      "nonzero": 506947,
+      "alpha": 0,
+      "width": 645,
+      "height": 360
+    },
+    "actor": {
+      "hash": 1124747084,
+      "nonzero": 51044,
+      "alpha": 298086,
+      "width": 645,
+      "height": 360
+    }
+  },
+  "actorClear": {
+    "hash": 566219845,
+    "nonzero": 0,
+    "alpha": 0,
+    "width": 645,
+    "height": 360
+  },
+  "samples": [
+    {
+      "name": "startup",
+      "world": {
+        "arenaWidth": 75,
+        "cells": 572,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 0
+      },
+      "sweep": {
+        "phase": "idle",
+        "cycle": 0,
+        "completed": 0,
+        "protected": [],
+        "hidden": 0,
+        "remainingBodies": 24,
+        "fields": 0,
+        "release": 0,
+        "lootOpen": false
+      },
+      "cpu": {
+        "samples": 24,
+        "median": 0,
+        "p95": 1,
+        "p99": 4.199999988079071,
+        "max": 4.199999988079071
+      },
+      "frameMs": {
+        "samples": 22,
+        "median": 16.69999999999999,
+        "p95": 16.700000000000045,
+        "p99": 16.799999999999955,
+        "max": 16.799999999999955
+      },
+      "render": {
+        "resolution": [
+          645,
+          360
+        ],
+        "output": [
+          1376,
+          768
+        ],
+        "frames": 2,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.429163,
+          "feedback": 0.397207,
+          "present": 0.304925,
+          "total": 1.1312950000000002
+        },
+        "targets": 6501600,
+        "gpuBytes": 4977376,
+        "staged": 0,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "not enabled",
+        "voiceLimit": 8,
+        "voices": 0,
+        "scheduled": 0,
+        "dropped": 0,
+        "error": null
+      }
+    },
+    {
+      "name": "large-loaded",
+      "world": {
+        "arenaWidth": 196,
+        "cells": 2136,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 1
+      },
+      "sweep": {
+        "phase": "idle",
+        "cycle": 0,
+        "completed": 0,
+        "protected": [],
+        "hidden": 0,
+        "remainingBodies": 24,
+        "fields": 0,
+        "release": 0,
+        "lootOpen": false
+      },
+      "cpu": {
+        "samples": 53,
+        "median": 0.29999998211860657,
+        "p95": 1.300000011920929,
+        "p99": 4.199999988079071,
+        "max": 4.199999988079071
+      },
+      "frameMs": {
+        "samples": 49,
+        "median": 16.699999999999932,
+        "p95": 16.800000000000068,
+        "p99": 66.70000000000005,
+        "max": 66.70000000000005
+      },
+      "render": {
+        "resolution": [
+          645,
+          360
+        ],
+        "output": [
+          1376,
+          768
+        ],
+        "frames": 34,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.429163,
+          "feedback": 0.397207,
+          "present": 0.304925,
+          "total": 1.1312950000000002
+        },
+        "targets": 6501600,
+        "gpuBytes": 7005824,
+        "staged": 0,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "running",
+        "voiceLimit": 8,
+        "voices": 8,
+        "scheduled": 17,
+        "dropped": 84,
+        "error": null
+      }
+    },
+    {
+      "name": "running-0",
+      "world": {
+        "arenaWidth": 196,
+        "cells": 2136,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 1
+      },
+      "sweep": {
+        "phase": "inbound",
+        "cycle": 8,
+        "completed": 0,
+        "protected": [
+          6
+        ],
+        "hidden": 15,
+        "remainingBodies": 1,
+        "fields": 20,
+        "release": 0,
+        "lootOpen": true
+      },
+      "cpu": {
+        "samples": 208,
+        "median": 0.5,
+        "p95": 2.0999999940395355,
+        "p99": 2.5,
+        "max": 4.199999988079071
+      },
+      "frameMs": {
+        "samples": 195,
+        "median": 16.699999999999818,
+        "p95": 16.800000000000068,
+        "p99": 33.39999999999998,
+        "max": 66.70000000000005
+      },
+      "render": {
+        "resolution": [
+          640,
+          360
+        ],
+        "output": [
+          960,
+          540
+        ],
+        "frames": 121,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.50195,
+          "feedback": 0.414785,
+          "present": 0.500409,
+          "total": 1.417144
+        },
+        "targets": 6451200,
+        "gpuBytes": 7268480,
+        "staged": 0,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "running",
+        "voiceLimit": 8,
+        "voices": 8,
+        "scheduled": 91,
+        "dropped": 624,
+        "error": null
+      }
+    },
+    {
+      "name": "running-2",
+      "world": {
+        "arenaWidth": 196,
+        "cells": 2136,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 1
+      },
+      "sweep": {
+        "phase": "complete",
+        "cycle": 9,
+        "completed": 2,
+        "protected": [
+          6
+        ],
+        "hidden": 0,
+        "remainingBodies": 0,
+        "fields": 0,
+        "release": 2,
+        "lootOpen": false
+      },
+      "cpu": {
+        "samples": 328,
+        "median": 0.5999999940395355,
+        "p95": 1.9000000059604645,
+        "p99": 2.600000023841858,
+        "max": 5.5
+      },
+      "frameMs": {
+        "samples": 315,
+        "median": 16.699999999999818,
+        "p95": 16.800000000000068,
+        "p99": 16.800000000000182,
+        "max": 66.70000000000005
+      },
+      "render": {
+        "resolution": [
+          640,
+          360
+        ],
+        "output": [
+          960,
+          540
+        ],
+        "frames": 241,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.552033,
+          "feedback": 0.379411,
+          "present": 0.461368,
+          "total": 1.392812
+        },
+        "targets": 6451200,
+        "gpuBytes": 7268480,
+        "staged": 0,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "running",
+        "voiceLimit": 8,
+        "voices": 1,
+        "scheduled": 130,
+        "dropped": 943,
+        "error": null
+      }
+    },
+    {
+      "name": "running-4",
+      "world": {
+        "arenaWidth": 196,
+        "cells": 2136,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 1
+      },
+      "sweep": {
+        "phase": "preparing",
+        "cycle": 11,
+        "completed": 3,
+        "protected": [
+          6
+        ],
+        "hidden": 0,
+        "remainingBodies": 24,
+        "fields": 4,
+        "release": 3,
+        "lootOpen": true
+      },
+      "cpu": {
+        "samples": 449,
+        "median": 0.5999999940395355,
+        "p95": 1.9000000059604645,
+        "p99": 3,
+        "max": 5.5
+      },
+      "frameMs": {
+        "samples": 436,
+        "median": 16.699999999999818,
+        "p95": 16.800000000000068,
+        "p99": 16.80000000000109,
+        "max": 66.70000000000005
+      },
+      "render": {
+        "resolution": [
+          640,
+          360
+        ],
+        "output": [
+          960,
+          540
+        ],
+        "frames": 362,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.447785,
+          "feedback": 0.342787,
+          "present": 0.391702,
+          "total": 1.182274
+        },
+        "targets": 6451200,
+        "gpuBytes": 7268480,
+        "staged": 1,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "running",
+        "voiceLimit": 8,
+        "voices": 0,
+        "scheduled": 165,
+        "dropped": 1250,
+        "error": null
+      }
+    },
+    {
+      "name": "running-6",
+      "world": {
+        "arenaWidth": 196,
+        "cells": 2136,
+        "candidateErrors": 0,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "movementProfile": 1
+      },
+      "sweep": {
+        "phase": "outbound",
+        "cycle": 12,
+        "completed": 4,
+        "protected": [
+          6
+        ],
+        "hidden": 107,
+        "remainingBodies": 1,
+        "fields": 4,
+        "release": 4,
+        "lootOpen": true
+      },
+      "cpu": {
+        "samples": 570,
+        "median": 0.5999999940395355,
+        "p95": 1.800000011920929,
+        "p99": 3,
+        "max": 5.5
+      },
+      "frameMs": {
+        "samples": 557,
+        "median": 16.699999999999818,
+        "p95": 16.799999999999272,
+        "p99": 16.80000000000109,
+        "max": 66.70000000000005
+      },
+      "render": {
+        "resolution": [
+          640,
+          360
+        ],
+        "output": [
+          960,
+          540
+        ],
+        "frames": 483,
+        "pending": 0,
+        "gpuMs": {
+          "scene": 0.637866,
+          "feedback": 0.47866,
+          "present": 0.523909,
+          "total": 1.6404349999999999
+        },
+        "targets": 6451200,
+        "gpuBytes": 7268480,
+        "staged": 0,
+        "timestamps": true
+      },
+      "audio": {
+        "state": "running",
+        "voiceLimit": 8,
+        "voices": 8,
+        "scheduled": 211,
+        "dropped": 1653,
+        "error": null
+      }
+    }
+  ]
+}

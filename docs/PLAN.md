@@ -21,7 +21,11 @@ The separately authorized [continuous fold experiment](../arena-fold/README.md) 
 
 The user retained that experiment as candidate 1 and authorized [candidate 2](../arena-fold-2/README.md): fixed layouts audition / disappear / reappear, random instigators spread sector corruption, old geometry can persist across waves, and coherence reduces affected sectors toward a static world. All old bodies clear globally at wave end, including bodies in surviving sectors, as explicitly selected by the user. Inert fixtures demonstrate that timing; actual looting and game progression remain future work. Candidate 1 remains unchanged.
 
-Next, review larger-arena smooth preparation and the fold's physical / visual behavior on target devices. Authored surface tiles, broader safe transitions, arbitrary-surface locomotion, mirrors, combat, and broader/stacked generation remain later milestones. Physical device checks are pending; current movement uses desktop mouse/keyboard controls.
+The user reported **Test PASS** and selected candidate 2 as the direction on 2026-11-26. Candidate 1 remains a historical comparison. The selected encounter transition uses discrete architecture changes, a living corruption-wave warning and global old-body cleanup; no moving architecture is required.
+
+The proposed next milestone is a separate procedural-wave integration test: versioned sector/replacement-group ownership, compatible boundaries and composed-world validation, worker-prepared choices, safe atomic commits without fallback relocation, bounded resource retention, and the benchmark's coarse lighting combined with coverage/history rendering. Start at 75 m, then test 196 m. The [engine plan](ENGINE_PLAN.md) records the gaps, proposed restrictions and acceptance criteria. The compatible-interior subset is implemented separately in `arena-sweep/`; arbitrary topology and neighbour-dependent rebaking remain future work.
+
+Audiovisual presets can be defined now against shared transition events: shadowless dynamic light/emissive changes, sector-local static/interference and glitches, spatial sound and procedural material changes. Prototype these in parallel with integration; final lighting, masks and spatial tuning need the real generated arena. Keep independent H controls and measured budgets. Authored surface tiles, arbitrary-surface locomotion, mirrors, combat, and broader/stacked generation remain later milestones. Physical device checks are pending; current movement uses desktop mouse/keyboard controls.
 
 ## Cross-device testing and deployment
 
@@ -41,3 +45,10 @@ The v1.1.0 [DOS-maze runtime](../dos-maze/README.md) adds the minimal H menu, a 
 - Gameplay
 - Enemies
 - Multiplayer
+
+
+## Procedural sweep integration
+
+[`arena-sweep/`](../arena-sweep/README.md) implements the latest collapse/return direction on both generated arena sizes. The fixed starting XY anchors an outward deletion and inward reconstruction. Protected clumps safely contain body/weapon across seams; contact produces transparent static fields. Bodies disappear with deleted clumps; those in surviving clumps clear at final return. Staged enemy fixtures and the player share one final field-release / loot-close boundary.
+
+The current integration preserves structural boundaries and changes compatible interiors/material generations. It includes bounded worker staging, per-clump resource selection, shadowless light, eight-voice spatial sound and controlled screen-space void feedback. It has no actual looting, combat or enemy AI. The benchmark, small engine, both earlier fold tests and title apps remain unchanged. Use the new test's H menu for medium/large workload, clump/coherence, protection, effects and performance checks.
