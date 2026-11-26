@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080807"><title>EIGENGOTT — Arena benchmark</title><link rel="stylesheet" href="style.css"></head>
+<body>
+  <canvas id="scene" aria-label="EIGENGOTT larger arena benchmark"></canvas>
+  <div id="status" role="status"><p id="message">Opening the small baseline…</p><button id="retry" hidden>Retry</button></div>
+  <div id="gate" hidden><p class="eyebrow">EIGENGOTT / ARENA BENCHMARK</p><button id="enter">Enter arena</button><p>WASD · move &nbsp; Mouse · look &nbsp; Space · jump<br>H · tools &nbsp; N · prepare next arena &nbsp; Esc · release mouse</p></div>
+  <aside id="controls" aria-label="Benchmark development controls" hidden>
+    <header><div><h1>EIGENGOTT</h1><p>Larger arenas / background preparation</p></div><button id="close" aria-label="Close controls">×</button></header>
+    <section><h2>Next arena</h2>
+      <label>Benchmark profile<select id="profile"><option value="0">Small · accepted baseline · ~20 m</option><option value="1">Medium · 75 m / 2400 Quake units</option><option value="2">Large · 196 m / 6272 Quake units</option></select></label>
+      <label>Seed<input id="seed" type="number" min="0" max="4294967295" step="1" value="27011984"></label>
+      <div class="grid"><label>Emitters<input id="lights" type="number" min="1" max="64" value="12"></label><label>Luxels / metre<select id="density"><option>1</option><option selected>2</option><option>3</option><option>4</option></select></label></div>
+      <label>Wall geometry<select id="detail"><option value="0">Flat structural surfaces</option><option value="1" selected>Standard relief</option><option value="2">Double wall subdivisions</option></select></label>
+      <label>Candidate test<select id="fault"><option value="0">Valid construction</option><option value="1">Missing structural face</option><option value="2">Inverted ceiling</option><option value="3">Duplicate face</option><option value="4">Broken binding</option><option value="5">Disconnected interior</option><option value="6">Capacity failure</option><option value="7">Invalid vertex index</option><option value="8">Reversed winding</option><option value="9">Ceiling / mesh mismatch</option></select></label>
+      <label class="check"><input id="return-play" type="checkbox" checked>Return to play while preparing</label>
+      <div class="buttons"><button id="generate">Prepare candidate</button><button id="randomize">Random seed</button><button id="cancel">Cancel</button></div>
+      <button id="activate" disabled>Activate validated candidate</button>
+      <progress id="progress" max="1" value="0" aria-label="Candidate preparation progress"></progress>
+      <p id="candidate-status" class="hint" role="status">The active arena stays playable during construction, validation, and upload. Activation remains manual.</p>
+      <label>Main-thread preparation budget<input id="budget" type="range" min="0.25" max="3" step="0.25" value="1"><output id="budget-value">1.00 ms / frame</output></label>
+    </section>
+    <section><h2>Movement &amp; inspection</h2>
+      <label>Movement profile<select id="movement"><option value="0">EIGENGOTT · baseline</option><option value="1">Quake-referenced · 320 u/s, gravity 800</option></select></label>
+      <label>Camera<select id="camera"><option value="0">Player · physical collision</option><option value="1">Free camera · development only</option><option value="2">Top-down structural overview</option></select></label>
+      <p class="hint">Free camera: WASD, Space / Ctrl vertically, Shift faster. The physical player stays in place.</p>
+      <label class="check"><input id="collision" type="checkbox">Structural collision &amp; seams</label>
+      <label class="check"><input id="atlas" type="checkbox">Inspect lightmap atlas</label>
+      <label class="check"><input id="lightmap" type="checkbox" checked>Coarse baked lighting</label>
+      <label>Surface relief<output id="relief-value">1.00</output><input id="relief" type="range" min="0" max="1" step="0.05" value="1"></label>
+      <label>Internal height<select id="resolution"><option value="360">360 pixels</option><option value="540">540 pixels</option><option value="720">720 pixels</option><option value="0">Viewport resolution</option></select></label>
+      <div class="buttons"><button id="reset-player">Reset player</button><button id="fullscreen">Fullscreen</button></div>
+    </section>
+    <section><h2>Repeatable routes</h2>
+      <div class="buttons"><button id="record-route">Record from spawn</button><button id="stop-route">Stop</button><button id="play-route">Replay route</button></div>
+      <p id="route-status" class="hint">Record physical inputs from spawn, then replay against the same arena and movement profile.</p>
+    </section>
+    <section><h2>Saved fixtures</h2>
+      <label>Fixture name<input id="fixture-name" type="text" maxlength="64" placeholder="Arena / seed / workload"></label>
+      <select id="fixtures" aria-label="Saved fixtures"><option value="">Choose fixture…</option></select>
+      <div class="buttons"><button id="save-fixture">Save</button><button id="load-fixture">Load settings</button><button id="delete-fixture">Delete</button><button id="export-fixture">Export settings</button><button id="import-fixture">Import settings</button></div>
+      <input id="fixture-file" type="file" accept="application/json,.json" hidden>
+      <p id="fixture-status" class="hint" role="status"></p>
+    </section>
+    <section><h2>Benchmark suite</h2>
+      <button id="run-suite">Run &amp; activate small → medium → large</button><button id="stop-suite">Stop suite</button>
+      <p id="suite-status" class="hint" role="status">Records preparation latency and gameplay frame times, then activates each profile and samples its rendering.</p>
+      <button id="export-report">Export benchmark report</button>
+    </section>
+    <section><h2>Diagnostics</h2><pre id="diagnostics" aria-live="off">Starting…</pre><div class="buttons"><button id="copy">Copy diagnostics</button><button id="reset-metrics">Reset measurements</button></div><p id="feedback" class="hint" role="status"></p></section>
+    <footer>32 Quake units = 1 metre · reference profile, not exact engine parity<br><a href="../engine-test/">Accepted small baseline</a> · H hide tools · F fullscreen</footer>
+  </aside>
+  <noscript>This benchmark requires JavaScript, WebAssembly, WebGPU, and Web Workers.</noscript>
+  <script type="module" src="main.js"></script>
+</body></html>

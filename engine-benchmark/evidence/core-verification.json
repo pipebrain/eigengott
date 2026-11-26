@@ -1,0 +1,386 @@
+{
+  "passed": true,
+  "wasmBytes": 85069,
+  "wasmMemoryBytes": 33554432,
+  "imageBytes": 23217088,
+  "baselineSeeds": [
+    27011984,
+    0,
+    1,
+    93,
+    94,
+    4294967295
+  ],
+  "validSeeds": 36,
+  "structuralTrianglesChecked": 166296,
+  "rejectedFaults": 27,
+  "movementSteps": 17280,
+  "trajectories": [
+    {
+      "movement": 0,
+      "fps": 30,
+      "position": [
+        -0.00011664421617751941,
+        -23.765104293823242,
+        1.7177553176879883
+      ],
+      "velocity": [
+        -1.484264657847234e-7,
+        3.1564624309539795,
+        -0.5260653495788574
+      ]
+    },
+    {
+      "movement": 0,
+      "fps": 60,
+      "position": [
+        -0.00011664421617751941,
+        -23.765104293823242,
+        1.7177553176879883
+      ],
+      "velocity": [
+        -1.484264657847234e-7,
+        3.1564624309539795,
+        -0.5260653495788574
+      ]
+    },
+    {
+      "movement": 0,
+      "fps": 120,
+      "position": [
+        -0.00011664421617751941,
+        -23.765104293823242,
+        1.7177553176879883
+      ],
+      "velocity": [
+        -1.484264657847234e-7,
+        3.1564624309539795,
+        -0.5260653495788574
+      ]
+    },
+    {
+      "movement": 0,
+      "fps": 240,
+      "position": [
+        -0.00011664421617751941,
+        -23.765104293823242,
+        1.7177553176879883
+      ],
+      "velocity": [
+        -1.484264657847234e-7,
+        3.1564624309539795,
+        -0.5260653495788574
+      ]
+    },
+    {
+      "movement": 1,
+      "fps": 30,
+      "position": [
+        -0.010925807058811188,
+        -11.362439155578613,
+        0.0030000016558915377
+      ],
+      "velocity": [
+        -0.004262707661837339,
+        10,
+        0
+      ]
+    },
+    {
+      "movement": 1,
+      "fps": 60,
+      "position": [
+        -0.010925807058811188,
+        -11.362439155578613,
+        0.0030000016558915377
+      ],
+      "velocity": [
+        -0.004262707661837339,
+        10,
+        0
+      ]
+    },
+    {
+      "movement": 1,
+      "fps": 120,
+      "position": [
+        -0.010925807058811188,
+        -11.362439155578613,
+        0.0030000016558915377
+      ],
+      "velocity": [
+        -0.004262707661837339,
+        10,
+        0
+      ]
+    },
+    {
+      "movement": 1,
+      "fps": 240,
+      "position": [
+        -0.010925807058811188,
+        -11.362439155578613,
+        0.0030000016558915377
+      ],
+      "velocity": [
+        -0.004262707661837339,
+        10,
+        0
+      ]
+    }
+  ],
+  "phaseSamples": [
+    {
+      "name": "Small · accepted baseline",
+      "profile": 0,
+      "lights": 12,
+      "density": 2,
+      "detail": 1,
+      "seed": 27011984,
+      "counts": {
+        "abi": 2,
+        "activeId": 7,
+        "seed": 27011984,
+        "candidateId": 7,
+        "candidateSeed": 27011984,
+        "candidateReady": true,
+        "candidateErrors": 0,
+        "candidateMessages": [],
+        "cells": 140,
+        "topologyVertices": 392,
+        "triangles": 832,
+        "vertices": 9520,
+        "indices": 14280,
+        "faces": 416,
+        "lights": 12,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "components": 1,
+        "intersections": 0,
+        "grounded": false,
+        "physicsSteps": 0,
+        "collisionHits": 0,
+        "blockedLooks": 0,
+        "vertexCapacity": 262144,
+        "indexCapacity": 393216,
+        "geometryHash": 3875890898,
+        "activations": 1,
+        "arenaStorageBytes": 20967520,
+        "position": [
+          0,
+          -7,
+          0.4675000011920929
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0,
+        "simulationTime": 0,
+        "generationMs": 0.036208998411893845,
+        "validationMs": 0.8507909774780273,
+        "surfaceMs": 0.12399999797344208,
+        "bakeMs": 2.556209087371826,
+        "spawn": [
+          0,
+          -7,
+          0.4675000011920929
+        ],
+        "arenaWidth": 22.75,
+        "arenaHeight": 5,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "profile": 0,
+        "gridSize": 13,
+        "atlasSize": 512,
+        "density": 2,
+        "detail": 1,
+        "requestedLights": 12,
+        "bakedTexels": 26840,
+        "visibilityRays": 69110,
+        "visibilitySteps": 204133,
+        "bvhNodes": 255,
+        "intersectionPairs": 2492,
+        "movementProfile": 0,
+        "cameraMode": 0
+      }
+    },
+    {
+      "name": "Medium · 75 m arena",
+      "profile": 1,
+      "lights": 24,
+      "density": 2,
+      "detail": 1,
+      "seed": 27011984,
+      "counts": {
+        "abi": 2,
+        "activeId": 20,
+        "seed": 27011984,
+        "candidateId": 20,
+        "candidateSeed": 27011984,
+        "candidateReady": true,
+        "candidateErrors": 0,
+        "candidateMessages": [],
+        "cells": 572,
+        "topologyVertices": 1352,
+        "triangles": 2752,
+        "vertices": 18976,
+        "indices": 28464,
+        "faces": 1376,
+        "lights": 24,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "components": 1,
+        "intersections": 0,
+        "grounded": false,
+        "physicsSteps": 0,
+        "collisionHits": 0,
+        "blockedLooks": 0,
+        "vertexCapacity": 262144,
+        "indexCapacity": 393216,
+        "geometryHash": 2743295239,
+        "activations": 1,
+        "arenaStorageBytes": 20967520,
+        "position": [
+          0,
+          -30,
+          2.0299999713897705
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0,
+        "simulationTime": 0,
+        "generationMs": 0.09433300048112869,
+        "validationMs": 2.809333086013794,
+        "surfaceMs": 0.7503340244293213,
+        "bakeMs": 24.050582885742188,
+        "spawn": [
+          0,
+          -30,
+          2.0299999713897705
+        ],
+        "arenaWidth": 75,
+        "arenaHeight": 12,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "profile": 1,
+        "gridSize": 25,
+        "atlasSize": 1024,
+        "density": 2,
+        "detail": 1,
+        "requestedLights": 24,
+        "bakedTexels": 134496,
+        "visibilityRays": 452890,
+        "visibilitySteps": 2431206,
+        "bvhNodes": 1023,
+        "intersectionPairs": 6988,
+        "movementProfile": 0,
+        "cameraMode": 0
+      }
+    },
+    {
+      "name": "Large · 196 m arena",
+      "profile": 2,
+      "lights": 48,
+      "density": 2,
+      "detail": 1,
+      "seed": 27011984,
+      "counts": {
+        "abi": 2,
+        "activeId": 33,
+        "seed": 27011984,
+        "candidateId": 33,
+        "candidateSeed": 27011984,
+        "candidateReady": true,
+        "candidateErrors": 0,
+        "candidateMessages": [],
+        "cells": 2136,
+        "topologyVertices": 5000,
+        "triangles": 10176,
+        "vertices": 67008,
+        "indices": 100512,
+        "faces": 5088,
+        "lights": 48,
+        "unmatchedEdges": 0,
+        "nonmanifoldEdges": 0,
+        "components": 1,
+        "intersections": 0,
+        "grounded": false,
+        "physicsSteps": 0,
+        "collisionHits": 0,
+        "blockedLooks": 0,
+        "vertexCapacity": 262144,
+        "indexCapacity": 393216,
+        "geometryHash": 1993985199,
+        "activations": 1,
+        "arenaStorageBytes": 20967520,
+        "position": [
+          0,
+          -88,
+          2.0299999713897705
+        ],
+        "velocity": [
+          0,
+          0,
+          0
+        ],
+        "yaw": 0,
+        "pitch": 0,
+        "simulationTime": 0,
+        "generationMs": 0.344292014837265,
+        "validationMs": 9.597249984741211,
+        "surfaceMs": 1.187041997909546,
+        "bakeMs": 79.0947494506836,
+        "spawn": [
+          0,
+          -88,
+          2.0299999713897705
+        ],
+        "arenaWidth": 196,
+        "arenaHeight": 12,
+        "up": [
+          0,
+          0,
+          1
+        ],
+        "profile": 2,
+        "gridSize": 49,
+        "atlasSize": 1024,
+        "density": 2,
+        "detail": 1,
+        "requestedLights": 48,
+        "bakedTexels": 649792,
+        "visibilityRays": 977547,
+        "visibilitySteps": 4603836,
+        "bvhNodes": 4095,
+        "intersectionPairs": 26522,
+        "movementProfile": 0,
+        "cameraMode": 0
+      }
+    }
+  ],
+  "checks": [
+    "Byte-identical small baseline GPU buffers across six seeds",
+    "Three deterministic size fixtures and bounded light/detail/density controls",
+    "Sealed connected geometry and spatially culled validation",
+    "27 invalid candidates and atlas capacity rejection",
+    "Active factory mutation rejected",
+    "Same-build isolated image transport and simulation parity",
+    "Both movement profiles independent of render FPS",
+    "Body/weapon sweeps, jump/movement penetration checks",
+    "Free/top-down cameras preserve the physical player",
+    "Strict saved-fixture schema and storage roundtrip"
+  ]
+}

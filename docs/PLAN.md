@@ -15,7 +15,9 @@ The engine is true 3D. Generate arenas from bound 2D sector construction data, a
 
 The first [engine proof](../engine-test/README.md) is implemented separately in `engine-test/`: sealed sector-generated 3D arenas, fixed-step body/weapon collision, one procedural surface preset, coarse lightmaps/palette, validated GPU staging and manual activation, hidden controls, and bounded diagnostics/recovery. Deterministic structural/physics checks run in CI; desktop browser and soak checks have local evidence. Both title apps and their defaults remain unchanged.
 
-Next, review the arena's movement, scale, visibility, and surface treatment in the playable test. Then develop authored surface tiles and a verified moving-geometry/fold prototype, keeping the original loot warning window. Arbitrary-surface locomotion, mirrors, combat, and broader generation remain later milestones. Physical device checks are pending; the initial test uses desktop mouse/keyboard controls.
+The user accepted the small test. The subsequent [larger arena benchmark](../engine-benchmark/README.md) is implemented separately in `engine-benchmark/`, preserving `engine-test/` as the historical small baseline. It adds 75 m and 196 m fixtures, background generation/validation/baking, bounded candidate copy/upload, spatial acceleration, explicit atomic activation, and H tools for workloads, inspection, fixtures, routes, and exported benchmarks. An optional Quake-referenced movement profile follows the user's choice; baseline movement remains the default. The benchmark README records source references, measured timings, memory budgets, and parity limits.
+
+Next, review larger-arena movement, scale, visibility, inspection tools, and smooth preparation on target devices. Then develop authored surface tiles and a verified moving-geometry/fold prototype, keeping the original loot warning window. Arbitrary-surface locomotion, mirrors, combat, and broader/stacked generation remain later milestones. Physical device checks are pending; both tests use desktop mouse/keyboard controls.
 
 ## Cross-device testing and deployment
 
