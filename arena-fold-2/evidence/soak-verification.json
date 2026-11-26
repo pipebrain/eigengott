@@ -1,0 +1,1187 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:50573/arena-fold-2/?test",
+  "seconds": 30,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+  "snapshot": {
+    "version": "arena-fold-candidate-2",
+    "build": null,
+    "ready": true,
+    "error": null,
+    "recovering": false,
+    "recoveries": 0,
+    "frames": 1821,
+    "elapsedMs": 30356.09999999404,
+    "wasmBytes": 4194304,
+    "settings": {
+      "waves": true,
+      "loop": true,
+      "spread": 0.72,
+      "coherence": 0.9,
+      "delay": 0.38,
+      "slotDuration": 1.1,
+      "hz": 12,
+      "blank": 0.28,
+      "jitter": 0.25,
+      "roots": 2,
+      "depth": 6,
+      "margin": 0.2,
+      "tail": 0.5,
+      "interval": 2,
+      "stageBodies": true,
+      "cutaway": false,
+      "showCorpses": true,
+      "feedback": true,
+      "feedbackFreeze": false,
+      "halfLife": 2.4,
+      "stretch": 3,
+      "worldAnchor": false,
+      "style": 1,
+      "pitch": 9,
+      "lineWidth": 1,
+      "branch": 0.5,
+      "grid": 1,
+      "monoWorld": false,
+      "monoVoid": true,
+      "seed": 27011984,
+      "inspection": 0,
+      "resolution": 360,
+      "dpr": 1,
+      "showBody": true,
+      "camera": 0,
+      "debug": 0
+    },
+    "wave": {
+      "clear": true,
+      "sealed": true,
+      "catalogValid": true,
+      "active": false,
+      "playing": true,
+      "cycle": 7,
+      "completed": 7,
+      "visited": 1,
+      "changed": 1,
+      "protected": 0,
+      "pending": 0,
+      "bodies": false,
+      "bodyClears": 7,
+      "previews": 715,
+      "previewBlocks": 0,
+      "physicsSteps": 3639,
+      "meshRevision": 399,
+      "camera": 0,
+      "enabled": true,
+      "loop": true,
+      "waveTick": 209,
+      "eventCount": 831,
+      "oldestAge": 5,
+      "colliders": 79,
+      "instigators": 1,
+      "flickering": 0,
+      "stageBodies": true,
+      "seed": 27011984,
+      "blockedLooks": 0,
+      "position": [
+        0,
+        -8.5,
+        0.0030000079423189163
+      ],
+      "yaw": 0.12000001221895218,
+      "pitch": 0,
+      "time": 30.325000762939453,
+      "waveTime": 1.7416666746139526,
+      "effectiveSpread": 0.07200001925230026,
+      "coherence": 0.8999999761581421,
+      "margin": 0.20000000298023224,
+      "velocity": [
+        0,
+        0,
+        0
+      ],
+      "accumulator": 0.0071000000461936
+    },
+    "sectors": [
+      {
+        "id": 0,
+        "variant": 2,
+        "visible": 2,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 1,
+        "variant": 5,
+        "visible": 5,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 2,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 3,
+        "variant": 1,
+        "visible": 1,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 4,
+        "variant": 4,
+        "visible": 4,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 3,
+        "epoch": 4,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 5,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 6,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 7,
+        "variant": 0,
+        "visible": 0,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 8,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 1,
+        "epoch": 6,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 9,
+        "variant": 5,
+        "visible": 5,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 10,
+        "variant": 4,
+        "visible": 4,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 11,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 2,
+        "epoch": 5,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 12,
+        "variant": 3,
+        "visible": 3,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 13,
+        "variant": 2,
+        "visible": 2,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 14,
+        "variant": 2,
+        "visible": 2,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 15,
+        "variant": 1,
+        "visible": 1,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 16,
+        "variant": 0,
+        "visible": 0,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 5,
+        "epoch": 2,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 17,
+        "variant": 5,
+        "visible": 5,
+        "state": 3,
+        "parent": -1,
+        "depth": 0,
+        "age": 0,
+        "epoch": 7,
+        "instigator": true,
+        "slot": 14,
+        "due": 1,
+        "start": 1,
+        "finish": 150,
+        "target": 5,
+        "protectedBy": 0
+      },
+      {
+        "id": 18,
+        "variant": 5,
+        "visible": 5,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      },
+      {
+        "id": 19,
+        "variant": 4,
+        "visible": 4,
+        "state": 0,
+        "parent": -1,
+        "depth": 0,
+        "age": 4,
+        "epoch": 3,
+        "instigator": false,
+        "slot": 4294967295,
+        "due": 0,
+        "start": 0,
+        "finish": 0,
+        "target": 0,
+        "protectedBy": 0
+      }
+    ],
+    "render": {
+      "resolution": [
+        645,
+        360
+      ],
+      "output": [
+        1376,
+        768
+      ],
+      "pendingFrames": 1,
+      "frames": 1821,
+      "uploadsPerFrame": 9408,
+      "renderTargetBytes": 6501600,
+      "bufferBytes": 590208,
+      "timestamps": true,
+      "gpuMs": {
+        "scene": 0.140331,
+        "feedback": 0.117998,
+        "present": 0.504242,
+        "total": 0.762571
+      },
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": ""
+      }
+    },
+    "cpuMs": {
+      "p50": 0.4000000059604645,
+      "p95": 0.7000000029802322
+    },
+    "fps": 60.00300015000745,
+    "hidden": false
+  },
+  "maximumAge": 5,
+  "retainedJSHeapBytes": {
+    "before": 790444,
+    "after": 902488,
+    "delta": 112044
+  },
+  "sampledGPU": {
+    "p50": 0.768697,
+    "p95": 0.799321,
+    "max": 0.851945
+  },
+  "sampledFPS": {
+    "min": 59.99999999999989,
+    "median": 60.00300015000745
+  },
+  "samples": [
+    {
+      "second": 1,
+      "fps": 60.003750234389635,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.138414,
+        "feedback": 0.135456,
+        "present": 0.486826,
+        "total": 0.760696
+      },
+      "cycle": 1,
+      "completed": 0,
+      "visited": 12,
+      "changed": 1,
+      "bodies": true,
+      "coherence": 0,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 2,
+      "fps": 60.00300015000756,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.139581,
+        "feedback": 0.116664,
+        "present": 0.529366,
+        "total": 0.7856110000000001
+      },
+      "cycle": 1,
+      "completed": 0,
+      "visited": 16,
+      "changed": 8,
+      "bodies": true,
+      "coherence": 0,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 3,
+      "fps": 59.99999999999996,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.158081,
+        "feedback": 0.136081,
+        "present": 0.490992,
+        "total": 0.785154
+      },
+      "cycle": 1,
+      "completed": 0,
+      "visited": 16,
+      "changed": 15,
+      "bodies": true,
+      "coherence": 0,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 4,
+      "fps": 60.00300015000745,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.142872,
+        "feedback": 0.122332,
+        "present": 0.484784,
+        "total": 0.749988
+      },
+      "cycle": 1,
+      "completed": 1,
+      "visited": 16,
+      "changed": 16,
+      "bodies": false,
+      "coherence": 0,
+      "age": 1,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 5,
+      "fps": 60.00300015000755,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.142748,
+        "feedback": 0.122331,
+        "present": 0.4907,
+        "total": 0.755779
+      },
+      "cycle": 1,
+      "completed": 1,
+      "visited": 16,
+      "changed": 16,
+      "bodies": false,
+      "coherence": 0,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 6,
+      "fps": 60.00600060006005,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.146456,
+        "feedback": 0.125457,
+        "present": 0.507867,
+        "total": 0.7797799999999999
+      },
+      "cycle": 2,
+      "completed": 1,
+      "visited": 8,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 7,
+      "fps": 60.00600060006,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.154789,
+        "feedback": 0.132122,
+        "present": 0.492367,
+        "total": 0.779278
+      },
+      "cycle": 2,
+      "completed": 1,
+      "visited": 15,
+      "changed": 1,
+      "bodies": true,
+      "coherence": 0,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 8,
+      "fps": 60.003000150007445,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7999999970197678
+      },
+      "gpuMs": {
+        "scene": 0.150372,
+        "feedback": 0.131915,
+        "present": 0.48641,
+        "total": 0.768697
+      },
+      "cycle": 2,
+      "completed": 1,
+      "visited": 18,
+      "changed": 13,
+      "bodies": true,
+      "coherence": 0,
+      "age": 2,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 9,
+      "fps": 60.00300015000742,
+      "cpuMs": {
+        "p50": 0.5,
+        "p95": 0.7999999970197678
+      },
+      "gpuMs": {
+        "scene": 0.162372,
+        "feedback": 0.133957,
+        "present": 0.498076,
+        "total": 0.794405
+      },
+      "cycle": 2,
+      "completed": 1,
+      "visited": 18,
+      "changed": 16,
+      "bodies": true,
+      "coherence": 0,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 10,
+      "fps": 60.003000150007416,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.150457,
+        "feedback": 0.12704,
+        "present": 0.515575,
+        "total": 0.793072
+      },
+      "cycle": 2,
+      "completed": 2,
+      "visited": 18,
+      "changed": 18,
+      "bodies": false,
+      "coherence": 0,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 11,
+      "fps": 59.99999999999997,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.161873,
+        "feedback": 0.136788,
+        "present": 0.50066,
+        "total": 0.799321
+      },
+      "cycle": 2,
+      "completed": 2,
+      "visited": 18,
+      "changed": 18,
+      "bodies": false,
+      "coherence": 0.5,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 12,
+      "fps": 60.003000150007466,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.156664,
+        "feedback": 0.126581,
+        "present": 0.483868,
+        "total": 0.7671129999999999
+      },
+      "cycle": 3,
+      "completed": 2,
+      "visited": 3,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.5,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 13,
+      "fps": 60.00600060005997,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.149915,
+        "feedback": 0.132206,
+        "present": 0.487576,
+        "total": 0.769697
+      },
+      "cycle": 3,
+      "completed": 2,
+      "visited": 11,
+      "changed": 1,
+      "bodies": true,
+      "coherence": 0.5,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 14,
+      "fps": 60.00300015000743,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.126832,
+        "feedback": 0.122331,
+        "present": 0.495492,
+        "total": 0.744655
+      },
+      "cycle": 3,
+      "completed": 2,
+      "visited": 13,
+      "changed": 6,
+      "bodies": true,
+      "coherence": 0.5,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 15,
+      "fps": 59.99999999999995,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.151831,
+        "feedback": 0.134164,
+        "present": 0.485284,
+        "total": 0.771279
+      },
+      "cycle": 3,
+      "completed": 2,
+      "visited": 13,
+      "changed": 12,
+      "bodies": true,
+      "coherence": 0.5,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 16,
+      "fps": 59.99999999999996,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.145873,
+        "feedback": 0.12729,
+        "present": 0.494492,
+        "total": 0.767655
+      },
+      "cycle": 3,
+      "completed": 3,
+      "visited": 13,
+      "changed": 13,
+      "bodies": false,
+      "coherence": 0.5,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 17,
+      "fps": 60.00300015000741,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.146748,
+        "feedback": 0.048415,
+        "present": 0.488993,
+        "total": 0.684156
+      },
+      "cycle": 3,
+      "completed": 3,
+      "visited": 13,
+      "changed": 13,
+      "bodies": false,
+      "coherence": 0.5,
+      "age": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 18,
+      "fps": 60.00300015000736,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5999999940395355
+      },
+      "gpuMs": {
+        "scene": 0.155205,
+        "feedback": 0.129415,
+        "present": 0.489075,
+        "total": 0.773695
+      },
+      "cycle": 4,
+      "completed": 3,
+      "visited": 1,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.5,
+      "age": 2,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 19,
+      "fps": 60.00300015000747,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5999999940395355
+      },
+      "gpuMs": {
+        "scene": 0.150332,
+        "feedback": 0.132498,
+        "present": 0.489409,
+        "total": 0.772239
+      },
+      "cycle": 4,
+      "completed": 4,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.5,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 20,
+      "fps": 60.00300015000753,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.140207,
+        "feedback": 0.125623,
+        "present": 0.484952,
+        "total": 0.7507820000000001
+      },
+      "cycle": 4,
+      "completed": 4,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.5,
+      "age": 2,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 21,
+      "fps": 60.00300015000741,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.151539,
+        "feedback": 0.137498,
+        "present": 0.501451,
+        "total": 0.790488
+      },
+      "cycle": 5,
+      "completed": 4,
+      "visited": 1,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.8999999761581421,
+      "age": 3,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 22,
+      "fps": 59.99999999999989,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.134582,
+        "feedback": 0.055707,
+        "present": 0.487159,
+        "total": 0.677448
+      },
+      "cycle": 5,
+      "completed": 4,
+      "visited": 1,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.8999999761581421,
+      "age": 3,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 23,
+      "fps": 59.99999999999992,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.152748,
+        "feedback": 0.134331,
+        "present": 0.486827,
+        "total": 0.773906
+      },
+      "cycle": 5,
+      "completed": 5,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.8999999761581421,
+      "age": 3,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 24,
+      "fps": 60.00300015000753,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.148373,
+        "feedback": 0.130165,
+        "present": 0.488701,
+        "total": 0.767239
+      },
+      "cycle": 5,
+      "completed": 5,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.8999999761581421,
+      "age": 3,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 25,
+      "fps": 59.999999999999936,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5999999940395355
+      },
+      "gpuMs": {
+        "scene": 0.144748,
+        "feedback": 0.128373,
+        "present": 0.488993,
+        "total": 0.762114
+      },
+      "cycle": 6,
+      "completed": 5,
+      "visited": 1,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.8999999761581421,
+      "age": 4,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 26,
+      "fps": 60.00300015000749,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.140789,
+        "feedback": 0.11804,
+        "present": 0.50745,
+        "total": 0.7662789999999999
+      },
+      "cycle": 6,
+      "completed": 5,
+      "visited": 1,
+      "changed": 1,
+      "bodies": true,
+      "coherence": 0.8999999761581421,
+      "age": 4,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 27,
+      "fps": 60.006000600059814,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.699999988079071
+      },
+      "gpuMs": {
+        "scene": 0.138539,
+        "feedback": 0.11929,
+        "present": 0.496909,
+        "total": 0.7547379999999999
+      },
+      "cycle": 6,
+      "completed": 6,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.8999999761581421,
+      "age": 4,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 28,
+      "fps": 60.00600060005999,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.155039,
+        "feedback": 0.13579,
+        "present": 0.561116,
+        "total": 0.851945
+      },
+      "cycle": 6,
+      "completed": 6,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.8999999761581421,
+      "age": 4,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 29,
+      "fps": 59.99999999999995,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.142831,
+        "feedback": 0.055416,
+        "present": 0.495867,
+        "total": 0.694114
+      },
+      "cycle": 7,
+      "completed": 6,
+      "visited": 1,
+      "changed": 0,
+      "bodies": true,
+      "coherence": 0.8999999761581421,
+      "age": 5,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 30,
+      "fps": 60.00600060005992,
+      "cpuMs": {
+        "p50": 0.4000000059604645,
+        "p95": 0.7000000029802322
+      },
+      "gpuMs": {
+        "scene": 0.140331,
+        "feedback": 0.117998,
+        "present": 0.504242,
+        "total": 0.762571
+      },
+      "cycle": 7,
+      "completed": 7,
+      "visited": 1,
+      "changed": 1,
+      "bodies": false,
+      "coherence": 0.8999999761581421,
+      "age": 5,
+      "queue": 0,
+      "targets": 6501600
+    }
+  ],
+  "eventTraceOmitted": true
+}

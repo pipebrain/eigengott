@@ -1,0 +1,61 @@
+{
+  "passed": true,
+  "wasmBytes": 55944,
+  "memoryBytes": 4194304,
+  "catalogEntries": 120,
+  "previewSamples": 1910,
+  "blankSamples": 730,
+  "stableByteChecks": 371,
+  "coherence": [
+    {
+      "coherence": 0,
+      "affected": 446
+    },
+    {
+      "coherence": 0.5,
+      "affected": 113
+    },
+    {
+      "coherence": 0.9,
+      "affected": 41
+    },
+    {
+      "coherence": 1,
+      "affected": 0
+    }
+  ],
+  "holds": [
+    {
+      "kind": "body",
+      "seed": 24,
+      "reason": 3
+    },
+    {
+      "kind": "weapon",
+      "seed": 17,
+      "reason": 2
+    },
+    {
+      "kind": "footing",
+      "seed": 28,
+      "reason": 4
+    }
+  ],
+  "movementSteps": 7200,
+  "renderCadences": [
+    30,
+    60,
+    120,
+    240
+  ],
+  "checks": [
+    "Fixed catalogue geometry; no interpolation",
+    "Four-neighbour propagation with random roots and bounded visitation",
+    "Auditions exclude final selection",
+    "Global old-body cleanup at wave end, including untouched sectors",
+    "Coherence reduces changes; old geometry survives multiple cycles",
+    "FPS-independent event sequence",
+    "Body and weapon rejection retains old geometry without displacing player",
+    "Independent pause / step; fixed memory and finite inputs"
+  ]
+}

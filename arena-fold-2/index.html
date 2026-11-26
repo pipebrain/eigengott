@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080807"><title>EIGENGOTT — Fold candidate 2</title><link rel="stylesheet" href="style.css"></head>
+<body>
+ <canvas id="scene" aria-label="Sector corruption wave test"></canvas>
+ <div id="status" role="status"><p class="eyebrow">EIGENGOTT / CANDIDATE 2</p><p id="message">Preparing fixed sector layouts…</p><button id="retry" hidden>Retry</button></div>
+ <div id="gate" hidden><p class="eyebrow">CANDIDATE 2 / CORRUPTION WAVES</p><button id="enter">Enter arena</button><p>WASD · mouse · Space · N corruption wave · H tools</p><button id="inspect">Open tools</button></div>
+ <aside id="controls" hidden aria-label="Candidate 2 controls">
+  <header><div><h1>CANDIDATE 2</h1><p>Discrete sector changes · no moving architecture</p></div><button id="close" aria-label="Close tools">×</button></header>
+  <section><h2>Living intermission</h2>
+   <div class="buttons"><button id="trigger">Start wave [N]</button><button id="pause">Pause wave</button><button id="step">Single step</button></div>
+   <label class="check"><input id="waves" type="checkbox" checked>Enable wave progression</label>
+   <label class="check"><input id="loop" type="checkbox">Repeat intermissions</label>
+   <label>Rest between waves (seconds)<input id="interval" type="number" min="0.25" max="10" step="0.25" value="2"></label>
+   <label>Final settling time (seconds)<input id="tail" type="number" min="0.1" max="3" step="0.1" value="0.5"></label>
+   <p class="hint">All old bodies clear together when the wave finishes, including bodies in sectors that survive unchanged. Fixtures demonstrate the timing; looting is not implemented.</p><p id="wave-state" role="status"></p>
+  </section>
+  <section><h2>Instigators / propagation</h2>
+   <label>Random instigators<input id="roots" type="number" min="1" max="8" step="1" value="2"></label>
+   <label>Neighbour propagation chance <output id="spread-value"></output><input id="spread" type="range" min="0" max="1" step="0.01" value="0.72"></label>
+   <label>Propagation delay (seconds)<input id="delay" type="number" min="0.08" max="2" step="0.02" value="0.38"></label>
+   <label>Maximum hops<input id="depth" type="number" min="0" max="12" step="1" value="6"></label>
+   <label>Timing jitter <output id="jitter-value"></output><input id="jitter" type="range" min="0" max="0.8" step="0.01" value="0.25"></label>
+   <label>Seed (next waves; reset rebuilds arena)<input id="seed" type="number" min="0" max="4294967295" step="1" value="27011984"></label>
+  </section>
+  <section><h2>Slot-machine auditions</h2>
+   <label>Audition duration (seconds)<input id="slotDuration" type="number" min="0.25" max="4" step="0.05" value="1.1"></label>
+   <label>Flicker rate (Hz)<input id="hz" type="number" min="2" max="30" step="1" value="12"></label>
+   <label>Blank-slot chance <output id="blank-value"></output><input id="blank" type="range" min="0" max="1" step="0.01" value="0.28"></label>
+   <label>Body / weapon safety margin (metres)<input id="margin" type="number" min="0.05" max="0.6" step="0.05" value="0.2"></label>
+   <p class="hint">Auditions never show the final selection. They leave committed collision intact. At settlement, a safe new layout appears instantly; a protected sector keeps its old layout. Floor support and the outer seal remain physical throughout.</p>
+  </section>
+  <section><h2>End-game coherence</h2>
+   <label>Coherence: chaotic → static <output id="coherence-value"></output><input id="coherence" type="range" min="0" max="1" step="0.01" value="0"></label>
+   <div class="buttons"><button id="chaotic">Chaotic</button><button id="late-game">Late game</button><button id="static">Static</button></div>
+   <p id="effective" class="hint"></p><p class="hint">Coherence reduces root count and propagation chance. Unvisited sectors retain their exact geometry across iterations. Age counts waves since the last replacement.</p>
+   <div id="sectors" class="sector-grid" aria-label="Sector state and age"></div><p class="hint">id / age · amber queued · white audition · green replaced · red protected · grey retained</p>
+  </section>
+  <section><h2>Bodies / inspection</h2>
+   <label class="check"><input id="stageBodies" type="checkbox" checked>Stage inert bodies before each wave</label>
+   <label class="check"><input id="showCorpses" type="checkbox" checked>Show body fixtures</label>
+   <label class="check"><input id="showBody" type="checkbox" checked>Show player / weapon (physics stays active)</label>
+   <div class="buttons"><button id="stage-bodies">Stage body fixtures</button><button id="reset">Reset arena</button></div>
+   <div class="buttons"><button id="body-guard">Body guard fixture</button><button id="weapon-guard">Weapon guard fixture</button></div>
+   <label>Camera<select id="camera"><option value="0">Player</option><option value="1">Free observer (WASD / Space / Shift)</option><option value="2">Overhead observer</option></select></label>
+   <label class="check"><input id="cutaway" type="checkbox">Cutaway ceiling (render only)</label>
+   <label class="check"><input id="colliders" type="checkbox">Committed collider edges</label><label class="check"><input id="protection" type="checkbox">Body / weapon protection</label><label class="check"><input id="sector-bounds" type="checkbox">Sector bounds / wave state</label>
+  </section>
+  <section><h2>Independent void feedback</h2>
+   <label class="check"><input id="feedback" type="checkbox" checked>Retain world feedback in exposed areas</label><label class="check"><input id="feedbackFreeze" type="checkbox">Freeze drift / decay</label>
+   <label>Interpretation<select id="style"><option value="1">Colour afterimages (reference comparison)</option><option value="0">Architectural lines</option></select></label>
+   <label class="check"><input id="worldAnchor" type="checkbox">World-anchored reprojection</label>
+   <label>Persistence half-life (seconds)<input id="halfLife" type="number" min="0.05" max="12" step="0.05" value="2.4"></label><label>Stretch / drift speed<input id="stretch" type="number" min="0" max="12" step="0.25" value="3"></label>
+   <label>Hatch direction bias <output id="branch-value"></output><input id="branch" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+   <label>Hatch coordinates<select id="grid"><option value="1">Screen grid (0° / 90°)</option><option value="0">World planes / perspective</option><option value="2">Screen grid (45°)</option></select></label>
+   <div class="grid"><label>Screen pitch (pixels)<input id="pitch" type="number" min="3" max="40" step="1" value="9"></label><label>Line width (pixels)<input id="lineWidth" type="number" min="0.5" max="4" step="0.5" value="1"></label></div>
+   <label class="check"><input id="monoVoid" type="checkbox" checked>Monochrome void lines</label>
+   <label>Pass inspection<select id="inspection"><option value="0">Final composite</option><option value="1">Solid coverage / void mask</option><option value="2">Raw history (no bodies)</option><option value="3">Current solid scene</option></select></label>
+   <button id="clear-history">Clear feedback history</button><p class="hint">Bodies and weapons never enter history. Wave playback and retained feedback are independently controlled.</p>
+  </section>
+  <section><h2>Rendering / diagnostics</h2>
+   <label>Internal height<select id="resolution"><option value="180">180</option><option value="360" selected>360</option><option value="540">540</option><option value="720">720</option><option value="1080">1080</option></select></label>
+   <label>Pixel ratio cap<select id="dpr"><option value="0.5">0.50</option><option value="1" selected>1.00</option><option value="1.5">1.50</option><option value="2">2.00</option></select></label>
+   <label class="check"><input id="monoWorld" type="checkbox">Monochrome physical world</label>
+   <div class="buttons"><button id="fullscreen">Fullscreen [F]</button><button id="copy">Copy diagnostics</button><button id="defaults">Reset controls</button></div><pre id="diagnostics"></pre><p id="feedback-message" role="status"></p>
+  </section>
+  <footer>Separate candidate 2. Candidate 1 and the accepted engine / benchmark / title tests are preserved.</footer>
+ </aside>
+ <noscript>This test requires JavaScript, WebAssembly and WebGPU.</noscript><script type="module" src="main.js"></script>
+</body></html>

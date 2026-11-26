@@ -19,6 +19,8 @@ The user accepted the small test. The subsequent [larger arena benchmark](../eng
 
 The separately authorized [continuous fold experiment](../arena-fold/README.md) adds a sealed chamber, safe moving partitions and independent controlled void feedback. Its body / weapon guard and H controls do not alter either accepted engine test or title renderer. It remains a bounded transition proof; the original loot warning window and arbitrary candidate-arena transitions are not implemented here.
 
+The user retained that experiment as candidate 1 and authorized [candidate 2](../arena-fold-2/README.md): fixed layouts audition / disappear / reappear, random instigators spread sector corruption, old geometry can persist across waves, and coherence reduces affected sectors toward a static world. All old bodies clear globally at wave end, including bodies in surviving sectors, as explicitly selected by the user. Inert fixtures demonstrate that timing; actual looting and game progression remain future work. Candidate 1 remains unchanged.
+
 Next, review larger-arena smooth preparation and the fold's physical / visual behavior on target devices. Authored surface tiles, broader safe transitions, arbitrary-surface locomotion, mirrors, combat, and broader/stacked generation remain later milestones. Physical device checks are pending; current movement uses desktop mouse/keyboard controls.
 
 ## Cross-device testing and deployment
@@ -30,7 +32,7 @@ The v1.1.0 [DOS-maze runtime](../dos-maze/README.md) adds the minimal H menu, a 
 1. The Pages workflow rebuilds the WASM runtimes and runs all deterministic engine/title checks before uploading and publishing the static artifact. Pull requests validate without deploying.
 2. The hub, hidden H menus, and engine diagnostics/report exports identify the deployed commit. Direct `?tools=1` URLs open existing inspection controls without a physical H key.
 3. The user's explicit authorization to make `pipebrain/eigengott` public and enable Pages supersedes the earlier visibility restriction.
-4. Passing pushes to `main` deploy automatically. Keep `/engine-test/`, `/engine-benchmark/`, `/arena-fold/`, `/dos-maze/`, and `/vector-labyrinth/` available under the shared hub.
+4. Passing pushes to `main` deploy automatically. Keep `/engine-test/`, `/engine-benchmark/`, `/arena-fold/`, `/arena-fold-2/`, `/dos-maze/`, and `/vector-labyrinth/` available under the shared hub.
 5. Test rendering, worker preparation/activation, controls, browser saves, and fixture/preset import/export across target WebGPU-capable browsers and devices. Record the build, device, browser, and results. Touch movement is still a future feature; current engine controls use keyboard and mouse.
 
 ## Game development
