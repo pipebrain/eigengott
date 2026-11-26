@@ -1,0 +1,17 @@
+{
+  "passed": true,
+  "perspectivePlanes": 64,
+  "fillPlanes": 24,
+  "segments": 8637,
+  "checks": [
+    "True common vanishing point before quantization",
+    "Both perspective and fill profiles generated",
+    "Geometry redrawn as layers move",
+    "All endpoint coordinates share a defined grid",
+    "Collision starts an edge decision",
+    "Priority held only for bounded contact duration",
+    "Actual line endpoint redraw on collision",
+    "Collision-state persistence",
+    "Exact home recovery"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "passed": true,
+  "generatorHashes": [
+    "3328356bd78e20824e13fad2c706587bfcfa61f47de4ceacd60a4eadb86a564d",
+    "800a329faa0d7a35418c3efe847ed6c0bf8d6bff09119a499a84956e81cdb11b",
+    "44ac84902b69d387ddfa7a494064a709acecad2fa605e5e9d60cb67c48132857",
+    "3937bd4bac4ceb37d340924f4d760e086f05299113243f5d2077a86f32a6d5be"
+  ],
+  "diagonalCount": 829,
+  "referenceSegments": 1826,
+  "checks": [
+    "Four distinct seeded algorithms and weighted Growing Tree selection",
+    "Generator cache determinism",
+    "Region size bias",
+    "Stable plate anchoring and exact return",
+    "Only allowed diagonal angles",
+    "Reference centerlines preserved exactly",
+    "Optional reference pocket fill",
+    "Extreme aspect ratios and small canvases",
+    "Whole-title and per-letter hatch events combine",
+    "Hatch trigger selection and per-letter opt-out",
+    "Hatch pose persistence",
+    "Diagonal hatch gating",
+    "Identical perpendicular hatch pitch"
+  ]
+}

@@ -1,0 +1,7 @@
+{
+  "pitch": 6,
+  "wall": 2.8,
+  "requestedGap": 3.2,
+  "cellsChecked": 28728,
+  "cellsWithoutAnExactWidthPath": 11429
+}

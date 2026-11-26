@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "measuredFPS": 60,
+  "redrawsDuringExactReturn": 21,
+  "homeBuilds": 10,
+  "plateCountAtChaos": 38,
+  "checks": [
+    "New tectonic / no-overlap / full-fill defaults",
+    "Actual WebGPU ownership pass",
+    "Fixed wall width through chaos",
+    "Hard-flicker cycle returns pixel-for-pixel",
+    "Flicker does not regenerate home geometry",
+    "Higher-ranked glyph hides lower letter hatch",
+    "Per-letter priority controls visible hatch",
+    "No-overlap toggle permits crosshatching when off",
+    "Priority and random hierarchy/corruption state survive JSON export/import",
+    "No runtime or GPU errors"
+  ]
+}

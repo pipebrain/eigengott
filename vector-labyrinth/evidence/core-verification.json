@@ -1,0 +1,21 @@
+{
+  "passed": true,
+  "protectedFilesUnchanged": 40,
+  "segmentsChecked": 40170,
+  "stableSegments": 1578,
+  "chaosSegments": 13630,
+  "checks": [
+    "30-second cycle and endpoint holds",
+    "Manual state",
+    "Preset validation",
+    "Hard flicker scheduling",
+    "Exact original-study geometry restoration",
+    "Concept composition guide",
+    "Exact seeded recovery",
+    "Seeded redraw variation",
+    "All segments axis-aligned",
+    "Constant-gap lattice",
+    "Segment budget",
+    "Existing application files unchanged"
+  ]
+}

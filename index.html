@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="EIGENGOTT — a title study built from stacks of flat slices. Native WebGPU and WebAssembly.">
+  <title>EIGENGOTT — Slice study</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <canvas id="scene" aria-label="EIGENGOTT. Flat character slices extend into a central vanishing point while their stacks drift."></canvas>
+  <div id="status" role="status"><span class="loader"></span><p>Assembling space</p></div>
+  <aside id="controls" aria-label="Slice study controls" hidden>
+    <header><div><span class="eyebrow">TITLE STUDY / 02</span><h1>Stacks of space</h1></div><button id="close" aria-label="Close controls">×</button></header>
+    <details open><summary>Characters & appearance</summary>
+      <label>Title<input id="text" type="text" maxlength="48" value="EIGENGOTT" spellcheck="false" autocomplete="off"></label>
+      <label>Character mask<select id="font"><option value="block">Rectilinear · built in</option><option value="mono">System monospace</option><option value="sans">System sans serif</option><option value="custom" disabled>Loaded font file</option></select></label>
+      <label class="file-label">Load a font file<input id="font-file" type="file" accept=".ttf,.otf,.woff,.woff2"></label>
+      <p id="font-status" class="hint" role="status">TTF, OTF, WOFF or WOFF2 · stays on this device</p>
+      <label>Palette<select id="palette"><option value="bw">Black & white</option><option value="muted">Muted olive, earth & violet</option></select></label>
+      <label class="check"><input id="outline" type="checkbox"> Outline characters</label>
+      <label>Slices per stack <output id="slices-value"></output><input id="slices" type="range" min="48" max="320" step="16"></label>
+      <label>Environment density <output id="envDensity-value"></output><input id="envDensity" type="range" min="1" max="8" step="1"></label>
+      <label>Depth stretch <output id="depth-value"></output><input id="depth" type="range" min="0.25" max="3" step="0.01"></label>
+      <label>White layer thickness <output id="lineWidth-value"></output><input id="lineWidth" type="range" min="0.1" max="0.9" step="0.01"></label>
+    </details>
+    <details><summary>Stack movement</summary>
+      <label>Title displacement <output id="separation-value"></output><input id="separation" type="range" min="0" max="2" step="0.01"></label>
+      <label>Environment drift <output id="drift-value"></output><input id="drift" type="range" min="0" max="2" step="0.01"></label>
+      <label>Time scale <output id="speed-value"></output><input id="speed" type="range" min="0.1" max="2" step="0.01"></label>
+      <label>Elastic repulsion <output id="repulsion-value"></output><input id="repulsion" type="range" min="0" max="2" step="0.01"></label>
+      <label>Twist through depth <output id="twist-value"></output><input id="twist" type="range" min="0" max="3" step="0.01"></label>
+      <label>Shear through depth <output id="shear-value"></output><input id="shear" type="range" min="0" max="3" step="0.01"></label>
+      <label class="check"><input id="hold" type="checkbox"> Hold characters at their anchors</label>
+    </details>
+    <details id="camera-panel"><summary>Camera playground</summary>
+      <p class="hint">With this menu open: drag the scene to pan, Shift-drag to look, scroll to move in or out. R resets the camera.</p>
+      <label>Camera X <output id="cameraX-value"></output><input id="cameraX" type="range" min="-20" max="20" step="0.01"></label>
+      <label>Camera Y <output id="cameraY-value"></output><input id="cameraY" type="range" min="-15" max="15" step="0.01"></label>
+      <label>Camera distance <output id="cameraZ-value"></output><input id="cameraZ" type="range" min="-5" max="30" step="0.01"></label>
+      <label>Look left / right <output id="yaw-value"></output><input id="yaw" type="range" min="-40" max="40" step="0.1"></label>
+      <label>Look up / down <output id="pitch-value"></output><input id="pitch" type="range" min="-35" max="35" step="0.1"></label>
+      <label>Vertical field of view <output id="fov-value"></output><input id="fov" type="range" min="35" max="110" step="1"></label>
+      <button id="camera-reset">Reset camera</button>
+    </details>
+    <div class="buttons"><button id="pause">Pause</button><button id="reform">Reassemble</button><button id="reset">Reset all</button></div>
+    <footer><span id="telemetry">Initializing</span><span>H · hide &nbsp; F · fullscreen</span></footer>
+  </aside>
+  <script type="module" src="main.js"></script>
+</body>
+</html>

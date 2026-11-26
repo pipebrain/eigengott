@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "originalSegments": 2349,
+  "filledSegments": 2504,
+  "cleanSegments": 2496,
+  "movingSegments": 6123,
+  "checks": [
+    "Reference walls preserved by dead-zone filling",
+    "Additional vector lines in previously unfilled spaces",
+    "Finite plate bounds and valid ownership IDs",
+    "Allowed wall angles after plate transforms",
+    "Exact vector recovery with changed animation/order seeds",
+    "Cycle priority randomization",
+    "Per-character base hierarchy",
+    "Hard-flicker random corruption / priority state",
+    "Hierarchy pose persistence",
+    "Exact stable and chaos endpoints"
+  ]
+}

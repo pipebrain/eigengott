@@ -1,0 +1,6 @@
+{
+  "samples": 10974,
+  "originalDirectionAgreement": 0.5007289958082741,
+  "conceptDirectionAgreement": 0.9740295243302352,
+  "method": "Dominant horizontal/vertical stroke direction in 9px neighborhoods, at 8px sample intervals; title region and ambiguous/empty reference samples excluded."
+}

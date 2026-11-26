@@ -1,0 +1,703 @@
+{
+  "applicationFilesUnchanged": true,
+  "applicationHashes": {
+    "index.html": "d97fcc3bc6386abedd905e6ca9ac1d3799b2a0bb5fec3618739bef2ea3521d53",
+    "style.css": "06c4556845237072c6317438436d75b5244eba162d4cfc08c78f9740e66ff152",
+    "main.js": "0d347b1c5cd49f4993c297d9ba4147db8d772636a99f7eb27784f871af56bd63",
+    "masks.js": "f64b4f50ab3ebf3c3b4caf100bc4e3c1b26366fee90eb14a8eeefdcac1c1b1bc",
+    "scene.js": "c6127c4e0127e014cb1e4933f1b64ebb4b3ee69bdd783b7329dbc7139821128b",
+    "src/motion.c": "a7cb78ec183db7258fb09147479d875c6283300063b0b29a307549698c32724b",
+    "motion.wasm": "e7a26cc315d1e0e363c5f2a1a9a584c660339e4b5a0adfc48762b479f7b19b49",
+    "shaders/scene.wgsl": "bb64cc9b2edafbb5b269dab764f33dc2dd8e95e862d6e02c8820391b6fa46c49"
+  },
+  "referencePath": "/Users/poo/Downloads/EIGENGOTT-Title-Concept.jpg",
+  "reference": {
+    "sourceSize": [
+      2752,
+      1536
+    ],
+    "measurementSize": [
+      1376,
+      768
+    ],
+    "whitePixelFraction": 0.35784959423449614,
+    "blackPixelFraction": 0.5723384886749031,
+    "middleGrayFraction": 0.14334934441618216,
+    "meanBrightness": 0.3578513321763216,
+    "edges": {
+      "strongEdgePixels": 509532,
+      "axisAlignedWithin5Degrees": 0.9680433838325553,
+      "axisAlignedWithin10Degrees": 0.9741927693877467
+    },
+    "backgroundEdges": {
+      "strongEdgePixels": 389371,
+      "axisAlignedWithin5Degrees": 0.9705224536927813,
+      "axisAlignedWithin10Degrees": 0.9763521856721639
+    }
+  },
+  "referenceTitleApproximate": {
+    "box": [
+      640,
+      525,
+      2105,
+      1018
+    ],
+    "fractionOfImage": [
+      0.5323401162790697,
+      0.3209635416666667
+    ],
+    "method": "Manually estimated visible title envelope; not an OCR measurement."
+  },
+  "cases": [
+    {
+      "name": "default",
+      "controls": {},
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 2,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 0
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.553607792817345,
+        "blackPixelFraction": 0.3490718871124031,
+        "middleGrayFraction": 0.14125806231831395,
+        "meanBrightness": 0.5804916277466655,
+        "edges": {
+          "strongEdgePixels": 472560,
+          "axisAlignedWithin5Degrees": 0.4132709336968632,
+          "axisAlignedWithin10Degrees": 0.5532498826896074
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 297572,
+          "axisAlignedWithin5Degrees": 0.3295315182434825,
+          "axisAlignedWithin10Degrees": 0.483691193269555
+        }
+      }
+    },
+    {
+      "name": "axis-aligned",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 3,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 54
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.5598456804142442,
+        "blackPixelFraction": 0.33521359465843026,
+        "middleGrayFraction": 0.1630584953367248,
+        "meanBrightness": 0.5846571069228321,
+        "edges": {
+          "strongEdgePixels": 502388,
+          "axisAlignedWithin5Degrees": 0.9722339524231864,
+          "axisAlignedWithin10Degrees": 0.9786698279967448
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 319334,
+          "axisAlignedWithin5Degrees": 0.9834976691962781,
+          "axisAlignedWithin10Degrees": 0.9862937660690512
+        }
+      }
+    },
+    {
+      "name": "line-balance-low",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "lineWidth": 0.15
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 4,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 54
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.8425822886385659,
+        "blackPixelFraction": 0.07252395984738372,
+        "middleGrayFraction": 0.1506073234617248,
+        "meanBrightness": 0.8592399303774321,
+        "edges": {
+          "strongEdgePixels": 383112,
+          "axisAlignedWithin5Degrees": 0.9749731937876007,
+          "axisAlignedWithin10Degrees": 0.9797788489226589
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 261686,
+          "axisAlignedWithin5Degrees": 0.9825602088701607,
+          "axisAlignedWithin10Degrees": 0.9855405483345605
+        }
+      }
+    },
+    {
+      "name": "line-balance-high",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "lineWidth": 0.85
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 5,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 56
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.18224151374757752,
+        "blackPixelFraction": 0.7057868898376938,
+        "middleGrayFraction": 0.14967902131782945,
+        "meanBrightness": 0.2135943504248841,
+        "edges": {
+          "strongEdgePixels": 391175,
+          "axisAlignedWithin5Degrees": 0.9724604702630549,
+          "axisAlignedWithin10Degrees": 0.9789622526548807
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 263273,
+          "axisAlignedWithin5Degrees": 0.982754024271358,
+          "axisAlignedWithin10Degrees": 0.985751959160259
+        }
+      }
+    },
+    {
+      "name": "ink-balance-match",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "lineWidth": 0.65
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 6,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 56
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.3776448567708333,
+        "blackPixelFraction": 0.5169015337330426,
+        "middleGrayFraction": 0.16674710059350775,
+        "meanBrightness": 0.401734526553475,
+        "edges": {
+          "strongEdgePixels": 490655,
+          "axisAlignedWithin5Degrees": 0.9721670817681862,
+          "axisAlignedWithin10Degrees": 0.9786343969873865
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 314911,
+          "axisAlignedWithin5Degrees": 0.9835299974166976,
+          "axisAlignedWithin10Degrees": 0.9862943751360169
+        }
+      }
+    },
+    {
+      "name": "thin-dense",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "slices": 320,
+        "envDensity": 8,
+        "lineWidth": 0.15
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 7,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 320,
+        "flatLayers": 79680,
+        "fps": 56
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.8512313014777132,
+        "blackPixelFraction": 0.032064748364825583,
+        "middleGrayFraction": 0.2696154690528101,
+        "meanBrightness": 0.8606894258127186,
+        "edges": {
+          "strongEdgePixels": 487095,
+          "axisAlignedWithin5Degrees": 0.9772717930944216,
+          "axisAlignedWithin10Degrees": 0.9812989648790554
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 385785,
+          "axisAlignedWithin5Degrees": 0.9837037517662466,
+          "axisAlignedWithin10Degrees": 0.9866678571671172
+        }
+      }
+    },
+    {
+      "name": "outline",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "outline": true
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 8,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          9.165081053508253
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 56
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.5193665970203488,
+        "blackPixelFraction": 0.3487946266351744,
+        "middleGrayFraction": 0.20299441315406977,
+        "meanBrightness": 0.5508405577286631,
+        "edges": {
+          "strongEdgePixels": 558321,
+          "axisAlignedWithin5Degrees": 0.9204272770602616,
+          "axisAlignedWithin10Degrees": 0.9424028234755482
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 332238,
+          "axisAlignedWithin5Degrees": 0.9750188964325264,
+          "axisAlignedWithin10Degrees": 0.9797308797131159
+        }
+      }
+    },
+    {
+      "name": "narrow-lens",
+      "controls": {
+        "drift": 0,
+        "twist": 0,
+        "shear": 0,
+        "repulsion": 0,
+        "fov": 35,
+        "cameraZ": 10.4
+      },
+      "state": {
+        "ready": true,
+        "renderer": "WebGPU",
+        "motion": "WebAssembly",
+        "lighting": false,
+        "shadows": false,
+        "renderPasses": 1,
+        "drawCalls": 1,
+        "errors": [],
+        "geometry": {
+          "count": 39,
+          "environmentCount": 30,
+          "characterCount": 9,
+          "titleWidth": 17.5,
+          "titleHeight": 3.1644611855995275
+        },
+        "text": "EIGENGOTT",
+        "font": "block",
+        "palette": "bw",
+        "maskBuilds": 9,
+        "time": 0,
+        "paused": true,
+        "separation": 0,
+        "camera": [
+          0,
+          0,
+          19.56508105350825
+        ],
+        "cameraRight": [
+          1,
+          0,
+          0
+        ],
+        "cameraUp": [
+          0,
+          1,
+          0
+        ],
+        "cameraBack": [
+          0,
+          0,
+          1
+        ],
+        "slices": 192,
+        "flatLayers": 36288,
+        "fps": 58
+      },
+      "metrics": {
+        "sourceSize": [
+          1376,
+          768
+        ],
+        "measurementSize": [
+          1376,
+          768
+        ],
+        "whitePixelFraction": 0.525642335876938,
+        "blackPixelFraction": 0.2603333938953488,
+        "middleGrayFraction": 0.32863031431686046,
+        "meanBrightness": 0.5817077998532262,
+        "edges": {
+          "strongEdgePixels": 734176,
+          "axisAlignedWithin5Degrees": 0.9763437196839853,
+          "axisAlignedWithin10Degrees": 0.9812208088531764
+        },
+        "backgroundEdges": {
+          "strongEdgePixels": 569986,
+          "axisAlignedWithin5Degrees": 0.984587675830343,
+          "axisAlignedWithin10Degrees": 0.9873478210639627
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Image statistics describe visible differences, not perceptual equivalence.",
+    "The title-envelope estimate is approximate.",
+    "UI experiments are diagnostic examples, not an exhaustive parameter optimization.",
+    "A single reference image does not uniquely identify its original 3D construction or camera."
+  ]
+}

@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#000000"><title>EIGENGOTT — Vector labyrinth study</title><link rel="stylesheet" href="style.css"></head>
+<body>
+  <canvas id="scene" aria-label="EIGENGOTT. An animated white labyrinth and gothic title on black."></canvas>
+  <div id="status" role="status"><span class="loader"></span><p>Drawing the labyrinth</p></div>
+  <aside id="controls" aria-label="Vector labyrinth controls" hidden>
+    <header><div><span class="eyebrow">EIGENGOTT / VECTOR STUDY</span><h1>Branching dimensions</h1></div><button id="close" aria-label="Close controls">×</button></header>
+    <div class="transport"><button id="pause">Pause</button><button id="step">Step</button><button id="home">Stable pose</button></div>
+    <p id="live-state" class="live">Stable · 0.000</p>
+    <div id="groups"></div>
+    <details id="character-panel"><summary>Per-character transforms</summary>
+      <label>Character<select id="character-select"></select></label>
+      <fieldset id="character-fields"><div id="character-inputs"></div><button id="character-reset">Reset this character</button></fieldset>
+      <p class="hint">Rotations affect glyph masks. Hatch directions stay in screen space: 0° / 90°, plus 45° / 135° when enabled.</p>
+    </details>
+    <details id="presets-panel"><summary>Browser saves, files & resets</summary>
+      <label>Save name<input id="preset-name" type="text" maxlength="100" placeholder="Name this setup"></label>
+      <div class="buttons"><button id="browser-save">Save in browser</button></div>
+      <label>Saved setups<select id="browser-preset"></select></label>
+      <div class="buttons"><button id="browser-load">Load selected</button><button id="browser-delete">Delete saved</button></div>
+      <label class="check"><input id="save-pose" type="checkbox" checked> Include current animation pose</label>
+      <h2 class="subhead">PORTABLE FILES</h2>
+      <div class="buttons"><button id="export">Export JSON</button><button id="import">Import JSON</button></div>
+      <h2 class="subhead">BUILT-IN RESETS</h2>
+      <div class="buttons"><button id="reset">dos-maze default</button><button id="concept-reset">Previous concept</button><button id="original-reset">Original study</button></div>
+      <input id="preset-file" type="file" accept=".json,application/json" hidden>
+      <p id="preset-status" class="hint" role="status">Current options autosave. Named saves and JSON files also preserve imported fonts.</p>
+    </details>
+    <footer><span id="telemetry">Initializing WebGPU</span><span>H · hide controls &nbsp; F · fullscreen &nbsp; Space · pause</span><span id="budget-status"></span></footer>
+  </aside>
+  <script type="module" src="main.js"></script>
+</body></html>

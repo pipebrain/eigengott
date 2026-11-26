@@ -1,0 +1,167 @@
+{
+  "passed": true,
+  "browser": "Chrome headless / Metal WebGPU",
+  "checks": [
+    "WASM + WGSL initialization",
+    "One stack per character",
+    "Grayscale pixels verified in default mode",
+    "One unlit draw call with no shadows",
+    "Rest/displacement/return poses",
+    "Fixed default camera",
+    "Camera slider, drag, look and reset",
+    "Hidden controls and H shortcut",
+    "Pause/resume",
+    "Reassembly",
+    "Persistent controls",
+    "Live text editing",
+    "Local font file loading",
+    "Masks generated only on edits",
+    "Colored pixels verified in muted mode",
+    "Empty and 24-character titles",
+    "Portrait resize",
+    "No runtime or WebGPU errors"
+  ],
+  "snapshots": [
+    {
+      "ready": true,
+      "renderer": "WebGPU",
+      "motion": "WebAssembly",
+      "lighting": false,
+      "shadows": false,
+      "renderPasses": 1,
+      "drawCalls": 1,
+      "errors": [],
+      "geometry": {
+        "count": 39,
+        "environmentCount": 30,
+        "characterCount": 9,
+        "titleWidth": 17.5,
+        "titleHeight": 3.1644611855995275
+      },
+      "text": "EIGENGOTT",
+      "font": "block",
+      "palette": "bw",
+      "maskBuilds": 1,
+      "time": 0,
+      "paused": true,
+      "separation": 0,
+      "camera": [
+        0,
+        0,
+        10.262981388043096
+      ],
+      "cameraRight": [
+        1,
+        0,
+        0
+      ],
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "cameraBack": [
+        0,
+        0,
+        1
+      ],
+      "slices": 192,
+      "flatLayers": 36288,
+      "fps": 0
+    },
+    {
+      "ready": true,
+      "renderer": "WebGPU",
+      "motion": "WebAssembly",
+      "lighting": false,
+      "shadows": false,
+      "renderPasses": 1,
+      "drawCalls": 1,
+      "errors": [],
+      "geometry": {
+        "count": 39,
+        "environmentCount": 30,
+        "characterCount": 9,
+        "titleWidth": 17.5,
+        "titleHeight": 3.1644611855995275
+      },
+      "text": "EIGENGOTT",
+      "font": "block",
+      "palette": "bw",
+      "maskBuilds": 1,
+      "time": 16,
+      "paused": true,
+      "separation": 0.8500000238418579,
+      "camera": [
+        0,
+        0,
+        10.262981388043096
+      ],
+      "cameraRight": [
+        1,
+        0,
+        0
+      ],
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "cameraBack": [
+        0,
+        0,
+        1
+      ],
+      "slices": 192,
+      "flatLayers": 36288,
+      "fps": 0
+    },
+    {
+      "ready": true,
+      "renderer": "WebGPU",
+      "motion": "WebAssembly",
+      "lighting": false,
+      "shadows": false,
+      "renderPasses": 1,
+      "drawCalls": 1,
+      "errors": [],
+      "geometry": {
+        "count": 39,
+        "environmentCount": 30,
+        "characterCount": 9,
+        "titleWidth": 17.5,
+        "titleHeight": 3.1644611855995275
+      },
+      "text": "EIGENGOTT",
+      "font": "block",
+      "palette": "bw",
+      "maskBuilds": 1,
+      "time": 25.5,
+      "paused": true,
+      "separation": 0,
+      "camera": [
+        0,
+        0,
+        10.262981388043096
+      ],
+      "cameraRight": [
+        1,
+        0,
+        0
+      ],
+      "cameraUp": [
+        0,
+        1,
+        0
+      ],
+      "cameraBack": [
+        0,
+        0,
+        1
+      ],
+      "slices": 192,
+      "flatLayers": 36288,
+      "fps": 0
+    }
+  ]
+}

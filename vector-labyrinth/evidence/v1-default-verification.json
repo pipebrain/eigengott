@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "browser": "Chrome headless / Metal WebGPU",
+  "checks": [
+    "dos-maze settings exactly match the browser-saved dos-maze profile",
+    "Animated WebGPU/WASM startup",
+    "Previous profile default available",
+    "Revision-3 options backed up before default switch",
+    "Saved options restore without repeated migration",
+    "Reset restores dos-maze",
+    "No runtime or GPU errors",
+    "Rendering/generation files unchanged"
+  ],
+  "renderingFilesUnchanged": 24
+}

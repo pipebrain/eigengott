@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "geometry": {
+    "count": 39,
+    "environmentCount": 30,
+    "characterCount": 9,
+    "titleWidth": 17.5,
+    "titleHeight": 3.3124861633827765
+  },
+  "peakDistance": 3.0374945533481523,
+  "returnDistance": 0.025380120969524942,
+  "heldDistance": 0.025356561837611313,
+  "movingEnvironmentStacks": 30,
+  "checks": [
+    "One stack per character",
+    "Finite transforms over full cycle",
+    "Substantial displacement",
+    "Spring recovery of every character",
+    "Reassembly while paused",
+    "Anchored title hold",
+    "Continuously moving environment",
+    "Extreme repulsion and motion"
+  ]
+}

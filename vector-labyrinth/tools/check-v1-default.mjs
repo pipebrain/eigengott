@@ -1,0 +1,50 @@
+import {spawn} from 'node:child_process';
+import {mkdtemp,mkdir,readFile,writeFile,rm} from 'node:fs/promises';
+import {join} from 'node:path';
+import {tmpdir} from 'node:os';
+import {fileURLToPath} from 'node:url';
+import assert from 'node:assert/strict';
+const root=fileURLToPath(new URL('../',import.meta.url)),out=join(root,'evidence');await mkdir(out,{recursive:true});
+const profile=await mkdtemp(join(tmpdir(),'eigengott-vector-check-')),download=join(profile,'downloads');await mkdir(download);
+const chrome=spawn(process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',[
+  '--headless=new','--enable-unsafe-webgpu','--use-angle=metal','--no-first-run','--no-default-browser-check','--remote-debugging-port=0',`--user-data-dir=${profile}`,'about:blank',
+],{stdio:['ignore','ignore','pipe']});
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));let socket;
+try{
+  const url=await new Promise((resolve,reject)=>{let log='';const timer=setTimeout(()=>reject(new Error('Chrome startup timed out')),20000);chrome.on('error',reject);chrome.stderr.on('data',chunk=>{log+=chunk;const m=log.match(/DevTools listening on (ws:\/\/\S+)/);if(m){clearTimeout(timer);resolve(m[1]);}});});
+  socket=new WebSocket(url);await new Promise((resolve,reject)=>{socket.onopen=resolve;socket.onerror=reject;});
+  let serial=0;const pending=new Map(),runtimeErrors=[];
+  socket.onmessage=event=>{const m=JSON.parse(event.data);if(m.id){const p=pending.get(m.id);if(p){pending.delete(m.id);m.error?p.reject(new Error(JSON.stringify(m.error))):p.resolve(m.result);}}if(m.method==='Runtime.exceptionThrown')runtimeErrors.push(m.params.exceptionDetails.exception?.description||m.params.exceptionDetails.text);};
+  const send=(method,params={},sessionId)=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});socket.send(JSON.stringify({id,method,params,...(sessionId?{sessionId}:{})}));});
+  const {targetId}=await send('Target.createTarget',{url:'about:blank'}),{sessionId}=await send('Target.attachToTarget',{targetId,flatten:true});
+  const cmd=(method,params)=>send(method,params,sessionId);
+  const evaluate=async expression=>{const r=await cmd('Runtime.evaluate',{expression,returnByValue:true,awaitPromise:true});if(r.exceptionDetails)throw new Error(r.exceptionDetails.exception?.description||r.exceptionDetails.text);return r.result.value;};
+  const waitFor=async expression=>{for(let i=0;i<160;i++){if(await evaluate(expression))return;const error=await evaluate('!document.querySelector("#status")?.hidden?document.querySelector("#status")?.innerText:null');if(error&&!error.includes('Drawing the labyrinth'))throw new Error(error);await sleep(100);}throw new Error('Timed out: '+expression+' '+JSON.stringify(runtimeErrors)+' '+JSON.stringify(await evaluate('window.__VECTOR_STUDY')));};
+  await cmd('Page.enable');await cmd('Runtime.enable');
+  await cmd('Emulation.setDeviceMetricsOverride',{width:1376,height:768,deviceScaleFactor:1,mobile:false});
+  await cmd('Page.navigate',{url:'http://127.0.0.1:8080/vector-labyrinth/'});
+  await waitFor('window.__VECTOR_STUDY?.ready');
+  const expected=JSON.parse(await readFile(join(root,'presets/dos-maze.json'),'utf8')).settings;
+  assert.deepEqual(await evaluate('window.__VECTOR_STUDY.settings'),expected);
+  assert.equal(await evaluate('document.querySelector("#browser-preset").value'),'builtin:dos-maze');
+  assert.equal(await evaluate('window.__VECTOR_STUDY.paused'),false);
+  await sleep(250);assert.ok(await evaluate('window.__VECTOR_STUDY.time>0'));
+  const {data}=await cmd('Page.captureScreenshot',{format:'png'});await writeFile(join(out,'dos-maze-default.png'),Buffer.from(data,'base64'));
+  const load=async id=>{await evaluate(`document.querySelector('#browser-preset').value=${JSON.stringify(id)};document.querySelector('#browser-load').click()`);await sleep(150);};
+  await load('builtin:reference-filled');assert.equal(await evaluate('window.__VECTOR_STUDY.settings.lineProfiles'),true);
+  assert.equal(await evaluate('window.__VECTOR_STUDY.settings.constantGap'),true);
+  await evaluate(`(async()=>{const {profileDefaults}=await import('./settings.js');localStorage.setItem('eigengott-vector-labyrinth-v2',JSON.stringify({version:2,defaultRevision:3,activePreset:'builtin:reference-filled',settings:{...profileDefaults(),title:'PRESERVED'}}));})()`);
+  const reload=async()=>{await cmd('Page.reload');await sleep(200);await waitFor('window.__VECTOR_STUDY?.ready');};
+  await reload();assert.deepEqual(await evaluate('window.__VECTOR_STUDY.settings'),expected);
+  assert.equal(await evaluate(`JSON.parse(localStorage.getItem('eigengott-vector-labyrinth-v2-before-dos-maze')).settings.title`),'PRESERVED');
+  await load('before-dos-maze');assert.equal(await evaluate('window.__VECTOR_STUDY.title'),'PRESERVED');
+  await reload();assert.equal(await evaluate('window.__VECTOR_STUDY.title'),'PRESERVED','Migration must only run once');
+  await evaluate(`document.querySelector('#reset').click()`);await sleep(150);
+  assert.deepEqual(await evaluate('window.__VECTOR_STUDY.settings'),expected);
+  assert.deepEqual(await evaluate('window.__VECTOR_STUDY.errors'),[]);assert.deepEqual(runtimeErrors,[]);
+  const hashes=JSON.parse(await readFile(join(out,'checkpoint-renderer-hashes.json'),'utf8'));
+  const {createHash}=await import('node:crypto');
+  for(const [file,hash] of Object.entries(hashes))assert.equal(createHash('sha256').update(await readFile(join(root,'..',file))).digest('hex'),hash,`Rendering code changed: ${file}`);
+  const report={passed:true,browser:'Chrome headless / Metal WebGPU',checks:['dos-maze settings exactly match the browser-saved dos-maze profile','Animated WebGPU/WASM startup','Previous profile default available','Revision-3 options backed up before default switch','Saved options restore without repeated migration','Reset restores dos-maze','No runtime or GPU errors','Rendering/generation files unchanged'],renderingFilesUnchanged:Object.keys(hashes).length};
+  await writeFile(join(out,'v1-default-verification.json'),JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));
+}finally{socket?.close();chrome.kill('SIGTERM');await sleep(500);await rm(profile,{recursive:true,force:true,maxRetries:3,retryDelay:300});}

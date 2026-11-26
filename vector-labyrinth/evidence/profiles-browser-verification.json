@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "measuredFPS": 55,
+  "perspectivePlanes": 64,
+  "fillPlanes": 24,
+  "checks": [
+    "Anchored title default and unlock toggle",
+    "Common-vanishing-point and fill profiles rendered by WebGPU",
+    "Collision-driven visibility changes during ongoing contacts",
+    "Perspective and fill profile toggles",
+    "Independent hatch movement / randomization",
+    "Grid toggle",
+    "Pixel-exact saved collision/edge redraw pose",
+    "Pixel-exact full-cycle recovery",
+    "Previous v5 options preserved on migration",
+    "Portrait rendering",
+    "No GPU or runtime errors"
+  ]
+}

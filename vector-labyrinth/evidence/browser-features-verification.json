@@ -1,0 +1,24 @@
+{
+  "passed": true,
+  "comparison": {
+    "binaryPixelAgreement": 0.9103861964026163,
+    "whitePrecisionWithin1px": 0.9988916144271827,
+    "whiteRecallWithin1px": 0.9997746995552305
+  },
+  "measuredFPS": 60,
+  "checks": [
+    "Traced reference rendered by WebGPU",
+    "Reference image comparison at one-pixel tolerance",
+    "Optional reference pocket fill",
+    "Mixed-generator preset",
+    "Plate chaos rendering",
+    "45 and 135 degree whole-title and per-letter hatch rendering",
+    "Diagonal toggle gates directions",
+    "Hard flicker combines global and per-letter changes",
+    "No font rebuild on hatch events",
+    "Hatch directions survive browser save and portable JSON",
+    "Animated mixed/plate/diagonal geometry",
+    "Portrait rendering",
+    "No GPU or runtime errors"
+  ]
+}
