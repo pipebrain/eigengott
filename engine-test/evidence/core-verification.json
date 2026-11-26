@@ -1,0 +1,151 @@
+{
+  "passed": true,
+  "rust": "1.100.0 / wasm32-unknown-unknown",
+  "wasmBytes": 48674,
+  "wasmMemoryBytes": 16777216,
+  "validSeeds": 256,
+  "structuralTrianglesChecked": 215040,
+  "rejectedFaults": 8,
+  "movementSteps": 7680,
+  "renderRatesCompared": [
+    {
+      "fps": 30,
+      "position": [
+        -0.00017106106679420918,
+        -2.058000087738037,
+        0.00300001073628664
+      ],
+      "velocity": [
+        6.739745117556595e-7,
+        0,
+        0
+      ]
+    },
+    {
+      "fps": 60,
+      "position": [
+        -0.00017106106679420918,
+        -2.058000087738037,
+        0.00300001073628664
+      ],
+      "velocity": [
+        6.739745117556595e-7,
+        0,
+        0
+      ]
+    },
+    {
+      "fps": 120,
+      "position": [
+        -0.00017106106679420918,
+        -2.058000087738037,
+        0.00300001073628664
+      ],
+      "velocity": [
+        6.739745117556595e-7,
+        0,
+        0
+      ]
+    },
+    {
+      "fps": 240,
+      "position": [
+        -0.00017106106679420918,
+        -2.058000087738037,
+        0.00300001073628664
+      ],
+      "velocity": [
+        6.739745117556595e-7,
+        0,
+        0
+      ]
+    }
+  ],
+  "phaseSamples": [
+    {
+      "generationMs": 0.27466699481010437,
+      "validationMs": 1.5415829420089722,
+      "surfaceMs": 0.3547089993953705,
+      "bakeMs": 4.693333148956299
+    },
+    {
+      "generationMs": 0.28141701221466064,
+      "validationMs": 1.2904160022735596,
+      "surfaceMs": 0.15720899403095245,
+      "bakeMs": 2.6482911109924316
+    },
+    {
+      "generationMs": 0.26316601037979126,
+      "validationMs": 1.0514589548110962,
+      "surfaceMs": 0.1404999941587448,
+      "bakeMs": 2.8005409240722656
+    },
+    {
+      "generationMs": 0.2683750092983246,
+      "validationMs": 1.1285829544067383,
+      "surfaceMs": 0.15483300387859344,
+      "bakeMs": 2.996709108352661
+    },
+    {
+      "generationMs": 0.24754199385643005,
+      "validationMs": 0.9400420188903809,
+      "surfaceMs": 0.13683299720287323,
+      "bakeMs": 3.0028328895568848
+    },
+    {
+      "generationMs": 0.329041987657547,
+      "validationMs": 1.3404580354690552,
+      "surfaceMs": 0.16099999845027924,
+      "bakeMs": 3.043750047683716
+    },
+    {
+      "generationMs": 0.2619580030441284,
+      "validationMs": 1.0142500400543213,
+      "surfaceMs": 0.13725000619888306,
+      "bakeMs": 2.602375030517578
+    },
+    {
+      "generationMs": 0.2525840103626251,
+      "validationMs": 1.0680409669876099,
+      "surfaceMs": 0.16050000488758087,
+      "bakeMs": 2.9021670818328857
+    },
+    {
+      "generationMs": 0.2536660134792328,
+      "validationMs": 1.0670839548110962,
+      "surfaceMs": 0.14395800232887268,
+      "bakeMs": 3.0305418968200684
+    },
+    {
+      "generationMs": 0.25312501192092896,
+      "validationMs": 0.9950829744338989,
+      "surfaceMs": 0.15070900321006775,
+      "bakeMs": 2.6456658840179443
+    },
+    {
+      "generationMs": 0.2621249854564667,
+      "validationMs": 1.1230000257492065,
+      "surfaceMs": 0.1440420001745224,
+      "bakeMs": 2.9619579315185547
+    },
+    {
+      "generationMs": 0.2590410113334656,
+      "validationMs": 0.9920840263366699,
+      "surfaceMs": 0.15395799279212952,
+      "bakeMs": 2.542541980743408
+    }
+  ],
+  "checks": [
+    "Deterministic seeded topology/surface meshes",
+    "Closed oriented manifold boundary and connected interior",
+    "Finite bounded GPU buffers and quantized lightmaps",
+    "Eight invalid candidates preserve active arena bytes and player state",
+    "Stale activation rejected",
+    "Frame-rate-independent 120 Hz simulation",
+    "Stationary ramp contact",
+    "Jump/landing and eight movement directions without penetration",
+    "Swept floor/ceiling/wall collision",
+    "Exterior/pillar containment and invalid placement rejection",
+    "Bounded memory, finite inputs, and catch-up cap"
+  ]
+}

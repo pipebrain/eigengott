@@ -13,6 +13,10 @@ Follow the [approved engine direction](ENGINE_PLAN.md), incorporating the user's
 
 The engine is true 3D. Generate arenas from bound 2D sector construction data, assemble their 3D gameplay geometry, and validate walls, floors, ceilings, seams, collision, and connectivity before replacing the current arena. Keep failed candidates isolated from the active world. Rust/WASM, symmetry, surface dressing, coarse lighting/palette, arena modifiers, and mirrors are directions to pursue in staged tests; performance numbers are measured targets.
 
+The first [engine proof](../engine-test/README.md) is implemented separately in `engine-test/`: sealed sector-generated 3D arenas, fixed-step body/weapon collision, one procedural surface preset, coarse lightmaps/palette, validated GPU staging and manual activation, hidden controls, and bounded diagnostics/recovery. Deterministic structural/physics checks run in CI; desktop browser and soak checks have local evidence. Both title apps and their defaults remain unchanged.
+
+Next, review the arena's movement, scale, visibility, and surface treatment in the playable test. Then develop authored surface tiles and a verified moving-geometry/fold prototype, keeping the original loot warning window. Arbitrary-surface locomotion, mirrors, combat, and broader generation remain later milestones. Physical device checks are pending; the initial test uses desktop mouse/keyboard controls.
+
 ## Cross-device testing and deployment
 
 Status: planned. The repository remains private and Pages deployment is not enabled.

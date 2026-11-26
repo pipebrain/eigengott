@@ -1,6 +1,6 @@
 # EIGENGOTT · approved engine direction
 
-Status: design decisions recorded on 2026-11-26; engine implementation has not started. This plan incorporates the user's eight responses to the review of `eigengott_3d_engine_geometry_specification.md`. The supplied document is architectural input; the original game decisions remain authoritative where they differ.
+Status: the first separate [engine proof](../engine-test/README.md) is implemented on 2026-11-26. Its scope and validation results are recorded below. This plan incorporates the user's eight responses to the review of `eigengott_3d_engine_geometry_specification.md`. The supplied document is architectural input; the original game decisions remain authoritative where they differ.
 
 ## Gameplay contracts
 
@@ -131,3 +131,26 @@ Build a separate `engine-test/` prototype, preserving both title apps.
 Acceptance checks: deterministic generation; deliberate leak rejection; closed seams and correct reflected winding where used; valid floor/ceiling/wall collision; comparable simulation outcomes across render rates; safe candidate rejection/activation; bounded buffers/resources; and explicit CPU/GPU measurements. Physical-device acceptance remains pending until it is actually performed.
 
 Follow with original-timing loot/fold integration, verified moving geometry, arbitrary-surface locomotion/arena modifiers, authored surface tiles, and bounded mirrors/rival-self rendering. These directions are accepted for exploration; they are not requirements to complete all at once in the first engine test.
+
+## Engine proof 1 implementation
+
+The separate `engine-test/` now implements the six steps above with a bounded initial generator. The root title prototype, `vector-labyrinth/`, and `dos-maze/` remain intact. No game release version or deployment is implied by this prototype.
+
+- **Core:** dependency-free Rust 1.100.0 / `wasm32-unknown-unknown`, explicit pointer/count ABI, compile-time layouts, 16 MiB fixed memory, two isolated arena slots, and checked geometry/light/atlas capacities. Browser I/O and raw WebGPU remain vanilla JS.
+- **Construction:** a deterministic 13 × 13 sector template varies dimensions, floor/ceiling slopes, pillars, and emitters by seed. Canonical coordinates use 1/1024 m integer ticks. It contains shared interior openings and assembles welded 3D floor/ceiling/wall boundaries. This generator has one height interval per grid cell; future engine generators are not restricted to it.
+- **Validation/activation:** reciprocal binding, headroom, connectivity, finite/nondegenerate indexed geometry, winding, oriented manifold-edge closure, proper nonadjacent triangle crossings, and spawn/body/weapon clearance. An invalid candidate never changes active geometry or player state. A valid GPU upload is staged for explicit activation on a frame boundary; rendering and physical state switch together. Unclear player placement falls back to a verified spawn.
+- **Movement/view:** 120 Hz fixed-step, oriented 3D capsule sweeps, ramp contact, jump, sliding, and conservative physical gun clearance. Placeholder body/equipment geometry shares the world's view and depth pass. Ordinary gravity is active; arbitrary-surface walking is deferred.
+- **Surface/rendering:** one procedural preset with real 3D wall relief and light fixtures, continuous parent-plane UVs/guarded coarse atlas, 12 bounded emitters, nearest sampling, indexed horror palette, and dithering. Relief is adjustable. The common preset reserves an authored pack ID; the OBJ/glTF packer and full tile library remain future work.
+- **Harness/lifetime:** hidden H controls for seeds, fault injection, staging/activation, collision/seams, lighting/relief/resolution, and CPU/GPU/memory diagnostics. Resize, visibility/freeze, stale requests, bounded device recovery, manual retry, missing assets, and explicit disposal have browser checks.
+
+The validator is scoped to this canonical generator and is not a general arbitrary-mesh CSG proof. Decorative light visibility is accelerated using the current sector grid and height planes; future stacked-volume construction needs an adapted accelerator. Arena construction and baking currently run synchronously. Continuous folding, moving structural geometry, mirrors, authored surface packs, and gameplay are not implemented.
+
+### Bounded verification and measurements
+
+See [`engine-test/evidence/`](../engine-test/evidence/) and the engine README for commands and scope. The initial local verification covers 256 deterministic seeds / 215,040 structural triangles, eight rejected fault types with byte-for-byte active-buffer preservation, stale activation, fixed memory, 7,680 directional movement steps, jumping/contact, long sweeps, and matching 120 Hz simulation results at 30/60/120/240 render FPS. Browser checks cover native Pointer Lock, view/surface controls, activation/rejection/races, portrait/high-DPI rendering, freeze/resume, two simulated device recoveries, manual retry, disposal, and asset/unsupported-WebGPU errors.
+
+On an Apple M2 / 16 GB with Chrome/Metal, the default roughly 645 × 360 scene at 1376 × 768 output measured approximately 60 display-limited FPS, 0.10 ms median / 0.20 ms p95 host-frame CPU, and sampled GPU work of 0.17 ms scene / 0.26 ms palette/display. These are individual bounded local measurements, not cross-device guarantees. Fixed WASM storage is 16 MiB, with about 1.37 MiB of active arena GPU mesh/atlas data for the measured seed.
+
+Initial core phase samples were generation 0.25–0.34 ms, validation 0.96–1.57 ms, procedural surfaces 0.14–0.36 ms, and bake 2.60–4.91 ms. Generation includes sector creation and welding, so it does not establish a 0.03 ms isolated extrusion result. The bake exceeds the 2 ms target; neither proposed performance target is claimed as achieved. Optional GPU timestamps measure GPU passes, not presentation latency. Physical-device acceptance remains pending.
+
+A 30-second desktop soak also passed: eight validated replacements, eight rejected candidates, continued movement and repeated portrait/high-DPI changes, 1,810 rendered frames, roughly 60 FPS throughout, and at most 0.50 ms host-frame CPU p95 across the sampled windows. WASM stayed at 16 MiB; retained JS heap rose about 104 KiB after explicit garbage collection. This bounds that run only and is not a long-duration or driver-memory leak proof.
