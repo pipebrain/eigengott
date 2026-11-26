@@ -1,0 +1,383 @@
+{
+  "date": "2026-11-26",
+  "scope": "Local Chrome 158 / Metal; physical-device acceptance remains pending",
+  "core": {
+    "passed": true,
+    "checks": [
+      "18 model packs, 33 named roster entries, all skins and 13 weapons validated against their hashes; finite animation frames / tags / indices",
+      "Validated medium / large all-pairs route tables, reciprocal next hops, bounded table sizes and safe enemy placement",
+      "All weapons equip and cycle with unlimited test inventory and physical replacement checks",
+      "Melee, automatic hitscan, shotgun pellets, lightning, rail and all projectile classes exercise the real collision path without tunnelling or unbounded pools",
+      "Encounter clear automatically requests Recomposition; deleted-cluster corpse cleanup, locked enemy staging and shared Release agree",
+      "Crouch/stand physical height, live player clearance, finite actor movement and fixed 32 MiB WASM memory",
+      "1,920 live character-box steps keep every body corner within the forcefield-protected cluster union",
+      "30 / 60 / 120 / 240 FPS produce identical fixed-step positions, AI, shots, hits and encounter state"
+    ],
+    "containmentSteps": 1920
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "Full catalog startup, per-character hull default, all test weapons and all five debug defaults",
+      "Native entry/audio, C crouch, number weapons, extra-weapon cycling and Mouse 3 zoom",
+      "Native attack kills a Self, displays obituary and automatically runs Collapse / Return / shared Release",
+      "Animated characters, held weapons and bodies remain outside owned world feedback",
+      "Every requested overlay and browser console logging has an independent H setting",
+      "Large arena generation also prepares character-clearance navigation off the gameplay thread",
+      "Every one of the 18 character models selects, computes its own physical envelope / route table and renders through WebGPU",
+      "All thirteen imported weapon models equip and render with the complete test inventory intact",
+      "GPU recovery preserves combat state, corpses, loaded character choices and in-flight Recomposition",
+      "Portrait / landscape resize and freezing preserve bounded targets without simulation catch-up",
+      "Tools remain usable when Pointer Lock is unavailable"
+    ],
+    "models": [
+      {
+        "id": "angelyss",
+        "gear": {
+          "radius": 0.9003346581589871,
+          "height": 2.1400390625,
+          "crouchHeight": 1.645390625,
+          "eye": 1.58884765625,
+          "length": 0.6839818143529967,
+          "gunRadius": 0.30839339355165307,
+          "start": -0.1947538171665712,
+          "right": 0.2793764403647906,
+          "down": 0.42806306331167177,
+          "pivot": 1.139375765323639,
+          "boxed": true
+        },
+        "draws": 9
+      },
+      {
+        "id": "arachna",
+        "gear": {
+          "radius": 1.6293188659859703,
+          "height": 2.277911102557003,
+          "crouchHeight": 1.5783589669783566,
+          "eye": 1.79099609375,
+          "length": 0.6032951696090798,
+          "gunRadius": 0.32337499190325814,
+          "start": -0.32850838093043305,
+          "right": 0.15618209699231858,
+          "down": 0.5698350262272263,
+          "pivot": 0.9784960556399551,
+          "boxed": true
+        },
+        "draws": 11
+      },
+      {
+        "id": "assassin",
+        "gear": {
+          "radius": 0.965943223650388,
+          "height": 2.0962979488953137,
+          "crouchHeight": 1.838592359604037,
+          "eye": 1.62107421875,
+          "length": 1.1277049269181414,
+          "gunRadius": 0.419872498104663,
+          "start": -0.1399709214108896,
+          "right": 0.2293829857141827,
+          "down": 0.2162359525761679,
+          "pivot": 1.166214783191681,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "ayumi",
+        "gear": {
+          "radius": 0.8866330826724261,
+          "height": 2.3687960487850046,
+          "crouchHeight": 1.7613920230081166,
+          "eye": 1.9565234375,
+          "length": 0.5026854200108394,
+          "gunRadius": 0.39790671604275957,
+          "start": -0.41569258142897914,
+          "right": 0.25594284702236164,
+          "down": 0.22492395772687002,
+          "pivot": 1.5944977593421936,
+          "boxed": true
+        },
+        "draws": 11
+      },
+      {
+        "id": "beret",
+        "gear": {
+          "radius": 0.8530269734301964,
+          "height": 2.152831730167186,
+          "crouchHeight": 1.9213354668749694,
+          "eye": 1.771953125,
+          "length": 0.5654566938782899,
+          "gunRadius": 0.4292204743558774,
+          "start": -0.3127080927599401,
+          "right": 0.24014685665693847,
+          "down": 0.3364433048951674,
+          "pivot": 1.2064336878061295,
+          "boxed": true
+        },
+        "draws": 9
+      },
+      {
+        "id": "gargoyle",
+        "gear": {
+          "radius": 1.6280801811443386,
+          "height": 2.1904610967943574,
+          "crouchHeight": 1.6917561048331187,
+          "eye": 1.69626953125,
+          "length": 0.8373496523929194,
+          "gunRadius": 0.4285301726054175,
+          "start": -0.20924588244319184,
+          "right": 0.11710902060042754,
+          "down": 0.5015460526951265,
+          "pivot": 1.0868076276779175,
+          "boxed": true
+        },
+        "draws": 8
+      },
+      {
+        "id": "kyonshi",
+        "gear": {
+          "radius": 0.8910971552803172,
+          "height": 2.462885346070085,
+          "crouchHeight": 1.702862205179493,
+          "eye": 1.848125,
+          "length": 0.8640890323000612,
+          "gunRadius": 0.2690708365818515,
+          "start": -0.03579418925158229,
+          "right": 0.2192651181941701,
+          "down": 0.19432487472051196,
+          "pivot": 1.557678837776184,
+          "boxed": true
+        },
+        "draws": 13
+      },
+      {
+        "id": "liz",
+        "gear": {
+          "radius": 0.8280540200805168,
+          "height": 1.8642717613122182,
+          "crouchHeight": 1.4928715686000888,
+          "eye": 1.44919921875,
+          "length": 0.715589157453385,
+          "gunRadius": 0.24113237438915835,
+          "start": -0.07463930151835566,
+          "right": 0.2408864483655901,
+          "down": 0.3243093615271908,
+          "pivot": 1.1373746585845947,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "major",
+        "gear": {
+          "radius": 0.6592840506317124,
+          "height": 1.9877510890482388,
+          "crouchHeight": 1.577669812130131,
+          "eye": 1.6401171875,
+          "length": 0.6000380744887327,
+          "gunRadius": 0.2693645382647568,
+          "start": -0.3385720442109794,
+          "right": 0.23088358003022458,
+          "down": 0.3174117212408727,
+          "pivot": 1.1541007947921753,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "merman",
+        "gear": {
+          "radius": 1.7383637620909689,
+          "height": 2.0727998314487883,
+          "crouchHeight": 1.430873409922903,
+          "eye": 1.689921875,
+          "length": 0.5557122746357027,
+          "gunRadius": 0.450506120924405,
+          "start": -0.33157232932874714,
+          "right": 0.22849918536398145,
+          "down": 0.4014851811191549,
+          "pivot": 1.273342866897583,
+          "boxed": true
+        },
+        "draws": 10
+      },
+      {
+        "id": "neko",
+        "gear": {
+          "radius": 0.9082431505736549,
+          "height": 2.021875,
+          "crouchHeight": 1.54724609375,
+          "eye": 1.658671875,
+          "length": 0.642924020387167,
+          "gunRadius": 0.3279525284981469,
+          "start": -0.24915816018280873,
+          "right": 0.3076314539682985,
+          "down": 0.4199997092491723,
+          "pivot": 1.2235076320171356,
+          "boxed": true
+        },
+        "draws": 10
+      },
+      {
+        "id": "penguin",
+        "gear": {
+          "radius": 0.978689712683381,
+          "height": 2.0816479627444897,
+          "crouchHeight": 1.861412815423403,
+          "eye": 1.68357421875,
+          "length": 0.5706149785422633,
+          "gunRadius": 0.42552645144953555,
+          "start": -0.4032649311922871,
+          "right": 0.3596308356942582,
+          "down": 0.42593280089691765,
+          "pivot": 1.109641034603119,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "sarge",
+        "gear": {
+          "radius": 0.9737266098176591,
+          "height": 1.9255808410963655,
+          "crouchHeight": 1.6808027711765732,
+          "eye": 1.6518359375,
+          "length": 0.5118015909919726,
+          "gunRadius": 0.2643280671604794,
+          "start": -0.452235567475868,
+          "right": 0.23586558389098874,
+          "down": 0.45942696490329427,
+          "pivot": 1.0284423124790192,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "sergei",
+        "gear": {
+          "radius": 0.7601017280922632,
+          "height": 1.9439860064433456,
+          "crouchHeight": 1.4856692103152729,
+          "eye": 1.6147265625,
+          "length": 0.6009614590766321,
+          "gunRadius": 0.2515720081711641,
+          "start": -0.22946277582434937,
+          "right": -0.22787220994340285,
+          "down": 0.3498023553833658,
+          "pivot": 1.0893492889404297,
+          "boxed": true
+        },
+        "draws": 7
+      },
+      {
+        "id": "skelebot",
+        "gear": {
+          "radius": 0.8618041799224068,
+          "height": 2.097324117720901,
+          "crouchHeight": 1.700232893753523,
+          "eye": 1.66306640625,
+          "length": 0.6705172117912661,
+          "gunRadius": 0.2282015830476587,
+          "start": -0.20095224105499385,
+          "right": 0.24972864474783985,
+          "down": 0.3760016616730435,
+          "pivot": 1.2408142876625061,
+          "boxed": true
+        },
+        "draws": 7
+      },
+      {
+        "id": "smarine",
+        "gear": {
+          "radius": 0.8387792394693094,
+          "height": 1.9174020641854443,
+          "crouchHeight": 1.5624020045807996,
+          "eye": 1.623515625,
+          "length": 0.891070139108812,
+          "gunRadius": 0.24433891582553835,
+          "start": 0.10086776503519079,
+          "right": 0.4291809289707543,
+          "down": 0.2686959402387945,
+          "pivot": 1.1306188297271729,
+          "boxed": true
+        },
+        "draws": 6
+      },
+      {
+        "id": "sorceress",
+        "gear": {
+          "radius": 0.7189705558534222,
+          "height": 2.277426477483521,
+          "crouchHeight": 1.9134881710368299,
+          "eye": 1.55857421875,
+          "length": 0.8174513086063591,
+          "gunRadius": 0.3575364570101171,
+          "start": -0.20925285466113458,
+          "right": 0.18085002923568433,
+          "down": 0.3447954164439666,
+          "pivot": 1.147788245677948,
+          "boxed": true
+        },
+        "draws": 7
+      },
+      {
+        "id": "tony",
+        "gear": {
+          "radius": 0.8205705650272125,
+          "height": 2.0087644651184515,
+          "crouchHeight": 1.7985393712083089,
+          "eye": 1.76169921875,
+          "length": 0.5495272543305392,
+          "gunRadius": 0.4400312493732195,
+          "start": -0.382822449685179,
+          "right": 0.28495606178319005,
+          "down": 0.41724450044809913,
+          "pivot": 1.1072249007225037,
+          "boxed": true
+        },
+        "draws": 6
+      }
+    ]
+  },
+  "lifecycle": {
+    "passed": true,
+    "url": "http://127.0.0.1:52061/encounter-test/",
+    "checks": [
+      "In-flight avatar selection cannot mutate a newer validated arena",
+      "Missing WebGPU presents a recoverable error before downloading media"
+    ]
+  },
+  "soak": {
+    "passed": true,
+    "seconds": 30,
+    "cleared": 6,
+    "encounters": 6,
+    "shots": 145,
+    "hits": 45,
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+    "cpu": {
+      "samples": 600,
+      "median": 1.7000000178813934,
+      "p95": 2.800000011920929,
+      "p99": 3.0999999940395355,
+      "max": 5.5999999940395355
+    },
+    "frame": {
+      "samples": 600,
+      "median": 16.69999999999709,
+      "p95": 16.799999999999272,
+      "p99": 16.80000000000291,
+      "max": 16.80000000000291
+    },
+    "sampledGPU": {
+      "median": 0.810612,
+      "p95": 2.262633,
+      "max": 3.6815290000000003
+    },
+    "retainedJSHeapBytes": {
+      "before": 2287184,
+      "after": 3098608,
+      "delta": 811424
+    }
+  }
+}

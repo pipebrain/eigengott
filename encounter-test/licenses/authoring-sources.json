@@ -1,0 +1,980 @@
+{
+  "upstreamRevision": 951,
+  "origin": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/",
+  "files": [
+    {
+      "path": "angelyss/angelyss-088-reanim.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/angelyss-088-reanim.blend",
+      "bytes": 2437828,
+      "sha256": "0e5c4dc43d25a25a9e00c4cf730b06a132983e7dafa04a8a40bbd15ab27e8617"
+    },
+    {
+      "path": "angelyss/angelyss-ik.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/angelyss-ik.blend",
+      "bytes": 5212984,
+      "sha256": "1a055678edd6292b3378a2489133d3322b9d40dfd8ef4a0e7a22d5ff32dc64a7"
+    },
+    {
+      "path": "angelyss/angelyss1f-LOD-416-2007-07-03.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/angelyss1f-LOD-416-2007-07-03.blend",
+      "bytes": 2947284,
+      "sha256": "32e7ddc07b467fc52307b302f87e077b1edde16b3a64daee4aa630a72d913916"
+    },
+    {
+      "path": "angelyss/gldclothes2.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/gldclothes2.psd",
+      "bytes": 1174449,
+      "sha256": "dd2f17802934487bc200aac41ce09a4bf5be5ef1faad8fd4cab33f5f26682889"
+    },
+    {
+      "path": "angelyss/gldskin2.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/gldskin2.psd",
+      "bytes": 1397004,
+      "sha256": "f843f5b786320ab539c115504451cf453bb0c8a0e954459f4c0303217e3097d8"
+    },
+    {
+      "path": "angelyss/nexuiz.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/nexuiz.blend",
+      "bytes": 4545252,
+      "sha256": "6683f1afef9a0ad2f7dc28eaef0aa8c03c8063d1c85505032d48c51ad8e27a1d"
+    },
+    {
+      "path": "angelyss/nude.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/nude.png",
+      "bytes": 250154,
+      "sha256": "3aa1d8ae305400133c7d8847995741fdbbea23720fa8636c8891fef0c81c01c3"
+    },
+    {
+      "path": "angelyss/nudeclothes.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/nudeclothes.png",
+      "bytes": 156142,
+      "sha256": "42ca74c45ed847459d20f5d42a3a0588490d7a2afde0a893f60c57801fd32405"
+    },
+    {
+      "path": "angelyss/reanimate5.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/reanimate5.blend",
+      "bytes": 4685048,
+      "sha256": "5e6755399e023d50c3bae32c314539a2f4f224a92760c66c7e275957c86bd9d0"
+    },
+    {
+      "path": "angelyss/reanimate7.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/angelyss/reanimate7.blend",
+      "bytes": 4707244,
+      "sha256": "d2570a740d4d6e918239da9ad47bb7bf85fedc5e0a170c27dc4f65a04abc3cec"
+    },
+    {
+      "path": "arachna/folorna/forlorna_hair.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/folorna/forlorna_hair.psd",
+      "bytes": 3892056,
+      "sha256": "061c4f5e6ae33ae1316bb39fa27b4f016319759230b196e3d1cfc481323fbfe3"
+    },
+    {
+      "path": "arachna/folorna/forlorna_jewelry.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/folorna/forlorna_jewelry.psd",
+      "bytes": 545691,
+      "sha256": "51865d0a3f2af01560472399f2f9ac4d61e38a36aa888e8ccdff379abc565511"
+    },
+    {
+      "path": "arachna/folorna/forlorna_spider.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/folorna/forlorna_spider.psd",
+      "bytes": 4039539,
+      "sha256": "cc45168ee3d1d56b0f5123e1ec8a70ca256f081f081914330f4c82ffe41028c6"
+    },
+    {
+      "path": "arachna/folorna/forlorna_torso.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/folorna/forlorna_torso.psd",
+      "bytes": 2916662,
+      "sha256": "4a1fae2da0465113d923ecade147c1c6a139bbc7155f1d72f157c4b920986fc9"
+    },
+    {
+      "path": "arachna/jewelry_1c.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/jewelry_1c.psd",
+      "bytes": 1191605,
+      "sha256": "3cdf9c6895deb295d26b29e6336d816f3ce946f5653069ebd60fb05f201e9809"
+    },
+    {
+      "path": "arachna/spid37animLOD.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/spid37animLOD.blend",
+      "bytes": 2477800,
+      "sha256": "20d2a762907980a7b03769e55eb0e235937e9165e4cd002e03a0f5e93a1bc584"
+    },
+    {
+      "path": "arachna/widowe/jewelry_widowe.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/widowe/jewelry_widowe.psd",
+      "bytes": 184274,
+      "sha256": "406db187ce3382b6fff29ea4f008850921e42a25f68ed6b07684c2fb5ae86be1"
+    },
+    {
+      "path": "arachna/widowe/spider_widowe.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/widowe/spider_widowe.psd",
+      "bytes": 452944,
+      "sha256": "6c6fa9721e572468f75ad2a9df5d04dc7ee6acdb8cb099d0dfca26feaab3fca0"
+    },
+    {
+      "path": "arachna/widowe/spider_widowe_guides.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/widowe/spider_widowe_guides.tga",
+      "bytes": 42520,
+      "sha256": "059b8fe20a10a1ec2e5dfff5616d04e84124629a80169881bf3006aae814369e"
+    },
+    {
+      "path": "arachna/widowe/torso_widowe.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/arachna/widowe/torso_widowe.psd",
+      "bytes": 1045886,
+      "sha256": "fef84e7e67ca3e598600c3a3407f05c6187725a6cfe0630407811138a292bb1f"
+    },
+    {
+      "path": "assassin/assasin_v10.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/assassin/assasin_v10.blend",
+      "bytes": 1007280,
+      "sha256": "9f3a7b59f64dd12252b30f85ee6e41ce2a5ef61273ad7b18e77f95ce92e084bc"
+    },
+    {
+      "path": "assassin/lower1-colors.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/assassin/lower1-colors.xcf",
+      "bytes": 1629156,
+      "sha256": "d3f2743188b7073f0103756eb72922598caf8f1cce9cde696b6dd2eb8d001d8e"
+    },
+    {
+      "path": "assassin/lower1-final.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/assassin/lower1-final.psd",
+      "bytes": 3544849,
+      "sha256": "d3d171104089bd9c3a4216bfdabb6dcc7c09ea5303bbab2f99dd30f443f29e53"
+    },
+    {
+      "path": "assassin/upper1-colors.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/assassin/upper1-colors.xcf",
+      "bytes": 1361781,
+      "sha256": "881f3d265d10664831f59d1a1caaf5854d5b28eedce281e6e7c4271b88f5acbf"
+    },
+    {
+      "path": "assassin/upper1-final.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/assassin/upper1-final.psd",
+      "bytes": 3497105,
+      "sha256": "247eab25a66770c86c03e732a9c8646b1084e25ab2afb85450d8c87cb4429a0d"
+    },
+    {
+      "path": "beret/11.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/11.blend",
+      "bytes": 1547100,
+      "sha256": "10a791a7a8fbe322e057431b344ecbc41f355b50ce92ba831197cc6cc9e27561"
+    },
+    {
+      "path": "beret/19-3b.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/19-3b.blend",
+      "bytes": 1122548,
+      "sha256": "d1bd2e32d2eee736e8fe791499607f7ce50378d4cf9e93d9aa31676620f28fed"
+    },
+    {
+      "path": "beret/19-3f-anim.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/19-3f-anim.blend",
+      "bytes": 1203112,
+      "sha256": "1f4097acc9b5e3db023755b18e622d9df2b5e0642b8d44707e56cd77ad79ed41"
+    },
+    {
+      "path": "beret/19-modnki3.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/19-modnki3.blend",
+      "bytes": 1119556,
+      "sha256": "cf2a0bc53a07eee6f76b71309b3626b2e604d6f0290fa694dc1c38b2616de099"
+    },
+    {
+      "path": "beret/19.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/19.blend",
+      "bytes": 1090968,
+      "sha256": "d8b099ce86c4514b1804d6b67522d8490914b704cf6c21fdf172c975b828d564"
+    },
+    {
+      "path": "beret/skin1b.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/skin1b.psd",
+      "bytes": 2872385,
+      "sha256": "9c932b882f35c6c095a531707c0fdbff591558539c2cee70dfd9f69baea7c785"
+    },
+    {
+      "path": "beret/skin1c.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/skin1c.xcf",
+      "bytes": 1846986,
+      "sha256": "81fac2b74a4da31ca79767f956cb28300e4ef9ebb1dcff1e1bfad9f5db09de7e"
+    },
+    {
+      "path": "beret/skin2b.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/skin2b.psd",
+      "bytes": 2991000,
+      "sha256": "b19373e3eec5be572f6e3026d6e400002280f4af57d88f6ec333d1ef9905af10"
+    },
+    {
+      "path": "beret/skin2b.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/beret/skin2b.xcf",
+      "bytes": 2228699,
+      "sha256": "02b2729436e37b5ee9b7fab8a83edf06a6797a24ed33c15b54b8f5d9530d3345"
+    },
+    {
+      "path": "gangter/28.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gangter/28.blend",
+      "bytes": 1009840,
+      "sha256": "0f1525a3963a28ab7223b6dc1b6897b80ca256e1f3f4eb57efc37d8aafc45176"
+    },
+    {
+      "path": "gargoyle/crayon-garg.zip",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/crayon-garg.zip",
+      "bytes": 11052313,
+      "sha256": "5d491170a30f9551b80209526e6128b7775083df62a06509db64407aa18a7c9d"
+    },
+    {
+      "path": "gargoyle/gargoyle-ik.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/gargoyle-ik.blend",
+      "bytes": 3966308,
+      "sha256": "ecb1201ef8812d0427eacc4eefdb3f450e24f0c7ed3d17ace45fd31413bb34b6"
+    },
+    {
+      "path": "gargoyle/lodme.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/lodme.blend",
+      "bytes": 2851624,
+      "sha256": "23ef72cb636fe3d7467a5009ab81935097ccb57fc93bf4f82a7890f9db9280d3"
+    },
+    {
+      "path": "gargoyle/mapobject3.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/mapobject3.blend",
+      "bytes": 2344232,
+      "sha256": "16fd08ff5212b258510353573cee24b74a9bd79919bd31728ddbc320f680bb54"
+    },
+    {
+      "path": "gargoyle/morphedgarg.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/morphedgarg.png",
+      "bytes": 1933516,
+      "sha256": "8709c335ebcc097e4effbb455d16cfbd897def56e156e928bff4c52a683d7d68"
+    },
+    {
+      "path": "gargoyle/skinGargoyle-stone.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/gargoyle/skinGargoyle-stone.tga",
+      "bytes": 785288,
+      "sha256": "0b09f3c77e749f51c00bad6ace64f6a93e5a67a5e8d43330d9fb53dbf3c7f735"
+    },
+    {
+      "path": "grism/credits",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/grism/credits",
+      "bytes": 65,
+      "sha256": "2f2aee8de129f0979b6fa5bf5aa9f52d9cc36b5275d90970e8053709f3d60677"
+    },
+    {
+      "path": "grism/reanimate5.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/grism/reanimate5.blend",
+      "bytes": 1316880,
+      "sha256": "0d7a0ed0c57343b26c9249f42013c2fffbea1d1ce54503fff693ddb0e1c0bfd3"
+    },
+    {
+      "path": "grism/reanimate6.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/grism/reanimate6.blend",
+      "bytes": 1126616,
+      "sha256": "c377d401990d3d6ce51b0a45426dd3e728a1d99e6c58d002b64ec77eca98c78d"
+    },
+    {
+      "path": "hnt/animtest.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/animtest.blend",
+      "bytes": 1567820,
+      "sha256": "dae545337072f4b6da66073912882e67b3a127c309c2746a7c1e42aa6a6a2a42"
+    },
+    {
+      "path": "hnt/animtestphys.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/animtestphys.blend",
+      "bytes": 1808556,
+      "sha256": "28835d0e1c4b725d7a7b60ae3da752b4fcc45e96b0518e630140d5a9e23f5cae"
+    },
+    {
+      "path": "hnt/clothes2d-final.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/clothes2d-final.xcf",
+      "bytes": 2223354,
+      "sha256": "e618e58773f7a8d0330723c28b8f5f063c89cb0b71831071372f10613bb44bd2"
+    },
+    {
+      "path": "hnt/hunter1e-anim2b.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/hunter1e-anim2b.blend",
+      "bytes": 543752,
+      "sha256": "0a364dbc5a4003b89aa0c701f595c9d4b8c62a2ce9bd710fa38d9c5729d1eeaa"
+    },
+    {
+      "path": "hnt/hunter1e-anim2e.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/hunter1e-anim2e.blend",
+      "bytes": 2448828,
+      "sha256": "26e8e1cdeda08190a2425d03178e94ea37dff8345b65fe9f625a67a1bf43cd25"
+    },
+    {
+      "path": "hnt/hunter1f-LOD.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/hunter1f-LOD.blend",
+      "bytes": 2957012,
+      "sha256": "bfae23b3aa992cd1f3e483418c1d06a8e1a5e8a4031359678b674dd25908f78c"
+    },
+    {
+      "path": "hnt/skin2d-final.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/hnt/skin2d-final.xcf",
+      "bytes": 1272193,
+      "sha256": "e5b398e37bab5b9871e94072378472b715344e88393a068ad4c20911414f8e11"
+    },
+    {
+      "path": "kyonshi/md3me365.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/kyonshi/md3me365.blend",
+      "bytes": 2084156,
+      "sha256": "049ac24902f2a5be9facff009216cffafdc21bc1e03c6df583ca91da4a9dcf58"
+    },
+    {
+      "path": "kyonshi/md3me367.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/kyonshi/md3me367.blend",
+      "bytes": 2323708,
+      "sha256": "49f58efe01debf48e369711605abf3c4a1aa883b51858b42e04ee5164e48e7bf"
+    },
+    {
+      "path": "kyonshi/sdk.obj",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/kyonshi/sdk.obj",
+      "bytes": 125463,
+      "sha256": "bda187177756b72cc9314fa144cacf3dce3c058eb1cf9804c713a6d6f18eca55"
+    },
+    {
+      "path": "liz/h_head.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/h_head.psd",
+      "bytes": 1070100,
+      "sha256": "1e6fef74be5b7c656981f1b8d62ce1d608d7cdd7c494b6e5a1c41f8ce3864fe9"
+    },
+    {
+      "path": "liz/h_head.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/h_head.xcf",
+      "bytes": 1062407,
+      "sha256": "2d20720992556a591abd91375c380c793abde9b02f32f652074d0b539bb26dee"
+    },
+    {
+      "path": "liz/l_legs.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/l_legs.psd",
+      "bytes": 592456,
+      "sha256": "31a38f2e0e8a6a4280278c2dcc509e55591e15d8890ea97d678d868099b2ff05"
+    },
+    {
+      "path": "liz/l_legs.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/l_legs.xcf",
+      "bytes": 1098041,
+      "sha256": "d7b70ee483a5251cf00934cf897c06df4b9107d2b5bf388f14a2a62be010e5e2"
+    },
+    {
+      "path": "liz/liz2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/liz2.blend",
+      "bytes": 850584,
+      "sha256": "06c174952763f0b2e9d7e97257ff509415ca9f1390823d0cb59d8f4fb679f699"
+    },
+    {
+      "path": "liz/u_torso.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/u_torso.psd",
+      "bytes": 605224,
+      "sha256": "b7b0f0556b082df9b4b381f12b728606825a91a2604fe568e9da5a26b264ba09"
+    },
+    {
+      "path": "liz/u_torso.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/liz/u_torso.xcf",
+      "bytes": 1123262,
+      "sha256": "865c2ff0c8cab9423ffab2d4ce4ac9a7ea93d8195bffc4228c662a2af7c33799"
+    },
+    {
+      "path": "major/19.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/major/19.blend",
+      "bytes": 791628,
+      "sha256": "c265b85df0a0abacd8a288eec4662949ae43b1380299df3593e8169ef022780f"
+    },
+    {
+      "path": "merman/merman-anim-final-LOD.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/merman/merman-anim-final-LOD.blend",
+      "bytes": 1495788,
+      "sha256": "762f19c91079b8e2563fb7573053a7a8d8f0875bb67859b61c77356dcd333fee"
+    },
+    {
+      "path": "missionpack/kamboom2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/kamboom2.blend",
+      "bytes": 327892,
+      "sha256": "3e9b5830bbd2ed8e433ddbe2876fabb7958eaa00a438ceeaf005d99e04455ad0"
+    },
+    {
+      "path": "missionpack/nailgun/3gf.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/nailgun/3gf.tga",
+      "bytes": 529587,
+      "sha256": "345655d21b8f52b65acf340a9f56c391bf0eca6e191663bf34cc715f44d48ee6"
+    },
+    {
+      "path": "missionpack/nailgun/NailGun.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/nailgun/NailGun.blend",
+      "bytes": 163832,
+      "sha256": "15d46a7dbe40811be5dc42a18721e8fcd6453831a60e8cd86a1a4c4bd9623f5a"
+    },
+    {
+      "path": "missionpack/nailgun/NailGun2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/nailgun/NailGun2.blend",
+      "bytes": 272640,
+      "sha256": "328e89586f33cc9c8e0ccb2a9b256750ced0e4477bc1b9b6eee203d21f2a1d96"
+    },
+    {
+      "path": "missionpack/overload/overload.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/overload/overload.blend",
+      "bytes": 218148,
+      "sha256": "d2aaec91f39520559cab418e20974949209220623966aea9677fb67c082153f1"
+    },
+    {
+      "path": "missionpack/overload/overload2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/overload/overload2.blend",
+      "bytes": 235120,
+      "sha256": "b28558dbe667709dfdcf47ac0db7b383b9464122a605de04062433d235ba75aa"
+    },
+    {
+      "path": "missionpack/pop.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/pop.blend",
+      "bytes": 131020,
+      "sha256": "5b908723de0c80b9a8e7402dd622c8073af62fd9d0fb84c0a90df0ce1c0bdb06"
+    },
+    {
+      "path": "missionpack/runepowers.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/missionpack/runepowers.blend",
+      "bytes": 160440,
+      "sha256": "e6ddf5369ebab9c48df5262569671e34e70a96b6b79b5c1631fe6ae8e2bbee9f"
+    },
+    {
+      "path": "neko/090-NEKO-ANIM-12.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/090-NEKO-ANIM-12.blend",
+      "bytes": 6942456,
+      "sha256": "da08c1e06a5e2bd4aa1fa9891e771f5b346e1c91419f00965369a3107ebdf786"
+    },
+    {
+      "path": "neko/Neko.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/Neko.blend",
+      "bytes": 2177036,
+      "sha256": "465c43e8f60b1bba76a5819d8010047cf97a69854da8dfe2ee4b6e2c640835ba"
+    },
+    {
+      "path": "neko/NekoHair.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/NekoHair.png",
+      "bytes": 184617,
+      "sha256": "4d8c88a2385abc67b46eac54babd0f790c450a6605b379b656287c7ed0108e0d"
+    },
+    {
+      "path": "neko/bottoms2.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/bottoms2.png",
+      "bytes": 18469,
+      "sha256": "892baced218538959d8111431cbeb505d490ae9269c617fc20f45084bb8c2e11"
+    },
+    {
+      "path": "neko/craw.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/craw.png",
+      "bytes": 5196,
+      "sha256": "82081396dedc3ae7161854109333d50126c8730720766e52a2fde950c52093d7"
+    },
+    {
+      "path": "neko/dressy.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/dressy.png",
+      "bytes": 1589858,
+      "sha256": "a295ff21df9694b74cc282b081d9c220813ff33f8a3af3c4bad32b6a4584f7c5"
+    },
+    {
+      "path": "neko/nekonew46.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/nekonew46.blend",
+      "bytes": 306030,
+      "sha256": "824d29c86b966fb8b8841bfa9779aaa8e6f8f4eeccb3f6e2222f046b89dffb80"
+    },
+    {
+      "path": "neko/nude/catty.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/nude/catty.png",
+      "bytes": 1611059,
+      "sha256": "f842611ac8121d6cb07ec2eea4f210bcb756deafbd2262b39df7a6490edb99cb"
+    },
+    {
+      "path": "neko/slyus/diffuselayers.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/slyus/diffuselayers.xcf",
+      "bytes": 4451241,
+      "sha256": "2a45150e40a702a56c12f6e72599bb9052075a6bde62324e5447bbc988d28827"
+    },
+    {
+      "path": "neko/slyus/slyus_hair_PSD.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/slyus/slyus_hair_PSD.psd",
+      "bytes": 499274,
+      "sha256": "5ba4aea004c62e8f6280bfbb9b6502c6cba71d2795b61fb73372630f5bb204be"
+    },
+    {
+      "path": "neko/slyus/slyus_hair_fixed.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/slyus/slyus_hair_fixed.png",
+      "bytes": 42499,
+      "sha256": "e421aca222e1d57790dfce351d8553d37464d55a4dd289144c72a28f5275ffe6"
+    },
+    {
+      "path": "neko/slyus/slyus_nekoPSD.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/slyus/slyus_nekoPSD.psd",
+      "bytes": 3055419,
+      "sha256": "04ad8e4bb4ad677ea5b4ddc28450f739793e881b92818f58d8a0361d2e0bef0f"
+    },
+    {
+      "path": "neko/slyus/specularlayers.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/neko/slyus/specularlayers.xcf",
+      "bytes": 4121643,
+      "sha256": "e923624674359f1282ce08836e822ea9613b46adcebfe26e6453d919b4ff109f"
+    },
+    {
+      "path": "newbfg/bfg7.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/bfg7.blend",
+      "bytes": 199492,
+      "sha256": "1588bc3e09ff073144510938929e20e48a9161503bd583c9e3a159c803508153"
+    },
+    {
+      "path": "newbfg/bfg8whand.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/bfg8whand.blend",
+      "bytes": 197900,
+      "sha256": "291f32e8854674fa8fbfb8d5f32649185a74b93a12e24020e7172d49ea630ca2"
+    },
+    {
+      "path": "newbfg/bfgee3.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/bfgee3.blend",
+      "bytes": 419812,
+      "sha256": "d1a4292314baffb1c4f627345842ef56983c4c7c1f502829f7c8306a55f722fe"
+    },
+    {
+      "path": "newbfg/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/fixpath.bat",
+      "bytes": 348,
+      "sha256": "f30fcabf6422fa289b5246f3359081ea8fc4111aab5230fd8c84b313c01740cc"
+    },
+    {
+      "path": "newbfg/newflashandprojectile.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/newflashandprojectile.blend",
+      "bytes": 140428,
+      "sha256": "f02eae13c1e67d3c36d92e45c2c10433c4d561d0f74eaf883bcf34a690854e6e"
+    },
+    {
+      "path": "newbfg/newflashandprojectile2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newbfg/newflashandprojectile2.blend",
+      "bytes": 140428,
+      "sha256": "0272066475f5a5e808eb198b9973b5a469ac7c4e7917aa7ad91e62fd7ec3f62a"
+    },
+    {
+      "path": "newgauntlet/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newgauntlet/fixpath.bat",
+      "bytes": 217,
+      "sha256": "6c57fac4f5db60aa34cc7c224f9a485b26b7672e949b0b84210a7dfb0a457689"
+    },
+    {
+      "path": "newgauntlet/q34.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newgauntlet/q34.blend",
+      "bytes": 131708,
+      "sha256": "21ca6880de7979940afe99dd137375d6d22007e36201249b7d42f5a969f83806"
+    },
+    {
+      "path": "newgren/2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newgren/2.blend",
+      "bytes": 136144,
+      "sha256": "6d718615717a8147f95b00e2f72719fffe4fbc0b4d742e0554d3d5be751fc2df"
+    },
+    {
+      "path": "newgren/NewGren4.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newgren/NewGren4.blend",
+      "bytes": 206944,
+      "sha256": "3d853baa31abb371eaf17801ca91adbd2517cbc9af2a9d4ec41ec15383177ad1"
+    },
+    {
+      "path": "newgren/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newgren/fixpath.bat",
+      "bytes": 111,
+      "sha256": "1927190fc71b15a7dc710f4e0cfd044ab6e62fd6616325dfe600318e717b7494"
+    },
+    {
+      "path": "newmgun/NewMgun2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmgun/NewMgun2.blend",
+      "bytes": 303148,
+      "sha256": "31c21f3e5116d25707e4d0cae17720abd89f0c9769db9e168ecd3af13273b62d"
+    },
+    {
+      "path": "newmgun/machinegunskin1h.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmgun/machinegunskin1h.xcf",
+      "bytes": 35815000,
+      "sha256": "5cce22f77517a545d63e535fe4ab68523538a01bdb00e441ead8e1133b23bfb1"
+    },
+    {
+      "path": "newmgun/mgun.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmgun/mgun.xcf",
+      "bytes": 1980236,
+      "sha256": "6b6077501ee26c1991076bcfd479d7821c60af26d1326ca4b1d3796dd0241b94"
+    },
+    {
+      "path": "newmgun/oamgunnf13.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmgun/oamgunnf13.blend",
+      "bytes": 162124,
+      "sha256": "9e7a6b88b50d3028b55bebe336059d33b9bb76a04ab5c4e4a7b1ba85e9a625ff"
+    },
+    {
+      "path": "newmgun/sknr2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmgun/sknr2.blend",
+      "bytes": 155096,
+      "sha256": "92e8990a74448eab6e89936a38db0386545b0f2f1af067e8ac119edc63751092"
+    },
+    {
+      "path": "newmuz/1.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmuz/1.blend",
+      "bytes": 144972,
+      "sha256": "f0bc80630fb62124258d007f531f0edd84aa9374c580c4d2b0a8e716a399b21a"
+    },
+    {
+      "path": "newmuz/2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmuz/2.blend",
+      "bytes": 170440,
+      "sha256": "0e40b7f2e0df5c10b43627dad6c6c7097011c599b97da708946dfac1231ed1c7"
+    },
+    {
+      "path": "newmuz/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newmuz/fixpath.bat",
+      "bytes": 186,
+      "sha256": "430a6a085ec6b19bdfb1cd05d4a765c839d9dcfdabc0cb1f46005a640ce84cf6"
+    },
+    {
+      "path": "newplas/4.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newplas/4.blend",
+      "bytes": 285912,
+      "sha256": "c24e925036f0dfd2208d3dde02b11784982b6d046327c7532320f36fc60ad9e1"
+    },
+    {
+      "path": "newplas/4b.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newplas/4b.blend",
+      "bytes": 502320,
+      "sha256": "e0670819417e898aff42bea275411b890729175f263c9099ac7afa9d15e4bbba"
+    },
+    {
+      "path": "newplas/skin-c.psd",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newplas/skin-c.psd",
+      "bytes": 5484225,
+      "sha256": "fc3aff68ea0d442dd9d21e3f45c2577729adaeed1a531d52ad4d5aebc76b11d7"
+    },
+    {
+      "path": "newrail/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newrail/fixpath.bat",
+      "bytes": 194,
+      "sha256": "d15c3630c13d8e99988d9aa74406a84814005080e3b7818654d07840f0b4c203"
+    },
+    {
+      "path": "newrail/railgunUV5-final.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newrail/railgunUV5-final.png",
+      "bytes": 1585606,
+      "sha256": "ee6cc525409d56d3c4891cb6d5c48f538a4281bbf6bcfa4e31c0f9b907fd4dbd"
+    },
+    {
+      "path": "newrail/skinni2n4.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newrail/skinni2n4.blend",
+      "bytes": 275404,
+      "sha256": "1f08350f8ce4d6e6e17c691f793bf61e9d643c4d89ffabfaab21d570824c9224"
+    },
+    {
+      "path": "newrock/90.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newrock/90.blend",
+      "bytes": 164900,
+      "sha256": "4b175f2ad4120c2e7f86119380f156e5a37d4ce870d280cfbe37754a25f39058"
+    },
+    {
+      "path": "newrock/fixpath.bat",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newrock/fixpath.bat",
+      "bytes": 197,
+      "sha256": "5437bb238dccbbd55dc57fe31afd61815a95871ac4ee37c7185d22a68650fa30"
+    },
+    {
+      "path": "penguin/penguin.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/penguin/penguin.xcf",
+      "bytes": 1050459,
+      "sha256": "7bd6f9819b6b451c2a199f28bea62647121d3c1e325b62523f5158d504c98f2f"
+    },
+    {
+      "path": "penguin/penguin11.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/penguin/penguin11.blend",
+      "bytes": 932788,
+      "sha256": "d41d1c06db555ad46f1e82b761408394582b471f3955b76c2da0cf7d23df4170"
+    },
+    {
+      "path": "proxmine/proxlaunch.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/proxmine/proxlaunch.blend",
+      "bytes": 132944,
+      "sha256": "9f3fb46927b872188b03eb8cfb0e81885b61d88382d48a5307c8f35791ccff6e"
+    },
+    {
+      "path": "proxmine/proxthemine.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/proxmine/proxthemine.blend",
+      "bytes": 161104,
+      "sha256": "9c4bef8ccc3bcedf7104fa72ee1e249218a6592c6c98baa25020f7eb122655b8"
+    },
+    {
+      "path": "shotgun/shotgun2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/shotgun/shotgun2.blend",
+      "bytes": 361300,
+      "sha256": "066d563fcb4eb84b69f7541e32d0d11483db1707af435563da57dc4a6bff024b"
+    },
+    {
+      "path": "skelebot/robodeath-armature1.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/skelebot/robodeath-armature1.blend",
+      "bytes": 781248,
+      "sha256": "883365edd1b8ccd154f97340865c1da5599b7670bdd9bb58265f12f2213f5561"
+    },
+    {
+      "path": "sorceress/SorcNd.png",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/SorcNd.png",
+      "bytes": 593413,
+      "sha256": "ed5dc9a5c796ff7c2e42860432d104194b8090020f207f438d5719015fd6740b"
+    },
+    {
+      "path": "sorceress/body3.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/body3.tga",
+      "bytes": 680881,
+      "sha256": "b8105517cda9a59f3ca45e4f0e17a993a994025af70a9d899efca82e811b5073"
+    },
+    {
+      "path": "sorceress/head.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/head.tga",
+      "bytes": 182575,
+      "sha256": "a804623a5eb9612d5623477aafabb9bbed553270587c6dacb2fa4a072c50905e"
+    },
+    {
+      "path": "sorceress/rings.tga",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/rings.tga",
+      "bytes": 8899,
+      "sha256": "f53ca0a5de965cb52a54a7d24c99d0ce151ef2e6bbcdafd7e5c6a6ef4ff34b43"
+    },
+    {
+      "path": "sorceress/sorc12.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc12.blend",
+      "bytes": 2934144,
+      "sha256": "68b678437596de839d4e89d3f7a89dfef292e9163475257fdd502d1c5bd099bb"
+    },
+    {
+      "path": "sorceress/sorc19.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc19.blend",
+      "bytes": 2887956,
+      "sha256": "a92a3c5f79dfdca415dcbc0c3888b097f9bb2b725f8169798ad0473d3ea0d2e3"
+    },
+    {
+      "path": "sorceress/sorc2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc2.blend",
+      "bytes": 2865024,
+      "sha256": "88c70bd2e39165f960011778747cac2b6f243e9beb529bde7b56ebbff40a3746"
+    },
+    {
+      "path": "sorceress/sorc23.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc23.blend",
+      "bytes": 2963104,
+      "sha256": "feab2ebcf0ff28fb92058a3e8889d7e1d49390619ec27de402dc5af1c6159fed"
+    },
+    {
+      "path": "sorceress/sorc28.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc28.blend",
+      "bytes": 3421944,
+      "sha256": "86c79bc81f6f9e076ec4b98417a5d298e14400f8bba7822e45713be2a4fb35e2"
+    },
+    {
+      "path": "sorceress/sorc30.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc30.blend",
+      "bytes": 3965052,
+      "sha256": "14f7b13edadbd98c5a82119796c6888ef5fa0dde248166b1fccb46315b5779f0"
+    },
+    {
+      "path": "sorceress/sorc32.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/sorceress/sorc32.blend",
+      "bytes": 4179164,
+      "sha256": "6c0f75decae2de63a0a83cea2ec90c2b84d8aab646f268613953755a6e04d1e6"
+    },
+    {
+      "path": "spacemrn/h_head.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/spacemrn/h_head.xcf",
+      "bytes": 693684,
+      "sha256": "496c062d7b8e45158712f3cc10e2377490748fc70f4a75919328ef70f46729c3"
+    },
+    {
+      "path": "spacemrn/l_legs.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/spacemrn/l_legs.xcf",
+      "bytes": 924558,
+      "sha256": "8c5300a55fd3d3bd3ee1d581e3ce5ffd10955dff74aaa63ab32d6f49363dd84d"
+    },
+    {
+      "path": "spacemrn/space maween8.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/spacemrn/space%20maween8.blend",
+      "bytes": 667080,
+      "sha256": "6d59559c90d357dfabf3733116f383c85a540f255e25c99f2db786446384ac03"
+    },
+    {
+      "path": "spacemrn/space maween9.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/spacemrn/space%20maween9.blend",
+      "bytes": 7910644,
+      "sha256": "daf502f9cd6d1a16b34e8c2829b6125a669841ec7b349b3731b91012a5d7319a"
+    },
+    {
+      "path": "spacemrn/u_torso.xcf",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/spacemrn/u_torso.xcf",
+      "bytes": 2675396,
+      "sha256": "f2197a7cee6040875a81cd232d730d5f1e4ad2788872c2a178dc76ee566ec53c"
+    },
+    {
+      "path": "vulcan/q35.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/vulcan/q35.blend",
+      "bytes": 265416,
+      "sha256": "917c3dbb6c0d94a262fd71d570d7d1e16cec7284357bc3a3bed3b38b70f97e92"
+    },
+    {
+      "path": "vulcan/skin.psp",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/vulcan/skin.psp",
+      "bytes": 845556,
+      "sha256": "53e080b9d41420b1601e6b2373a75f77f3d173457effe91fd5be2df5c37c8451"
+    },
+    {
+      "path": "lightninggun/lightninggun.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/lightninggun/lightninggun.blend",
+      "bytes": 185284,
+      "sha256": "ac415325447b212ec6970dd8b20435cec8058d41ebe9fe1df80313c455206446"
+    },
+    {
+      "path": "lightninggun/lightninggun2.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/lightninggun/lightninggun2.blend",
+      "bytes": 340372,
+      "sha256": "b0e785d673ebca1e654845591f9754c26f93847f7a5d1f5806556359d7fff185"
+    }
+  ],
+  "archives": [
+    {
+      "file": "authoring-angelyss.zip",
+      "bytes": 6615691,
+      "sha256": "e8b6243b6d890f25bdd65033f78b23bde9c565ee9b0c568bbd0f9e038db0668d"
+    },
+    {
+      "file": "authoring-arachna.zip",
+      "bytes": 9630024,
+      "sha256": "9c6b73a845d6a59ddb7eaf8c42939b91552f163e268d507b47b18c4af6b67de5"
+    },
+    {
+      "file": "authoring-assassin.zip",
+      "bytes": 6259463,
+      "sha256": "dbe0e37c627b6908f43837a4712e6671d30051f04b1272172e6edce1d44fd33a"
+    },
+    {
+      "file": "authoring-beret.zip",
+      "bytes": 7861499,
+      "sha256": "ffefa8aee66adf2c8d6a84aa5a6e4bf488b48065de39c6a3d0aecc5b27e6528c"
+    },
+    {
+      "file": "authoring-gangter.zip",
+      "bytes": 203631,
+      "sha256": "219013f3169591a7389d9016988baae383c0d5295da9e34659ffdf9376cce72b"
+    },
+    {
+      "file": "authoring-gargoyle.zip",
+      "bytes": 15725817,
+      "sha256": "e9fb6cb556b1f252a85f5c1119689953402c3b5a5b13df5058c0a674698bd48e"
+    },
+    {
+      "file": "authoring-grism.zip",
+      "bytes": 591816,
+      "sha256": "9427bec5ec2262705eb816f85d35b5ab450a1d80337f570e88464b32b9952f57"
+    },
+    {
+      "file": "authoring-hnt.zip",
+      "bytes": 3647143,
+      "sha256": "eccee290f52775dfa7b8e7c7c3b923508ceba2bd4ba5c9f49d82cea1b1dc9cf1"
+    },
+    {
+      "file": "authoring-kyonshi.zip",
+      "bytes": 768973,
+      "sha256": "358763e4feb30cacbae4e9c390ad148869bbdeac9c68d342fd26a3b769bffdfd"
+    },
+    {
+      "file": "authoring-lightninggun.zip",
+      "bytes": 134593,
+      "sha256": "a43c6269e13b9992d5ecbcb0daf8b4e00a68841721f7f73b84a7275415701af4"
+    },
+    {
+      "file": "authoring-liz.zip",
+      "bytes": 3281097,
+      "sha256": "b0e4a6baef720c30e8a114464836e9035824a70dea6ae0f6e46f0ec83f54429c"
+    },
+    {
+      "file": "authoring-major.zip",
+      "bytes": 187448,
+      "sha256": "19534848e8facba217239f22350c5142e8342adc87a2ebd46d673b46acc7d425"
+    },
+    {
+      "file": "authoring-merman.zip",
+      "bytes": 315297,
+      "sha256": "41a546f8a19776fd81083cd37ae59b9ae91e598015a9987ccb4b0d609a1f9d3d"
+    },
+    {
+      "file": "authoring-missionpack.zip",
+      "bytes": 673305,
+      "sha256": "80b0377b1bf90957a71f38d5397b8e62589b0a49491ef04c0fc4db6102aae14a"
+    },
+    {
+      "file": "authoring-neko.zip",
+      "bytes": 12734127,
+      "sha256": "1d762a58a92b30dad592fb067f157a98437a97a677c33d1eb2dc2fe05e3dd0a3"
+    },
+    {
+      "file": "authoring-newbfg.zip",
+      "bytes": 231097,
+      "sha256": "e03dc35f4e9648bb30f689a691b1edad6f3a771619107d2d11a2e8b58e476389"
+    },
+    {
+      "file": "authoring-newgauntlet.zip",
+      "bytes": 37615,
+      "sha256": "dcbdf021e1e3cb5ae223826357b16970400526de76fc3fac8a975d847ee41b6c"
+    },
+    {
+      "file": "authoring-newgren.zip",
+      "bytes": 98759,
+      "sha256": "58198a79802f8f767b7404a99a3f891b773e35c9d3bd865bb786216d4568c7f1"
+    },
+    {
+      "file": "authoring-newmgun.zip",
+      "bytes": 28438895,
+      "sha256": "324650c520e0194e251283d40d1e9af620fc7529080adb32b8170e94e2697df0"
+    },
+    {
+      "file": "authoring-newmuz.zip",
+      "bytes": 84782,
+      "sha256": "aeaff9be0ccb4a9b7d46799dd68891fa95ebb14d1f810afccd11bc9533f1b95c"
+    },
+    {
+      "file": "authoring-newplas.zip",
+      "bytes": 3471446,
+      "sha256": "cb6d9d3026582d410f8138e49ccec42578c367227c4d56dc3e65c1a24bf882df"
+    },
+    {
+      "file": "authoring-newrail.zip",
+      "bytes": 1660992,
+      "sha256": "f22c11766c2f5f1ee097d1a6899c0880f26b64d418689928e96941e13adfc579"
+    },
+    {
+      "file": "authoring-newrock.zip",
+      "bytes": 46029,
+      "sha256": "959edeee862957655d770af3907d9c86debd531a78e47ff94698bf30059d3995"
+    },
+    {
+      "file": "authoring-penguin.zip",
+      "bytes": 852982,
+      "sha256": "191761738d50dfd777847249e5f66992fae194060c83153a86be7b221ba79bbd"
+    },
+    {
+      "file": "authoring-proxmine.zip",
+      "bytes": 79879,
+      "sha256": "01eac8177d4fad223d2ca4172e0d6442c6344245a049985a236c690b787e72c1"
+    },
+    {
+      "file": "authoring-shotgun.zip",
+      "bytes": 76327,
+      "sha256": "9fa7a107f41db7430822e8249365d6d2b836d6e50d1a57394b6672641a5ba426"
+    },
+    {
+      "file": "authoring-skelebot.zip",
+      "bytes": 164926,
+      "sha256": "bced68abccd52beaa8739b3593e1e303f838bf18f7149af859999a0b6a94e4b2"
+    },
+    {
+      "file": "authoring-sorceress.zip",
+      "bytes": 5016802,
+      "sha256": "686ae883ca53dd4e856859ad374f7d2f8e9c96e5dafb390afaa2e60f6c46c427"
+    },
+    {
+      "file": "authoring-spacemrn.zip",
+      "bytes": 4073708,
+      "sha256": "922450fd73fa7afbb81532d5ff83d05f1c95446cbd41d44f3988f05e249a5109"
+    },
+    {
+      "file": "authoring-vulcan.zip",
+      "bytes": 579102,
+      "sha256": "173954b6813a34615ac6e24c4f4fdb1371402bf9a8030b25478e08d728b07f5c"
+    }
+  ]
+}

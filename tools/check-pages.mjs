@@ -27,5 +27,6 @@ assert.ok(files.has('engine-benchmark/worker.js'));assert.ok(files.has('dos-maze
 assert.ok(files.has('arena-fold/fold.wasm'));assert.ok(files.has('arena-fold/shaders/feedback.wgsl'));
 assert.ok(files.has('arena-fold-2/wave.wasm'));assert.ok(files.has('arena-fold-2/shaders/feedback.wgsl'));
 assert.ok(files.has('arena-sweep/engine.wasm'));assert.ok(files.has('arena-sweep/worker.js'));assert.ok(files.has('arena-sweep/shaders/objects.wgsl'));
-assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
+for(const file of ['engine.wasm','worker.js','media-worker.js','assets/catalog.json','licenses/index.html','licenses/manifest.json'])assert.ok(files.has('encounter-test/'+file));
+assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','encounter-test','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
 console.log(JSON.stringify({passed:true,build:manifest.build.short,applications:manifest.applications,files:manifest.files.length,bytes:manifest.files.reduce((sum,f)=>sum+f.bytes,0)},null,2));

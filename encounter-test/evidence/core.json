@@ -1,0 +1,383 @@
+{
+  "passed": true,
+  "checks": [
+    "18 model packs, 33 named roster entries, all skins and 13 weapons validated against their hashes; finite animation frames / tags / indices",
+    "Validated medium / large all-pairs route tables, reciprocal next hops, bounded table sizes and safe enemy placement",
+    "All weapons equip and cycle with unlimited test inventory and physical replacement checks",
+    "Melee, automatic hitscan, shotgun pellets, lightning, rail and all projectile classes exercise the real collision path without tunnelling or unbounded pools",
+    "Encounter clear automatically requests Recomposition; deleted-cluster corpse cleanup, locked enemy staging and shared Release agree",
+    "Crouch/stand physical height, live player clearance, finite actor movement and fixed 32 MiB WASM memory",
+    "1,920 live character-box steps keep every body corner within the forcefield-protected cluster union",
+    "30 / 60 / 120 / 240 FPS produce identical fixed-step positions, AI, shots, hits and encounter state"
+  ],
+  "containmentSteps": 1920,
+  "cadences": [
+    {
+      "fps": 30,
+      "p": [
+        -18.766220092773438,
+        -30,
+        3.042018413543701
+      ],
+      "shots": 35,
+      "hits": 7,
+      "state": "encounter",
+      "bots": [
+        [
+          -7.6689677238464355,
+          -20.521286010742188,
+          1.3345295190811157
+        ],
+        [
+          13.675910949707031,
+          -27.631980895996094,
+          2.193633794784546
+        ],
+        [
+          -11.878155708312988,
+          -24.158203125,
+          2.853011131286621
+        ]
+      ]
+    },
+    {
+      "fps": 60,
+      "p": [
+        -18.766220092773438,
+        -30,
+        3.042018413543701
+      ],
+      "shots": 35,
+      "hits": 7,
+      "state": "encounter",
+      "bots": [
+        [
+          -7.6689677238464355,
+          -20.521286010742188,
+          1.3345295190811157
+        ],
+        [
+          13.675910949707031,
+          -27.631980895996094,
+          2.193633794784546
+        ],
+        [
+          -11.878155708312988,
+          -24.158203125,
+          2.853011131286621
+        ]
+      ]
+    },
+    {
+      "fps": 120,
+      "p": [
+        -18.766220092773438,
+        -30,
+        3.042018413543701
+      ],
+      "shots": 35,
+      "hits": 7,
+      "state": "encounter",
+      "bots": [
+        [
+          -7.6689677238464355,
+          -20.521286010742188,
+          1.3345295190811157
+        ],
+        [
+          13.675910949707031,
+          -27.631980895996094,
+          2.193633794784546
+        ],
+        [
+          -11.878155708312988,
+          -24.158203125,
+          2.853011131286621
+        ]
+      ]
+    },
+    {
+      "fps": 240,
+      "p": [
+        -18.766220092773438,
+        -30,
+        3.042018413543701
+      ],
+      "shots": 35,
+      "hits": 7,
+      "state": "encounter",
+      "bots": [
+        [
+          -7.6689677238464355,
+          -20.521286010742188,
+          1.3345295190811157
+        ],
+        [
+          13.675910949707031,
+          -27.631980895996094,
+          2.193633794784546
+        ],
+        [
+          -11.878155708312988,
+          -24.158203125,
+          2.853011131286621
+        ]
+      ]
+    }
+  ],
+  "workloads": [
+    {
+      "profile": 1,
+      "nodes": 553,
+      "tableBytes": 611618
+    },
+    {
+      "profile": 2,
+      "nodes": 2015,
+      "tableBytes": 8120450
+    }
+  ],
+  "models": [
+    {
+      "id": "angelyss",
+      "skins": 17,
+      "body": {
+        "radius": 0.9003346581589871,
+        "height": 2.1400390625,
+        "crouchHeight": 1.645390625,
+        "eye": 1.58884765625
+      }
+    },
+    {
+      "id": "arachna",
+      "skins": 3,
+      "body": {
+        "radius": 1.6293188659859703,
+        "height": 2.277911102557003,
+        "crouchHeight": 1.5783589669783566,
+        "eye": 1.79099609375
+      }
+    },
+    {
+      "id": "assassin",
+      "skins": 4,
+      "body": {
+        "radius": 0.965943223650388,
+        "height": 2.0962979488953137,
+        "crouchHeight": 1.838592359604037,
+        "eye": 1.62107421875
+      }
+    },
+    {
+      "id": "ayumi",
+      "skins": 3,
+      "body": {
+        "radius": 0.8866330826724261,
+        "height": 2.3687960487850046,
+        "crouchHeight": 1.7613920230081166,
+        "eye": 1.9565234375
+      }
+    },
+    {
+      "id": "beret",
+      "skins": 6,
+      "body": {
+        "radius": 0.8530269734301964,
+        "height": 2.152831730167186,
+        "crouchHeight": 1.9213354668749694,
+        "eye": 1.771953125
+      }
+    },
+    {
+      "id": "gargoyle",
+      "skins": 8,
+      "body": {
+        "radius": 1.6280801811443386,
+        "height": 2.1904610967943574,
+        "crouchHeight": 1.6917561048331187,
+        "eye": 1.69626953125
+      }
+    },
+    {
+      "id": "kyonshi",
+      "skins": 4,
+      "body": {
+        "radius": 0.8910971552803172,
+        "height": 2.462885346070085,
+        "crouchHeight": 1.702862205179493,
+        "eye": 1.848125
+      }
+    },
+    {
+      "id": "liz",
+      "skins": 3,
+      "body": {
+        "radius": 0.8280540200805168,
+        "height": 1.8642717613122182,
+        "crouchHeight": 1.4928715686000888,
+        "eye": 1.44919921875
+      }
+    },
+    {
+      "id": "major",
+      "skins": 4,
+      "body": {
+        "radius": 0.6592840506317124,
+        "height": 1.9877510890482388,
+        "crouchHeight": 1.577669812130131,
+        "eye": 1.6401171875
+      }
+    },
+    {
+      "id": "merman",
+      "skins": 3,
+      "body": {
+        "radius": 1.7383637620909689,
+        "height": 2.0727998314487883,
+        "crouchHeight": 1.430873409922903,
+        "eye": 1.689921875
+      }
+    },
+    {
+      "id": "neko",
+      "skins": 4,
+      "body": {
+        "radius": 0.9082431505736549,
+        "height": 2.021875,
+        "crouchHeight": 1.54724609375,
+        "eye": 1.658671875
+      }
+    },
+    {
+      "id": "penguin",
+      "skins": 3,
+      "body": {
+        "radius": 0.978689712683381,
+        "height": 2.0816479627444897,
+        "crouchHeight": 1.861412815423403,
+        "eye": 1.68357421875
+      }
+    },
+    {
+      "id": "sarge",
+      "skins": 7,
+      "body": {
+        "radius": 0.9737266098176591,
+        "height": 1.9255808410963655,
+        "crouchHeight": 1.6808027711765732,
+        "eye": 1.6518359375
+      }
+    },
+    {
+      "id": "sergei",
+      "skins": 3,
+      "body": {
+        "radius": 0.7601017280922632,
+        "height": 1.9439860064433456,
+        "crouchHeight": 1.4856692103152729,
+        "eye": 1.6147265625
+      }
+    },
+    {
+      "id": "skelebot",
+      "skins": 4,
+      "body": {
+        "radius": 0.8618041799224068,
+        "height": 2.097324117720901,
+        "crouchHeight": 1.700232893753523,
+        "eye": 1.66306640625
+      }
+    },
+    {
+      "id": "smarine",
+      "skins": 4,
+      "body": {
+        "radius": 0.8387792394693094,
+        "height": 1.9174020641854443,
+        "crouchHeight": 1.5624020045807996,
+        "eye": 1.623515625
+      }
+    },
+    {
+      "id": "sorceress",
+      "skins": 2,
+      "body": {
+        "radius": 0.7189705558534222,
+        "height": 2.277426477483521,
+        "crouchHeight": 1.9134881710368299,
+        "eye": 1.55857421875
+      }
+    },
+    {
+      "id": "tony",
+      "skins": 3,
+      "body": {
+        "radius": 0.8205705650272125,
+        "height": 2.0087644651184515,
+        "crouchHeight": 1.7985393712083089,
+        "eye": 1.76169921875
+      }
+    }
+  ],
+  "weapons": [
+    {
+      "id": 1,
+      "damage": 100,
+      "shots": 2
+    },
+    {
+      "id": 2,
+      "damage": 35,
+      "shots": 7
+    },
+    {
+      "id": 3,
+      "damage": 110,
+      "shots": 8
+    },
+    {
+      "id": 6,
+      "damage": 80,
+      "shots": 18
+    },
+    {
+      "id": 7,
+      "damage": 100,
+      "shots": 19
+    },
+    {
+      "id": 13,
+      "damage": 105,
+      "shots": 34
+    },
+    {
+      "id": 4,
+      "projectiles": 0
+    },
+    {
+      "id": 5,
+      "projectiles": 0
+    },
+    {
+      "id": 8,
+      "projectiles": 0
+    },
+    {
+      "id": 9,
+      "projectiles": 0
+    },
+    {
+      "id": 10,
+      "projectiles": 0
+    },
+    {
+      "id": 11,
+      "projectiles": 0
+    },
+    {
+      "id": 12,
+      "projectiles": 0
+    }
+  ],
+  "wasmBytes": 108997
+}

@@ -1,0 +1,10 @@
+import {imports,readStats} from './base-stats.js';import {planPacket} from './packets.js';import {propsMesh} from './mesh.js';import {Sweep} from './model.js';import {buildNavigation,transferNavigation} from './navigation.js';
+self.onmessage=async({data})=>{try{const {serial}=data;if(data.type==='world'||data.type==='navigation'){
+ const sim=(await WebAssembly.instantiate(data.module,imports())).exports,started=performance.now(),errors=sim.engine_build(data.seed,0,data.profile,data.profile===2?48:24,2,1);if(errors||!sim.engine_activate(sim.candidate_id()))throw new Error('Generated arena failed validation: '+errors);const sweep=new Sweep(sim,{span:data.span||4,corpses:false});
+ if(data.current){sweep.current=data.current;let installed=sweep.install();if(!installed)for(const g of sweep.groups)for(const c of g.cells)if(!installed){sim.engine_try_place(...c.p.map((v,i)=>v+(i===2?.1:0)),0,0);installed=sweep.install();}if(!installed)throw new Error('Navigation overlay could not be composed safely.');}
+ const blocked=sweep.current.filter(Boolean).map(p=>sweep.groups[p.gid].flat?.id).filter(Number.isInteger),tables=[];
+ for(const spec of data.profiles||[{id:'default',profile:null}])tables.push({id:spec.id,nav:buildNavigation(sim,spec.profile,blocked)});
+ const transfers=tables.flatMap(t=>transferNavigation(t.nav));if(data.type==='navigation'){self.postMessage({serial,type:'navigation',tables,workerMs:performance.now()-started},transfers);return;}
+ const start=sim.image_start(),end=Number(sim.__heap_base.value),image=sim.memory.buffer.slice(start,end);self.postMessage({serial,type:'world',start,end,image,tables,stats:readStats(sim),workerMs:performance.now()-started},[image,...transfers]);
+ }else{const packet=planPacket(data.request),current=propsMesh(data.request.current),next=propsMesh(packet.next,1);self.postMessage({serial,type:'wave',packet,current,next},[current.vertices.buffer,current.indices.buffer,next.indices.buffer]);}}
+ catch(error){self.postMessage({serial:data.serial,type:'error',error:error.message});}};

@@ -44,13 +44,20 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await evaluate('window.__sweep.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1});window.__sweep.trigger()');await wait('window.__sweep.snapshot().sweep.completed===1');
   assert.equal(await evaluate('(()=>{const s=window.__sweep.snapshot().sweep;return !s.lootOpen&&s.fields===0&&s.remainingBodies===0&&s.enemies.length>0&&s.enemies.every(e=>e.released&&e.release===s.release);})()'),true);
   checks.push('Procedural sweep: deployed identity, tools URL, worker preparation and shared field release');
+  await cmd('Page.navigate',{url:new URL('encounter-test/?test&tools=1',base).href});await wait('window.__encounter?.snapshot().ready&&!window.__encounter.snapshot().preparing');
+  assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('window.__encounter.snapshot().build.commit'),commit);
+  assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
+  await evaluate('window.__encounter.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1});window.__encounter.targetFixture();window.__encounter.test.game.bots[0].health=1;window.__encounter.selectWeapon(2);window.__encounter.actions(1);window.__encounter.play(true);window.__encounter.actions(1)');
+  await wait('window.__encounter.snapshot().sweep.completed===1');await evaluate('window.__encounter.actions(0);window.__encounter.play(false)');
+  assert.equal(await evaluate('(()=>{const s=window.__encounter.snapshot();return s.settings.physicalModels&&s.game.encounter===2&&s.game.alive===3&&s.game.bodies===0&&s.sweep.fields===0&&s.media.characters===18&&s.media.weapons===13;})()'),true);
+  checks.push('Interactive encounter: imported roster, physical envelopes, automatic combat / Recomposition and deployed identity');
   const {identifier}=await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Object.defineProperty(document,"exitPointerLock",{value:undefined,configurable:true});Object.defineProperty(Element.prototype,"requestPointerLock",{value:undefined,configurable:true});'});
   for(const [app,handle]of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);
     assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);
   }
   await cmd('Page.removeScriptToEvaluateOnNewDocument',{identifier});checks.push('Engine inspection tools open without Pointer Lock APIs');
-  for(const [app,binary]of [['engine-test','engine.wasm'],['engine-benchmark','engine.wasm'],['arena-fold','fold.wasm'],['arena-fold-2','wave.wasm'],['arena-sweep','engine.wasm']]){
+  for(const [app,binary]of [['engine-test','engine.wasm'],['engine-benchmark','engine.wasm'],['arena-fold','fold.wasm'],['arena-fold-2','wave.wasm'],['arena-sweep','engine.wasm'],['encounter-test','engine.wasm']]){
     const response=await fetch(new URL(`${app}/${binary}?check=${Date.now()}`,base));assert.equal(response.status,200);assert.match(response.headers.get('content-type')||'',/application\/wasm/);
   }
   assert.deepEqual(errors,[]);await sleep(100);

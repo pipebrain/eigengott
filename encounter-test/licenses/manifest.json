@@ -1,0 +1,341 @@
+{
+  "upstream": "OpenArena 0.8.8",
+  "upstreamMD5": "9f353d96d7889c377349d692c3905e5b",
+  "files": [
+    {
+      "file": "COPYING.txt",
+      "bytes": 17992,
+      "sha256": "32b1062f7da84967e7019d01ab805935caa7ab7321a7ced0e30ebe75e5df1670"
+    },
+    {
+      "file": "CREDITS.txt",
+      "bytes": 3148,
+      "sha256": "6de6f21502e192cfb2724cea64e98c7d84cd9cdecd1abe6ba508f72cb260a3e6"
+    },
+    {
+      "file": "README.txt",
+      "bytes": 4063,
+      "sha256": "8834b5f191bf71eaaa5e26e41ab838ca90221504aa0a077cf445f28fbc6499f9"
+    },
+    {
+      "file": "authoring-angelyss.zip",
+      "bytes": 6615691,
+      "sha256": "e8b6243b6d890f25bdd65033f78b23bde9c565ee9b0c568bbd0f9e038db0668d"
+    },
+    {
+      "file": "authoring-arachna.zip",
+      "bytes": 9630024,
+      "sha256": "9c6b73a845d6a59ddb7eaf8c42939b91552f163e268d507b47b18c4af6b67de5"
+    },
+    {
+      "file": "authoring-assassin.zip",
+      "bytes": 6259463,
+      "sha256": "dbe0e37c627b6908f43837a4712e6671d30051f04b1272172e6edce1d44fd33a"
+    },
+    {
+      "file": "authoring-beret.zip",
+      "bytes": 7861499,
+      "sha256": "ffefa8aee66adf2c8d6a84aa5a6e4bf488b48065de39c6a3d0aecc5b27e6528c"
+    },
+    {
+      "file": "authoring-gangter.zip",
+      "bytes": 203631,
+      "sha256": "219013f3169591a7389d9016988baae383c0d5295da9e34659ffdf9376cce72b"
+    },
+    {
+      "file": "authoring-gargoyle.zip",
+      "bytes": 15725817,
+      "sha256": "e9fb6cb556b1f252a85f5c1119689953402c3b5a5b13df5058c0a674698bd48e"
+    },
+    {
+      "file": "authoring-grism.zip",
+      "bytes": 591816,
+      "sha256": "9427bec5ec2262705eb816f85d35b5ab450a1d80337f570e88464b32b9952f57"
+    },
+    {
+      "file": "authoring-hnt.zip",
+      "bytes": 3647143,
+      "sha256": "eccee290f52775dfa7b8e7c7c3b923508ceba2bd4ba5c9f49d82cea1b1dc9cf1"
+    },
+    {
+      "file": "authoring-kyonshi.zip",
+      "bytes": 768973,
+      "sha256": "358763e4feb30cacbae4e9c390ad148869bbdeac9c68d342fd26a3b769bffdfd"
+    },
+    {
+      "file": "authoring-lightninggun.zip",
+      "bytes": 134593,
+      "sha256": "a43c6269e13b9992d5ecbcb0daf8b4e00a68841721f7f73b84a7275415701af4"
+    },
+    {
+      "file": "authoring-liz.zip",
+      "bytes": 3281097,
+      "sha256": "b0e4a6baef720c30e8a114464836e9035824a70dea6ae0f6e46f0ec83f54429c"
+    },
+    {
+      "file": "authoring-major.zip",
+      "bytes": 187448,
+      "sha256": "19534848e8facba217239f22350c5142e8342adc87a2ebd46d673b46acc7d425"
+    },
+    {
+      "file": "authoring-merman.zip",
+      "bytes": 315297,
+      "sha256": "41a546f8a19776fd81083cd37ae59b9ae91e598015a9987ccb4b0d609a1f9d3d"
+    },
+    {
+      "file": "authoring-missionpack.zip",
+      "bytes": 673305,
+      "sha256": "80b0377b1bf90957a71f38d5397b8e62589b0a49491ef04c0fc4db6102aae14a"
+    },
+    {
+      "file": "authoring-neko.zip",
+      "bytes": 12734127,
+      "sha256": "1d762a58a92b30dad592fb067f157a98437a97a677c33d1eb2dc2fe05e3dd0a3"
+    },
+    {
+      "file": "authoring-newbfg.zip",
+      "bytes": 231097,
+      "sha256": "e03dc35f4e9648bb30f689a691b1edad6f3a771619107d2d11a2e8b58e476389"
+    },
+    {
+      "file": "authoring-newgauntlet.zip",
+      "bytes": 37615,
+      "sha256": "dcbdf021e1e3cb5ae223826357b16970400526de76fc3fac8a975d847ee41b6c"
+    },
+    {
+      "file": "authoring-newgren.zip",
+      "bytes": 98759,
+      "sha256": "58198a79802f8f767b7404a99a3f891b773e35c9d3bd865bb786216d4568c7f1"
+    },
+    {
+      "file": "authoring-newmgun.zip",
+      "bytes": 28438895,
+      "sha256": "324650c520e0194e251283d40d1e9af620fc7529080adb32b8170e94e2697df0"
+    },
+    {
+      "file": "authoring-newmuz.zip",
+      "bytes": 84782,
+      "sha256": "aeaff9be0ccb4a9b7d46799dd68891fa95ebb14d1f810afccd11bc9533f1b95c"
+    },
+    {
+      "file": "authoring-newplas.zip",
+      "bytes": 3471446,
+      "sha256": "cb6d9d3026582d410f8138e49ccec42578c367227c4d56dc3e65c1a24bf882df"
+    },
+    {
+      "file": "authoring-newrail.zip",
+      "bytes": 1660992,
+      "sha256": "f22c11766c2f5f1ee097d1a6899c0880f26b64d418689928e96941e13adfc579"
+    },
+    {
+      "file": "authoring-newrock.zip",
+      "bytes": 46029,
+      "sha256": "959edeee862957655d770af3907d9c86debd531a78e47ff94698bf30059d3995"
+    },
+    {
+      "file": "authoring-penguin.zip",
+      "bytes": 852982,
+      "sha256": "191761738d50dfd777847249e5f66992fae194060c83153a86be7b221ba79bbd"
+    },
+    {
+      "file": "authoring-proxmine.zip",
+      "bytes": 79879,
+      "sha256": "01eac8177d4fad223d2ca4172e0d6442c6344245a049985a236c690b787e72c1"
+    },
+    {
+      "file": "authoring-shotgun.zip",
+      "bytes": 76327,
+      "sha256": "9fa7a107f41db7430822e8249365d6d2b836d6e50d1a57394b6672641a5ba426"
+    },
+    {
+      "file": "authoring-skelebot.zip",
+      "bytes": 164926,
+      "sha256": "bced68abccd52beaa8739b3593e1e303f838bf18f7149af859999a0b6a94e4b2"
+    },
+    {
+      "file": "authoring-sorceress.zip",
+      "bytes": 5016802,
+      "sha256": "686ae883ca53dd4e856859ad374f7d2f8e9c96e5dafb390afaa2e60f6c46c427"
+    },
+    {
+      "file": "authoring-sources.json",
+      "bytes": 40216,
+      "sha256": "7b67d6c83eba0eb50fac591cc64b926482e558d4b2728eb6c9c856d0c347c5b4"
+    },
+    {
+      "file": "authoring-spacemrn.zip",
+      "bytes": 4073708,
+      "sha256": "922450fd73fa7afbb81532d5ff83d05f1c95446cbd41d44f3988f05e249a5109"
+    },
+    {
+      "file": "authoring-vulcan.zip",
+      "bytes": 579102,
+      "sha256": "173954b6813a34615ac6e24c4f4fdb1371402bf9a8030b25478e08d728b07f5c"
+    },
+    {
+      "file": "readme_088.txt",
+      "bytes": 4405,
+      "sha256": "21fa298fe95c25af25edb40f56b131f0c40df2ba0cda3ba47f9ddddddac90570"
+    },
+    {
+      "file": "source-angelyss.zip",
+      "bytes": 15691979,
+      "sha256": "8ba802363adbfb3ddfc7683829bba410f89d9ed43e58f3ff954cc6fc213a79c3"
+    },
+    {
+      "file": "source-arachna.zip",
+      "bytes": 7242720,
+      "sha256": "1efae77d023c01176a6b887367881a886b8a8d4e435353d1c80d314dca3d8cb8"
+    },
+    {
+      "file": "source-assassin.zip",
+      "bytes": 4095067,
+      "sha256": "3cec99866faa6eac4a592c5b35c1b3eae68cfd2ae8835f4f9cef0a23919be5a2"
+    },
+    {
+      "file": "source-ayumi.zip",
+      "bytes": 3099619,
+      "sha256": "82efbd7a301424b83e206f571d8947a936185a600122d7aa5ce176e71794c3ee"
+    },
+    {
+      "file": "source-beret.zip",
+      "bytes": 4617513,
+      "sha256": "5d96a09f75daff8d91364e7c261b019be22b109cce805a70071015c677fddc08"
+    },
+    {
+      "file": "source-gargoyle.zip",
+      "bytes": 9520554,
+      "sha256": "31c598967904c5bb0f7bf9417ad525903e583377c28b02cd40b7af7d36f5105c"
+    },
+    {
+      "file": "source-kyonshi.zip",
+      "bytes": 9856399,
+      "sha256": "5a43f19244a79d372539fba33648e9da6f53d5074063c21842b07da5de8b281f"
+    },
+    {
+      "file": "source-liz.zip",
+      "bytes": 2470790,
+      "sha256": "a77f349293149c971cb10a18a948a8dd42ac418d7b74bac475c796efca8376ea"
+    },
+    {
+      "file": "source-major.zip",
+      "bytes": 2743208,
+      "sha256": "0b89d5a2a94540fb12817dd9ad12729f6448b4a60cfc3b7b4a5396b88a4fd1ad"
+    },
+    {
+      "file": "source-merman.zip",
+      "bytes": 5264369,
+      "sha256": "3966bfedd32e6787579499a0fbd106644caa713580918f85fd6522ce56c80cae"
+    },
+    {
+      "file": "source-neko.zip",
+      "bytes": 3639719,
+      "sha256": "5ca66c6c47dbf7a1aa384c35aa6091a3447f28f40ed06e6c55cbba9d39f82ded"
+    },
+    {
+      "file": "source-penguin.zip",
+      "bytes": 2480538,
+      "sha256": "0c15bda162fad31ffef350252fc002d1632cd79a933380e490d5ffcd7160f143"
+    },
+    {
+      "file": "source-sarge.zip",
+      "bytes": 4994019,
+      "sha256": "e40eb81fe5a78a60e59d1fad4796cd31d6e78996906a5a71dcfba8531058d90f"
+    },
+    {
+      "file": "source-sergei.zip",
+      "bytes": 6630275,
+      "sha256": "88a51d5e325f63945b72a059e261d56147d0c8ba9c67730369858051848a2158"
+    },
+    {
+      "file": "source-shared.zip",
+      "bytes": 20753046,
+      "sha256": "c30470597ebb96cc1668b3f39c92e3de58955728de62f972d5f7159799e1d251"
+    },
+    {
+      "file": "source-skelebot.zip",
+      "bytes": 5914911,
+      "sha256": "e556cb3e6e992fa81dd4f852c6db5dc515c90730635609dd31d2134abf4f6f42"
+    },
+    {
+      "file": "source-smarine.zip",
+      "bytes": 7075502,
+      "sha256": "ad4eed55913b79f0352d790ec3fe1f1d1d91de144cb92c96cccd92f7f2a92c80"
+    },
+    {
+      "file": "source-sorceress.zip",
+      "bytes": 2175105,
+      "sha256": "40860b0fa6b881bc4c8fb89fd854b6e8dad05c4bfcff8f08a06439735cc5a579"
+    },
+    {
+      "file": "source-tony.zip",
+      "bytes": 1488012,
+      "sha256": "73f5c319e3a08459263f8c2886bdcd3f3f71ebf723decb8932c6c0bfcd3f18ab"
+    },
+    {
+      "file": "source-weapon-1.zip",
+      "bytes": 398793,
+      "sha256": "4df80b90a0e102303b49f4eb4d359a61194f382dbaf0539b5eb93f5f43515550"
+    },
+    {
+      "file": "source-weapon-10.zip",
+      "bytes": 412040,
+      "sha256": "6c6d84754d733cce0f7a85772ff81611eeca59974c2a890015df66edefdd998c"
+    },
+    {
+      "file": "source-weapon-11.zip",
+      "bytes": 326292,
+      "sha256": "e4aa6ddd1f1939c9f59982914d6d2631e6c202a85d5e88eae9266ec81c1c3822"
+    },
+    {
+      "file": "source-weapon-12.zip",
+      "bytes": 450259,
+      "sha256": "2598563cfd7db7eced07dc953b70da28b3e2bf158ad003e00a524ea98a7ae958"
+    },
+    {
+      "file": "source-weapon-13.zip",
+      "bytes": 241407,
+      "sha256": "fb3b81060f03917137a103aa4026d49142018748d8cf22bdc37c5551cbe76fb1"
+    },
+    {
+      "file": "source-weapon-2.zip",
+      "bytes": 618117,
+      "sha256": "800eea18a239916c2c1aa13f477fdedfa11f75d5db0c6df7a564e9df0db338a6"
+    },
+    {
+      "file": "source-weapon-3.zip",
+      "bytes": 576203,
+      "sha256": "046e723282b1a49fdd2e3080ced02759ff4db66252973dfd1cefd5c5f0c048f2"
+    },
+    {
+      "file": "source-weapon-4.zip",
+      "bytes": 641202,
+      "sha256": "568c6bc1deb13697d11dd42bd5f16f3f99f509fff6ddd52a4fa6da8557df5990"
+    },
+    {
+      "file": "source-weapon-5.zip",
+      "bytes": 393663,
+      "sha256": "6bbcdf8f8866c535047d5b702fc4a3a3acb19e8dc1c0210b6bc1f3d715c9a0a1"
+    },
+    {
+      "file": "source-weapon-6.zip",
+      "bytes": 557710,
+      "sha256": "47a7b8fba1c7e4df23d1ab1d66ffefc83ffd2151353c046908069dcdcfc20fe1"
+    },
+    {
+      "file": "source-weapon-7.zip",
+      "bytes": 656670,
+      "sha256": "e111dd6ce665c54e3673ed383ef42ae3b9bcb99901a4907f6d9a9cf9ee1f1b95"
+    },
+    {
+      "file": "source-weapon-8.zip",
+      "bytes": 553935,
+      "sha256": "deb3fd5ec604306ae117c0f1ab4dd132adfbfe601e831504b661946cc6ffd06f"
+    },
+    {
+      "file": "source-weapon-9.zip",
+      "bytes": 371710,
+      "sha256": "2169ed462f63fb9a476acf164e8f9292597b29d7e3eb185802b61dc3c63555c1"
+    }
+  ]
+}
