@@ -4,7 +4,14 @@
 
 - Preserve the `v1.0.0` checkpoint and the exact `dos-maze` default profile.
 - Keep earlier profiles available in the H menu.
-- Next rendering work: investigate and correct the reported off-grid lines and glyph-clearance behavior, using the saved reproducer. The checkpoint itself does not fix that issue.
+- The `v1.1.1` DOS-maze defaults are time scale ×0.50, pixel ratio cap 1.00, and antialiasing off.
+- The full lab's reported off-grid lines and glyph-clearance issue retain their saved reproducer. Preserve the accepted DOS-maze appearance while pursuing the engine test.
+
+## Small 3D engine test
+
+Follow the [approved engine direction](ENGINE_PLAN.md), incorporating the user's 2026-11-26 clarification. Preserve original true-first-person, looting/transition, equipped-inventory, and progression rules.
+
+The engine is true 3D. Generate arenas from bound 2D sector construction data, assemble their 3D gameplay geometry, and validate walls, floors, ceilings, seams, collision, and connectivity before replacing the current arena. Keep failed candidates isolated from the active world. Rust/WASM, symmetry, surface dressing, coarse lighting/palette, arena modifiers, and mirrors are directions to pursue in staged tests; performance numbers are measured targets.
 
 ## Cross-device testing and deployment
 
