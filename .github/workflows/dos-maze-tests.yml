@@ -1,0 +1,39 @@
+name: DOS-maze checks
+
+on:
+  push:
+    branches: [main]
+    paths: ['dos-maze/**', '.github/workflows/dos-maze-tests.yml']
+  pull_request:
+    paths: ['dos-maze/**', '.github/workflows/dos-maze-tests.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deterministic-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Install freestanding WASM compiler
+        run: sudo apt-get update && sudo apt-get install -y clang lld
+      - name: Check JavaScript syntax
+        run: |
+          for source in dos-maze/*.js dos-maze/tools/*.mjs; do
+            node --check "$source"
+          done
+      - name: Rebuild WASM
+        env:
+          WASM_CC: clang
+        run: sh dos-maze/tools/build-wasm.sh
+      - name: Check exact geometry, glyph atlas, and animation parity
+        run: |
+          node dos-maze/tools/check-generator.mjs
+          node dos-maze/tools/check-animation.mjs

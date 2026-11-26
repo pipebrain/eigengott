@@ -1,0 +1,12 @@
+{
+  "passed": true,
+  "frames": 7200,
+  "simulatedSeconds": 120,
+  "flickerRedraws": 40,
+  "checks": [
+    "Exact corruption cycle",
+    "Exact flicker events and opacity",
+    "Exact redraw seeds",
+    "Exact letter hierarchy across cycles and flickers"
+  ]
+}

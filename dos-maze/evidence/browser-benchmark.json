@@ -1,0 +1,48 @@
+{
+  "environment": "Local Chrome headless, Metal WebGPU; vsync/frame-rate limit disabled; GPU queue drained at both measurement boundaries",
+  "scope": "Same default 4x MSAA and DPR, continuously moving state 0.5, flicker disabled; local results are not physical-device guarantees",
+  "cases": [
+    {
+      "width": 1376,
+      "height": 768,
+      "dpr": 1,
+      "vector-labyrinth": {
+        "frames": 7025,
+        "elapsedMs": 3171.300000011921,
+        "fps": 2215.179894672088,
+        "mainThreadMsPerFrame": 0.3825168683274021,
+        "jsHeapBytes": 2033188
+      },
+      "dos-maze": {
+        "frames": 7058,
+        "elapsedMs": 3008,
+        "fps": 2346.409574468085,
+        "mainThreadMsPerFrame": 0.08906290733918958,
+        "jsHeapBytes": 2040508
+      },
+      "throughputRatio": 1.0592410937421508,
+      "mainThreadReduction": 0.7671660658296532
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "dpr": 1,
+      "vector-labyrinth": {
+        "frames": 1274,
+        "elapsedMs": 4279,
+        "fps": 297.733115213835,
+        "mainThreadMsPerFrame": 2.383606750392465,
+        "jsHeapBytes": 1518560
+      },
+      "dos-maze": {
+        "frames": 1147,
+        "elapsedMs": 3007.4000000059605,
+        "fps": 381.39256500556183,
+        "mainThreadMsPerFrame": 0.18402789886660853,
+        "jsHeapBytes": 2866692
+      },
+      "throughputRatio": 1.280988057816954,
+      "mainThreadReduction": 0.9227943540450588
+    }
+  ]
+}

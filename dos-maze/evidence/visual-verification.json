@@ -1,0 +1,72 @@
+{
+  "passed": true,
+  "comparison": "v1.0.0 dos-maze vs stripped runtime, default render quality",
+  "cases": [
+    {
+      "width": 1376,
+      "height": 768,
+      "dpr": 1,
+      "state": 0,
+      "time": 0,
+      "meanAbsoluteError": 9.46281492248062e-7,
+      "changedChannelFraction": 9.46281492248062e-7,
+      "largeErrorFraction": 0,
+      "maxChannelError": 1
+    },
+    {
+      "width": 1376,
+      "height": 768,
+      "dpr": 1,
+      "state": 0.5,
+      "time": 7.5,
+      "meanAbsoluteError": 9.46281492248062e-7,
+      "changedChannelFraction": 9.46281492248062e-7,
+      "largeErrorFraction": 0,
+      "maxChannelError": 1
+    },
+    {
+      "width": 1376,
+      "height": 768,
+      "dpr": 1,
+      "state": 1,
+      "time": 15,
+      "meanAbsoluteError": 0.000001892562984496124,
+      "changedChannelFraction": 0.000001892562984496124,
+      "largeErrorFraction": 0,
+      "maxChannelError": 1
+    },
+    {
+      "width": 390,
+      "height": 844,
+      "dpr": 1,
+      "state": 0.6,
+      "time": 9,
+      "meanAbsoluteError": 0,
+      "changedChannelFraction": 0,
+      "largeErrorFraction": 0,
+      "maxChannelError": 0
+    },
+    {
+      "width": 1376,
+      "height": 768,
+      "dpr": 1.5,
+      "state": 0.5,
+      "time": 7.5,
+      "meanAbsoluteError": 0,
+      "changedChannelFraction": 0,
+      "largeErrorFraction": 0,
+      "maxChannelError": 0
+    },
+    {
+      "width": 1920,
+      "height": 1080,
+      "dpr": 2,
+      "state": 0.7,
+      "time": 10.5,
+      "meanAbsoluteError": 0.00011574074074074075,
+      "changedChannelFraction": 0.000006028163580246913,
+      "largeErrorFraction": 0.000004581404320987654,
+      "maxChannelError": 33
+    }
+  ]
+}

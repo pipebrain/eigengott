@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "cases": 376,
+  "segments": 695055,
+  "parity": "byte-for-byte, including original overlap clipping order",
+  "glyphAtlasParity": "all 4,718,592 bytes match original Canvas/JS cache",
+  "compressedAssetBytes": 3595,
+  "wasmBytes": 7788,
+  "memoryBytes": 8388608,
+  "baselineMemoryBytes": 67108864,
+  "timings": [
+    {
+      "width": 1376,
+      "height": 768,
+      "baselineMs": 0.5579999999999927,
+      "dosMazeMs": 0.13045899999997346,
+      "speedup": 4.27720586544513
+    },
+    {
+      "width": 2560,
+      "height": 1440,
+      "baselineMs": 3.6045420000000377,
+      "dosMazeMs": 0.462833000000046,
+      "speedup": 7.7879969665077455
+    },
+    {
+      "width": 3840,
+      "height": 2160,
+      "baselineMs": 12.425082999999631,
+      "dosMazeMs": 1.1142079999999623,
+      "speedup": 11.151493257991373
+    }
+  ]
+}

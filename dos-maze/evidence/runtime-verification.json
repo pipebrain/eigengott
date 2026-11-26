@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "browser": "Chrome headless / Metal WebGPU",
+  "checks": [
+    "Standalone WebGPU/WASM startup and minimal hidden menu",
+    "Quality and speed save/restore; reset to accepted render quality",
+    "Pause stops rendering; single-step renders on demand",
+    "18 landscape/portrait and DPR changes with bounded render targets",
+    "Two automatic device-loss recoveries; bounded failure and user retry",
+    "Engine mount, embedded-canvas resize, and explicit disposal",
+    "Missing asset produces a recoverable error instead of a blank screen",
+    "Unsupported WebGPU produces a clear error"
+  ]
+}
