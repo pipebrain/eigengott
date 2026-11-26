@@ -31,14 +31,15 @@ jobs:
           sudo apt-get install -y clang lld
       - name: Check browser and deployment JavaScript
         run: |
-          for source in site/*.js tools/build-pages.mjs tools/check-pages.mjs engine-test/*.js engine-benchmark/*.js dos-maze/*.js vector-labyrinth/*.js; do
+          for source in site/*.js tools/build-pages.mjs tools/check-pages.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js; do
             node --check "$source"
           done
       - name: Rebuild accepted engine and benchmark WASM
         run: |
           sh engine-test/tools/build-wasm.sh
           sh engine-benchmark/tools/build-wasm.sh
-          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm
+          sh arena-fold/tools/build-wasm.sh
+          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm arena-fold/fold.wasm
       - name: Rebuild DOS-maze WASM
         env:
           WASM_CC: clang
@@ -47,6 +48,7 @@ jobs:
         run: |
           node engine-test/tools/check-core.mjs
           node engine-benchmark/tools/check-core.mjs
+          node arena-fold/tools/check-core.mjs
           node dos-maze/tools/check-generator.mjs
           node dos-maze/tools/check-animation.mjs
       - name: Stage and verify the static runtime package

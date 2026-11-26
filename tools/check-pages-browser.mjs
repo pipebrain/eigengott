@@ -26,14 +26,20 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await cmd('Page.navigate',{url:new URL('vector-labyrinth/?tools=1',base).href});await wait('location.pathname.endsWith("/vector-labyrinth/")&&document.querySelector("#status")?.hidden');
   assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
   checks.push('Full vector lab loads its presets, reference geometry, shaders, and WASM');
+  await cmd('Page.navigate',{url:new URL('arena-fold/?test&tools=1',base).href});await wait('window.__fold?.snapshot().ready');
+  assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('window.__fold.snapshot().build.commit'),commit);
+  assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
+  await evaluate('window.__fold.configure({duration:1});window.__fold.trigger()');await wait('window.__fold.snapshot().fold.phase>.4');
+  assert.equal(await evaluate('window.__fold.snapshot().fold.clear&&window.__fold.snapshot().fold.sealed'),true);
+  checks.push('Arena fold: deployed identity, tools URL, protected moving geometry and feedback');
   const {identifier}=await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Object.defineProperty(document,"exitPointerLock",{value:undefined,configurable:true});Object.defineProperty(Element.prototype,"requestPointerLock",{value:undefined,configurable:true});'});
   for(const [app,handle]of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);
     assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);
   }
   await cmd('Page.removeScriptToEvaluateOnNewDocument',{identifier});checks.push('Engine inspection tools open without Pointer Lock APIs');
-  for(const app of ['engine-test','engine-benchmark']){
-    const response=await fetch(new URL(`${app}/engine.wasm?check=${Date.now()}`,base));assert.equal(response.status,200);assert.match(response.headers.get('content-type')||'',/application\/wasm/);
+  for(const [app,binary]of [['engine-test','engine.wasm'],['engine-benchmark','engine.wasm'],['arena-fold','fold.wasm']]){
+    const response=await fetch(new URL(`${app}/${binary}?check=${Date.now()}`,base));assert.equal(response.status,200);assert.match(response.headers.get('content-type')||'',/application\/wasm/);
   }
   assert.deepEqual(errors,[]);await sleep(100);
   const report={passed:true,url:base.href,commit,checks};await writeFile('.local/pages-browser-verification.json',JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify(report,null,2));

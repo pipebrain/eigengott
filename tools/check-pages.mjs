@@ -24,5 +24,6 @@ for(const item of manifest.files.filter(f=>/\.(?:html|js|css)$/.test(f.path))){
   }
 }
 assert.ok(files.has('engine-benchmark/worker.js'));assert.ok(files.has('dos-maze/assets/title.bin.gz'));assert.ok(files.has('vector-labyrinth/reference-master.json'));
-assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
+assert.ok(files.has('arena-fold/fold.wasm'));assert.ok(files.has('arena-fold/shaders/feedback.wgsl'));
+assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
 console.log(JSON.stringify({passed:true,build:manifest.build.short,applications:manifest.applications,files:manifest.files.length,bytes:manifest.files.reduce((sum,f)=>sum+f.bytes,0)},null,2));

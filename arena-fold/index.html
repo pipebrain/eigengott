@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#080807"><title>EIGENGOTT — Arena fold test</title><link rel="stylesheet" href="style.css"></head>
+<body>
+ <canvas id="scene" aria-label="Arena fold test"></canvas>
+ <div id="status" role="status"><p class="eyebrow">EIGENGOTT / ARENA FOLD</p><p id="message">Preparing the protected chamber…</p><button id="retry" hidden>Retry</button></div>
+ <div id="gate" hidden><p class="eyebrow">CONTINUOUS ARENA FOLD / EXPERIMENT</p><button id="enter">Enter chamber</button><p>WASD · mouse · Space jump · N fold · H tools</p><button id="inspect">Open tools</button></div>
+ <aside id="controls" hidden aria-label="Arena fold controls">
+  <header><div><h1>ARENA FOLD</h1><p>H to close · independent geometry and void controls</p></div><button id="close" aria-label="Close tools">×</button></header>
+  <section><h2>Moving geometry</h2>
+   <label class="check"><input id="geometry" type="checkbox" checked>Enable fold motion</label>
+   <div class="buttons"><button id="trigger">Fold / reverse [N]</button><button id="pause">Pause</button><button id="step-back">− step</button><button id="step-forward">+ step</button></div>
+   <label>Guarded phase <output id="phase-value">0.000</output><input id="phase" type="range" min="0" max="1" step="0.001" value="0"></label>
+   <label class="check"><input id="loop" type="checkbox">Loop with endpoint dwell</label>
+   <label>Fold duration (seconds)<input id="duration" type="number" min="1" max="30" step="0.5" value="4"></label>
+   <label>Protection margin (metres)<input id="margin" type="number" min="0.05" max="0.6" step="0.05" value="0.2"></label>
+   <p class="hint">Body and held weapon always protected. An unsafe sweep holds the whole fold. Moving away releases it.</p><p id="guard" role="status"></p>
+  </section>
+  <section><h2>Render-only openings</h2>
+   <label class="check"><input id="openingFollow" type="checkbox" checked>Openings follow fold (closed at endpoints)</label>
+   <label>Opening amount <output id="opening-value"></output><input id="opening" type="range" min="0" max="1" step="0.01" value="0.78"></label>
+   <p class="hint">Visual faces disappear; the physical outer enclosure remains sealed.</p>
+  </section>
+  <section><h2>Controlled void feedback</h2>
+   <label class="check"><input id="feedback" type="checkbox" checked>Enable retained world feedback</label>
+   <label class="check"><input id="feedbackFreeze" type="checkbox">Freeze feedback drift / decay</label>
+   <label>Interpretation<select id="style"><option value="0">Architectural lines</option><option value="1">Colour afterimages</option></select></label>
+   <label class="check"><input id="worldAnchor" type="checkbox" checked>World-anchored reprojection</label>
+   <label>Persistence half-life (seconds)<input id="halfLife" type="number" min="0.05" max="12" step="0.05" value="2.4"></label>
+   <label>Stretch / drift speed<input id="stretch" type="number" min="0" max="12" step="0.25" value="2"></label>
+   <label>Branch direction bias <output id="branch-value"></output><input id="branch" type="range" min="0" max="1" step="0.01" value="0.5"></label>
+   <label>Hatch coordinates<select id="grid"><option value="1">Screen grid (0° / 90°)</option><option value="0">World planes / perspective</option><option value="2">Screen grid (45°)</option></select></label>
+   <div class="grid"><label>Screen pitch (pixels)<input id="pitch" type="number" min="3" max="40" step="1" value="9"></label><label>Line width (pixels)<input id="lineWidth" type="number" min="0.5" max="4" step="0.5" value="1"></label></div>
+   <label class="check"><input id="monoVoid" type="checkbox" checked>Monochrome void lines</label>
+   <label>Pattern seed<input id="seed" type="number" min="0" max="999" step="1" value="17"></label>
+   <button id="clear-history">Clear feedback history</button><p class="hint">Fresh depth each frame. Only uncovered pixels receive feedback; the body and gun never enter its history. Line width is evaluated at final output resolution.</p>
+  </section>
+  <section><h2>Inspection / safety fixtures</h2>
+   <label>Camera<select id="camera"><option value="0">Player</option><option value="1">Free observer (WASD / Space / Shift)</option><option value="2">Overhead observer</option></select></label>
+   <label class="check"><input id="colliders" type="checkbox">Collider edges</label><label class="check"><input id="protection" type="checkbox">Body / weapon protected volumes</label>
+   <label class="check"><input id="showBody" type="checkbox" checked>Draw body / weapon (physics always active)</label>
+   <label>Pass inspection<select id="inspection"><option value="0">Final composite</option><option value="1">Solid coverage / void mask</option><option value="2">Raw owned history (no body)</option><option value="3">Current solid scene</option></select></label>
+   <div class="buttons"><button id="reset">Reset chamber</button><button id="weapon-fixture">Weapon hold fixture</button><button id="body-fixture">Body hold fixture</button></div>
+  </section>
+  <section><h2>Rendering / diagnostics</h2>
+   <label>Internal height<select id="resolution"><option value="180">180</option><option value="360" selected>360</option><option value="540">540</option><option value="720">720</option><option value="1080">1080</option></select></label>
+   <label>Pixel ratio cap<select id="dpr"><option value="0.5">0.50</option><option value="1" selected>1.00</option><option value="1.5">1.50</option><option value="2">2.00</option></select></label>
+   <label class="check"><input id="monoWorld" type="checkbox">Monochrome physical world</label>
+   <div class="buttons"><button id="fullscreen">Fullscreen [F]</button><button id="copy">Copy diagnostics</button><button id="defaults">Reset controls</button></div>
+   <pre id="diagnostics"></pre><p id="feedback-message" role="status"></p>
+  </section>
+  <footer>Separate experiment. No combat, loot timing or arbitrary arena replacement.<br>Keyboard / mouse movement. Touch devices can inspect through these tools.</footer>
+ </aside>
+ <noscript>This test requires JavaScript, WebAssembly and WebGPU.</noscript><script type="module" src="main.js"></script>
+</body></html>

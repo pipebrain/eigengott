@@ -1,0 +1,523 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:65480/arena-fold/",
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+  "checks": [
+    "Body, weapon and debug lines excluded from history (exact GPU readback equality)",
+    "Feedback disabled + all faces hidden produces a cleared black void",
+    "Time-based half-life, independent feedback freeze, and long decay without an 8-bit retention floor",
+    "Weapon and body fixtures hold safely through browser WASM",
+    "Geometry and feedback enable / pause controls operate independently",
+    "GPU screenshot: exact one-pixel lines and nine-pixel pitch at 180 / 360 / 720 internal heights",
+    "Mixed hatch directions and branch seams remain on the exact output grid",
+    "Architectural, perspective, 45-degree hatch and colour afterimage modes render without WebGPU errors",
+    "Resize / quality / DPR reset and recreate bounded history targets",
+    "GPU device loss recovery preserves physical state and resets history",
+    "Hidden / frozen lifecycle pauses simulation without a catch-up jump",
+    "Native Pointer Lock entry and H-menu release",
+    "Eight-second bounded animated run: sealed, clear, bounded queue and memory",
+    "Inspection fallback without Pointer Lock APIs",
+    "Unavailable WebGPU shows a bounded retry state"
+  ],
+  "samples": [
+    {
+      "name": "startup",
+      "snapshot": {
+        "version": "arena-fold-1",
+        "build": null,
+        "ready": true,
+        "error": null,
+        "recovering": false,
+        "recoveries": 0,
+        "frames": 97,
+        "elapsedMs": 1821.2000000029802,
+        "wasmBytes": 4194304,
+        "settings": {
+          "geometry": true,
+          "loop": false,
+          "duration": 4,
+          "margin": 0.2,
+          "openingFollow": true,
+          "opening": 0.78,
+          "feedback": true,
+          "feedbackFreeze": false,
+          "halfLife": 2.4,
+          "stretch": 2,
+          "worldAnchor": true,
+          "style": 0,
+          "pitch": 9,
+          "lineWidth": 1,
+          "branch": 0.5,
+          "grid": 1,
+          "monoWorld": false,
+          "monoVoid": true,
+          "seed": 17,
+          "inspection": 0,
+          "resolution": 360,
+          "dpr": 1,
+          "showBody": true,
+          "camera": 0,
+          "debug": 0
+        },
+        "fold": {
+          "clear": true,
+          "sealed": true,
+          "bounded": true,
+          "blockedPanels": 0,
+          "blockedBy": 0,
+          "checks": 0,
+          "rejections": 0,
+          "certificationNodes": 0,
+          "deepestSubdivision": 0,
+          "physicsSteps": 191,
+          "contacts": 186,
+          "blockedLooks": 0,
+          "playing": false,
+          "enabled": true,
+          "camera": 0,
+          "loop": false,
+          "phase": 0,
+          "target": 0,
+          "duration": 4,
+          "margin": 0.20000000298023224,
+          "position": [
+            0,
+            -5,
+            0.0030000079423189163
+          ],
+          "yaw": 0,
+          "pitch": 0,
+          "bodyClearance": 6.493078708648682,
+          "weaponClearance": 5.817398548126221,
+          "time": 1.5916666984558105,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "accumulator": 0.008141333237290382
+        },
+        "render": {
+          "resolution": [
+            645,
+            360
+          ],
+          "output": [
+            1376,
+            768
+          ],
+          "pendingFrames": 1,
+          "frames": 97,
+          "uploadsPerFrame": 18528,
+          "renderTargetBytes": 6501600,
+          "bufferBytes": 262528,
+          "timestamps": true,
+          "gpuMs": {
+            "scene": 0.207038,
+            "feedback": 0.17758,
+            "present": 0.548658,
+            "total": 0.933276
+          },
+          "adapter": {
+            "vendor": "apple",
+            "architecture": "metal-3",
+            "device": ""
+          }
+        },
+        "cpuMs": {
+          "p50": 0.19999998807907104,
+          "p95": 0.5
+        },
+        "fps": 60.007200864103766,
+        "hidden": false
+      }
+    },
+    {
+      "name": "animated-0",
+      "snapshot": {
+        "version": "arena-fold-1",
+        "build": null,
+        "ready": true,
+        "error": null,
+        "recovering": false,
+        "recoveries": 1,
+        "frames": 184,
+        "elapsedMs": 8844.40000000596,
+        "wasmBytes": 4194304,
+        "settings": {
+          "geometry": true,
+          "loop": true,
+          "duration": 1,
+          "margin": 0.2,
+          "openingFollow": true,
+          "opening": 0.78,
+          "feedback": true,
+          "feedbackFreeze": false,
+          "halfLife": 2.4,
+          "stretch": 2,
+          "worldAnchor": true,
+          "style": 0,
+          "pitch": 9,
+          "lineWidth": 1,
+          "branch": 0.5,
+          "grid": 1,
+          "monoWorld": false,
+          "monoVoid": true,
+          "seed": 17,
+          "inspection": 0,
+          "resolution": 360,
+          "dpr": 1,
+          "showBody": true,
+          "camera": 0,
+          "debug": 0
+        },
+        "fold": {
+          "clear": true,
+          "sealed": true,
+          "bounded": true,
+          "blockedPanels": 0,
+          "blockedBy": 0,
+          "checks": 13320,
+          "rejections": 450,
+          "certificationNodes": 13320,
+          "deepestSubdivision": 0,
+          "physicsSteps": 121,
+          "contacts": 116,
+          "blockedLooks": 0,
+          "playing": true,
+          "enabled": true,
+          "camera": 0,
+          "loop": true,
+          "phase": 0.9916660785675049,
+          "target": 1,
+          "duration": 1,
+          "margin": 0.20000000298023224,
+          "position": [
+            0,
+            -5,
+            0.0030000079423189163
+          ],
+          "yaw": 0,
+          "pitch": 0,
+          "bodyClearance": 6.197071552276611,
+          "weaponClearance": 5.515537261962891,
+          "time": 1.0083333253860474,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "accumulator": 0.008266666904091835
+        },
+        "render": {
+          "resolution": [
+            640,
+            360
+          ],
+          "output": [
+            960,
+            540
+          ],
+          "pendingFrames": 0,
+          "frames": 88,
+          "uploadsPerFrame": 18528,
+          "renderTargetBytes": 6451200,
+          "bufferBytes": 262528,
+          "timestamps": true,
+          "gpuMs": {
+            "scene": 0.144165,
+            "feedback": 0.199622,
+            "present": 0.258579,
+            "total": 0.602366
+          },
+          "adapter": {
+            "vendor": "apple",
+            "architecture": "metal-3",
+            "device": ""
+          }
+        },
+        "cpuMs": {
+          "p50": 0.29999999701976776,
+          "p95": 0.7999999970197678
+        },
+        "fps": 59.99999999999997,
+        "hidden": false
+      }
+    },
+    {
+      "name": "animated-3",
+      "snapshot": {
+        "version": "arena-fold-1",
+        "build": null,
+        "ready": true,
+        "error": null,
+        "recovering": false,
+        "recoveries": 1,
+        "frames": 365,
+        "elapsedMs": 11854.5,
+        "wasmBytes": 4194304,
+        "settings": {
+          "geometry": true,
+          "loop": true,
+          "duration": 1,
+          "margin": 0.2,
+          "openingFollow": true,
+          "opening": 0.78,
+          "feedback": true,
+          "feedbackFreeze": false,
+          "halfLife": 2.4,
+          "stretch": 2,
+          "worldAnchor": true,
+          "style": 0,
+          "pitch": 9,
+          "lineWidth": 1,
+          "branch": 0.5,
+          "grid": 1,
+          "monoWorld": false,
+          "monoVoid": true,
+          "seed": 17,
+          "inspection": 0,
+          "resolution": 360,
+          "dpr": 1,
+          "showBody": true,
+          "camera": 0,
+          "debug": 0
+        },
+        "fold": {
+          "clear": true,
+          "sealed": true,
+          "bounded": true,
+          "blockedPanels": 0,
+          "blockedBy": 0,
+          "checks": 15240,
+          "rejections": 450,
+          "certificationNodes": 15240,
+          "deepestSubdivision": 0,
+          "physicsSteps": 483,
+          "contacts": 478,
+          "blockedLooks": 0,
+          "playing": true,
+          "enabled": true,
+          "camera": 0,
+          "loop": true,
+          "phase": 0.9749994277954102,
+          "target": 1,
+          "duration": 1,
+          "margin": 0.20000000298023224,
+          "position": [
+            0,
+            -5,
+            0.0030000079423189163
+          ],
+          "yaw": 0,
+          "pitch": 0,
+          "bodyClearance": 6.13161039352417,
+          "weaponClearance": 5.443558216094971,
+          "time": 4.025000095367432,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "accumulator": 0.008100000210106373
+        },
+        "render": {
+          "resolution": [
+            640,
+            360
+          ],
+          "output": [
+            960,
+            540
+          ],
+          "pendingFrames": 1,
+          "frames": 269,
+          "uploadsPerFrame": 18528,
+          "renderTargetBytes": 6451200,
+          "bufferBytes": 262528,
+          "timestamps": true,
+          "gpuMs": {
+            "scene": 1.465644,
+            "feedback": 2.824956,
+            "present": 4.937925,
+            "total": 9.228525
+          },
+          "adapter": {
+            "vendor": "apple",
+            "architecture": "metal-3",
+            "device": ""
+          }
+        },
+        "cpuMs": {
+          "p50": 0.5,
+          "p95": 0.8999999910593033
+        },
+        "fps": 60.00600060005991,
+        "hidden": false
+      }
+    },
+    {
+      "name": "animated-6",
+      "snapshot": {
+        "version": "arena-fold-1",
+        "build": null,
+        "ready": true,
+        "error": null,
+        "recovering": false,
+        "recoveries": 1,
+        "frames": 545,
+        "elapsedMs": 14862.10000000894,
+        "wasmBytes": 4194304,
+        "settings": {
+          "geometry": true,
+          "loop": true,
+          "duration": 1,
+          "margin": 0.2,
+          "openingFollow": true,
+          "opening": 0.78,
+          "feedback": true,
+          "feedbackFreeze": false,
+          "halfLife": 2.4,
+          "stretch": 2,
+          "worldAnchor": true,
+          "style": 0,
+          "pitch": 9,
+          "lineWidth": 1,
+          "branch": 0.5,
+          "grid": 1,
+          "monoWorld": false,
+          "monoVoid": true,
+          "seed": 17,
+          "inspection": 0,
+          "resolution": 360,
+          "dpr": 1,
+          "showBody": true,
+          "camera": 0,
+          "debug": 0
+        },
+        "fold": {
+          "clear": true,
+          "sealed": true,
+          "bounded": true,
+          "blockedPanels": 0,
+          "blockedBy": 0,
+          "checks": 17144,
+          "rejections": 450,
+          "certificationNodes": 17144,
+          "deepestSubdivision": 0,
+          "physicsSteps": 843,
+          "contacts": 838,
+          "blockedLooks": 0,
+          "playing": true,
+          "enabled": true,
+          "camera": 0,
+          "loop": true,
+          "phase": 0.9416661262512207,
+          "target": 1,
+          "duration": 1,
+          "margin": 0.20000000298023224,
+          "position": [
+            0,
+            -5,
+            0.0030000079423189163
+          ],
+          "yaw": 0,
+          "pitch": 0,
+          "bodyClearance": 6.008438587188721,
+          "weaponClearance": 5.306646347045898,
+          "time": 7.025000095367432,
+          "velocity": [
+            0,
+            0,
+            0
+          ],
+          "accumulator": 0.008100000210106373
+        },
+        "render": {
+          "resolution": [
+            640,
+            360
+          ],
+          "output": [
+            960,
+            540
+          ],
+          "pendingFrames": 0,
+          "frames": 449,
+          "uploadsPerFrame": 18528,
+          "renderTargetBytes": 6451200,
+          "bufferBytes": 262528,
+          "timestamps": true,
+          "gpuMs": {
+            "scene": 0.148373,
+            "feedback": 0.198455,
+            "present": 0.383911,
+            "total": 0.730739
+          },
+          "adapter": {
+            "vendor": "apple",
+            "architecture": "metal-3",
+            "device": ""
+          }
+        },
+        "cpuMs": {
+          "p50": 0.4000000059604645,
+          "p95": 0.8999999910593033
+        },
+        "fps": 59.99999999999996,
+        "hidden": false
+      }
+    }
+  ],
+  "history": {
+    "actor": {
+      "width": 645,
+      "height": 360,
+      "hash": 3059884750,
+      "alpha": 232200,
+      "lit": 696600
+    },
+    "noActor": {
+      "width": 645,
+      "height": 360,
+      "hash": 3059884750,
+      "alpha": 232200,
+      "lit": 696600
+    },
+    "debug": {
+      "width": 645,
+      "height": 360,
+      "hash": 3059884750,
+      "alpha": 232200,
+      "lit": 696600
+    },
+    "black": {
+      "width": 645,
+      "height": 360,
+      "hash": 2125002693,
+      "alpha": 0,
+      "lit": 0
+    },
+    "retained": {
+      "width": 645,
+      "height": 360,
+      "hash": 3399878512,
+      "alpha": 115192.96875,
+      "lit": 696600
+    },
+    "frozen": {
+      "width": 645,
+      "height": 360,
+      "hash": 3399878512,
+      "alpha": 115192.96875,
+      "lit": 696600
+    },
+    "faded": {
+      "width": 645,
+      "height": 360,
+      "hash": 2035696029,
+      "alpha": 103.46932411193848,
+      "lit": 696600
+    }
+  }
+}

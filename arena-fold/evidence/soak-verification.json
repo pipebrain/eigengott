@@ -1,0 +1,642 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:65502/arena-fold/?test",
+  "seconds": 30,
+  "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/158.0.0.0 Safari/537.36",
+  "snapshot": {
+    "version": "arena-fold-1",
+    "build": null,
+    "ready": true,
+    "error": null,
+    "recovering": false,
+    "recoveries": 0,
+    "frames": 1813,
+    "elapsedMs": 30244.39999999106,
+    "wasmBytes": 4194304,
+    "settings": {
+      "geometry": true,
+      "loop": true,
+      "duration": 4,
+      "margin": 0.2,
+      "openingFollow": true,
+      "opening": 0.78,
+      "feedback": true,
+      "feedbackFreeze": false,
+      "halfLife": 2.4,
+      "stretch": 2,
+      "worldAnchor": true,
+      "style": 0,
+      "pitch": 9,
+      "lineWidth": 1,
+      "branch": 0.5,
+      "grid": 1,
+      "monoWorld": false,
+      "monoVoid": true,
+      "seed": 17,
+      "inspection": 0,
+      "resolution": 360,
+      "dpr": 1,
+      "showBody": true,
+      "camera": 0,
+      "debug": 0
+    },
+    "fold": {
+      "clear": true,
+      "sealed": true,
+      "bounded": true,
+      "blockedPanels": 0,
+      "blockedBy": 0,
+      "checks": 26000,
+      "rejections": 0,
+      "certificationNodes": 26000,
+      "deepestSubdivision": 0,
+      "physicsSteps": 3623,
+      "contacts": 3618,
+      "blockedLooks": 0,
+      "playing": true,
+      "enabled": true,
+      "camera": 0,
+      "loop": true,
+      "phase": 0.7708365321159363,
+      "target": 1,
+      "duration": 4,
+      "margin": 0.20000000298023224,
+      "position": [
+        0,
+        -5,
+        0.0030000079423189163
+      ],
+      "yaw": 0.11600001156330109,
+      "pitch": 0,
+      "bodyClearance": 5.570879936218262,
+      "weaponClearance": 4.735522747039795,
+      "time": 30.191667556762695,
+      "velocity": [
+        0,
+        0,
+        0
+      ],
+      "accumulator": 0.00713333347812295
+    },
+    "render": {
+      "resolution": [
+        645,
+        360
+      ],
+      "output": [
+        1376,
+        768
+      ],
+      "pendingFrames": 0,
+      "frames": 1813,
+      "uploadsPerFrame": 18528,
+      "renderTargetBytes": 6501600,
+      "bufferBytes": 262528,
+      "timestamps": true,
+      "gpuMs": {
+        "scene": 0.132623,
+        "feedback": 0.172663,
+        "present": 0.545409,
+        "total": 0.850695
+      },
+      "adapter": {
+        "vendor": "apple",
+        "architecture": "metal-3",
+        "device": ""
+      }
+    },
+    "cpuMs": {
+      "p50": 0.29999999701976776,
+      "p95": 0.4000000059604645
+    },
+    "fps": 59.99999999999991,
+    "hidden": false
+  },
+  "reversals": 6,
+  "retainedJSHeapBytes": {
+    "before": 773548,
+    "after": 857380,
+    "delta": 83832
+  },
+  "sampledGPU": {
+    "p50": 0.8400719999999999,
+    "p95": 2.934457,
+    "max": 4.281019000000001
+  },
+  "sampledFPS": {
+    "min": 59.99999999999991,
+    "median": 60.003000150007445
+  },
+  "samples": [
+    {
+      "second": 1,
+      "fps": 60.003750234389635,
+      "cpuMs": {
+        "p50": 0.20000000298023224,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.810946,
+        "feedback": 0.842571,
+        "present": 1.28094,
+        "total": 2.934457
+      },
+      "phase": 0.24999985098838806,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 2,
+      "fps": 60.00300015000756,
+      "cpuMs": {
+        "p50": 0.20000000298023224,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.127665,
+        "feedback": 0.180164,
+        "present": 0.566075,
+        "total": 0.873904
+      },
+      "phase": 0.49999961256980896,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 3,
+      "fps": 60.00300015000746,
+      "cpuMs": {
+        "p50": 0.20000000298023224,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.157331,
+        "feedback": 0.187247,
+        "present": 0.501159,
+        "total": 0.845737
+      },
+      "phase": 0.750002920627594,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 4,
+      "fps": 60.00300015000747,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.175165,
+        "feedback": 0.172664,
+        "present": 0.492243,
+        "total": 0.8400719999999999
+      },
+      "phase": 1,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 5,
+      "fps": 60.000000000000064,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.164581,
+        "feedback": 0.159331,
+        "present": 3.957107,
+        "total": 4.281019000000001
+      },
+      "phase": 0.8729149699211121,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 6,
+      "fps": 60.00300015000759,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.14554,
+        "feedback": 0.186706,
+        "present": 0.489701,
+        "total": 0.821947
+      },
+      "phase": 0.6229116320610046,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 7,
+      "fps": 60.00300015000747,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.141248,
+        "feedback": 0.19533,
+        "present": 0.492952,
+        "total": 0.8295300000000001
+      },
+      "phase": 0.3687434792518616,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 8,
+      "fps": 60.00300015000751,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.161205,
+        "feedback": 0.18458,
+        "present": 0.500201,
+        "total": 0.845986
+      },
+      "phase": 0.11874371767044067,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 9,
+      "fps": 60.003000150007445,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.178247,
+        "feedback": 0.161665,
+        "present": 0.519992,
+        "total": 0.859904
+      },
+      "phase": 0.004166666883975267,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 10,
+      "fps": 60.003000150007395,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.153872,
+        "feedback": 0.182955,
+        "present": 0.492826,
+        "total": 0.829653
+      },
+      "phase": 0.2583331763744354,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 11,
+      "fps": 60.00300015000749,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.123415,
+        "feedback": 0.180372,
+        "present": 0.597782,
+        "total": 0.9015690000000001
+      },
+      "phase": 0.5083330273628235,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 12,
+      "fps": 59.99999999999995,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.141457,
+        "feedback": 0.178205,
+        "present": 0.550034,
+        "total": 0.869696
+      },
+      "phase": 0.7583363652229309,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 13,
+      "fps": 59.999999999999936,
+      "cpuMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.21808,
+        "feedback": 0.199497,
+        "present": 0.5687,
+        "total": 0.986277
+      },
+      "phase": 1,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 14,
+      "fps": 60.00300015000743,
+      "cpuMs": {
+        "p50": 0.30000001192092896,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.170164,
+        "feedback": 0.184456,
+        "present": 0.489742,
+        "total": 0.8443620000000001
+      },
+      "phase": 0.8687482476234436,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 15,
+      "fps": 60.00300015000747,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.138956,
+        "feedback": 0.185956,
+        "present": 0.563366,
+        "total": 0.888278
+      },
+      "phase": 0.6145781874656677,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 16,
+      "fps": 60.00600060005998,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.139248,
+        "feedback": 0.192539,
+        "present": 0.497784,
+        "total": 0.8295710000000001
+      },
+      "phase": 0.3645768165588379,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 17,
+      "fps": 59.99999999999992,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.151332,
+        "feedback": 0.17908,
+        "present": 0.485909,
+        "total": 0.816321
+      },
+      "phase": 0.11457705497741699,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 18,
+      "fps": 59.99999999999991,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.170122,
+        "feedback": 0.162123,
+        "present": 0.492493,
+        "total": 0.824738
+      },
+      "phase": 0.008333333767950535,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 19,
+      "fps": 60.003000150007516,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.156622,
+        "feedback": 0.183038,
+        "present": 0.498118,
+        "total": 0.837778
+      },
+      "phase": 0.2624998390674591,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 20,
+      "fps": 59.99999999999997,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.137414,
+        "feedback": 0.185163,
+        "present": 0.489493,
+        "total": 0.8120700000000001
+      },
+      "phase": 0.5124997496604919,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 21,
+      "fps": 59.99999999999991,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.079832,
+        "feedback": 0.085915,
+        "present": 0.29562,
+        "total": 0.46136699999999997
+      },
+      "phase": 0.7625030875205994,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 22,
+      "fps": 60.00300015000744,
+      "cpuMs": {
+        "p50": 0.20000000298023224,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.169706,
+        "feedback": 0.168914,
+        "present": 0.542533,
+        "total": 0.8811530000000001
+      },
+      "phase": 1,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 23,
+      "fps": 60.003000150007466,
+      "cpuMs": {
+        "p50": 0.20000000298023224,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.171205,
+        "feedback": 0.191414,
+        "present": 0.491033,
+        "total": 0.8536520000000001
+      },
+      "phase": 0.8604148030281067,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 24,
+      "fps": 60.00300015000744,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.140247,
+        "feedback": 0.186914,
+        "present": 0.48916,
+        "total": 0.8163210000000001
+      },
+      "phase": 0.6104114651679993,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 25,
+      "fps": 60.003000150007416,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.133165,
+        "feedback": 0.110916,
+        "present": 0.490493,
+        "total": 0.7345740000000001
+      },
+      "phase": 0.3604101538658142,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 26,
+      "fps": 60.003000150007466,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.5
+      },
+      "gpuMs": {
+        "scene": 0.151665,
+        "feedback": 0.17983,
+        "present": 0.48991,
+        "total": 0.8214049999999999
+      },
+      "phase": 0.10624372959136963,
+      "queue": 1,
+      "targets": 6501600
+    },
+    {
+      "second": 27,
+      "fps": 60.003000150007495,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.4000000059604645
+      },
+      "gpuMs": {
+        "scene": 0.167205,
+        "feedback": 0.156957,
+        "present": 0.487827,
+        "total": 0.8119890000000001
+      },
+      "phase": 0.01666666753590107,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 28,
+      "fps": 59.99999999999997,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.4000000059604645
+      },
+      "gpuMs": {
+        "scene": 0.152082,
+        "feedback": 0.184164,
+        "present": 0.492159,
+        "total": 0.8284050000000001
+      },
+      "phase": 0.2666665017604828,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 29,
+      "fps": 60.00300015000742,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.4000000059604645
+      },
+      "gpuMs": {
+        "scene": 0.138207,
+        "feedback": 0.193581,
+        "present": 0.490493,
+        "total": 0.822281
+      },
+      "phase": 0.5166664719581604,
+      "queue": 0,
+      "targets": 6501600
+    },
+    {
+      "second": 30,
+      "fps": 59.99999999999991,
+      "cpuMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.4000000059604645
+      },
+      "gpuMs": {
+        "scene": 0.132623,
+        "feedback": 0.172663,
+        "present": 0.545409,
+        "total": 0.850695
+      },
+      "phase": 0.7708365321159363,
+      "queue": 0,
+      "targets": 6501600
+    }
+  ]
+}

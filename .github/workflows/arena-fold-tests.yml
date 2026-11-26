@@ -1,0 +1,34 @@
+name: Arena fold checks
+on:
+  push:
+    branches: [main]
+    paths: ['arena-fold/**', '.github/workflows/arena-fold-tests.yml']
+  pull_request:
+    paths: ['arena-fold/**', '.github/workflows/arena-fold-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  swept-safety:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+      - name: Install pinned freestanding Rust compiler
+        run: rustup toolchain install 1.100.0 --profile minimal --target wasm32-unknown-unknown
+      - name: Check JavaScript
+        run: |
+          for source in arena-fold/*.js arena-fold/tools/*.mjs; do
+            node --check "$source"
+          done
+      - name: Rebuild and verify checked-in WASM
+        run: |
+          sh arena-fold/tools/build-wasm.sh
+          git diff --exit-code -- arena-fold/fold.wasm
+      - name: Verify continuous clearance, sealing, rendered body coverage and movement
+        run: node arena-fold/tools/check-core.mjs
