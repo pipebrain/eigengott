@@ -1,4 +1,4 @@
-# EIGENGOTT DOS-maze · v1.1.0
+# EIGENGOTT DOS-maze · v1.1.1
 
 A standalone title-screen runtime specialized for the accepted `dos-maze` profile. The original `vector-labyrinth/` editor and `v1.0.0` checkpoint remain available.
 
@@ -22,6 +22,8 @@ Open **http://127.0.0.1:8080/dos-maze/**. The directory also works on its own lo
 
 The default remains 1 px walls, 16 px paths, 12 px glyph clearance, 30-second corruption cycle, drifting gothic letters, reference hatching, letter hierarchy, and hard maze flicker/redraw. The profile uses **free gaps**, exactly as saved. Grid snapping and the earlier glyph-clearance grid issue are not changed by this optimization. Walls stay screen-space width 1 rather than scaling with the title.
 
+v1.1.1 defaults: **time scale ×0.50**, **pixel ratio cap 1.00**, and **4× antialiasing off**. A 30-second simulation cycle therefore takes 60 seconds at the default speed. Existing saved browser choices still restore normally.
+
 ## What is specialized
 
 - One guided orthogonal maze generator; no generator mixer, perspective/fill profiles, plate simulation, diagonals, exact-grid variants, arbitrary title/font editing, or preset library.
@@ -44,8 +46,8 @@ const title = await createDOSMaze(canvas, {
 
 title.pause();
 title.resume();
-title.setTimeScale(1);
-title.setQuality({dprCap: 1.5, antialias: true});
+title.setTimeScale(0.5);
+title.setQuality({dprCap: 1, antialias: false});
 title.destroy(); // Cancels frames/listeners/fetches and releases GPU resources.
 ```
 
@@ -72,4 +74,4 @@ The private repository's **DOS-maze checks** Actions workflow rebuilds the WASM 
 
 Evidence is in `evidence/`: byte-for-byte geometry and atlas checks, 120 seconds of animation-state comparisons, desktop/portrait/high-DPI screenshot comparisons, runtime fault/lifecycle checks, a two-cycle browser soak, and local benchmarks. GPU floating-point/rasterization can introduce tiny pixel differences, so screenshot comparison uses a documented narrow tolerance.
 
-Local automated Chrome checks do not establish physical Android/iOS/Safari compatibility, performance on every GPU, or freedom from all long-duration driver faults. Cross-device acceptance remains in the [development plan](../docs/PLAN.md). The release build identifier resolves through the `v1.1.0` tag; the planned Pages build should stamp its exact deployed commit.
+Local automated Chrome checks do not establish physical Android/iOS/Safari compatibility, performance on every GPU, or freedom from all long-duration driver faults. Cross-device acceptance remains in the [development plan](../docs/PLAN.md). The release build identifier resolves through the matching release tag; the planned Pages build should stamp its exact deployed commit.

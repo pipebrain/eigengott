@@ -8,12 +8,12 @@
     <header><div><h1>EIGENGOTT</h1><p>DOS-maze <span id="version"></span></p></div><button id="close" aria-label="Close controls">×</button></header>
     <section><h2>Playback</h2>
       <div class="buttons"><button id="pause">Pause</button><button id="step">Step</button><button id="restart">Restart cycle</button></div>
-      <label>Time scale <output id="speed-value">×1.00</output><input id="speed" type="range" min="0" max="4" step="0.05" value="1"></label>
+      <label>Time scale <output id="speed-value">×0.50</output><input id="speed" type="range" min="0" max="4" step="0.05" value="0.5"></label>
       <button id="fullscreen">Fullscreen</button>
     </section>
     <section><h2>Render quality</h2>
-      <label>Pixel ratio cap <output id="ratio-value">1.50</output><input id="ratio" type="range" min="0.5" max="2" step="0.1" value="1.5"></label>
-      <label class="check"><input id="antialias" type="checkbox" checked>4× antialiasing</label>
+      <label>Pixel ratio cap <output id="ratio-value">1.00</output><input id="ratio" type="range" min="0.5" max="2" step="0.1" value="1"></label>
+      <label class="check"><input id="antialias" type="checkbox">4× antialiasing</label>
       <button id="reset-quality">Reset quality</button>
       <p class="hint">Lower the pixel ratio or disable antialiasing to reduce GPU work. These options save in this browser.</p>
     </section>

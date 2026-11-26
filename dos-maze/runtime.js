@@ -3,7 +3,7 @@ import {Animation,stateAt} from './animation.js';
 import {createTitle} from './title.js';
 import {createRenderer} from './renderer.js';
 const base=new URL('./',import.meta.url);
-const qualityOf=value=>({dprCap:Number.isFinite(value?.dprCap)?Math.max(.5,Math.min(2,value.dprCap)):PROFILE.dprCap,antialias:value?.antialias!==false});
+const qualityOf=value=>({dprCap:Number.isFinite(value?.dprCap)?Math.max(.5,Math.min(2,value.dprCap)):PROFILE.dprCap,antialias:typeof value?.antialias==='boolean'?value.antialias:PROFILE.antialias});
 async function loadSource(signal){
   const fetchOK=async path=>{const response=await fetch(new URL(path,base),{signal});if(!response.ok)throw new Error(`Could not load ${path} (${response.status}).`);return response;};
   const imports={env:{sin:Math.sin,cos:Math.cos}};
@@ -35,7 +35,7 @@ export async function createDOSMaze(canvas,options={}){
   let animation=new Animation(),quality=qualityOf(options.quality),paused=options.paused===true;
   let time=Number.isFinite(options.time)?Math.max(0,Math.min(1e8,options.time)):0;
   let manual=Number.isFinite(options.state)?Math.max(0,Math.min(1,options.state)):null;
-  let speed=Number.isFinite(options.timeScale)?Math.max(0,Math.min(4,options.timeScale)):1;
+  let speed=Number.isFinite(options.timeScale)?Math.max(0,Math.min(4,options.timeScale)):PROFILE.timeScale;
   const flicker=options.flicker!==false;
   let raf=0,last=0,lastGeometry=-Infinity,meshDirty=true,viewDirty=true,lastDpr=0,width=0,height=0,gpuWaiting=false;
   let frames=0,generations=0,segmentCount=0,state=0,geometryMs=0,totalCpuMs=0,firstPaintMs=0,error=null;

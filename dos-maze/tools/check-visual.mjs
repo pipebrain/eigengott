@@ -10,6 +10,7 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
     for(const app of ['vector-labyrinth','dos-maze']){
       await cmd('Page.navigate',{url:`${origin}/${app}/?paused&state=${state}&time=${time}&flicker=off`});
       await wait(app==='dos-maze'?'window.__DOS_MAZE?.ready':'window.__VECTOR_STUDY?.ready');await sleep(150);
+      if(app==='dos-maze'){await evaluate('window.__DOS_MAZE.setQuality({dprCap:1.5,antialias:true})');await sleep(150);}
       if(app==='vector-labyrinth')assert.equal(await evaluate('window.__VECTOR_STUDY.settings.titleGuide'),false);
       const {data}=await cmd('Page.captureScreenshot',{format:'png'}),png=Buffer.from(data,'base64');captures.push(pixels(png));
       if(width===1376&&dpr===1)await writeFile(new URL(`evidence/${app}-${state}.png`,root),png);
@@ -23,4 +24,4 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   }
   assert.deepEqual(errors,[]);
 });
-await writeFile(new URL('evidence/visual-verification.json',root),JSON.stringify({passed:true,comparison:'v1.0.0 dos-maze vs stripped runtime, default render quality',cases},null,2)+'\n');
+await writeFile(new URL('evidence/visual-verification.json',root),JSON.stringify({passed:true,comparison:'v1.0.0 dos-maze vs stripped runtime, explicit v1.1.0 reference quality (DPR cap 1.5, 4x MSAA)',cases},null,2)+'\n');

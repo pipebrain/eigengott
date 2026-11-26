@@ -10,13 +10,14 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors,requests})=>{
   assert.deepEqual(await evaluate('Array.from(document.querySelectorAll("h2")).map(e=>e.textContent)'),['Playback','Render quality','Diagnostics']);
   assert.ok(requests.every(url=>!url.includes('/vector-labyrinth/')),'Production must be standalone');
   assert.equal((await snapshot()).passes,3);assert.equal((await snapshot()).wasmMemoryBytes,8*1048576);
-  checks.push('Standalone WebGPU/WASM startup and minimal hidden menu');
+  assert.equal((await snapshot()).version,'1.1.1');assert.equal((await snapshot()).timeScale,.5);assert.deepEqual((await snapshot()).quality,{dprCap:1,antialias:false});assert.equal((await snapshot()).samples,1);
+  checks.push('v1.1.1 defaults: half speed, pixel ratio 1, antialiasing off');
   await cmd('Input.dispatchKeyEvent',{type:'keyDown',key:'h',code:'KeyH'});await cmd('Input.dispatchKeyEvent',{type:'keyUp',key:'h',code:'KeyH'});
   assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);
-  await evaluate(`document.querySelector('#ratio').value=1;document.querySelector('#ratio').dispatchEvent(new Event('input'));document.querySelector('#antialias').checked=false;document.querySelector('#antialias').dispatchEvent(new Event('input'));document.querySelector('#speed').value=1.5;document.querySelector('#speed').dispatchEvent(new Event('input'));`);
-  await open();assert.deepEqual((await snapshot()).quality,{dprCap:1,antialias:false});assert.equal((await snapshot()).timeScale,1.5);
+  await evaluate(`document.querySelector('#ratio').value=.8;document.querySelector('#ratio').dispatchEvent(new Event('input'));document.querySelector('#antialias').checked=true;document.querySelector('#antialias').dispatchEvent(new Event('input'));document.querySelector('#speed').value=1.5;document.querySelector('#speed').dispatchEvent(new Event('input'));`);
+  await open();assert.deepEqual((await snapshot()).quality,{dprCap:.8,antialias:true});assert.equal((await snapshot()).timeScale,1.5);
   await evaluate(`document.querySelector('#reset-quality').click()`);await sleep(150);
-  assert.deepEqual((await snapshot()).quality,{dprCap:1.5,antialias:true});checks.push('Quality and speed save/restore; reset to accepted render quality');
+  assert.deepEqual((await snapshot()).quality,{dprCap:1,antialias:false});checks.push('Quality and speed save/restore; reset to accepted render quality');
   const before=(await snapshot()).frames;await sleep(300);assert.equal((await snapshot()).frames,before,'Paused runtime must not render');
   await evaluate(`document.querySelector('#step').click()`);await wait(`window.__DOS_MAZE.snapshot().frames>${before}`);assert.ok((await snapshot()).time>0);
   checks.push('Pause stops rendering; single-step renders on demand');
@@ -25,7 +26,8 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors,requests})=>{
     await cmd('Emulation.setDeviceMetricsOverride',{width,height,deviceScaleFactor:i%3===0?1.5:1,mobile:false});
     await sleep(45);
   }
-  await sleep(200);assert.equal((await snapshot()).targetCount,4);assert.equal((await snapshot()).error,null);
+  await sleep(200);assert.equal((await snapshot()).targetCount,3);assert.equal((await snapshot()).error,null);
+  await evaluate('window.__DOS_MAZE.setQuality({dprCap:1.5,antialias:true})');
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:2,mobile:false});
   // CDP changes DPR without sending the native OS display-change events.
   await evaluate('window.dispatchEvent(new Event("resize"))');
@@ -50,7 +52,7 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors,requests})=>{
     window.__DOS_MAZE.destroy();const canvas=document.createElement('canvas');canvas.style.cssText='position:fixed;top:0;left:0;width:640px;height:360px';document.body.append(canvas);
     window.engineCanvas=canvas;window.engineMaze=await (await import('./runtime.js')).createDOSMaze(canvas,{paused:true,flicker:false});
   })()`);
-  await wait('window.engineMaze?.ready');assert.deepEqual(await evaluate('window.engineMaze.snapshot().renderSize'),[640,360]);
+  await wait('window.engineMaze?.ready');assert.equal(await evaluate('window.engineMaze.timeScale'),.5);assert.deepEqual(await evaluate('window.engineMaze.quality'),{dprCap:1,antialias:false});assert.deepEqual(await evaluate('window.engineMaze.snapshot().renderSize'),[640,360]);
   await evaluate('window.engineCanvas.style.width="800px"');await wait('window.engineMaze.snapshot().renderSize[0]===800');
   await evaluate('window.engineMaze.destroy()');const stopped=await evaluate('window.engineMaze.snapshot()');await sleep(150);
   assert.equal((await evaluate('window.engineMaze.snapshot()')).frames,stopped.frames);assert.equal(stopped.wasmMemoryBytes,0);

@@ -14,6 +14,7 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
     for(const app of ['vector-labyrinth','dos-maze']){
       await cmd('Page.navigate',{url:`${origin}/${app}/?state=0.5&time=7.5&flicker=off`});
       await wait(app==='dos-maze'?'window.__DOS_MAZE?.ready':'window.__VECTOR_STUDY?.ready');await sleep(1500);
+      if(app==='dos-maze'){await evaluate('window.__DOS_MAZE.setQuality({dprCap:1.5,antialias:true});window.__DOS_MAZE.setTimeScale(1)');await sleep(500);}
       const counter=app==='dos-maze'?'window.__DOS_MAZE.snapshot().frames':'window.__VECTOR_STUDY.frameRequests';
       const boundary=resume=>evaluate(`(async()=>{window.__benchHold=true;cancelAnimationFrame(window.__benchRaf);await window.__benchQueue.onSubmittedWorkDone();const value={now:performance.now(),frames:${counter}};${resume?'window.__benchHold=false;requestAnimationFrame(window.__benchFrame);':''}return value;})()`);
       const before=await boundary(true),beforeMetrics=Object.fromEntries((await cmd('Performance.getMetrics')).metrics.map(m=>[m.name,m.value]));
@@ -28,5 +29,5 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   }
   if(errors.length)throw new Error(JSON.stringify(errors));
 },{unlimited:true});
-const report={environment:'Local Chrome headless, Metal WebGPU; vsync/frame-rate limit disabled; GPU queue drained at both measurement boundaries',scope:'Same default 4x MSAA and DPR, continuously moving state 0.5, flicker disabled; local results are not physical-device guarantees',cases};
+const report={environment:'Local Chrome headless, Metal WebGPU; vsync/frame-rate limit disabled; GPU queue drained at both measurement boundaries',scope:'Same explicit reference quality (4x MSAA, DPR cap 1.5) and time scale 1, continuously moving state 0.5, flicker disabled; local results are not physical-device guarantees',cases};
 await writeFile(new URL('../evidence/browser-benchmark.json',import.meta.url),JSON.stringify(report,null,2)+'\n');

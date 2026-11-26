@@ -2,7 +2,7 @@ import {createDOSMaze} from './runtime.js';
 import {PROFILE,VERSION,BUILD} from './profile.js';
 const $=id=>document.getElementById(id),canvas=$('scene'),controls=$('controls');
 const key='eigengott-dos-maze-v1-options';let api,attempt,disposed=false;
-let preferences={timeScale:1,quality:{dprCap:PROFILE.dprCap,antialias:PROFILE.antialias}};
+let preferences={timeScale:PROFILE.timeScale,quality:{dprCap:PROFILE.dprCap,antialias:PROFILE.antialias}};
 try{const saved=JSON.parse(localStorage.getItem(key));if(saved&&typeof saved==='object')preferences={...preferences,...saved};}catch{}
 const params=new URLSearchParams(location.search);
 function save(){if(!api)return;preferences={timeScale:api.timeScale,quality:api.quality};try{localStorage.setItem(key,JSON.stringify(preferences));}catch{$('feedback').textContent='Browser options cannot be saved on this device.';}}

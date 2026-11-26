@@ -5,12 +5,13 @@ const checkpoints=[];
 await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await cmd('Emulation.setDeviceMetricsOverride',{width:1920,height:1080,deviceScaleFactor:1,mobile:false});
   await cmd('Performance.enable');await cmd('Page.navigate',{url:origin+'/dos-maze/'});await wait('window.__DOS_MAZE?.ready');
+  await evaluate('window.__DOS_MAZE.setTimeScale(1)'); // Exercise two cycles in 63 seconds.
   await cmd('HeapProfiler.collectGarbage');
   const heap=async()=>Object.fromEntries((await cmd('Performance.getMetrics')).metrics.map(m=>[m.name,m.value])).JSHeapUsedSize;
   const initialHeap=await heap();
   for(let n=0;n<6;n++){
     await sleep(10500);const d=await evaluate('window.__DOS_MAZE.snapshot()');
-    assert.equal(d.error,null);assert.equal(d.recoveries,0);assert.equal(d.wasmMemoryBytes,8*1048576);assert.equal(d.targetCount,4);
+    assert.equal(d.error,null);assert.equal(d.recoveries,0);assert.equal(d.wasmMemoryBytes,8*1048576);assert.equal(d.targetCount,3);
     assert.ok(Number.isFinite(d.state)&&d.state>=0&&d.state<=1);assert.ok(d.frames>0);
     checkpoints.push(d);console.log(JSON.stringify({time:d.time,frames:d.frames,redraws:d.redraws,fps:d.fps,cpuMs:d.cpuMs}));
   }
