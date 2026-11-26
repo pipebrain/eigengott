@@ -59,6 +59,34 @@ Valid start/end arenas do not prove a safe transition between them. The later fo
 - Pursue in-place folding/churn around the persistent player state. Candidate arena graphs may be regenerated; an immutable XY partition for the entire game is not an engine requirement.
 - Pursue arena physics modifiers and mirrors in later tests, with selection influenced by global progression and explicit performance limits.
 
+## Hybrid 3D surface library
+
+Preserve the supplied MD's hybrid library as an explicit engine direction: procedural architectural recipes and curated, authored low-poly tiles share a `SurfacePreset` system. These are actual 3D surface meshes applied to generated walls, floors, and ceilings.
+
+### Assets and shared presets
+
+- **Procedural recipes:** swept trim profiles, baseboards, cornices, stepped recesses, ribs, low-sided conduits, and wires. Recipes adapt continuous architecture to the generated surface dimensions.
+- **Authored tiles:** industrial panels, pipe/valve clusters, lamp bays, grates, and gothic relief authored in a 3D editor. An offline `tools/pack_surfaces` step converts supported OBJ/glTF input into a compact, versioned `surfaces.bin` pack. Validate indices, semantic tags, bounds, and alignment when packing. No OBJ/glTF parsing is needed during gameplay. Verify aligned embedding or loading of the pack into WASM rather than assuming its byte-array alignment.
+- **Common surface coordinates:** describe a tile in tangent-space `(u, v, n)`, with positive `n` toward the playable room and negative `n` recessed behind the structural plane. Store physical dimensions and placement constraints alongside its geometry.
+- **`SurfacePreset`:** identify the procedural bottom/top trims, authored or generated middle bay, intended bay dimensions, material/palette roles, AO weights, permitted relief bounds, and local light emitters. A preset may freely combine procedural and authored pieces.
+- **Semantic export data:** preserve roles such as palette slot, AO shade, and emissive cyan/red/amber. Transform local emitter positions into world-space light inputs when a preset is placed. Light count, atlas space, and bake work remain bounded and measured.
+
+### Fitting the generated arena
+
+Fit wall presets with fixed-size trim regions and repeating middle bays, using the MD's 9-slice/bay-subdivision approach. Preserve important feature proportions instead of stretching a complete tile indiscriminately. Sloped floors/ceilings require evaluating available wall height along the edge, rather than assuming one constant height.
+
+For floors and ceilings, combine a perimeter treatment with a world-aligned interior tile grid clipped to the generated polygon. Reuse the corresponding presets for mirrored/inverted architecture while correcting transforms, normals, and winding.
+
+Use mitered corner joins where appropriate, with explicit limits or bevel/corner-piece fallbacks for acute angles. Validate the transformed relief bounds and seams. Keep the structural gameplay boundary independently sealed beneath the dressing.
+
+### Physical and lighting contracts
+
+Most visual depth should recess behind the structural plane. The MD's outward-relief target of at most 0.15 m is an initial authoring constraint to verify, including the actual bounds after fitting and mitering. Derive any conservative collision padding from those bounds and check player/camera/weapon clearance against the complete 3D physical representation. Decorative surface complexity does not require per-triangle micro-collision; genuinely traversable or gameplay-blocking features require structural collision.
+
+Relief inherits the parent surface's lightmap transform with bounded per-face/per-vertex AO. Preset emitters feed the coarse lighting bake. Preserve `relief_scale` retraction/extrusion as a later transition feature, with the structural coverage and degenerate-triangle checks described below.
+
+Start the small engine test with one procedural preset. The authored packer and broader curated library follow the structural proof, using the same preset contract from the outset. This stages the implementation while retaining the hybrid-library design.
+
 ## Rendering corrections
 
 ### Lightmaps and surface relief
