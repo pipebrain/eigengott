@@ -81,7 +81,7 @@ export async function createEngine(canvas,options={}){
     },
     snapshot(){
       const summary=data=>{const values=Array.from(data.subarray(0,measured)).sort((a,b)=>a-b);return{median:values[Math.floor(values.length/2)]||0,p95:values[Math.floor(values.length*.95)]||0};};const interval=summary(frameTimes);
-      return {version:VERSION,ready,playing,error,busy,recovering,recoveries,frames,firstPaintMs,lastResult,staged:!!pending,...stats(),fps:document.hidden?0:interval.median?1000/interval.median:0,cpuMs:summary(cpuTimes),wasmMemoryBytes:sim?.memory.buffer.byteLength||0,disposed,gpuSceneMs:null,gpuPresentMs:null,...(renderer?.diagnostics||{})};
+      return {version:VERSION,deployment:globalThis.__EIGENGOTT_BUILD||null,ready,playing,error,busy,recovering,recoveries,frames,firstPaintMs,lastResult,staged:!!pending,...stats(),fps:document.hidden?0:interval.median?1000/interval.median:0,cpuMs:summary(cpuTimes),wasmMemoryBytes:sim?.memory.buffer.byteLength||0,disposed,gpuSceneMs:null,gpuPresentMs:null,...(renderer?.diagnostics||{})};
     },
     destroy,
     ...(options.testing?{simulateDeviceLoss:()=>renderer?.simulateLoss(),tryPlace:(...args)=>sim.engine_try_place(...args),playerClear:()=>!!sim.engine_player_clear()}:{}),

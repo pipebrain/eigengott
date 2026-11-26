@@ -139,7 +139,7 @@ export async function createDOSMaze(canvas,options={}){
     snapshot(){
       const summarize=(data)=>{const values=Array.from(data.subarray(0,measured)).sort((a,b)=>a-b);return {median:values[Math.floor(values.length/2)]||0,p95:values[Math.floor(values.length*.95)]||0};};
       const intervals=summarize(frameTimes),cpu=summarize(cpuTimes);
-      return {version:VERSION,build:BUILD,ready,paused,time,state,frames,generations,segmentCount,redraws:animation.redraw,hierarchy:Array.from(animation.order),
+      return {version:VERSION,build:BUILD,deployment:globalThis.__EIGENGOTT_BUILD||null,ready,paused,time,state,frames,generations,segmentCount,redraws:animation.redraw,hierarchy:Array.from(animation.order),
         recovering,recoveries,error,firstPaintMs,geometryMs,averageCpuMs:frames?totalCpuMs/frames:0,cpuMs:cpu,frameMs:intervals,fps:!paused&&speed>0&&!document.hidden&&intervals.median?1000/intervals.median:0,
         destroyed,quality:{...quality},timeScale:speed,wasmMemoryBytes:sim?.memory.buffer.byteLength||0,overflow:sim?!!sim.get_overflow():false,...(renderer?.diagnostics||{})};
     },

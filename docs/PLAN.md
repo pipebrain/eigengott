@@ -21,15 +21,15 @@ Next, review larger-arena movement, scale, visibility, inspection tools, and smo
 
 ## Cross-device testing and deployment
 
-Status: planned. The repository remains private and Pages deployment is not enabled.
+Status: the user accepted both engine milestones and authorized public cross-device testing on 2026-11-26. The repository is public and Pages uses Actions with HTTPS enforced. The [test hub](https://pipebrain.github.io/eigengott/) links the [small engine](https://pipebrain.github.io/eigengott/engine-test/), [larger benchmark](https://pipebrain.github.io/eigengott/engine-benchmark/), and title studies. See [deployment details](DEPLOYMENT.md).
 
-The v1.1.0 [DOS-maze runtime](../dos-maze/README.md) adds the minimal H menu, a release build identifier, and deterministic unit checks in GitHub Actions. Desktop GPU comparison/lifecycle/soak checks are provided separately. Physical multi-device testing and Pages publishing remain pending.
+The v1.1.0 [DOS-maze runtime](../dos-maze/README.md) adds the minimal H menu, a release build identifier, and deterministic unit checks in GitHub Actions. Desktop GPU comparison/lifecycle/soak checks are provided separately. Physical multi-device acceptance remains pending; publishing is now authorized and configured.
 
-1. Prepare automated unit checks in GitHub Actions and a Pages workflow that deploys only after those checks pass. Review existing checks for assumptions about earlier defaults before using them as deployment gates.
-2. Add the deployed build's commit identifier to the hidden H menu so devices can confirm they are running the same version.
-3. When the user says we are ready for cross-device testing, make `pipebrain/eigengott` public and enable GitHub Pages. This plan records the intended visibility change; it does not authorize changing visibility now.
-4. Automatically deploy passing pushes to `main`. The intended optimized title-screen URL is `https://pipebrain.github.io/eigengott/dos-maze/`; retain `/vector-labyrinth/` for the full editor.
-5. Test rendering, animation, controls, browser saves, and preset import/export across target WebGPU-capable browsers and devices. Record the build, device, browser, and results. Pages provides the shared test app; automated unit checks run separately in Actions.
+1. The Pages workflow rebuilds the WASM runtimes and runs all deterministic engine/title checks before uploading and publishing the static artifact. Pull requests validate without deploying.
+2. The hub, hidden H menus, and engine diagnostics/report exports identify the deployed commit. Direct `?tools=1` URLs open existing inspection controls without a physical H key.
+3. The user's explicit authorization to make `pipebrain/eigengott` public and enable Pages supersedes the earlier visibility restriction.
+4. Passing pushes to `main` deploy automatically. Keep `/engine-test/`, `/engine-benchmark/`, `/dos-maze/`, and `/vector-labyrinth/` available under the shared hub.
+5. Test rendering, worker preparation/activation, controls, browser saves, and fixture/preset import/export across target WebGPU-capable browsers and devices. Record the build, device, browser, and results. Touch movement is still a future feature; current engine controls use keyboard and mouse.
 
 ## Game development
 

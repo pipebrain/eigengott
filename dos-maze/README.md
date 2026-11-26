@@ -10,7 +10,7 @@ From the repository root:
 python3 vector-labyrinth/tools/serve.py --port 8080
 ```
 
-Open **http://127.0.0.1:8080/dos-maze/**. The directory also works on its own localhost/HTTPS static server. WebGPU, WebAssembly, hardware acceleration, and native gzip decompression are required. There are no runtime libraries, fonts to install, build services, or external network requests. This does not enable GitHub Pages or change repository visibility.
+Open **http://127.0.0.1:8080/dos-maze/** or the [public Pages build](https://pipebrain.github.io/eigengott/dos-maze/). The directory also works on its own localhost/HTTPS static server. WebGPU, WebAssembly, hardware acceleration, and native gzip decompression are required. There are no runtime libraries, fonts to install, build services, or external network requests.
 
 ## Controls
 
@@ -68,10 +68,10 @@ node dos-maze/tools/check-soak.mjs
 
 The first two checks use Node only. Browser checks use the installed Chrome binary and a temporary, isolated profile/server; no npm packages are needed. Set `CHROME_PATH` if Chrome is installed elsewhere. These tools currently target macOS Metal WebGPU; the app itself uses standard browser APIs.
 
-The private repository's **DOS-maze checks** Actions workflow rebuilds the WASM on Linux and runs the deterministic generator/atlas/animation checks on pushes and pull requests. Browser/GPU checks remain separate local checks. No Pages deployment is configured.
+The **DOS-maze checks** Actions workflow rebuilds the WASM on Linux and runs the deterministic generator/atlas/animation checks on pushes and pull requests. The separate [Pages workflow](../.github/workflows/pages.yml) also runs these checks before publishing the shared test site. Browser/GPU checks remain separate local checks.
 
 `tools/build-assets.mjs` rebakes the exact reference masks from the preserved lab using Chrome. It is an offline development utility. `tools/benchmark.mjs` compares both versions at identical quality with frame-rate limits disabled and GPU work drained at measurement boundaries.
 
 Evidence is in `evidence/`: byte-for-byte geometry and atlas checks, 120 seconds of animation-state comparisons, desktop/portrait/high-DPI screenshot comparisons, runtime fault/lifecycle checks, a two-cycle browser soak, and local benchmarks. GPU floating-point/rasterization can introduce tiny pixel differences, so screenshot comparison uses a documented narrow tolerance.
 
-Local automated Chrome checks do not establish physical Android/iOS/Safari compatibility, performance on every GPU, or freedom from all long-duration driver faults. Cross-device acceptance remains in the [development plan](../docs/PLAN.md). The release build identifier resolves through the matching release tag; the planned Pages build should stamp its exact deployed commit.
+Local automated Chrome checks do not establish physical Android/iOS/Safari compatibility, performance on every GPU, or freedom from all long-duration driver faults. Cross-device acceptance remains in the [development plan](../docs/PLAN.md). The release identifier resolves through the matching release tag; the hosted H menu and diagnostics additionally identify the exact deployed commit.

@@ -10,7 +10,7 @@ Serve the repository over localhost, then open `/engine-test/`. The checked-in `
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
 
-Open [the engine test](http://127.0.0.1:8080/engine-test/) in a WebGPU-capable desktop browser. HTTPS is required when serving remotely. The repository remains private; Pages is not enabled.
+Open [the local engine test](http://127.0.0.1:8080/engine-test/) in a WebGPU-capable desktop browser, or use the [public HTTPS build](https://pipebrain.github.io/eigengott/engine-test/) for device testing. [Open tools directly](https://pipebrain.github.io/eigengott/engine-test/?tools=1) when a physical H key is unavailable. See [deployment notes](../docs/DEPLOYMENT.md).
 
 Click **Enter arena** to capture the mouse. **WASD** moves, **mouse** looks, **Space** jumps, **Esc** releases the mouse, **H** opens development controls, and **F** toggles fullscreen. There is no gameplay HUD. Opening controls pauses movement.
 

@@ -170,7 +170,7 @@ export async function createEngine(canvas,options={}){
     },
     snapshot(){
       const frameMs=summary(intervals.filter(x=>x>0));
-      return {version:VERSION,ready,playing,error,phase,busy:!!job,staged:!!pending,frames,firstPaintMs,recovering,recoveries,disposed,arenaRevision:revision,activationMs,lastResult,history,
+      return {version:VERSION,deployment:globalThis.__EIGENGOTT_BUILD||null,ready,playing,error,phase,busy:!!job,staged:!!pending,frames,firstPaintMs,recovering,recoveries,disposed,arenaRevision:revision,activationMs,lastResult,history,
         fps:document.hidden?0:frameMs.median?1000/frameMs.median:0,frameMs,cpuMs:summary(cpuTimes),...readStats(sim),
         wasmMemoryBytes:sim?.memory.buffer.byteLength||0,ownedMemoryEstimate:ownedBytes(),peakOwnedMemoryEstimate:peakOwnedBytes,
         preparation:job?{seed:job.seed,settings:job.settings,phase,progress:job.progress||0,elapsedMs:performance.now()-job.began}:null,

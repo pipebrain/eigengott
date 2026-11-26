@@ -4,6 +4,7 @@ __pycache__/
 *.py[cod]
 node_modules/
 .local/
+_site/
 .env
 .env.*
 !.env.example

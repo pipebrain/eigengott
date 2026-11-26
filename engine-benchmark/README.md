@@ -4,6 +4,8 @@ This milestone tests **smooth gameplay while a replacement arena is generated, v
 
 Serve the repository over localhost and open [the benchmark](http://127.0.0.1:8080/engine-benchmark/). The checked-in WASM needs no local compiler to run.
 
+For shared device testing, use the [public HTTPS benchmark](https://pipebrain.github.io/eigengott/engine-benchmark/) or [open its tools directly](https://pipebrain.github.io/eigengott/engine-benchmark/?tools=1). The deployed commit appears in H and exported diagnostics/reports. See [deployment notes](../docs/DEPLOYMENT.md).
+
 ```sh
 python3 -m http.server 8080 --bind 127.0.0.1
 ```
