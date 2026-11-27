@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install -y clang lld
       - name: Check browser and deployment JavaScript
         run: |
-          for source in site/*.js tools/build-pages.mjs tools/check-pages.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js; do
+          for source in site/*.js tools/build-pages.mjs tools/check-pages.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs playable-test/*.js playable-test/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js; do
             node --check "$source"
           done
       - name: Rebuild accepted engine and benchmark WASM
@@ -42,7 +42,8 @@ jobs:
           sh arena-fold-2/tools/build-wasm.sh
           sh arena-sweep/tools/build-wasm.sh
           sh encounter-test/tools/build-wasm.sh
-          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm arena-fold/fold.wasm arena-fold-2/wave.wasm arena-sweep/engine.wasm encounter-test/engine.wasm
+          sh playable-test/tools/build-wasm.sh
+          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm arena-fold/fold.wasm arena-fold-2/wave.wasm arena-sweep/engine.wasm encounter-test/engine.wasm playable-test/engine.wasm
       - name: Rebuild DOS-maze WASM
         env:
           WASM_CC: clang
@@ -56,6 +57,7 @@ jobs:
           node arena-sweep/tools/check-core.mjs
           node encounter-test/tools/check-media.mjs
           node encounter-test/tools/check-core.mjs
+          node playable-test/tools/check-core.mjs
           node dos-maze/tools/check-generator.mjs
           node dos-maze/tools/check-animation.mjs
       - name: Stage and verify the static runtime package

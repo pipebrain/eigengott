@@ -51,13 +51,20 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await wait('window.__encounter.snapshot().sweep.completed===1');await evaluate('window.__encounter.actions(0);window.__encounter.play(false)');
   assert.equal(await evaluate('(()=>{const s=window.__encounter.snapshot();return s.settings.physicalModels&&s.game.encounter===2&&s.game.alive===3&&s.game.bodies===0&&s.sweep.fields===0&&s.media.characters===18&&s.media.weapons===13;})()'),true);
   checks.push('Interactive encounter: imported roster, physical envelopes, automatic combat / Recomposition and deployed identity');
+  await cmd('Page.navigate',{url:new URL('playable-test/?test&tools=1',base).href});await wait('window.__playable?.snapshot().ready&&!window.__playable.snapshot().preparing');
+  assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('window.__playable.snapshot().build.commit'),commit);
+  assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
+  await evaluate('window.__playable.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1,lootSlow:1});window.__playable.clearEncounter()');
+  await wait('window.__playable.snapshot().sweep.completed===1');
+  assert.equal(await evaluate('(()=>{const s=window.__playable.snapshot();return s.game.run.remaining===10&&s.game.encounter===2&&s.game.inventory.length===1&&s.game.loot.items.length===0&&s.sweep.fields===0&&s.audio.processing==="none";})()'),true);
+  checks.push('Playable run: finite ledger, one-gun loot / Release, shared maze and original-speed audio configuration');
   const {identifier}=await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Object.defineProperty(document,"exitPointerLock",{value:undefined,configurable:true});Object.defineProperty(Element.prototype,"requestPointerLock",{value:undefined,configurable:true});'});
   for(const [app,handle]of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);
     assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);
   }
   await cmd('Page.removeScriptToEvaluateOnNewDocument',{identifier});checks.push('Engine inspection tools open without Pointer Lock APIs');
-  for(const [app,binary]of [['engine-test','engine.wasm'],['engine-benchmark','engine.wasm'],['arena-fold','fold.wasm'],['arena-fold-2','wave.wasm'],['arena-sweep','engine.wasm'],['encounter-test','engine.wasm']]){
+  for(const [app,binary]of [['engine-test','engine.wasm'],['engine-benchmark','engine.wasm'],['arena-fold','fold.wasm'],['arena-fold-2','wave.wasm'],['arena-sweep','engine.wasm'],['encounter-test','engine.wasm'],['playable-test','engine.wasm']]){
     const response=await fetch(new URL(`${app}/${binary}?check=${Date.now()}`,base));assert.equal(response.status,200);assert.match(response.headers.get('content-type')||'',/application\/wasm/);
   }
   assert.deepEqual(errors,[]);await sleep(100);

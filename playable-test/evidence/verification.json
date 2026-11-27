@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-26",
+  "scope": "Local Chrome 158 / Metal automated checks; physical-device acceptance pending",
+  "core": {
+    "passed": true,
+    "checks": [
+      "Finite identities, exactly-once deaths, validated checkpoints and slot compatibility",
+      "One-gun economy, twelve real equipment drops, single-fragment transfer, armor effects and atomic clearance rollback",
+      "Deletion expires originating loot; shared Release clears the pool and stages existing surviving identities without population growth",
+      "Final opposing death completes the finite run and prevents another ordinary Recomposition",
+      "Armor movement multiplier affects real WASM physics; memory remains fixed at 32 MiB",
+      "Stuck recovery chooses a clear direction, holds it briefly and keeps live actor motion finite",
+      "User WAV files preserved byte-for-byte; playback has no rate ramp, detune or DSP effects"
+    ],
+    "audio": [
+      {
+        "file": "ambient-loop.wav",
+        "bytes": 5079392,
+        "sha256": "733c33bdbd243f529ef24062b94b85b07217517dfea18c00770119a3fcc91237"
+      },
+      {
+        "file": "warn-loop.wav",
+        "bytes": 1264584,
+        "sha256": "59a5928ef4e4c9c170659641d9e0d2e913a9e9e4abe3ae976de371f97a4f91fa"
+      },
+      {
+        "file": "death.wav",
+        "bytes": 737660,
+        "sha256": "0df8f38bc1fd5a427c8accb5451fc6980815264c88a0dd3ec60eba666098eeb6"
+      }
+    ]
+  },
+  "browser": {
+    "passed": true,
+    "checks": [
+      "Finite run, one equipped gun, shared accepted DOS-maze generator and WebGPU startup",
+      "Native combat entry unlocks raw audio; encounter clear releases the cursor and opens live 3D equipment previews",
+      "Mouse hover compares models; DOM fragment transfer and weapon exchange preserve equipped-only inventory",
+      "Player and equipment stay outside shared maze / architectural feedback history",
+      "Watching/reopening the wave does not restart or pause the selection deadline",
+      "GPU recovery preserves ledger, loadout, item pool and in-flight Recomposition",
+      "Shared Release closes loot, stages existing living identities and writes the next encounter checkpoint",
+      "New run and validated checkpoint restore preserve identities and equipped fragments",
+      "Last opposing death ends the finite run instead of starting another ordinary wave",
+      "Damage reduces protection and health while driving the layered injury / directional feedback",
+      "Supplied death recording plays once at original rate and pitch",
+      "Portrait / landscape resizing rebuilds bounded maze and history targets without WebGPU errors"
+    ]
+  },
+  "lifecycle": {
+    "passed": true,
+    "checks": [
+      "Malformed checkpoint rejection preserves the active run",
+      "Boundary checkpoint restores player injury as well as identities and equipment",
+      "Stale character preparation cannot mutate a newer validated arena",
+      "Pause and page freeze preserve the selection deadline without catch-up or background sound",
+      "Missing WebGPU fails before downloading media"
+    ]
+  },
+  "soak": {
+    "passed": true,
+    "seconds": 30,
+    "cleared": 6,
+    "encounters": 7,
+    "remaining": 29,
+    "shots": 64,
+    "hits": 46,
+    "cpu": {
+      "samples": 600,
+      "median": 1.199999988079071,
+      "p95": 2,
+      "p99": 3.199999988079071,
+      "max": 11.799999982118607
+    },
+    "frame": {
+      "samples": 600,
+      "median": 16.69999999999709,
+      "p95": 16.700000000004366,
+      "p99": 16.80000000000291,
+      "max": 16.80000000000291
+    },
+    "gpu": {
+      "scene": 0.334577,
+      "feedback": 0.20783,
+      "present": 0.602949,
+      "previews": 0,
+      "total": 1.145356
+    }
+  },
+  "performanceContext": "Soak samples recorded during development validation, not an isolated benchmark or universal device budget."
+}

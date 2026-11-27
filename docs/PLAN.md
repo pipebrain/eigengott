@@ -61,3 +61,9 @@ The user accepted the procedural Recomposition mechanic and authorized a separat
 All-weapons inventory is a test exception; actual corpse equipment exchange is skipped. The production equipped-inventory, true-first-person, no-gameplay-HUD, death-transfer and ending contracts remain authoritative. The accepted previous apps are preserved. OpenArena media notices, original conversion inputs, available preferred authoring sources and provenance accompany the test.
 
 Next: Structural Recomposition with actual walls/floors/ceilings/ramps/openings and their collision, connectivity and lighting versions. Prepare navigation for the accepted rebuilt composition before releasing live opponents. Retain protected geometry and preserve safe body/weapon clearance; validate old/new seams and composed-world reachability. Audio/visual authoring can be tuned independently after the mechanic is sound.
+
+## Playable equipment milestone
+
+Build a separate `playable-test/`: finite Self ledger and checkpoints, one equipped gun, armor/mod exchanges through a timed 3D loot interface, shared maze/history feedback, damage feedback and bounded AI recovery. Preserve the accepted encounter and engine apps. See [ENGINE_PLAN.md](ENGINE_PLAN.md#separate-playable-milestone-equipment-and-a-finite-run).
+
+The user supplied three audio placeholders and explicitly prohibited audio effects in this milestone. Deferred speed/pitch/stretch-ramping design: [SOUND_DESIGN.md](SOUND_DESIGN.md). Height-rich structural replacement, surface authoring/joining and multiple sky scenes follow the equipment slice.

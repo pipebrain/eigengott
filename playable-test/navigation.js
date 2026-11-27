@@ -1,0 +1,22 @@
+// Immutable all-pairs next-hop tables are built in a worker after validation.
+// Clearance samples use the same WASM body envelope as live movement.
+export function buildNavigation(sim,profile=null,blockedCells=[]){
+ const words=new Uint32Array(sim.memory.buffer,sim.bench_ptr(),16),n=words[1],stats=new Float32Array(sim.memory.buffer,sim.stats_ptr()+128,32),tile=stats[16]/n,half=stats[16]/2,data=new DataView(sim.memory.buffer,sim.active_cells_ptr(),n*n*52),blocked=new Set(blockedCells),ids=[],lookup=new Int32Array(n*n).fill(-1),positions=[];
+ const floor=(x,y)=>{const gx=Math.floor((x+half)/tile),gy=Math.floor((y+half)/tile);if(gx<0||gy<0||gx>=n||gy>=n)return -Infinity;const id=gy*n+gx;if(!data.getUint32(id*52,true))return -Infinity;return data.getFloat32(id*52+20,true)*x+data.getFloat32(id*52+24,true)*y+data.getFloat32(id*52+28,true);};
+ const at=(x,y)=>{const r=profile?.radius||.34;return [x,y,Math.max(...[[0,0],[-r,-r],[r,-r],[-r,r],[r,r]].map(([dx,dy])=>floor(x+dx,y+dy)))+.035];};
+ const clear=p=>{if(!profile)return true;if(!p.every(Number.isFinite))return false;const a=new Float32Array(sim.memory.buffer,sim.actor_input(),32);a.fill(0);a.set([...p,0,0,0,0,0,0,0,profile.radius,profile.height,profile.eye||1.5625,.3,.1,0,0,0,0,.2,+profile.boxed,profile.eye||1.5625,profile.crouchHeight||1.25]);return !!sim.actor_clear();};
+ for(let id=0;id<n*n;id++){if(!data.getUint32(id*52,true)||blocked.has(id))continue;const p=at((id%n+.5)*tile-half,(Math.floor(id/n)+.5)*tile-half);if(!clear(p))continue;lookup[id]=ids.length;ids.push(id);positions.push(...p);}
+ const count=ids.length;if(!count)throw new Error('No navigation space fits the selected character envelope.');const points=new Float32Array(positions),edges=ids.map(()=>[]);
+ for(let i=0;i<count;i++){const id=ids[i],p=Array.from(points.slice(i*3,i*3+3));for(let k=0;k<4;k++){const next=data.getInt32(id*52+4+k*4,true),j=next>=0&&next<lookup.length?lookup[next]:-1;if(j<0||j===i)continue;const q=Array.from(points.slice(j*3,j*3+3));let okay=true;for(const t of [.25,.5,.75])if(!clear(at(p[0]+(q[0]-p[0])*t,p[1]+(q[1]-p[1])*t))){okay=false;break;}if(okay)edges[i].push(j);}}
+ // Treat every connection as reciprocal; directional movement modifiers will
+ // require a distinct traversal profile instead of silently reusing this graph.
+ for(let i=0;i<count;i++)edges[i]=edges[i].filter(j=>edges[j].includes(i));
+ const next=new Uint16Array(count*count).fill(65535),queue=new Uint16Array(count),components=new Uint16Array(count).fill(65535);let componentCount=0;
+ for(let start=0;start<count;start++)if(components[start]===65535){let head=0,tail=1;queue[0]=start;components[start]=componentCount;while(head<tail){const a=queue[head++];for(const b of edges[a])if(components[b]===65535){components[b]=componentCount;queue[tail++]=b;}}componentCount++;}
+ for(let target=0;target<count;target++){let head=0,tail=1;queue[0]=target;next[target*count+target]=target;while(head<tail){const here=queue[head++];for(const from of edges[here]){const offset=from*count+target;if(next[offset]!==65535)continue;next[offset]=here;queue[tail++]=from;}}}
+ return {n,tile,half,ids:new Uint16Array(ids),lookup,points,next,count,edges,components,componentCount,profile,version:sim.candidate_id()};
+}
+export function cellAt(nav,p){const x=Math.floor((p[0]+nav.half)/nav.tile),y=Math.floor((p[1]+nav.half)/nav.tile);return x>=0&&y>=0&&x<nav.n&&y<nav.n?nav.lookup[y*nav.n+x]:-1;}
+export function nearestNode(nav,p,component=-1){let best=-1,distance=Infinity;for(let i=0;i<nav.count;i++){if(component>=0&&nav.components[i]!==component)continue;const d=(nav.points[i*3]-p[0])**2+(nav.points[i*3+1]-p[1])**2+(nav.points[i*3+2]-p[2])**2;if(d<distance){distance=d;best=i;}}return best;}
+export function routeTarget(nav,from,to){let a=cellAt(nav,from);if(a<0)a=nearestNode(nav,from);let b=cellAt(nav,to);if(b<0||nav.components[b]!==nav.components[a])b=nearestNode(nav,to,nav.components[a]);if(a<0||b<0)return null;if(a===b)return cellAt(nav,to)===a?[...to]:Array.from(nav.points.slice(b*3,b*3+3));const hop=nav.next[a*nav.count+b];if(hop===65535)return null;const p=Array.from(nav.points.slice(a*3,a*3+3)),q=Array.from(nav.points.slice(hop*3,hop*3+3)),dx=q[0]-p[0],dy=q[1]-p[1],len=Math.hypot(dx,dy);return [(p[0]+q[0])/2+dx/len*.30,(p[1]+q[1])/2+dy/len*.30,(p[2]+q[2])/2];}
+export const transferNavigation=n=>[n.ids.buffer,n.lookup.buffer,n.points.buffer,n.next.buffer,n.components.buffer];

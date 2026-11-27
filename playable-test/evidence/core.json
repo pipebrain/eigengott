@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "checks": [
+    "Finite identities, exactly-once deaths, validated checkpoints and slot compatibility",
+    "One-gun economy, twelve real equipment drops, single-fragment transfer, armor effects and atomic clearance rollback",
+    "Deletion expires originating loot; shared Release clears the pool and stages existing surviving identities without population growth",
+    "Final opposing death completes the finite run and prevents another ordinary Recomposition",
+    "Armor movement multiplier affects real WASM physics; memory remains fixed at 32 MiB",
+    "Stuck recovery chooses a clear direction, holds it briefly and keeps live actor motion finite",
+    "User WAV files preserved byte-for-byte; playback has no rate ramp, detune or DSP effects"
+  ],
+  "audio": [
+    {
+      "file": "ambient-loop.wav",
+      "bytes": 5079392,
+      "sha256": "733c33bdbd243f529ef24062b94b85b07217517dfea18c00770119a3fcc91237"
+    },
+    {
+      "file": "warn-loop.wav",
+      "bytes": 1264584,
+      "sha256": "59a5928ef4e4c9c170659641d9e0d2e913a9e9e4abe3ae976de371f97a4f91fa"
+    },
+    {
+      "file": "death.wav",
+      "bytes": 737660,
+      "sha256": "0df8f38bc1fd5a427c8accb5451fc6980815264c88a0dd3ec60eba666098eeb6"
+    }
+  ]
+}
