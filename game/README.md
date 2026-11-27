@@ -1,8 +1,8 @@
-# EIGENGOTT v0.1.3
+# EIGENGOTT v0.1.4
 
 [Play](https://pipebrain.github.io/eigengott/) · [H tools](https://pipebrain.github.io/eigengott/?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
 
-The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.3.checkpoint`; older saves remain untouched and can be imported explicitly.
+The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.4.checkpoint`; older saves remain untouched and can be imported explicitly.
 
 ## Current game rules
 
@@ -16,9 +16,9 @@ Population accounting uses exact integer counters and a bounded equipment pool (
 
 ## Presentation and collision
 
-Muzzle lights now reach 9 m, impacts 7.5 m and projectile lights 9 m, with brighter intensities and short trailing emitters. The 128-light, 256-particle and 512-sprite limits remain. Default dark basins are reduced to 10%, dynamic intensity is 1.5, and sky emission is 0.65. Unlit areas still require emitters: no ambient cheat, lightmaps or new audio processing are introduced.
+Muzzle lights now reach 9 m, impacts 7.5 m and projectile lights 9 m, with brighter intensities and short trailing emitters. The 128-light, 256-particle and 512-sprite limits remain. World surfaces now use warm grey, charcoal, ochre, brown and subdued olive ramps based on the supplied art, palette and lighting references. World-space texel / panel detail and sampled dynamic illumination retain the coarse aesthetic. Local sources are deduplicated per clump; sky spill is reduced. Display tone mapping preserves dim emitted light, with 32 colour steps rather than crushing it to eight levels. A restrained warm, lower-saturation grade also covers actors and loot models. Lights still require emitters: no ambient light, lightmaps or new audio processing are introduced.
 
-Chunky mode defaults ON: nearest texture sampling, stepped spatial illumination and event-light decay, low-step sprite alpha, stepped weapon effects and blocky injury/armor/directional overlays. Final presentation colour is quantized. H can compare stepped and smooth effects. Transparent/additive stock materials remain transparent/additive.
+Chunky mode defaults ON: nearest texture sampling, stepped spatial illumination and event-light decay, low-step sprite alpha, stepped weapon effects and blocky injury/armor/directional overlays. Final presentation colour is quantized to 32 steps per channel. The default raster is exactly **640×480**, including world, actors, feedback, skies, equipment previews and effect composition. The 4:3 picture scales with nearest sampling and letterboxes outside its bounds; browser size and DPR do not change its internal resolution. H retains an adaptive-resolution comparison toggle. Source texture / font-mask sizes remain asset-specific; all visible game rendering uses the shared raster. H can compare stepped and smooth effects. Transparent/additive stock materials remain transparent/additive.
 
 Gun contacts push the body clear of walls/props using bounded capsule separation and collision-safe sliding. Look is rejected only when the body cannot fit the displacement. Body and weapon clearance remain real; the engine does not solve sticking by disabling the gun collider.
 

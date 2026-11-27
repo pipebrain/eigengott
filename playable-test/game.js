@@ -26,20 +26,20 @@ export class Game {
   for(const id of nodes){const x=this.nav.points[id*3],y=this.nav.points[id*3+1],p=[x,y,this.floorAt(x,y,this.player.gear.radius)+.015];if(this.bots.some(b=>this.overlaps({...this.player,p,released:true},{...b,released:true})))continue;for(const yaw of [current.yaw,0,Math.PI/2,Math.PI,Math.PI*1.5])if(this.sim.engine_try_place(...p,yaw,current.pitch)&&this.sim.engine_void_finish()){this.syncPlayer();if(spread)this.respreadAfterLanding();return true;}}
   return false;
  }
- // Choose a valid position for the selected equipment, then drop onto its
+ // Choose a valid position for the selected equipment and stand on its
  // visible clump before the outward wave. Never spend Return below the map.
  returnFromVoid(){
   const m=this.sweep,s=this.sim;
   for(const g of m.groups)s.engine_group_visible(g.id,1);
   let found=false;
-  try{found=m.landingProbe(()=>this.ensureLanding(m.landing,false));}
+  try{found=m.landingProbe(()=>this.ensureLanding(this.player.p,false));}
   finally{for(const g of m.groups)s.engine_group_visible(g.id,m.states[g.id].visible);}
   if(!found)throw new Error('No valid landing for selected equipment.');
   m.landing=[...this.player.p];m.anchor=m.landing.slice(0,2);
   if(!s.engine_void_begin(...m.landing))throw new Error('Cannot begin return landing.');
   m.capture();for(const id of m.protected)m.visible(id,true);
   if(!m.install()||!s.engine_void_land())throw new Error('Cannot land on returning geometry.');
-  m.distance=m.groups.map(g=>Math.hypot((g.min[0]+g.max[0])/2-m.anchor[0],(g.min[1]+g.max[1])/2-m.anchor[1]));m.maxRadius=Math.max(1,...m.distance);m.inOrder=[...m.selected].sort((a,b)=>m.distance[a]-m.distance[b]);m.fieldRevision++;this.syncPlayer();
+  m.distance=m.groups.map(g=>Math.hypot(Math.max(g.min[0]-m.anchor[0],0,m.anchor[0]-g.max[0]),Math.max(g.min[1]-m.anchor[1],0,m.anchor[1]-g.max[1])));m.maxRadius=Math.max(1,...[...m.selected].map(id=>m.distance[id]));m.inOrder=[...m.selected].sort((a,b)=>m.distance[a]-m.distance[b]);m.fieldRevision++;this.syncPlayer();
  }
  navFor(e){return this.navByModel.get(e.model)||this.nav;}
  spawnInitial(staged=false){

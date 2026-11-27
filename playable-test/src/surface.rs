@@ -12,7 +12,8 @@ pub fn vertex(flat:V3,displacement:V3,normal:V3,ao:f32,material:u32,flags:u32,lm
 }
 pub fn color(id:u32)->V3{unsafe{let i=id as usize*4;v(PALETTE[i] as f32/255.0,PALETTE[i+1] as f32/255.0,PALETTE[i+2] as f32/255.0)}}
 pub fn palette(){
- let ramps=[v(0.66,0.53,0.23),v(0.60,0.17,0.12),v(0.36,0.41,0.24),v(0.40,0.28,0.43),v(0.43,0.49,0.48),v(0.76,0.72,0.56),v(0.22,0.77,0.70),v(0.92,0.45,0.16)];
+ // Ochre, warm stone, olive and charcoal: the supplied art / palette study.
+ let ramps=[v(0.72,0.53,0.19),v(0.60,0.57,0.49),v(0.45,0.44,0.32),v(0.53,0.51,0.44),v(0.69,0.67,0.59),v(0.83,0.79,0.68),v(0.48,0.53,0.46),v(0.76,0.46,0.20)];
  unsafe{
   for g in 0..8{for level in 0..32{let c=ramps[g]*(level as f32/31.0);let i=(g*32+level)*4;PALETTE[i]=(c.x*255.0) as u8;PALETTE[i+1]=(c.y*255.0) as u8;PALETTE[i+2]=(c.z*255.0) as u8;PALETTE[i+3]=255}}
   for z in 0..32{for y in 0..32{for x in 0..32{
@@ -54,11 +55,11 @@ pub fn mesh(a:&mut Arena){
  }
  for i in selected[..a.requested_lights].iter().copied(){if i==usize::MAX{continue}let f=&mut a.faces[i];f.emitter=true;
   let mut p=(f.p[0].point()+f.p[3].point())*0.5+f.normal*0.16;p.z+=2.2;let material=match hash(i as u32^a.seed)%3{0=>223,1=>255,_=>31};let c=color(material);
-  a.lights[a.light_count]=Light{position:[p.x,p.y,p.z],radius:8.0,color:[c.x,c.y,c.z],intensity:7.0};a.light_count+=1;
+  a.lights[a.light_count]=Light{position:[p.x,p.y,p.z],radius:14.0,color:[c.x,c.y,c.z],intensity:5.0};a.light_count+=1;
  }
  for i in 0..a.face_count{
   let f=a.faces[i];unsafe{CURRENT_OWNER=f.owner+1;}
-  if f.kind!=2{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,1.0,if f.kind==0{86}else{151},if f.kind==1&&a.cells[f.owner as usize].ceiling[3]>0.5{8|(((a.cells[f.owner as usize].ceiling[3]as u32)-1)<<4)}else{0},p.map(|p|uv(f,p,density,atlas)));continue}
+  if f.kind!=2{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,1.0,if f.kind==0{94}else{156},if f.kind==1&&a.cells[f.owner as usize].ceiling[3]>0.5{8|(((a.cells[f.owner as usize].ceiling[3]as u32)-1)<<4)}else{0},p.map(|p|uv(f,p,density,atlas)));continue}
   let left=f.p[0].point();let right=f.p[3].point();let top_left=f.p[1].point();let top_right=f.p[2].point();let dir=tangent(f);let length=(v(right.x,right.y,0.0)-v(left.x,left.y,0.0)).len();
   if a.detail==0{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,0.9,119,0,p.map(|p|uv(f,p,density,atlas)));continue}
   let normal_us=[0.0,0.12,length-0.12,length,0.0,0.0,0.0];
@@ -72,7 +73,7 @@ pub fn mesh(a:&mut Arena){
     d[j]=f.normal*(depths[*b]*if *col==0||*col==columns{0.0}else{1.0});
    }
    let n=((p[1]+d[1])-(p[0]+d[0])).cross((p[2]+d[2])-(p[0]+d[0])).unit();
-   quad(a,p,d,n,if band==2{0.72}else{0.94},if band==2{119}else if band==3{148}else{26},0,p.map(|p|uv(f,p,density,atlas)));
+   quad(a,p,d,n,if band==2{0.72}else{0.94},if band==2{if hash(f.owner^a.seed)%5==0{29}else{126}}else if band==3{154}else{28},0,p.map(|p|uv(f,p,density,atlas)));
   }}
   if f.emitter{
    let material=match hash(i as u32^a.seed)%3{0=>223,1=>255,_=>31};

@@ -16,6 +16,6 @@ fn dynamicLighting(p:vec3f,n:vec3f)->vec3f{
   let l=dynamic.entries[j];let delta=l.positionRadius.xyz-origin;let squared=dot(delta,delta);if squared>=l.positionRadius.w*l.positionRadius.w{continue;}
   let d=sqrt(max(.000001,squared));let diffuse=max(0.0,dot(normalize(n),delta/d));if diffuse<=0.0{continue;}
   var shadow=false;for(var k=0u;k<4u;k++){shadow=shadow||blocked(origin,delta,l.shadowsA[k])||blocked(origin,delta,l.shadowsB[k]);}if shadow{continue;}
-  var falloff=pow(max(0.0,1.0-d/max(.01,l.positionRadius.w)),2.0);if frame.palette.y>.5{falloff=floor(falloff*6.0)/6.0;}value+=l.colorIntensity.rgb*l.colorIntensity.w*falloff*select(diffuse,floor(diffuse*4.0)/4.0,frame.palette.y>.5);
- }return select(min(value,vec3f(4)),floor(min(value,vec3f(4))*6.0)/6.0,frame.palette.y>.5);
+  var falloff=pow(max(0.0,1.0-d/max(.01,l.positionRadius.w)),2.0);value+=l.colorIntensity.rgb*l.colorIntensity.w*falloff*diffuse;
+ }return select(min(value,vec3f(4)),floor(min(value,vec3f(4))*32.0+.5)/32.0,frame.palette.y>.5);
 }

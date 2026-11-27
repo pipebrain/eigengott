@@ -19,7 +19,10 @@ fn hatch(uv:vec2f)->f32{
  if frame.fold.w==3.0 {color=solid.rgb;}
  if frame.fold.w!=1.0&&frame.fold.w!=2.0 {color=actor.rgb+color*(1.0-actor.a);}
 
- if frame.palette.y>.5{color=floor(color*8.0)/8.0;}
+ let luminance=dot(color,vec3f(.299,.587,.114));color=mix(vec3f(luminance),color,.68)*vec3f(1.02,1,.93);
+ // Retain dim emitter light instead of crushing it with 8-level floor RGB.
+ color=pow(max(vec3f(0),color)/(max(vec3f(0),color)+vec3f(.65)),vec3f(.65));
+ if frame.palette.y>.5{color=floor(color*32.0+.5)/32.0;}
  if frame.up.w>.5&&frame.play.x<.5{let slit=select(1.0-smoothstep(.24,.32,abs(i.uv.y-.5)),1.0-step(.28,abs(i.uv.y-.5)),frame.palette.y>.5);color*=slit;}
  if frame.play.x>.5{return vec4f(color,1);}
  let effectUV=select(i.uv,floor(i.uv*frame.render.xy/4.0)*4.0/frame.render.xy,frame.palette.y>.5);
@@ -28,5 +31,5 @@ fn hatch(uv:vec2f)->f32{
  var injury=clamp(frame.play.z,0.0,1.0)*frame.feedback.w*fractured;if frame.palette.y>.5{injury=ceil(injury*5.0)/5.0;}color=mix(color,vec3f(.32,.012,.008),injury);
  let armorAlpha=frame.hurt.z*frame.armor.w*edge*.4;color=mix(color,frame.armor.rgb*.35,armorAlpha);
  let dir=normalize(vec2f(i.uv.x-.5,.5-i.uv.y)+vec2f(.00001));let hit=pow(max(0.0,dot(dir,normalize(frame.hurt.xy+vec2f(.00001)))),5.0)*edge*frame.play.w*frame.palette.w;color=mix(color,vec3f(1.0,.15,.08),clamp(hit,0.0,.8));
- return vec4f(select(color,floor(color*8.0)/8.0,frame.palette.y>.5),1);
+ return vec4f(select(color,floor(color*32.0+.5)/32.0,frame.palette.y>.5),1);
 }

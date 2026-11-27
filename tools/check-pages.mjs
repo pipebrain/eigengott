@@ -3,7 +3,7 @@ import {readFile,readdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 const root=new URL('../_site/',import.meta.url),manifest=JSON.parse(await readFile(new URL('manifest.json',root),'utf8'));
 const files=new Map(manifest.files.map(f=>[f.path,f]));
-assert.equal(manifest.build.version,'0.1.3');assert.ok(files.has('game/main.js'));assert.ok(files.has('game/preset.js'));
+assert.equal(manifest.build.version,'0.1.4');assert.ok(files.has('game/main.js'));assert.ok(files.has('game/preset.js'));
 assert.match(manifest.build.commit,/^[a-f0-9]{40}$/);
 for(const item of manifest.files){
   assert.ok(!/(^|\/)(?:src|tools|evidence|\.git|\.env|\.local)(?:\/|$)/.test(item.path));

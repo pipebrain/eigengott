@@ -263,8 +263,8 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
 #[no_mangle]pub extern "C" fn engine_void_land()->u32{unsafe{
  if ACTIVE>=1||!VOID{return 0}let mut p=PLAYER;p.feet=LANDING;
  if !p.placement_clear(&ARENAS[0],p.feet){return 0}
- for lift in [0.7,0.4,0.15,0.0]{let q=LANDING+v(0.0,0.0,lift);if p.placement_clear(&ARENAS[0],q){p.feet=q;break}}
- p.velocity=v(0.0,0.0,-2.0);p.grounded=false;PLAYER=p;VOID=false;ACCUMULATOR=0.0;render_state();1
+ for lift in if FREE_TRANSITION{[0.0;4]}else{[0.7,0.4,0.15,0.0]}{let q=LANDING+v(0.0,0.0,lift);if p.placement_clear(&ARENAS[0],q){p.feet=q;break}}
+ p.velocity=v(0.0,0.0,if FREE_TRANSITION{0.0}else{-2.0});p.grounded=FREE_TRANSITION;PLAYER=p;VOID=false;ACCUMULATOR=0.0;render_state();1
 }}
 #[no_mangle]pub extern "C" fn engine_void_active()->u32{unsafe{VOID as u32}}
 
@@ -278,3 +278,6 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
 #[no_mangle]pub extern "C" fn engine_transition_mode(enabled:u32){unsafe{FREE_TRANSITION=enabled!=0;}}
 #[no_mangle]pub extern "C" fn engine_void_pose(x:f32,y:f32,z:f32,yaw:f32,pitch:f32,vx:f32,vy:f32,vz:f32)->u32{unsafe{if !VOID||![x,y,z,yaw,pitch,vx,vy,vz].iter().all(|n|n.is_finite()){return 0}PLAYER.feet=v(x,y,z);PLAYER.yaw=yaw;PLAYER.pitch=clamp(pitch,-1.44,1.44);PLAYER.velocity=v(vx,vy,vz);render_state();1}}
 #[no_mangle]pub extern "C" fn engine_void_finish()->u32{unsafe{if ACTIVE>=1||!PLAYER.placement_clear(&ARENAS[ACTIVE],PLAYER.feet){return 0}VOID=false;PLAYER.velocity=v(0.0,0.0,0.0);ACCUMULATOR=0.0;render_state();1}}
+
+// Transition floors may disappear; height follows the logical sector flat.
+#[no_mangle]pub extern "C" fn engine_follow_floor(z:f32)->u32{unsafe{if !FREE_TRANSITION||!z.is_finite(){return 0}PLAYER.feet.z=z;PLAYER.velocity.z=0.0;PLAYER.grounded=!VOID;render_state();1}}

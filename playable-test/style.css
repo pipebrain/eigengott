@@ -5,3 +5,5 @@
 
 #loot{position:fixed;inset:0;z-index:3;margin:0;padding:0;border:0;background:transparent;pointer-events:none}#loot-items{position:absolute;inset:0}.void-loot{position:absolute;display:block;border:0;border-radius:0;padding:0;background:transparent;pointer-events:auto;cursor:pointer}.void-loot:hover{background:transparent}.void-loot:focus-visible{outline:1px solid #fff;outline-offset:5px}body:has(#loot:not([hidden])) .hud{display:none}
 #run-end{position:fixed;z-index:6;inset:28% 20%;padding:32px;background:#080b07ee;border:1px solid #aaa;text-align:center}.file-button{margin:0;padding:8px 10px;border:1px solid #66614a;background:#181914;cursor:pointer}.file-button input{display:none}@media(max-width:700px){#run-end{inset:20% 8%}}
+
+body{background:#000}#scene[data-fixed-raster="true"]{position:fixed;width:min(100vw,calc(100dvh * 4 / 3));height:min(100dvh,75vw);left:50%;top:50%;transform:translate(-50%,-50%)}
