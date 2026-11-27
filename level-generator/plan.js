@@ -1,16 +1,18 @@
 import {snap,rectangle,clip} from './geometry.js';
+import {makeSectors} from './sectors.js';
+import {makeDoors} from './doors.js';
 import {makeElevation} from './elevation.js';
-export const GENERATOR_VERSION='m3.0';
+export const GENERATOR_VERSION='m4.0';
 export function random(seed){let s=seed>>>0;return()=>{s=(s+0x6d2b79f5)>>>0;let t=Math.imul(s^s>>>15,s|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
 const key=(a,b)=>[Math.min(a,b),Math.max(a,b)].join(':');
 export function makePlan(seed,count=9,{widthOverride=null,features=true,elevation=true}={}){
  if(!Number.isInteger(seed)||seed<0||seed>4294967295)throw new Error('Seed must be an unsigned 32-bit integer.');
  if(![6,9,12].includes(count))throw new Error('Choose 6, 9 or 12 rooms.');
  if(widthOverride!==null&&(!Number.isFinite(widthOverride)||widthOverride<4||widthOverride>12))throw new Error('Corridor width must be within 4–12 m.');
- const rng=random(seed),cols=count===12?4:3,rows=count/cols,spacing=52,rooms=[],snake=[];
+ const rng=random(seed),cols=count===12?4:3,rows=count/cols,spacing=snap(84+rng()*12),rooms=[],snake=[];
  for(let y=0;y<rows;y++)for(let c=0;c<cols;c++){const x=y%2?cols-1-c:c;snake.push(y*cols+x);}
- for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const w=snap(28+rng()*8),h=snap(28+rng()*8),cx=(x-(cols-1)/2)*spacing,cy=(y-(rows-1)/2)*spacing;rooms.push({id:y*cols+x,name:'Room '+(y*cols+x+1),x0:snap(cx-w/2),x1:snap(cx+w/2),y0:snap(cy-h/2),y1:snap(cy+h/2),cx,cy,grid:[x,y],hallways:[]});}
- const links=[],linked=new Set(),mainCount=Math.ceil(count*.6),main=snake.slice(0,mainCount),attached=new Set(main);
+ for(let y=0;y<rows;y++)for(let x=0;x<cols;x++){const w=snap(40+rng()*8),h=snap(40+rng()*8),cx=(x-(cols-1)/2)*spacing,cy=(y-(rows-1)/2)*spacing;rooms.push({id:y*cols+x,name:'Room '+(y*cols+x+1),x0:snap(cx-w/2),x1:snap(cx+w/2),y0:snap(cy-h/2),y1:snap(cy+h/2),cx,cy,grid:[x,y],hallways:[]});}
+ const links=[],linked=new Set(),mainCount=Math.ceil(count*(.5+rng()*.25)),main=snake.slice(0,mainCount),attached=new Set(main);
  const link=(a,b,type)=>{const k=key(a,b);if(linked.has(k))return;linked.add(k);links.push({a,b,type});};
  for(let i=1;i<main.length;i++)link(main[i-1],main[i],'main');
  const adjacent=(a,b)=>Math.abs(rooms[a].grid[0]-rooms[b].grid[0])+Math.abs(rooms[a].grid[1]-rooms[b].grid[1])===1;
@@ -24,8 +26,8 @@ export function makePlan(seed,count=9,{widthOverride=null,features=true,elevatio
   const rects=[];for(let i=1;i<points.length;i++){const p=points[i-1],q=points[i];if(p[1]===q[1]){const y0=snap(p[1]-r);rects.push({x0:snap(Math.min(p[0],q[0])-r),x1:snap(Math.max(p[0],q[0])+r),y0,y1:snap(y0+width)});}else{const x0=snap(p[0]-r);rects.push({x0,x1:snap(x0+width),y0:snap(Math.min(p[1],q[1])-r),y1:snap(Math.max(p[1],q[1])+r)});}}
   rooms[e.a].hallways.push(id);rooms[e.b].hallways.push(id);return{id,name:'Hallway '+(id+1),a:e.a,b:e.b,type:e.type,width,points,rects};
  });
- const plan={seed,count,cols,rows,rooms,hallways,main,ceiling:5.5,version:GENERATOR_VERSION,features};
- addShapes(plan,rng);makeElevation(plan,rng,{elevation});return plan;
+ const plan={seed,count,cols,rows,rooms,hallways,main,spacing,ceiling:5.5,version:GENERATOR_VERSION,features};
+ addShapes(plan,rng);makeElevation(plan,rng,{elevation});makeSectors(plan,rng);makeDoors(plan);return plan;
 }
 
 function roundedRoom(r){
@@ -40,12 +42,12 @@ function addShapes(plan,rng){
   if(r.kind==='donut'){const radius=snap(5+rng()*1.5);r.obstacles.push({kind:'core',outline:regular(r.cx,r.cy,radius,12)});r.anchor=[r.cx,snap((r.cy-radius+r.y0)/2)];}
   if(r.kind==='posts')for(const dx of [-6.5,6.5])r.obstacles.push({kind:'post',outline:regular(r.cx+dx,r.cy,snap(2+rng()*.6),rng()<.5?4:8)});
  }
- for(const h of plan.hallways){h.shape=plan.features&&h.id%3!==2?'curved':'dogleg';h.sectionWidths=[h.width];
-  if(h.shape==='dogleg'){h.polygons=clip.union(...h.rects.map(r=>[rectangle(r)]));h.anchor=h.points[1].map((v,k)=>(v+h.points[2][k])/2);delete h.rects;continue;}
+ for(const h of plan.hallways){const a0=plan.rooms[h.a],b0=plan.rooms[h.b],along=a0.grid[1]===b0.grid[1]?0:1,gap=Math.min(a0.grid[along],b0.grid[along]);h.shape=plan.features&&h.id%3!==2&&(gap+(along===0?0:1))%2===0?'curved':'dogleg';h.sectionWidths=[h.width];if(h.id>0&&h.id%4===0){h.shape='straight';const a=plan.rooms[h.a],b=plan.rooms[h.b];h.points=along===0?[[a.cx,a.cy],[b.cx,b.cy]]:[[a.cx,a.cy],[b.cx,b.cy]];const p=h.points[0],q=h.points[1],r=h.width/2;h.rects=[{x0:snap(Math.min(p[0],q[0])-r),x1:snap(Math.max(p[0],q[0])+r),y0:snap(Math.min(p[1],q[1])-r),y1:snap(Math.max(p[1],q[1])+r)}];}
+  if(h.shape!=='curved'){h.polygons=clip.union(...h.rects.map(r=>[rectangle(r)]));h.anchor=h.points.length===2?h.points[0].map((v,k)=>(v+h.points[1][k])/2):h.points[1].map((v,k)=>(v+h.points[2][k])/2);delete h.rects;continue;}
   let a=plan.rooms[h.a],b=plan.rooms[h.b];const horizontal=a.grid[1]===b.grid[1];if(horizontal?a.cx>b.cx:a.cy>b.cy)[a,b]=[b,a];
   const old=h.points,offset=horizontal?old[0][1]-a.cy:old[0][0]-a.cx;
   const start=horizontal?[a.x1-3,a.cy+offset]:[a.cx+offset,a.y1-3],end=horizontal?[b.x0+3,b.cy-offset]:[b.cx-offset,b.y0+3];
-  const along=horizontal?0:1,length=end[along]-start[along],controlA=start.slice(),controlB=end.slice();controlA[along]+=length*.42;controlB[along]-=length*.42;
+  const length=end[along]-start[along],controlA=start.slice(),controlB=end.slice();controlA[along]+=length*.42;controlB[along]-=length*.42;
   const points=[],normals=[];for(let i=0;i<=12;i++){const t=i/12,u=1-t,p=start.map((v,k)=>u*u*u*v+3*u*u*t*controlA[k]+3*u*t*t*controlB[k]+t*t*t*end[k]),d=start.map((v,k)=>3*u*u*(controlA[k]-v)+6*u*t*(controlB[k]-controlA[k])+3*t*t*(end[k]-controlB[k])),len=Math.hypot(...d);points.push(p.map(snap));normals.push([-d[1]/len,d[0]/len]);}
   // Normal clearance of an axis-aligned square depends on wall orientation.
   // The 0.16 m allowance also covers chord tessellation and fixed-point snaps.

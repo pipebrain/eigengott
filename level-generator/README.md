@@ -1,58 +1,64 @@
-# Level generator M3
+# Level generator M4
 
-[Open generator](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/) · [Design and roadmap](../docs/LEVEL_GENERATOR.md)
+[Open generator](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/) · [Roadmap](../docs/LEVEL_GENERATOR.md)
 
-A separate, strictly blockout test: 6, 9 or 12 rooms, a main route with branches and a few loops, curved corridors, donut rooms and structural posts, with seeded **4–12 m corridor targets**, sealed welded geometry and precomputed clearance-aware navigation. Curved sections widen locally where the largest supported envelope needs extra diagonal clearance, staying within 4–12 m. Rooms have flat landings at seeded elevations. Hallways cross shallow slopes and real 0.15625 m stair risers, with broad 1.2–2 m treads. Ceilings follow the same terrain at 5.5 m vertical clearance. Donut rooms wrap around a solid central core; posts extend from floor to ceiling. Both are actual holes in the walkable polygon, with matching inner walls and alternate routes. Output contains only floors, walls and ceilings, with invisible white point emitters. A separate room/corridor acoustic graph exports propagation and reflection data for the v0.1.6 audio engine; the generator does not create an audio mixer. No textures, fixtures, props, decorative polygons, relief, grain or seams are generated.
+A structural blockout prototype with 6, 9 or 12 rooms, a main route, random branches and loops, curved and straight corridors, donut cores and posts. Corridor targets remain seeded random **4–12 m**, with permitted local curve widening inside that range. Room sizes, corridor lengths and branch counts vary by seed.
+
+M4 adds independent flat room floor/ceiling sectors, small reachable platforms and escapable step-down pits, 2 m inaccessible platforms and 4 m lethal pits. Red means lava/heat; green means radiation. Some donut cores are damaging full-height liquid-fall boundaries surrounded by liquid pits. These are existing structural surfaces, without decorative meshes, liquid tessellation, fixtures, trim or textures. Hazard point lights have corresponding colors. All other surfaces remain grey.
+
+Stairs use actual risers, straight flights, broad **16 m flat turning landings**, matching room entry heights and independently **sloped ceilings over the flights**. Ramps may curve. Turning stair corridors remain orthogonal. Current half-flight risers are at most 0.15625 m; supported limits remain 0.25 m step and 0.2 grade. There is no invisible ramp.
+
+Doors use grey structural leaves. All four types—up, down, horizontal split and vertical split—share exact rendering/SAT boxes. They open automatically for the manual player or AI walker, hold near a Self and reopen rather than close through an occupied swept volume. The v0.1.3 snapshot already provided the dynamic collision overlay; M4 reuses it without changing the WASM controller. Doors retract into enclosing solid boundaries; no separate frames or pockets are dressed onto the mesh.
 
 ## Controls
 
-- Generate a numeric seed, select a room count, or choose one of twelve qualified packages.
+- Generate a seed, choose 6/9/12 rooms, or load a qualified package.
 - **Walk / mouse look** captures the mouse. WASD moves, Shift walks, Space jumps, C crouches, Esc releases capture.
-- **3D overview** hides the ceiling visually while collision stays sealed.
-- Click the map or choose a room/hallway destination, then use **AI walk to destination** or **Tour every region** (including ring quadrants and post bypasses). The marker follows the actual controller; manual movement stops the tour.
-- **Enable sound / Sound at selected destination** reuses the v0.1.6 mixer to audition the selected room or hallway. Its voice, distance and room-stage limits are separate playback controls. **Acoustic graph & noise reach** inspects the exported data without playing sound.
-- **Clearance regions & waypoints** inspects the navigation decomposition. **Export package** saves full geometry, semantic plan, routes and reports.
-- **Build menu** returns to the current game / engine / generator selection. Touch movement is not implemented.
+- **AI walk to destination / Tour every region** uses the actual controller and opens route doors. The map includes all ring quadrants and post bypasses. Manual movement cancels a tour.
+- **3D overview / Inspection cutaway** hides ceilings visually while collision remains sealed.
+- **Enable sound** then **Sound at selected destination** auditions room/corridor propagation. **Test shot**, or left click while captured, sends an invisible diagnostic projectile: firing, each entered sector and wall impact emit sound. No projectile/world dressing geometry is added.
+- Health and burning status are shown below the destination controls. **Return to start** restores health. Hazards apply identically to the player and AI walker.
+- Sound diagnostics show independent local and external work counters. The native mixer's 16 voices and four echo-enabled voices remain separate limits.
+- **Export package** saves geometry, semantic sectors/doors/hazards, safe navigation LUTs and certificates. Touch movement is not implemented.
 
-## Engine and navigation
+## Safe navigation and geometry
 
-The test starts from the local **v0.1.3** body collision, movement controller and BVH snapshot. Its minimal WebGPU renderer uses that snapshot's packed vertices, frame layout and dynamic-lighting shader. This is a dedicated adapter, not the full current game renderer. The current game is versioned independently.
+One welded, oriented floor/wall/ceiling shell is compiled from exact snapped polygons and independent piecewise floor/ceiling planes. Sector risers and ceiling soffits are structural. Closure checks require every edge to have exactly two opposing incidences and compare signed shell volume to the integrated sector volume. Cores and posts remain actual exclusions shared by rendering, collision and navigation.
 
-[BASELINE.json](engine/BASELINE.json) records captured source hashes and the starting commit. The snapshot included local work at capture time; it is not claimed to equal a release tag. The adapter imports the shared structural mesh, queries actual floor/ceiling triangles for column membership and derives support from the highest floor beneath the complete AABB footprint. M3 extends the snapshot controller with bounded grounded lift/forward/down movement over real steps, using continuous SAT collision and clearance checks. It retains the captured movement fallback, body SAT and BVH; this is not a claim of current game-controller parity. No invisible collision ramps or geometry details are generated. Adaptations are recorded in BASELINE.json.
+The required navigation domain is now explicitly **safe traversable space**, excluding unreachable platforms and lethal sectors, with a 2 m standoff around radioactive features. The complete domain is then eroded by the composite AABB plus 12 mm. No connected subset is silently substituted. Every room, hallway, donut quadrant and post bypass must be represented in one component, with exact endpoints, full all-pairs next-hop/cost validation and continuous live-engine terrain traversal witnesses. Optional unreachable/lethal feature sectors are deliberately outside this promise. Reachable platforms and shallow escapable pits remain in it.
 
-The conservative routing profile has half-width **1.84336 m** and height **2.50789 m**, plus a 12 mm configuration-space safety margin. It contains the current navigation allowances for all 18 existing character models and their level-pitch machinegun yaw extents. Minimum footprint headroom, maximum grade and maximum riser are checked before activation. Routes cover the entire eroded polygonal free-space domain projected onto the validated terrain, including all space around cores and posts; they do not accept a 75% connected subset. Convex navigation cells share explicit portals. Weighted all-pairs next hops/costs are computed and the entire next-hop forest is checked for valid edges, exact endpoints, costs and cycles; and every directed edge has a fully sampled, critical-boundary-split 3D traversal witness certified with the adapter's continuous body-box sweeps. AABB support includes contact-skin allowance.
+The composite half-width **1.84336 m** and height **2.50789 m** contain the current 18 model navigation allowances and level-pitch machinegun yaw extents. Bounded step traversal uses full-footprint floor support and continuous lift/forward/down SAT. M4 retains the captured **v0.1.3-based** controller/BVH adapter; it does not establish current game-controller parity. [BASELINE.json](engine/BASELINE.json) records original hashes and adaptations. WASM remains fixed at 32 MiB.
 
-Twelve compressed packages, four seeds for each room count, contain geometry, topology, clearance regions, LUTs and validation reports. Engine/profile/package hashes and generator/schema identity guard loads. A failed or superseded candidate retains the active world. At 4 m, passage capacity may be fewer than three largest Selves abreast.
+Qualified schema-4 packages use generator identity `m4.0` and engine/profile/package hashes. Failed and superseded candidates retain the active world. Closed door states are runtime state; static LUT qualification assumes passable doors, while separate live-controller tests verify automatic traversal and both directions for every generated door at 4 m and 12 m fixtures.
 
-## Build and test
+## Environmental rules
 
-From the repository root:
+Fatal liquid pits kill on liquid contact. Nonfatal heat contact deals 45 health/s; sustained exposure increases ignition probability. Burning persists for four seconds after ignition and drains 18 health/s after leaving heat. Radiation has a 2 m finite range from a full hull to the source surface, quadratic falloff and stronger 100 health/s contact damage. These are prototype tuning values, shared by all Selves. Radiation has a finite zero-dose boundary so safe AI bypasses can be proven. No armor, resistance or player-specific exemption is applied here.
+
+## Sound handoff
+
+[LEVEL_GENERATOR_AUDIO.md](../docs/LEVEL_GENERATOR_AUDIO.md) defines the data contract, room/corridor graph, structural sector cells, dynamic door loss and the two work budgets. Default travel remains **three room→corridor→room stages / six transitions**. A closed door adds 24 dB loss; aperture reduces that loss. Strongest-route selection keeps bounded Pareto labels for distance and transmission, so an open alternate route can win.
+
+High resolution applies only to origins in the listener's current room. It shares **128 propagation/reflection work samples per 10 Hz update** across sounds. Low resolution has its own **128 external graph-state/sector evaluations per update**. These counts are not PCM samples or voice counts. High rays use actual 3D engine collision, including steps, ceilings, posts and doors; finite image-source echoes validate both 3D legs. Remote output uses bounded room/corridor propagation. Recording playback, HRTF and optional late reverb reuse v0.1.6 modules through an optional routing binding. The main game keeps its existing router unless supplied this binding.
+
+## Build and verify
 
 ```sh
 node level-generator/tools/build-profiles.mjs
 sh level-generator/tools/build-wasm.sh
 node level-generator/tools/check-core.mjs
 node level-generator/tools/check-acoustics.mjs
+node level-generator/tools/check-m4.mjs
 node level-generator/tools/build-catalogue.mjs
 node level-generator/tools/check-catalogue.mjs
 node level-generator/tools/check-browser.mjs
+node level-generator/tools/check-acoustics-browser.mjs
 node tools/build-pages.mjs
 node tools/check-pages.mjs
-GENERATOR_URL=https://pipebrain.github.io/eigengott/level-generator/ node level-generator/tools/check-browser.mjs
 ```
 
-Rust is pinned by `rust-toolchain.toml`; an existing local toolchain is supported by the build script. Core checks can run in CI; browser checks use the repository's development Chrome/Metal harness. Reports/screenshots go to ignored `.local/level-generator-checks/`. Runtime needs WebGPU and gzip streams, with no npm runtime dependencies.
+Rust is pinned at 1.100.0. Reports and screenshots are ignored under `.local/level-generator-checks/`; research remains private under `.local/level-generator/`. Geometry vendor code and [licenses](licenses/geometry.txt) remain pinned and local. GitHub Pages stages runtime files only.
 
-The M3 core suite checks 96 layouts, 1,115 distinct section widths, 20,992,608 LUT paths and 1,029,150 continuous collision sweeps. Sampled 4 m/12 m fixtures at every size replay the controller from the initial room to every room/hallway and back, over actual slopes and steps without jumping, with permitted local curve widening. Ninety-six additional controller journeys traverse donut quadrants in both directions. Structural core/post centres reject occupancy and block real eye-height rays. Planar triangulation is checked for exact area/coverage and floor-edge conformity so room joins cannot turn into invisible walls. Browser checks cover native input, qualified packages, rejection/cancellation, UI/resize and full-region tours for six- and twelve-room cases. These are bounded development checks; do not claim every actor pair was separately replayed.
+## Limits
 
-## Remaining scope
-
-Doors, sky openings, hazards and natural variants remain later work. Terrain is a single-valued heightfield with no overpasses or stacked rooms; production sector-list/Recomposition integration remains pending. Point lights currently use the snapshot's shadowless case and can spill across walls; sealed geometry does not establish light occlusion. Other weapons, arbitrary pitch while traversing, dynamic crowd behavior, device-loss recovery, physical-device acceptance and production Recomposition integration remain unverified. See the shared [roadmap](../docs/LEVEL_GENERATOR.md).
-
-## Geometry dependencies
-
-Pinned local [polygon-clipping 0.15.7](https://github.com/mfogel/polygon-clipping/tree/v0.15.7) performs union, subtraction and AABB boundary expansion. [Earcut 3.0.2](https://github.com/mapbox/earcut/tree/v3.0.2) triangulates polygons with holes; its output is independently checked for coverage and overlap before use. There are no CDN requests or npm runtime dependencies. Preserve [licenses](licenses/geometry.txt) and [vendoring provenance](vendor/README.md).
-
-## Acoustic handoff
-
-Exported schema-3 packages include `acoustics`: stable map-local room/corridor node IDs, reciprocal edges, valid navigation-path distances, portal anchors, up to four real finite wall spans per room and a precomputed three-stage propagation table. `acoustics.js` provides a DOM/Web-Audio-independent query runtime. See the [v0.1.6 integration contract](../docs/LEVEL_GENERATOR_AUDIO.md), including inverse-square energy versus playback amplitude, corridor loss, reflection timing, coordinate mapping and cache invalidation. The acoustic overlay is a data inspection view, not audio playback acceptance.
+This is still a roofed, single-valued heightfield. Sky openings, natural variants, stacked rooms, production sector-list/Recomposition integration, all weapons/pitches, dynamic crowds and physical-device acceptance remain pending. The AI demonstration uses one actual walker, not a crowd. Point lights currently lack wall occlusion and may spill through walls. The sound model is a bounded approximation, with event/voice culling under load, not a full wave-equation solver or calibrated environmental audio simulation. Combat pacing and damage balance require user play review.

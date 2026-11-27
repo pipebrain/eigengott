@@ -1,6 +1,7 @@
 // M3: polygon outlines, shared closed shell and full-domain clearance mesh.
 import {Q,clip,cross,same,pointKey,area,cleanRing,contains,boundaries,triangulate,conform,erode,boxCovered} from './geometry.js';
 import {refineOutline,terrainFaces} from './terrain-mesh.js';
+import {safePolygons} from './sectors.js';
 import {supportHeight,validateElevation} from './elevation.js';
 export {makePlan,random,GENERATOR_VERSION} from './plan.js';
 export {boxCovered} from './geometry.js';
@@ -14,19 +15,19 @@ export function compileStructure(plan){
  polygons=clip.union(polygons).map(p=>p.map(r=>cleanRing(r,true)));
  if(polygons.length!==1)throw new Error('Structural floor domain is disconnected.');
  polygons=refineOutline(plan,polygons);
- const terrain=terrainFaces(plan,polygons),points=[],triangles=[],kinds=[],vertices=new Map();
+ const terrain=terrainFaces(plan,polygons),points=[],triangles=[],kinds=[],materials=[],vertices=new Map();
  const vertex=p=>{const q=p.map(v=>Math.round(v*Q)),key=q.join(',');if(!vertices.has(key)){vertices.set(key,points.length/3);points.push(...q);}return vertices.get(key);};
- for(const {p,kind}of terrain.faces){triangles.push(...p.map(vertex));kinds.push(kind);}
+ for(const {p,kind,material}of terrain.faces){triangles.push(...p.map(vertex));kinds.push(kind);materials.push(material||0);}
  const boundary=boundaries(polygons);
  if(points.length/3>16384||triangles.length/3>32768)throw new Error('Structural mesh exceeds the engine capacity.');
  const xs=[...new Set(polygons.flat(2).map(p=>p[0]))].sort((a,b)=>a-b),ys=[...new Set(polygons.flat(2).map(p=>p[1]))].sort((a,b)=>a-b);
- return{points:new Int32Array(points),triangles:new Uint32Array(triangles),kinds,polygons,boundary,xs,ys,extent:Math.max(xs.at(-1)-xs[0],ys.at(-1)-ys[0]),floorArea:area(polygons),terrainTiles:terrain.tileCount,floorMin:Math.min(...points.filter((_,i)=>i%3===2))/Q,ceilingMax:Math.max(...points.filter((_,i)=>i%3===2))/Q};
+ return{points:new Int32Array(points),triangles:new Uint32Array(triangles),kinds,materials,sectorCells:terrain.cells,volume:terrain.volume,polygons,boundary,xs,ys,extent:Math.max(xs.at(-1)-xs[0],ys.at(-1)-ys[0]),floorArea:area(polygons),terrainTiles:terrain.tileCount,floorMin:Math.min(...points.filter((_,i)=>i%3===2))/Q,ceilingMax:Math.max(...points.filter((_,i)=>i%3===2))/Q};
 }
 export function validateStructure(plan,s){
  const edges=new Map();let volume6=0;
  for(let i=0;i<s.triangles.length;i+=3){const ids=Array.from(s.triangles.slice(i,i+3)),p=ids.map(id=>Array.from(s.points.slice(id*3,id*3+3),v=>v/Q));const[a,b,c]=p,ab=b.map((v,k)=>v-a[k]),ac=c.map((v,k)=>v-a[k]),n=[ab[1]*ac[2]-ab[2]*ac[1],ab[2]*ac[0]-ab[0]*ac[2],ab[0]*ac[1]-ab[1]*ac[0]];if(Math.hypot(...n)<1e-8)throw new Error('Degenerate triangle.');volume6+=a[0]*(b[1]*c[2]-b[2]*c[1])+a[1]*(b[2]*c[0]-b[0]*c[2])+a[2]*(b[0]*c[1]-b[1]*c[0]);for(let k=0;k<3;k++){const a=ids[k],b=ids[(k+1)%3],key=a<b?a+':'+b:b+':'+a,old=edges.get(key)||[0,0];old[0]++;old[1]+=a<b?1:-1;edges.set(key,old);}}
  let unmatched=0,nonmanifold=0,winding=0;for(const [count,balance]of edges.values()){if(count===1)unmatched++;if(count>2)nonmanifold++;if(balance!==0)winding++;}
- const volume=-volume6/6,expected=s.floorArea*plan.ceiling;
+ const volume=-volume6/6,expected=s.volume;
  if(unmatched||nonmanifold||winding||volume6>=0||Math.abs(volume-expected)>Math.max(.001,expected*1e-8))throw new Error('Enclosure validation failed: '+JSON.stringify({unmatched,nonmanifold,winding,volume,expected}));
  if(plan.rooms.some(r=>!r.hallways.length)||plan.hallways.some(h=>h.a===h.b||!plan.rooms[h.a]||!plan.rooms[h.b]||h.width<4||h.width>12||h.sectionWidths.some(w=>w<4||w>12)))throw new Error('Room/hallway incidence or width invalid.');
  for(const r of plan.rooms)for(const o of r.obstacles)if(contains(s.polygons,centre(o.outline)))throw new Error('Structural obstacle was not subtracted.');
@@ -57,18 +58,18 @@ export function buildNavigation(plan,s,profile){
  const radius=Math.ceil((profile.radius+.012)*Q)/Q,height=profile.height;
  if(height>=plan.ceiling)throw new Error('Insufficient headroom.');
  const elevation=validateElevation(plan,{radius,height});
- const domain=erode(s.polygons,radius);if(domain.length!==1)throw new Error('Clearance domain is disconnected.');
+ const safe=safePolygons(plan,s.polygons),domain=erode(safe,radius);if(domain.length!==1)throw new Error('Clearance domain is disconnected.');
  const polygons=convexRegions(triangulate(domain)),regions=polygons.map(p=>({polygon:p,x0:Math.min(...p.map(v=>v[0])),x1:Math.max(...p.map(v=>v[0])),y0:Math.min(...p.map(v=>v[1])),y1:Math.max(...p.map(v=>v[1]))}));
  const liftPoint=p=>[...p,supportHeight(plan,...p,profile.radius+.006)+.035],points=polygons.map(p=>liftPoint(centre(p))),edges=points.map(()=>[]),owners=points.map((_,i)=>i),targets=[];
  const connect=(a,b)=>{const d=Math.hypot(...points[a].map((v,k)=>v-points[b][k]));edges[a].push([b,d]);edges[b].push([a,d]);};
  const add=(p,region)=>{const id=points.length;points.push(liftPoint(p));edges.push([]);owners.push(region);connect(id,region);return id;};
  for(let a=0;a<polygons.length;a++)for(let b=a+1;b<polygons.length;b++){const at=portal(polygons[a],polygons[b]);if(at){const n=add(at,a);connect(n,b);}}
  const attach=(p,label,kind,id)=>{const region=polygons.findIndex(r=>r.every((a,i)=>cross(a,r[(i+1)%r.length],p)>=-1e-7));if(region<0||!boxCovered(s,...p,radius))throw new Error('Region target lacks clearance: '+label);const node=add(p,region);targets.push({label,kind,id,node,point:points[node]});};
- for(const r of plan.rooms){attach(r.anchor,r.name,'room',r.id);if(r.kind==='donut'){const o=r.obstacles[0],xs=o.outline.map(v=>v[0]),ys=o.outline.map(v=>v[1]);for(const [p,label]of [[[r.cx,(Math.max(...ys)+r.y1)/2],'north'],[[(Math.max(...xs)+r.x1)/2,r.cy],'east'],[[r.cx,(Math.min(...ys)+r.y0)/2],'south'],[[(Math.min(...xs)+r.x0)/2,r.cy],'west']])attach(p,r.name+' · ring '+label,'ring',r.id);}if(r.kind==='posts')for(const sign of [-1,1])attach([r.cx,r.cy+sign*7],r.name+' · posts '+(sign<0?'south':'north'),'post-bypass',r.id);}
+ for(const r of plan.rooms){attach(r.anchor,r.name,'room',r.id);if(r.kind==='donut'){const o=r.obstacles[0],haz=plan.hazards.find(h=>h.wall===o.outline)||plan.hazards.find(h=>h.sector===r.sectors.at(-1)),outline=haz?haz.polygons[0][0]:o.outline,pad=haz?.radius||0,xs=outline.map(v=>v[0]+Math.sign(v[0]-r.cx)*pad),ys=outline.map(v=>v[1]+Math.sign(v[1]-r.cy)*pad);for(const [p,label]of [[[r.cx,(Math.max(...ys)+r.y1)/2],'north'],[[(Math.max(...xs)+r.x1)/2,r.cy],'east'],[[r.cx,(Math.min(...ys)+r.y0)/2],'south'],[[(Math.min(...xs)+r.x0)/2,r.cy],'west']])attach(p,r.name+' · ring '+label,'ring',r.id);}if(r.kind==='posts')for(const sign of [-1,1])attach([r.cx,r.cy+sign*7],r.name+' · posts '+(sign<0?'south':'north'),'post-bypass',r.id);}
  for(const h of plan.hallways)attach(h.anchor,h.name,'hallway',h.id);
  if(points.length>2048)throw new Error('Waypoint budget exceeded.');
  const visited=new Set([0]),queue=[0];for(let i=0;i<queue.length;i++)for(const[n]of edges[queue[i]])if(!visited.has(n)){visited.add(n);queue.push(n);}if(visited.size!==points.length)throw new Error('Clearance domain is disconnected.');
- return{radius:profile.radius,clearanceRadius:radius,supportRadius:profile.radius+.006,height,elevation,supportCuts:{x:plan.elevation.x.segments.flatMap(s=>[s.lo,s.hi]),y:plan.elevation.y.segments.flatMap(s=>[s.lo,s.hi])},regions,domain,points,edges,owners,targets,count:points.length,...lookup(points,edges),componentCount:1,coverage:'Entire polygonal XY domain on validated stepped/sloped support surfaces, eroded by the declared AABB composite profile plus a 12 mm safety margin; cores and posts excluded.'};
+ return{radius:profile.radius,clearanceRadius:radius,supportRadius:profile.radius+.006,height,elevation,supportCuts:{x:[...plan.elevation.x.segments.flatMap(s=>[s.lo,s.hi]),...plan.sectors.flatMap(s=>[s.bounds[0],s.bounds[2]])],y:[...plan.elevation.y.segments.flatMap(s=>[s.lo,s.hi]),...plan.sectors.flatMap(s=>[s.bounds[1],s.bounds[3]])]},regions,domain,points,edges,owners,targets,count:points.length,...lookup(points,edges),componentCount:1,safePolygons:safe,excludedSectors:plan.sectors.filter(s=>!s.safe).map(s=>s.id),coverage:'Entire declared safe polygonal XY domain on validated stepped/sloped support surfaces, eroded by the declared AABB composite profile plus a 12 mm safety margin; cores and posts excluded.'};
 }
 export function route(nav,from,to){if(from<0||to<0||from>=nav.count||to>=nav.count)return null;const path=[from];while(from!==to){from=nav.next[from*nav.count+to];if(from===65535||path.length>nav.count)return null;path.push(from);}return path;}
 export function validateRoutes(nav){

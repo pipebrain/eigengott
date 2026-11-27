@@ -1,75 +1,70 @@
-# Level generator → v0.1.6 acoustic contract
+# Generator acoustics contract — M4 / v0.1.6 handoff
 
-This is a data/query handoff for the separate basic 3D audio engine. It creates no audio context, media, fixtures or world meshes. The user confirmed **three room→corridor→room stages** by default and **four or fewer wall echoes** per room.
+The independent blockout generator exports a data-only acoustic graph and structural sector cells. `level-generator/acoustics.js` owns bounded graph queries; `sector-sound.js` owns the listener work budgets and local samples. Native `playable-test/Audio` and `SpatialAudio` provide recording playback, HRTF and optional reverb. Their routing binding is optional; the current game retains its existing router.
 
-## Package and identity
+## Confirmed decisions
 
-Schema-3 level packages expose `package.acoustics`. The acoustic schema is independently versioned (`schema: 1`), with map-local IDs `room:N` and `corridor:N`. Recreate the acoustic runtime whenever a validated world activates. Do not carry caches or delayed events into another seed, geometry hash or generator version just because an ID such as `room:0` still exists.
+- Three room→corridor→room stages by default, meaning six graph transitions; configurable to 0–8 stages.
+- High resolution: **128 shared propagation/reflection work samples per update**, for sounds originating in the listener's current room.
+- Low resolution: its own **128 external listener-sector/graph-state evaluations per update**. Same-corridor sounds use the coarse model. Changing listener room reclassifies active origins.
+- Four or fewer finite structural wall spans per room for early echoes. Corridors damp propagation and create no wall echo taps.
+- Door operation is automatic for every Self, with occupied closure blocked/reversed. Closed doors attenuate sound.
+- These budgets are separate from PCM buffer size, active voice count and audio sample rate.
 
-- `nodes`: kind, owner ID, label, XYZ anchor, footprint, navigation target and at most four reflection walls.
-- `edges`: reciprocal room/corridor connections, portal index, positive navigation-path distance in metres and half-corridor attenuation in dB. These do not connect rooms through closed walls.
-- `portals`: inset approach anchors for panning incoming sound. These are not door polygons or an operable-door implementation.
-- `precomputed`: bounded propagation candidates for each source, destination and transition count under the default cap.
-- `elevation`, `polygons`: point ownership excludes post/core solids, space below floors and space above ceilings.
+## Data
 
-Coordinates are engine **[x, y, z] in metres, z up**. Existing Web Audio coordinates map to **[x, z, -y]**.
+Packages use schema 4 and generator `m4.0`; the extended room/corridor acoustic contract retains `schema:1` for the existing adapter. Validate the enclosing package version before interpreting M4 fields.
 
-## Query
+- `nodes`: stable map-local `room:N` / `corridor:N` IDs, anchor XYZ, footprint, nav target and up to four finite wall spans.
+- `edges`: reciprocal room/corridor edges with portal, validated navigation distance, 3 dB base loss and door IDs.
+- `doors`: structural axis, threshold position, floor/top, width and closed loss. Runtime aperture/revision is supplied separately, never baked into a static LUT.
+- `sectors`: semantic room height patches, safe/unsafe classification and hazard type.
+- `cells`: actual disjoint structural partitions, polygon footprint, floor/ceiling plane and parent acoustic node. They include room sectors and corridor ramp/tread/landing cells.
+- `polygons`, `boundary`, `elevation`: the same structural domain used for collision and navigation.
+- `precomputed`: default-stage candidates without runtime door loss.
+
+All distances are metres, x/y horizontal and z up. Web Audio uses `[x,z,-y]`. IDs are local to a map: discard events, cache and bindings when activating a replacement world.
+
+## Runtime and doors
 
 ```js
-import {createAcousticRuntime, locateAcousticNode}
-  from '../level-generator/acoustics.js';
-
-// Build once on validated-world activation, not for each sound or audio frame.
-const graph = levelPackage.acoustics;
-const acoustics = createAcousticRuntime(graph);
-
-const sourceNode = locateAcousticNode(graph, sourceXYZ);
-const listenerNode = locateAcousticNode(graph, listenerXYZ);
-const travel = acoustics.evaluate({
-  sourceNode, listenerNode,
-  sourcePosition: sourceXYZ, listenerPosition: listenerXYZ,
-  maxStages: 3,
-  referenceDistance: 1, // Saturates inside this distance; mixer may tune it.
-});
-
-if (travel.audible) {
-  // Absolute transmission amplitude; multiply by the event's own source gain.
-  gainNode.gain.value = sourceGain * travel.gain;
-  // Use travel.entryPosition for incoming direction around room connections.
-  // Optional propagation delay: travel.delaySeconds from emission time.
-  // Allocate at most travel.reflections.length <= 4 parallel early-echo taps.
-}
+const doors = createDoors(plan);
+const runtime = createAcousticRuntime(graph, {doors});
+const sound = createSectorSound(graph, runtime, {trace: structuralEngineRay});
+// All actors' full collision bounds participate in door occupancy.
+installDoors(sim, doors.update(dt, actors));
+sound.emit('weapon-fire', muzzleXYZ);
+// At a controlled 10 Hz cadence:
+sound.update(listenerXYZ, monotonicSeconds, {maxStages: 3});
+const travel = sound.route(sourceXYZ, {soundRooms: 3, soundDistance: 160});
 ```
 
-A stage is two graph edges, so the default cap is **six transitions**. Source and listener may be rooms or corridors. Zero stages confines a sound to its source node. Runtime queries permit integer stage limits 0–8; the inspection UI exposes 0–4. Unknown nodes and destinations beyond the cap return `audible: false`. Invalid limits/positions/reference distance throw an error.
+A closed door adds 24 dB; opening reduces it linearly to zero in dB. Every aperture change invalidates graph caches. Endpoint corrections account for origins/listeners on either side of a door within a corridor. Bounded dynamic programming keeps nondominated distance/loss candidates per (node, transition count), capped at 32 labels; exceeding this cap rejects the query rather than growing without bound. Selection uses strongest arriving energy, permitting a longer open alternative to beat a short closed route.
 
-## Falloff, loss and early echoes
-
-For path distance `d`, reference distance `r`, and total corridor loss `L` dB:
+For path distance `d`, reference distance `r = 1 m`, and combined loss `L`:
 
 ```text
 energyGain = (r / max(r, d))² × 10^(-L/10)
-gain       = sqrt(energyGain)
-delay      = d / 343 seconds
+playback amplitude = sqrt(energyGain)
+propagation delay = d / 343 seconds
 ```
 
-This is inverse-square **energy/intensity** falloff. Playback amplitude follows its square root; it is not another square-law multiplier. Each half traversal to/from a corridor anchor costs 3 dB, giving 6 dB for room→corridor→room. These are explicit prototype defaults, not measured material absorption. Tune `referenceDistance` and per-event source gain in the mixer. Avoid applying PannerNode attenuation again: for example retain spatial panning while setting `rolloffFactor = 0`. The Web Audio specification defines separate panner distance gain, so applying both would duplicate attenuation. [Web Audio distance models](https://www.w3.org/TR/webaudio/#enumdef-distancemodeltype).
+The panner uses zero rolloff to avoid applying distance falloff twice. Room/corridor anchor offsets remain a coarse path-distance approximation. The inspection graph can evaluate full bounded candidates; the live low-resolution listener pass may omit remote states when its independent 128-work budget is exhausted.
 
-A room retains at most one real finite wall span per cardinal side. The image-source calculation verifies that the reflection hits that span, between its floor and ceiling, and that both planar legs remain in free space around posts/cores. Returned reflection gains are absolute path amplitudes, including corridor loss and the prototype wall energy reflectance of 0.35. Their delays are absolute from emission time. Do not multiply them by `travel.gain` a second time. Corridors return no reflection taps. There is no feedback, recursive reflection, floor/ceiling reflection or diffuse reverb tail.
+## Shared budgets and lifecycle
 
-## Performance and approximation
+Each 10 Hz update advances at most 76 local ray samples, reserving work for finite wall reflections and direct occlusion checks. Every local early-wall test reserves three samples (image source and two 3D trace legs); a direct occlusion test reserves one. The sum cannot exceed 128 even across many sources. The local cache prevents repeated voices from charging the same origin twice during that update. Rays reflect from actual 3D surfaces, track current sector, decay with distance/reflection and retire after four bounces, low energy or leaving the listener room. A blocked local direct path receives an additional approximate 12 dB reduction; validated reflected paths remain available.
 
-Propagation uses dynamic programming over **(node, hop count)**. For `N` acoustic nodes and `H = 2 × stages` transitions, state storage is bounded by `N × (H + 1)`; expansion is bounded by that count and bounded graph degree. Cycles cannot create an exponential path flood or repeated energy summation. The default tables are baked into qualified packages; configurable-cap results are cached within a finite node/configuration budget. Each query examines at most `H + 1` candidates and up to four reflection spans.
+Low resolution first spends at most 96 evaluations on graph states from the listener. It spends the remaining budget on external sector/node evaluations, prioritizing active origins, with a hard total of 128. Remote playback consumes these prepared routes, without initiating an unbudgeted graph traversal. Omitted routes are silent until a later pass can admit them. The two budgets do not borrow from one another.
 
-The mixer still needs its own source/voice cap and a bounded update cadence. This module is not an audio-thread ray tracer. Point ownership and reflection occlusion inspect polygon boundaries; call them at controlled event/update times. Reflection and path work should not be inserted unbounded into audio callbacks. [Steam Audio simulation scheduling guidance](https://valvesoftware.github.io/steam-audio/doc/capi/simulation.html).
+The event pool holds at most 64 events for at most two seconds. Eight initial ray directions per admitted event fit in a 512-wave pool. Overflow is counted and culled. The mixer independently keeps its existing 16 voices, four echo-enabled voices × four taps, and four shared reverb delay lines. Echoes and reverb do not emit new game noise events or recursively multiply graph paths.
 
-This is a lumped room/corridor model: inter-node distances follow valid navigation routes and intranode position offsets are approximate. It chooses one strongest bounded path rather than mixing all loop paths. It does not model physical diffraction, frequency-dependent absorption, moving doors, full 3D ray acoustics or detailed reverberation around a donut core. Room geometry, posts, slopes, risers and ceilings remain structural blockout. Actual v0.1.6 playback, listening calibration and physical-device audio acceptance belong to that engine's integration checks.
+## Diagnostic projectile
 
-## Verification
+The blockout viewer's Test shot emits stock OpenArena rocket fire, travel and impact recordings without adding projectile meshes. A swept ray clips movement to the earliest structural/door hit. Segment intersections with every crossed sector boundary and floor/ceiling plane produce ordered entry events, so a fast projectile cannot skip sectors. Remaining within one sector does not create a new entry every physics tick. A wall hit emits an impact source just inside the free side. These hooks are isolated prototype behavior; full production weapon/AI-hearing integration is a later handoff.
 
-`node level-generator/tools/check-acoustics.mjs` verifies a chain with an exactly known three-stage cutoff, cycle/state/cache bounds, inverse-square energy ratios, dB conversion, travel delays, four analytically known image-source reflections, generated graph incidence and ownership, and reflection energy below the arriving direct signal. The regular generator checks also validate the acoustic graph in every qualified candidate and reproduce it from each catalogue seed.
+## Verification and limits
 
-## Viewer audition and native mixer
+`check-acoustics.mjs` checks exact stage cutoff, finite falloff, dB conversion, reflection geometry and ownership. `check-m4.mjs` checks closed/open door loss, automatic/no-crush traversal, both independent 128 caps under load, listener reclassification, expiry and high-speed sector crossings. Browser checks use a native audio gesture and confirm routed HRTF playback; they do not establish listening quality or physical-device acceptance.
 
-The generator viewer now reuses the v0.1.6 `Audio`/`SpatialAudio` modules for **Enable sound** and **Sound at selected destination**. Its `AcousticRouter` accepts this schema through `acousticSceneFromContract`. The mixer keeps its own softened distance curve, maximum distance, voice/echo budget and optional late reverb. These native playback gains/reflections are an approximation and are not bit-for-bit results of the pure generator query above. The graph overlay shows topological reach; audible output also depends on the mixer's distance, gain and voice culling. No new world geometry or audio fixtures are added.
+This approximation omits material/frequency-dependent absorption, diffraction and a full acoustic wave equation. Room image-source spans are at most four cardinal walls; actual 3D leg traces reject steps, posts, cores, ceilings and doors that block those paths. Local sample rays inspect other surfaces, but are not a separate audible source per ray. Late reverb remains the native shared approximation. Tune mix, range and hazard/weapon audibility during play review.
