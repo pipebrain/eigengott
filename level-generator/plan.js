@@ -1,8 +1,9 @@
 import {snap,rectangle,clip} from './geometry.js';
-export const GENERATOR_VERSION='m2.0';
+import {makeElevation} from './elevation.js';
+export const GENERATOR_VERSION='m3.0';
 export function random(seed){let s=seed>>>0;return()=>{s=(s+0x6d2b79f5)>>>0;let t=Math.imul(s^s>>>15,s|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
 const key=(a,b)=>[Math.min(a,b),Math.max(a,b)].join(':');
-export function makePlan(seed,count=9,{widthOverride=null,features=true}={}){
+export function makePlan(seed,count=9,{widthOverride=null,features=true,elevation=true}={}){
  if(!Number.isInteger(seed)||seed<0||seed>4294967295)throw new Error('Seed must be an unsigned 32-bit integer.');
  if(![6,9,12].includes(count))throw new Error('Choose 6, 9 or 12 rooms.');
  if(widthOverride!==null&&(!Number.isFinite(widthOverride)||widthOverride<4||widthOverride>12))throw new Error('Corridor width must be within 4–12 m.');
@@ -24,7 +25,7 @@ export function makePlan(seed,count=9,{widthOverride=null,features=true}={}){
   rooms[e.a].hallways.push(id);rooms[e.b].hallways.push(id);return{id,name:'Hallway '+(id+1),a:e.a,b:e.b,type:e.type,width,points,rects};
  });
  const plan={seed,count,cols,rows,rooms,hallways,main,ceiling:5.5,version:GENERATOR_VERSION,features};
- addShapes(plan,rng);return plan;
+ addShapes(plan,rng);makeElevation(plan,rng,{elevation});return plan;
 }
 
 function roundedRoom(r){

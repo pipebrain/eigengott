@@ -3,3 +3,7 @@
 header a{color:#c1d6df;text-underline-offset:3px}
 
 .scope a{color:#c1d6df;text-underline-offset:3px}
+
+@media(min-width:741px){aside{max-height:calc(100vh - 300px);overflow:auto;padding-right:5px}.view,#world{height:calc(100vh - 300px);min-height:550px;max-height:none}}
+
+#map{flex-shrink:0}

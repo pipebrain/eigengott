@@ -354,3 +354,7 @@ Movement profile 0 now means Quake 3; remove the former alternate movement optio
 Adapt id Software's actual PM_SlideMove, PM_StepSlideMove, PM_ClipVelocity and PM_CorrectAllSolid code to body traces. Preserve pinned upstream source, corresponding Rust source and GPL-2.0-or-later notices. Use multi-plane clipping, crease motion, repeated-plane nudges, step-up / down, bounded overlap sampling and a verified prior player position. Test corners, stairs, floor seams and generated ramps across all arena scales. These tests bound regressions; they do not establish universal geometry or complete Quake engine parity.
 
 Passive player regeneration: 1 HP/sec after five seconds without damage, cap 100, hit resets delay, no pause / death healing. Expose rate (including zero to disable) and delay in H. Loot entry's full heal remains.
+
+## Separate generator M3 — elevation and acoustic contract
+
+The separate blockout generator now compiles seeded room elevations, shallow slopes, true stair risers and terrain-following ceilings into a conforming closed shell. A largest-envelope terrain adapter validates footprint support, headroom and bidirectional room/hallway travel without jumping. The acoustic handoff exposes stable map-local room/corridor IDs, bounded three-stage propagation and at most four finite room-reflection spans. See [LEVEL_GENERATOR.md](LEVEL_GENERATOR.md) and [LEVEL_GENERATOR_AUDIO.md](LEVEL_GENERATOR_AUDIO.md) for the exact generator-side contracts and tested limits; the v0.1.6 mixer owns playback budgets.

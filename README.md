@@ -30,6 +30,6 @@ todo:
 - [Build menu](https://pipebrain.github.io/eigengott/)
 - [Current game](https://pipebrain.github.io/eigengott/play.html)
 - [Engine tests](https://pipebrain.github.io/eigengott/tests.html)
-- [Level generator M2](https://pipebrain.github.io/eigengott/level-generator/)
+- [Level generator M3](https://pipebrain.github.io/eigengott/level-generator/)
 
 Generator scope, contracts and next milestones: [shared roadmap](docs/LEVEL_GENERATOR.md). Hosting and checks: [deployment](docs/DEPLOYMENT.md).

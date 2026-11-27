@@ -1,226 +1,250 @@
 {
-  "schema": 2,
-  "generator": "m2.0",
+  "schema": 3,
+  "generator": "m3.0",
   "engineVersion": "0.1.3",
-  "engineHash": "193fd4f9dc293db11faa001705038674f4094b639a7b1ac3a91f664a79dd6099",
+  "engineHash": "e48e1912a7b939817d62432c6af1d9de28a5b521562bd0de3cd7f2fac6d3b627",
   "profileHash": "b04f5021e21c044ac72e58ffce2bf87b29e60f00a85ae8058864a146fb1979b5",
-  "scope": "M2 curved corridors, donut cores and structural posts; composite profile and level-pitch machinegun only.",
+  "scope": "M3 sloped/stepped corridors, donut cores, posts and bounded acoustics; composite profile and level-pitch machinegun only.",
   "entries": [
     {
       "seed": 1776,
       "count": 6,
       "file": "1776-6.json.gz",
-      "sha256": "7b03684d38a4bed19c892a3c8770cad75fad21dfb75ce351500b611b67a7230c",
-      "bytes": 512834,
-      "geometryPointsHash": "ad75c3ed7275334ff52bbf99bf7e167af5d92cfca052bed1df1457e3e3428a6f",
-      "geometryTrianglesHash": "cd77d14debe0c2f0873267cc25b49ab5b594ff7ae5ef193b3152439db9af7fc0",
+      "sha256": "f42a77e8a4be438a624b25caa89f2aef5f16e640a782e320ea395a4244a274b4",
+      "bytes": 750257,
+      "geometryPointsHash": "9660befbb3529ec2eeffdc5df74451f59c2ec24b09c78c6f3edd2fa7c83166ab",
+      "geometryTrianglesHash": "3b45c90992f4a4c76d260c4c1ba968301235c80ba785eb42aaad5160ef577f8c",
       "widthMin": 4.4443359375,
       "widthMax": 9.37890625,
       "features": {
         "curved": 4,
         "donutRooms": 2,
-        "posts": 4
+        "posts": 4,
+        "slopes": 1,
+        "stairRisers": 18
       },
-      "waypoints": 266,
-      "lookupPaths": 70756
+      "waypoints": 318,
+      "lookupPaths": 101124
     },
     {
       "seed": 391,
       "count": 6,
       "file": "391-6.json.gz",
-      "sha256": "584e3b207aea7b60286381b77a47a08255788897b3a92d357c10853714967e5b",
-      "bytes": 540335,
-      "geometryPointsHash": "eca69e5f3dbf37ffe35adff0bf87a8505ea0063242ccda09f5d00112dfe360c3",
-      "geometryTrianglesHash": "62d3af3f2bbceaf34a9ac9ff5672de2a6a953373d4eca089fd519f4d7fd8f26a",
+      "sha256": "7e1b1a20ab21d9ee0f7b84bdfb9c288a0ba540381d62e7097af227deb1fbae1d",
+      "bytes": 856578,
+      "geometryPointsHash": "b072baf849862a96ea567651cdfae27b8ff0538ffb944be8f09ab56cbcac57aa",
+      "geometryTrianglesHash": "82e4d4d0a76879fb55c5620ce83d4f79049eb7834d08401eed8f5b7b4cdad868",
       "widthMin": 4.19140625,
       "widthMax": 11.84375,
       "features": {
         "curved": 4,
         "donutRooms": 2,
-        "posts": 4
+        "posts": 4,
+        "slopes": 1,
+        "stairRisers": 20
       },
-      "waypoints": 272,
-      "lookupPaths": 73984
+      "waypoints": 340,
+      "lookupPaths": 115600
     },
     {
       "seed": 7717,
       "count": 6,
       "file": "7717-6.json.gz",
-      "sha256": "461ed4d3f5ee0ab3373be1a45f81a9cb21d8f012c62dae54fd1e32d3f9b2e3bc",
-      "bytes": 561601,
-      "geometryPointsHash": "811bd5601d94dfa7643263c280e49cf8acee26387b8562957fde6a3fb6bbd0aa",
-      "geometryTrianglesHash": "b2ecb8ea0c80c2a593bff45dfc5134acc5c3a7c10da87c5df18cf51d05a15fcf",
+      "sha256": "71201f648c71271d0014b3076c5b10b64337306e335c51741124a27a66d4c0d6",
+      "bytes": 797068,
+      "geometryPointsHash": "03b60e74be288c50205d4d2d45bfd23754ddadb78cfc283af79c06f9ec6b9172",
+      "geometryTrianglesHash": "19b5131698c83f502c4a2844a308a408ce442c0fa04bc1e7478a93c7d1fa1851",
       "widthMin": 5.3046875,
       "widthMax": 11.52734375,
       "features": {
         "curved": 4,
         "donutRooms": 2,
-        "posts": 4
+        "posts": 4,
+        "slopes": 1,
+        "stairRisers": 16
       },
-      "waypoints": 280,
-      "lookupPaths": 78400
+      "waypoints": 328,
+      "lookupPaths": 107584
     },
     {
       "seed": 23059,
       "count": 6,
       "file": "23059-6.json.gz",
-      "sha256": "ce1e20773d29bcc7a50d75537d3a679a548f5b75b051e24ccbb1ac7dd71a8ad8",
-      "bytes": 577790,
-      "geometryPointsHash": "657c86c2c2f4d51b31e9ab07a06a708a265fd79a81b2409e042335c69a5123ca",
-      "geometryTrianglesHash": "39e6e13fa67b52c0e1cd0d26c029448ca155626250c37283bd2319abe9987dba",
+      "sha256": "5d816afe8fe3f7ff5b3e448464084714c9a6730bd02d5b9e06207d73ff055405",
+      "bytes": 758249,
+      "geometryPointsHash": "173ee1fa6791962c2fd20e2b70cef33974f59f11dfc0fc112b3cd0c83bc1455a",
+      "geometryTrianglesHash": "0d85af90e5250a03eb73189a99efb5b6c32ddd578ee60f83a1c148cfc73c3ff0",
       "widthMin": 7.638671875,
       "widthMax": 11.5966796875,
       "features": {
         "curved": 4,
         "donutRooms": 2,
-        "posts": 4
+        "posts": 4,
+        "slopes": 1,
+        "stairRisers": 16
       },
-      "waypoints": 284,
-      "lookupPaths": 80656
+      "waypoints": 320,
+      "lookupPaths": 102400
     },
     {
       "seed": 1776,
       "count": 9,
       "file": "1776-9.json.gz",
-      "sha256": "24f0f26da1486a983f933812b01db28a5f0e7c4cacbc2e3c976611ace1b39297",
-      "bytes": 1178768,
-      "geometryPointsHash": "cae6d04fe9fa90dcf5095ab1c974871309d6ed283c2f663bd08f3204fb908f08",
-      "geometryTrianglesHash": "e653098233bfaa541561364af76e5064e4723bd218969b6bb6b17b1674b90688",
+      "sha256": "861920e436f99f63b9a3ff64d50f5d50aa9719a6209898ab4176d18232ba4bd3",
+      "bytes": 1650281,
+      "geometryPointsHash": "fe326c62364a5034c255f4061b6f388078192bbcad833a657d678749582da471",
+      "geometryTrianglesHash": "beaca8732b36fa53386d58b31d1cf95522a825167a313726724f57899281327e",
       "widthMin": 4.4443359375,
       "widthMax": 11.796875,
       "features": {
         "curved": 7,
         "donutRooms": 2,
-        "posts": 6
+        "posts": 6,
+        "slopes": 2,
+        "stairRisers": 18
       },
-      "waypoints": 408,
-      "lookupPaths": 166464
+      "waypoints": 480,
+      "lookupPaths": 230400
     },
     {
       "seed": 391,
       "count": 9,
       "file": "391-9.json.gz",
-      "sha256": "960f5043fd0ad9b393903f1dd5d0ce3592bcaa42987468af0fdea4a7e47c3de0",
-      "bytes": 1178016,
-      "geometryPointsHash": "a05089fbc2e01bcb5111c9463c0a787d5950d4d1ab5ea3587acb9b8f759034fb",
-      "geometryTrianglesHash": "01971f2d3836e340db5531d04b31dd5809daf35b3297ec04ed15990e4b6ef7ca",
+      "sha256": "ecdff6a282b75f82e5f2752b1910d37c47dd09b907e6ce56aea1aa5c688d200b",
+      "bytes": 1716316,
+      "geometryPointsHash": "0ea903e6ec905bf03005bad432f76ba5d3b674771f1fa3ba8901b085fb8f70ce",
+      "geometryTrianglesHash": "b7bbae2881d1abbeed5244906de253339acd585ed3b934f211c4bb4aa3c7c9c8",
       "widthMin": 4.19140625,
       "widthMax": 10.7060546875,
       "features": {
         "curved": 7,
         "donutRooms": 2,
-        "posts": 6
+        "posts": 6,
+        "slopes": 2,
+        "stairRisers": 18
       },
-      "waypoints": 408,
-      "lookupPaths": 166464
+      "waypoints": 490,
+      "lookupPaths": 240100
     },
     {
       "seed": 7717,
       "count": 9,
       "file": "7717-9.json.gz",
-      "sha256": "aee8579c0b06bb7eb2f0004ff0d92af9617cd5a4ff9163abfeea832de03ca803",
-      "bytes": 1145119,
-      "geometryPointsHash": "1892eb544c08f0bde5ee27c43ab9a7bc24b3e287a70ac333a69788e013ef3a1c",
-      "geometryTrianglesHash": "ba1d94c949867bee28c64cf0d83ee4c6edc9d1891df29523453525654f092e64",
+      "sha256": "88b5ef4a5f7ba80155b6568a4efe6e0baa9418511bcdd94a2f52564f9919393d",
+      "bytes": 1451012,
+      "geometryPointsHash": "a0b1a7e7fd30d66e6634f7b0f456b0e89e129aacc907e2cffcdd55fe83225a84",
+      "geometryTrianglesHash": "e3ad22961ac934a898a7c528d5e23dd731518e9e2c00ae3a25559582904d8c90",
       "widthMin": 4.8076171875,
       "widthMax": 10.1865234375,
       "features": {
         "curved": 7,
         "donutRooms": 2,
-        "posts": 6
+        "posts": 6,
+        "slopes": 2,
+        "stairRisers": 12
       },
-      "waypoints": 402,
-      "lookupPaths": 161604
+      "waypoints": 446,
+      "lookupPaths": 198916
     },
     {
       "seed": 23059,
       "count": 9,
       "file": "23059-9.json.gz",
-      "sha256": "c3dd96915c72a56c20fde82096cd1986fe0bfa554720f2a63a19c63aa7cdace3",
-      "bytes": 1164694,
-      "geometryPointsHash": "8d45b96d33ca72413d424b4bd47b363001d84ceb90548ecfd7d3221d897fdaa5",
-      "geometryTrianglesHash": "4d41c9d3eeabb61ad60611c21973ba5f91320850700bff406b1a64faa40d7bf7",
+      "sha256": "02b1d2048b29f28ab510ffdec2bdfe8e9ddf12009e58974116d9ff0f99423446",
+      "bytes": 1388357,
+      "geometryPointsHash": "6974a2796fb1a35f1226033a571fdeb880456610893474224711b5782d0b028b",
+      "geometryTrianglesHash": "61516e577c14a08f78056edfaa3a08761bb2477d0f0d1930f5621df056d93e5f",
       "widthMin": 4.421875,
       "widthMax": 11.3515625,
       "features": {
         "curved": 7,
         "donutRooms": 2,
-        "posts": 6
+        "posts": 6,
+        "slopes": 2,
+        "stairRisers": 16
       },
-      "waypoints": 408,
-      "lookupPaths": 166464
+      "waypoints": 440,
+      "lookupPaths": 193600
     },
     {
       "seed": 1776,
       "count": 12,
       "file": "1776-12.json.gz",
-      "sha256": "4c0acfce95590b9baa9d3d6638f6dbd54b57797a8d4409fb4333442d3d61bf67",
-      "bytes": 1918581,
-      "geometryPointsHash": "996a5a41a778b61675049faebb979ee8cc67e77d186b475df561b975cb8a5dc4",
-      "geometryTrianglesHash": "5190ffe7e4759ced94fc115e8254b767728568031eed624f51f029b65e107ce6",
+      "sha256": "800eaa12306ce5bb61e7a2035f3f248325a687d99c1e0c684afd3c1b3ee34775",
+      "bytes": 2363607,
+      "geometryPointsHash": "4f253d482758f16fc60d1af94df7b0a24d219e9fbb722fab4d47edbd3d739cc4",
+      "geometryTrianglesHash": "ba28f84403a7751034583672bdafa657f4a0dec7fb8b718d95dffab0e36b95db",
       "widthMin": 4.26171875,
       "widthMax": 11.7431640625,
       "features": {
         "curved": 9,
         "donutRooms": 2,
-        "posts": 8
+        "posts": 8,
+        "slopes": 3,
+        "stairRisers": 14
       },
-      "waypoints": 528,
-      "lookupPaths": 278784
+      "waypoints": 582,
+      "lookupPaths": 338724
     },
     {
       "seed": 391,
       "count": 12,
       "file": "391-12.json.gz",
-      "sha256": "e146d1a8326088b4001ee65ddad0da3cf495e06d48bba33183ba20f80ccffd07",
-      "bytes": 1817070,
-      "geometryPointsHash": "9a4039bc260bece84079cb5506c81e88af7edd1323eb91760d347e943544c1e9",
-      "geometryTrianglesHash": "6c158432d09e210ec6904e11b7042aad0d8d1a6d79ca746cc2fe031fbc6f3bfb",
+      "sha256": "72a13730ebe958faa22dce67990ec3823ef4f55231a4a475a1cdd34b132044c7",
+      "bytes": 2212696,
+      "geometryPointsHash": "b78dcd644b951c8b3dddb5d36fc80bc7f4a07f9f035b6c3cad2c7f99b17a69d5",
+      "geometryTrianglesHash": "25f29fee27e4aaf81e78d4195a111123d5ee17e78383e1a10e82b726757c7dfc",
       "widthMin": 4.326171875,
       "widthMax": 11.6015625,
       "features": {
         "curved": 9,
         "donutRooms": 2,
-        "posts": 8
+        "posts": 8,
+        "slopes": 3,
+        "stairRisers": 16
       },
-      "waypoints": 514,
-      "lookupPaths": 264196
+      "waypoints": 562,
+      "lookupPaths": 315844
     },
     {
       "seed": 7717,
       "count": 12,
       "file": "7717-12.json.gz",
-      "sha256": "b258631dc2ab6fea3ccc50ccdea9dd5dc4979e04a44f6a9d95a899df3d6b60dc",
-      "bytes": 1836969,
-      "geometryPointsHash": "8533a19d2c34f5d2928178410a9ecab15e2ef7dec3b49f169a3f4f1591ad4839",
-      "geometryTrianglesHash": "5d6658fdab948400bc69f075dd38502028544d886c2c107990ad347f3cec171a",
+      "sha256": "4af03b66bb5d9a7a8865315c429e40b667cef5d62c3fc784f90f6972e98402b2",
+      "bytes": 2294893,
+      "geometryPointsHash": "b40f50107c04d6b1e53417d8f89f41d5c24d8464f51f2f206c5aa627f79ba04d",
+      "geometryTrianglesHash": "8ff568f3f135cc644069aa90fafed7876a7de5ea5f5f78754208d8dd8085c691",
       "widthMin": 4.6396484375,
       "widthMax": 10.009765625,
       "features": {
         "curved": 9,
         "donutRooms": 2,
-        "posts": 8
+        "posts": 8,
+        "slopes": 3,
+        "stairRisers": 16
       },
-      "waypoints": 518,
-      "lookupPaths": 268324
+      "waypoints": 570,
+      "lookupPaths": 324900
     },
     {
       "seed": 23059,
       "count": 12,
       "file": "23059-12.json.gz",
-      "sha256": "5071b0baf04ebeb23d637b330dcd7affbd2d00bad3105156b1dc8364a88fad20",
-      "bytes": 1777116,
-      "geometryPointsHash": "86e655d8659e4e5e7786c1acd0e029c5ef211a34e84011d6403cec5581480a2c",
-      "geometryTrianglesHash": "5a8ffd2d5255d990a802484a007cab845f6144d262a35d1b1b3c363438325467",
+      "sha256": "5f5440ad534e097ee37f97e0bed2bd09e2ac56cc98c76a63797080f3251f5acb",
+      "bytes": 2208437,
+      "geometryPointsHash": "ed5c12d6ed40d5c4af033a39f17c49b01a5aa219bcc3bef69fc776838d24f960",
+      "geometryTrianglesHash": "9d40e598f7684ce0c54e507d7d61eede9b2fa590836a9e6d150b98f0b011efd3",
       "widthMin": 4.0556640625,
       "widthMax": 11.5498046875,
       "features": {
         "curved": 9,
         "donutRooms": 2,
-        "posts": 8
+        "posts": 8,
+        "slopes": 3,
+        "stairRisers": 12
       },
-      "waypoints": 512,
-      "lookupPaths": 262144
+      "waypoints": 564,
+      "lookupPaths": 318096
     }
   ]
 }

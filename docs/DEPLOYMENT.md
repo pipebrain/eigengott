@@ -6,7 +6,7 @@ The user authorized making `pipebrain/eigengott` public and enabling GitHub Page
 
 - [Build selection menu](https://pipebrain.github.io/eigengott/)
 - [EIGENGOTT v0.1.5](https://pipebrain.github.io/eigengott/play.html)
-- [Level generator M2](https://pipebrain.github.io/eigengott/level-generator/) · [design and roadmap](LEVEL_GENERATOR.md)
+- [Level generator M3](https://pipebrain.github.io/eigengott/level-generator/) · [design and roadmap](LEVEL_GENERATOR.md)
 - [Test hub](https://pipebrain.github.io/eigengott/tests.html)
 - [Small engine baseline](https://pipebrain.github.io/eigengott/engine-test/) · [open tools](https://pipebrain.github.io/eigengott/engine-test/?tools=1)
 - [Larger arena benchmark](https://pipebrain.github.io/eigengott/engine-benchmark/) · [open tools](https://pipebrain.github.io/eigengott/engine-benchmark/?tools=1)

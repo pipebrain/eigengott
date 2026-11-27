@@ -56,6 +56,7 @@ impl Player{
   }
   if input&16!=0&&self.previous&16==0&&self.grounded{self.velocity=if self.profile==1{self.velocity-self.up*self.velocity.dot(self.up)+self.up*8.4375}else{wish+self.up*5.6};self.grounded=false}
   self.previous=input;if !self.grounded{self.velocity=self.velocity-self.up*((if self.profile==1{25.0}else{22.0})*dt)}self.grounded=false;
+  if crate::lab::supported_move(self,a){return}
   let mut remaining=self.velocity*dt;
   for _ in 0..5{
    if remaining.len2()<1e-12{break}let mut earliest=1.0;let mut weapon_contact=false;let mut normal=v(0.0,0.0,0.0);
@@ -76,7 +77,7 @@ pub fn shape_clear(a:&Arena,p:V3,q:V3,radius:f32)->bool{
  crate::spatial::query(a,lo,hi,|i|{let tri=a.collision[i];let(x,y)=segment_triangle(p,q,tri.p);if (x-y).len()<radius+tri.pad-0.0004{clear=false;return false}true});clear&&crate::overlay::clear(p,q,radius)
 }
 pub fn inside(a:&Arena,p:V3)->bool{
- if let Some(inside)=crate::lab::flat_contains(a,p){return inside}
+ if let Some(inside)=crate::lab::column_contains(a,p){return inside}
  let end=p+v(207.643,83.057,124.586);let mut hits=[0.0f32;256];let mut count=0;let mut overflow=false;
  crate::groups::all(||crate::spatial::ray(a,p,end,|i|{let tri=a.collision[i];if let Some(t)=segment_hit(p,end,tri.p[0],tri.p[1],tri.p[2],false){
   if t<1e-7{return true}if hits[..count].iter().any(|old|(t-*old).abs()<1e-6){return true}
