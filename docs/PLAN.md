@@ -129,3 +129,7 @@ The user clarified: keep the loot interval, then keep player movement live while
 Default game rendering is fixed 640×480 at 4:3, nearest-scaled with letterboxing. World, actors, feedback, sky views, loot models / labels and effect composition target the same internal raster; asset texture and font-mask dimensions are independent. Keep the title's accepted DOS-maze renderer and debug tools available. H can compare adaptive resolution.
 
 Restore warm grey / charcoal / ochre / brown / olive material ramps from the provided art.png, pallet.png and lighting.png references. Use stable sampled surface detail and dynamic lighting; deduplicate local fixtures per clump, reduce overlapping sky emission and retain dim light through finer quantization / tone mapping instead of flooring it to black. Source-free scenes remain black. No lightmaps or audio processing are added. Dark basins can receive local light spill rather than forcing every distant source's radius to collapse to zero.
+
+## Level generator M1
+
+Published as a separate blockout test with a shared build menu. See [the generator design and roadmap](LEVEL_GENERATOR.md) and [runtime/build commands](../level-generator/README.md). The current milestone is flat 6/9/12-room layouts, random 4–12 m corridors, sealed structure, precomputed navigation and actual-controller route tours. Advanced geometry/features and integration remain later work.

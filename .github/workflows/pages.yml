@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install -y clang lld
       - name: Check browser and deployment JavaScript
         run: |
-          for source in game/*.js site/*.js tools/build-pages.mjs tools/check-pages.mjs tools/check-release*.mjs tools/check-progression.mjs tools/check-game-soak.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs playable-test/*.js playable-test/tools/*.mjs audio-previews/*.js audio-previews/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js; do
+          for source in game/*.js site/*.js tools/build-pages.mjs tools/check-pages.mjs tools/check-release*.mjs tools/check-progression.mjs tools/check-game-soak.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs playable-test/*.js playable-test/tools/*.mjs audio-previews/*.js audio-previews/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js level-generator/*.js level-generator/tools/*.mjs; do
             node --check "$source"
           done
       - name: Rebuild accepted engine and benchmark WASM
@@ -43,7 +43,9 @@ jobs:
           sh arena-sweep/tools/build-wasm.sh
           sh encounter-test/tools/build-wasm.sh
           sh playable-test/tools/build-wasm.sh
-          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm arena-fold/fold.wasm arena-fold-2/wave.wasm arena-sweep/engine.wasm encounter-test/engine.wasm playable-test/engine.wasm
+          sh level-generator/tools/build-wasm.sh
+          node level-generator/tools/build-profiles.mjs
+          git diff --exit-code -- engine-test/engine.wasm engine-benchmark/engine.wasm arena-fold/fold.wasm arena-fold-2/wave.wasm arena-sweep/engine.wasm encounter-test/engine.wasm playable-test/engine.wasm level-generator/engine/blockout.wasm level-generator/profiles.json
       - name: Rebuild DOS-maze WASM
         env:
           WASM_CC: clang
@@ -63,6 +65,8 @@ jobs:
           node tools/check-progression.mjs
           node tools/check-release.mjs
           node playable-test/tools/check-loot-motion.mjs
+          node level-generator/tools/check-core.mjs
+          node level-generator/tools/check-catalogue.mjs
           node audio-previews/tools/check-audio.mjs
           node dos-maze/tools/check-generator.mjs
           node dos-maze/tools/check-animation.mjs

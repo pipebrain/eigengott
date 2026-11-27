@@ -1,0 +1,87 @@
+{
+  "version": "0.1.3",
+  "sourceCommit": "f69ab3381f0be4f0d24e81def92c5d54696e0da8",
+  "kind": "Snapshot of current local v0.1.3 sources, including existing uncommitted work; not a claim of release-tag parity.",
+  "files": [
+    {
+      "source": "playable-test/src/boxes.rs",
+      "snapshot": "engine/src/boxes.rs",
+      "sha256": "c7699c7ace132b44098e0f6147e552977347825f9c3b1da2e0cece702ba339b2"
+    },
+    {
+      "source": "playable-test/src/terrain.rs",
+      "snapshot": "engine/src/terrain.rs",
+      "sha256": "c7b7624c633eec5ffa3263ba6f17cec934e2e87b3dc1f984153435d65c4ad78e"
+    },
+    {
+      "source": "playable-test/src/spatial.rs",
+      "snapshot": "engine/src/spatial.rs",
+      "sha256": "f57efd57a88140bf5b557826fe6a38594955e3650864e5a17f395b2969f2a084"
+    },
+    {
+      "source": "playable-test/src/groups.rs",
+      "snapshot": "engine/src/groups.rs",
+      "sha256": "e842f72682f0a1eb20185126fad032fc7245f50c8f92962587a93226a48d5a10"
+    },
+    {
+      "source": "playable-test/src/body.rs",
+      "snapshot": "engine/src/body.rs",
+      "sha256": "8e3efdfba25dde4700b01b19062ba4f445a889c0caf43f6b9d5847ff719af5df"
+    },
+    {
+      "source": "playable-test/src/lib.rs",
+      "snapshot": "engine/src/lib.rs",
+      "sha256": "480bbf9276338492b5413926e47553ef03210d3bec0de813e38d29b7270c1d07"
+    },
+    {
+      "source": "playable-test/src/overlay.rs",
+      "snapshot": "engine/src/overlay.rs",
+      "sha256": "4ea1aa4cab1da1b108d70ea6eff6dfe4b3f2e99d45ebff55b3f58bb4c14a4788"
+    },
+    {
+      "source": "playable-test/src/world.rs",
+      "snapshot": "engine/src/world.rs",
+      "sha256": "efab052a3292112b736af16b6acaa4bb7e0aedfb39902234f2d247f3c8294992"
+    },
+    {
+      "source": "playable-test/src/surface.rs",
+      "snapshot": "engine/src/surface.rs",
+      "sha256": "e124e7413d679625a5ad64bbdd6699417d5a88698378d18e3b664f5dc53cecae"
+    },
+    {
+      "source": "playable-test/src/math.rs",
+      "snapshot": "engine/src/math.rs",
+      "sha256": "0c68a64b499d1a3d481b7d13807473f571aa5e88bad542136f6e85ffaf6b9c6e"
+    },
+    {
+      "source": "playable-test/src/validate.rs",
+      "snapshot": "engine/src/validate.rs",
+      "sha256": "f70e6c981d1ae12a7d861224ddfa3c6c01836c221252eed9ccd82621e06d166d"
+    },
+    {
+      "source": "playable-test/src/physics.rs",
+      "snapshot": "engine/src/physics.rs",
+      "sha256": "c47882b75932f6d9d26636af8d1bfdc463a74385139117467dff7771e1bb5b12"
+    },
+    {
+      "source": "playable-test/shaders/common.wgsl",
+      "snapshot": "engine/shaders/common.wgsl",
+      "sha256": "a83275e0173b23649a09948106498e73f81833a619070d5d3b9459801b83d4b5"
+    },
+    {
+      "source": "playable-test/shaders/lighting.wgsl",
+      "snapshot": "engine/shaders/lighting.wgsl",
+      "sha256": "1df045928bd8a6c1c55b4c48b3a63eece457c6cfd10a3e44226689ecb39fbdab"
+    },
+    {
+      "source": "playable-test/tools/build-wasm.sh",
+      "snapshot": "engine/source-build-wasm.sh",
+      "sha256": "f7e4d631916c6a78ebb95c573ebde02263ceffc3ba11bdae65603cfcee5afa0c"
+    },
+    {
+      "source": "game/preset.js",
+      "snapshot": "engine/source-preset.js",
+      "sha256": "4853a568d9c1df83c1a9d94fb9b824e7b2a48615f267c94aee2c61998c9cec0d"
+    }
+  ]
+}

@@ -4,6 +4,12 @@ import {createHash} from 'node:crypto';
 const root=new URL('../_site/',import.meta.url),manifest=JSON.parse(await readFile(new URL('manifest.json',root),'utf8'));
 const files=new Map(manifest.files.map(f=>[f.path,f]));
 assert.equal(manifest.build.version,'0.1.4');assert.ok(files.has('game/main.js'));assert.ok(files.has('game/preset.js'));
+for(const file of ['play.html','level-generator/engine/blockout.wasm','level-generator/engine/shaders/common.wgsl','level-generator/engine/shaders/lighting.wgsl','level-generator/profiles.json','level-generator/catalogue/index.json'])assert.ok(files.has(file),file+' missing');
+assert.ok(!files.has('level-generator/engine/BASELINE.json'));assert.ok(!files.has('level-generator/engine/source-preset.js'));
+const menu=await readFile(new URL('index.html',root),'utf8');for(const link of ['play.html','engine-test/','level-generator/'])assert.ok(menu.includes(`href="${link}"`));
+const catalogue=JSON.parse(await readFile(new URL('level-generator/catalogue/index.json',root),'utf8')),profiles=JSON.parse(await readFile(new URL('level-generator/profiles.json',root),'utf8'));
+assert.equal(catalogue.entries.length,12);assert.equal(catalogue.engineHash,files.get('level-generator/engine/blockout.wasm').sha256);assert.equal(catalogue.profileHash,profiles.hash);
+for(const entry of catalogue.entries)assert.equal(files.get('level-generator/catalogue/'+entry.file)?.sha256,entry.sha256,'Staged qualified package missing or changed: '+entry.file);
 assert.match(manifest.build.commit,/^[a-f0-9]{40}$/);
 for(const item of manifest.files){
   assert.ok(!/(^|\/)(?:src|tools|evidence|\.git|\.env|\.local)(?:\/|$)/.test(item.path));
@@ -32,5 +38,5 @@ for(const file of ['engine.wasm','worker.js','media-worker.js','assets/catalog.j
 for(const file of ['engine.wasm','shaders/labyrinth.wgsl','preview.js','assets/ambient-loop.wav','assets/warn-loop.wav','assets/death.wav'])assert.ok(files.has('playable-test/'+file));
 for(const file of ['assets/effects.bin.gz','shaders/sprites.wgsl','shaders/lighting.wgsl','licenses/source-effects.zip','licenses/armor-authoring.zip'])assert.ok(files.has('playable-test/'+file));
 for(const file of ['assets/manifest.json','assets/ambient-loop-a.wav','assets/warn-loop-b.wav','assets/death-a.wav'])assert.ok(files.has('audio-previews/'+file));
-assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','encounter-test','playable-test','audio-previews','game','tests.html','hub.js','hub.css','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
+assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','encounter-test','playable-test','audio-previews','game','level-generator','play.html','tests.html','hub.js','hub.css','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
 console.log(JSON.stringify({passed:true,build:manifest.build.short,applications:manifest.applications,files:manifest.files.length,bytes:manifest.files.reduce((sum,f)=>sum+f.bytes,0)},null,2));

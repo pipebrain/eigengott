@@ -1,8 +1,10 @@
 # EIGENGOTT v0.1.4
 
-[Play](https://pipebrain.github.io/eigengott/) · [H tools](https://pipebrain.github.io/eigengott/?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
+[Play](https://pipebrain.github.io/eigengott/play.html) · [H tools](https://pipebrain.github.io/eigengott/play.html?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
 
 The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.4.checkpoint`; older saves remain untouched and can be imported explicitly.
+
+The root index now provides the shared build menu; the game opens directly at `play.html`.
 
 ## Current game rules
 
@@ -38,7 +40,7 @@ node tools/check-release-browser.mjs
 node tools/check-recomposition-browser.mjs
 node tools/check-game-soak.mjs
 node tools/check-pages-browser.mjs
-GAME_URL=https://pipebrain.github.io/eigengott/ node tools/check-release-browser.mjs
+GAME_URL=https://pipebrain.github.io/eigengott/play.html node tools/check-release-browser.mjs
 ```
 
 Browser checks exercise all workload ranges, moving through collapse/void/return, healing, safe resized-world Release, upgraded media, population checkpoints, native cold start, and an actual rendered colour-level comparison. Wall and prop fixtures prove weapon displacement and escape. A 45-second maximum Large/15-opponent soak records bounded resources and frame timing. Physical-device acceptance and touch locomotion remain pending. Accepted historical engine/fold/encounter/title applications remain unchanged.

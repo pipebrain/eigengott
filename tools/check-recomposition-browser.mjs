@@ -3,7 +3,7 @@ import {mkdir,writeFile} from 'node:fs/promises';
 import {withBrowser,sleep} from '../dos-maze/tools/browser.mjs';
 await mkdir('.local/game',{recursive:true});
 await withBrowser(async({origin,cmd,evaluate:ev,wait,errors})=>{
- const base=process.env.GAME_URL||origin+'/_site/',app='window.__EIGENGOTT_GAME.app',snap=()=>ev(app+'.snapshot()'),click=async selector=>{
+ const base=process.env.GAME_URL||origin+'/_site/play.html',app='window.__EIGENGOTT_GAME.app',snap=()=>ev(app+'.snapshot()'),click=async selector=>{
   const p=await ev(`(()=>{const r=document.querySelector(${JSON.stringify(selector)}).getBoundingClientRect();return {x:r.x+r.width/2,y:r.y+r.height/2};})()`);
   for(const type of ['mousePressed','mouseReleased'])await cmd('Input.dispatchMouseEvent',{type,button:'left',clickCount:1,...p});
  };

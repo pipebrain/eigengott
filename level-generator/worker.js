@@ -1,0 +1,11 @@
+import{makePlan,compileStructure,validateStructure,buildNavigation,validateRoutes,GENERATOR_VERSION}from'./generator.js';
+import{createSimulation,certifySweeps}from'./engine-adapter.js';
+import{sha256,openPackage}from'./package.js';
+let compiled,engineHash;
+self.onmessage=async({data})=>{const{serial,seed,count,profile,catalogue}=data;try{const start=performance.now();if(!compiled){const bytes=await(await fetch('./engine/blockout.wasm')).arrayBuffer();compiled=await WebAssembly.compile(bytes);engineHash=await sha256(bytes);}
+ let plan,structure,nav,report;
+ if(catalogue){const bytes=await(await fetch('./catalogue/'+catalogue.file)).arrayBuffer();if(await sha256(bytes)!==catalogue.sha256)throw new Error('Qualified package hash mismatch.');const pack=openPackage(JSON.parse(await new Response(new Blob([bytes]).stream().pipeThrough(new DecompressionStream('gzip'))).text()));({plan,structure,nav,report}=pack);if(report.engineHash!==engineHash||report.profileHash!==profile.hash||report.generator!==GENERATOR_VERSION)throw new Error('Qualified package certificate is stale.');validateRoutes(nav);const sim=await createSimulation(compiled,plan,structure);certifySweeps(sim,nav);report={...report,loadedPrecomputed:true,workerMs:performance.now()-start};}
+ else{plan=makePlan(seed,count);structure=compileStructure(plan);const closure=validateStructure(plan,structure);nav=buildNavigation(plan,structure,profile.composite);const routes=validateRoutes(nav),sim=await createSimulation(compiled,plan,structure),physical=certifySweeps(sim,nav),geometryPointsHash=await sha256(structure.points.buffer),geometryTrianglesHash=await sha256(structure.triangles.buffer);report={generator:GENERATOR_VERSION,seed,count,closure,routes,physical,engineHash,profileHash:profile.hash,geometryPointsHash,geometryTrianglesHash,workerMs:performance.now()-start,widths:plan.hallways.map(h=>h.width),note:'M1 flat structure and composite-profile certification; advanced M2/M4 features remain pending.'};}
+ const transfer=[structure.points.buffer,structure.triangles.buffer,nav.next.buffer,nav.cost.buffer];for(const k of ['open','prefix'])if(structure[k])transfer.push(structure[k].buffer);
+ self.postMessage({serial,plan,structure,nav,report},transfer);
+}catch(e){self.postMessage({serial,error:e.message,seed});}};

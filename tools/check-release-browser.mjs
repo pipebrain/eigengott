@@ -4,7 +4,7 @@ import {withBrowser,sleep} from '../dos-maze/tools/browser.mjs';
 import {VERSION,PRESET} from '../game/preset.js';
 await mkdir('.local/game',{recursive:true});const checks=[];
 await withBrowser(async({origin,cmd,evaluate:ev,errors})=>{
- const base=process.env.GAME_URL||origin+'/_site/',snap=()=>ev('window.__EIGENGOTT_GAME.snapshot()');
+ const base=process.env.GAME_URL||origin+'/_site/play.html',snap=()=>ev('window.__EIGENGOTT_GAME.snapshot()');
  const wait=async e=>{for(let i=0;i<600;i++){if(await ev(e))return;await sleep(100);}throw Error('Timeout '+e+' '+JSON.stringify(errors));};
  await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Math.random=()=>.999999;'});
  await cmd('Emulation.setDeviceMetricsOverride',{width:1376,height:768,deviceScaleFactor:1,mobile:false});await cmd('Page.navigate',{url:base+'?test'});

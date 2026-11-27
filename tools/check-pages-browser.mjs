@@ -10,9 +10,12 @@ await withBrowser(async({origin,cmd,evaluate,wait:shortWait,errors})=>{
   const buildResponse=await fetch(new URL(`build.json?check=${Date.now()}`,base));assert.equal(buildResponse.status,200);
   const build=await buildResponse.json();assert.equal(build.commit,commit);
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:false});
+  await cmd('Page.navigate',{url:base.href});await wait('document.querySelector("#build")?.textContent.includes("Build")');
+  for(const href of ['play.html','engine-test/','level-generator/'])assert.equal(await evaluate(`!!document.querySelector('nav[aria-label="Build selection"] a[href="${href}"]')`),true);
+  assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true);
   await cmd('Page.navigate',{url:new URL('tests.html',base).href});await wait('document.querySelector("#build")?.textContent.includes("Build")');
   assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true);
-  assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);checks.push('Mobile-width landing page, build identity, and test links');
+  assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);checks.push('Mobile-width build menu and test hub, current game/engine/generator links and build identity');
   await cmd('Emulation.setDeviceMetricsOverride',{width:1376,height:768,deviceScaleFactor:1,mobile:false});
   for(const [app,handle] of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK'],['dos-maze','__DOS_MAZE']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);
@@ -63,6 +66,12 @@ await withBrowser(async({origin,cmd,evaluate,wait:shortWait,errors})=>{
   await cmd('Page.navigate',{url:new URL('audio-previews/',base).href});await wait('document.querySelectorAll("audio").length===9');
   assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);assert.equal(await evaluate('[...document.querySelectorAll("audio")].every(a=>a.paused&&a.preload==="none")'),true);
   checks.push('Separate audio auditions: original/A/B tracks load without autoplay or gameplay integration');
+  await cmd('Page.navigate',{url:new URL('level-generator/',base).href});await wait('window.__generator?.snapshot().ready&&!window.__generator.snapshot().preparing');
+  assert.equal(await evaluate('window.__generator.snapshot().build.commit'),commit);assert.equal(await evaluate('window.__generator.snapshot().report.closure.unmatched'),0);
+  assert.equal(await evaluate('window.__generator.snapshot().report.routes.components'),1);
+  await evaluate('document.querySelector("#catalogue").value="0";document.querySelector("#catalogue").dispatchEvent(new Event("change"))');await wait('!window.__generator.snapshot().preparing&&window.__generator.snapshot().report.loadedPrecomputed');
+  assert.equal(await evaluate('window.__generator.snapshot().report.widths.every(w=>w>=4&&w<=12)'),true);
+  checks.push('Level generator: project-prefix worker/WASM/shader startup, qualified package hash checks and complete navigation');
   const {identifier}=await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Object.defineProperty(document,"exitPointerLock",{value:undefined,configurable:true});Object.defineProperty(Element.prototype,"requestPointerLock",{value:undefined,configurable:true});'});
   for(const [app,handle]of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);
