@@ -10,4 +10,4 @@ struct V { @builtin(position) clip:vec4f,@location(0) uv:vec2f,@location(1) colo
  var o:V;o.clip=frame.vp*vec4f(p,1);o.uv=vec2f(c.x*.5+.5,.5-c.y*.5);o.color=s.color;o.layer=u32(s.params.x);return o;
 }
 struct O{@location(0) world:vec4f,@location(1) actor:vec4f}
-@fragment fn spriteColor(i:V)->O{let texel=textureSample(atlas,spriteSampler,i.uv,i32(i.layer));let alpha=texel.a*i.color.a;if alpha<.003{discard;}var o:O;o.world=vec4f(0);o.actor=vec4f(texel.rgb*i.color.rgb*alpha,alpha);return o;}
+@fragment fn spriteColor(i:V)->O{let texel=textureSample(atlas,spriteSampler,i.uv,i32(i.layer));let alpha=select(texel.a*i.color.a,floor(texel.a*i.color.a*4.0)/4.0,frame.palette.y>.5);if alpha<.003{discard;}var o:O;o.world=vec4f(0);o.actor=vec4f(texel.rgb*i.color.rgb*alpha,alpha);return o;}

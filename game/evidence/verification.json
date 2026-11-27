@@ -1,15 +1,159 @@
 {
   "passed": true,
-  "url": "http://127.0.0.1:53992/_site/",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "checks": [
-    "DOS-maze owns the black title screen while the prepared game stands by without rendering",
-    "One native key clears the title and starts S_Marine / 32 Selves with every requested value, no second Enter gate and no accidental shot",
-    "Loot remains open beyond five seconds and expires at ten; a fresh 1\u20137 cohort returns on validated replacement structure",
-    "The seven-opponent upper bound fits physically, the next draw can be one, and restoring a checkpoint retains that drawn count",
-    "A native click during cold preparation clears the screen immediately and carries capture/audio activation into direct gameplay"
+    "DOS-maze first-input launch applies the 6022-Self preset; all first-arena actors hold shotguns and Large supports fifteen opponents",
+    "Large\u2192Small\u2192Medium\u2192Large\u2192Small replacement honors all population ranges, keeps movement during Collapse/void/Return, heals loot health and recovers collision-safe before combat",
+    "Surviving copies gain persistent equipment, newly unlocked media prepare before Collapse, and checkpoint restore preserves population, gear and workload",
+    "Rendered chunky mode limits displayed channel levels while smooth comparison has continuous gradients; stock texture sampling stays nearest",
+    "Cold-start click still clears the title and starts gameplay with capture/audio and the full population"
   ],
-  "lootMs": 10066,
-  "cohort": 7,
-  "scope": "Local Chrome/Metal packaged working-tree validation; physical-device acceptance pending."
+  "rounds": [
+    {
+      "profile": 0,
+      "count": 1,
+      "remaining": 5410,
+      "position": [
+        -7.5,
+        -7.5,
+        2.571713447570801
+      ],
+      "tier": 1
+    },
+    {
+      "profile": 1,
+      "count": 5,
+      "remaining": 4873,
+      "position": [
+        -3,
+        0,
+        -0.3973884880542755
+      ],
+      "tier": 2
+    },
+    {
+      "profile": 2,
+      "count": 15,
+      "remaining": 4386,
+      "position": [
+        4,
+        8,
+        -0.36916816234588623
+      ],
+      "tier": 3
+    },
+    {
+      "profile": 0,
+      "count": 3,
+      "remaining": 3938,
+      "position": [
+        4.497867584228516,
+        7.4981889724731445,
+        2.2184906005859375
+      ],
+      "tier": 4
+    }
+  ],
+  "chunky": {
+    "levels": [
+      8,
+      8,
+      8
+    ],
+    "lit": 276401
+  },
+  "smooth": {
+    "levels": [
+      256,
+      256,
+      254
+    ],
+    "lit": 635395
+  },
+  "scope": "Local Chrome / Metal packaged working-tree checks; physical-device acceptance pending.",
+  "populationEconomy": {
+    "passed": true,
+    "checks": [
+      "6022 finite Selves with bounded equipment materialization and shotgun-only first encounter",
+      "Clears strengthen surviving copies and reduce offscreen population exactly once; player gear still requires loot",
+      "Exact large counters, no resurrected identities, bounded checkpoints and validated round trips",
+      "Upgrades retain one gun, three armor pieces and at most one fragment per item"
+    ]
+  },
+  "weaponPush": {
+    "passed": true,
+    "checks": [
+      "Turning a long weapon into a wall displaces its body while retaining valid body/gun clearance",
+      "Backing away after muzzle contact remains possible; the weapon does not pin movement",
+      "Stock object-box contacts also push the body while keeping both envelopes clear"
+    ],
+    "before": [
+      -36.7794075012207,
+      -29.999881744384766,
+      0.07605461031198502
+    ],
+    "pushed": [
+      -35.53239440917969,
+      -29.999881744384766,
+      0.07605432718992233
+    ],
+    "yaw": -1.2999993562698364,
+    "escaped": [
+      -32.57444381713867,
+      -30.929346084594727,
+      -1.179890513420105
+    ],
+    "propPush": [
+      -32.782474517822266,
+      -30.517210006713867,
+      -1.1396687030792236
+    ]
+  },
+  "soak": {
+    "passed": true,
+    "seconds": 45,
+    "profile": 2,
+    "maxOpponents": 15,
+    "encounters": 11,
+    "remaining": 1824,
+    "shots": 6,
+    "cpu": {
+      "samples": 600,
+      "median": 1.899999976158142,
+      "p95": 2.7000000178813934,
+      "p99": 3.300000011920929,
+      "max": 13.099999994039536
+    },
+    "frame": {
+      "samples": 600,
+      "median": 16.69999999999709,
+      "p95": 16.799999999995634,
+      "p99": 16.80000000000291,
+      "max": 16.80000000000291
+    },
+    "gpu": {
+      "sky": 0.12912300000000002,
+      "scene": 5.496916,
+      "feedback": 5.260753,
+      "present": 6.191323,
+      "previews": 0,
+      "total": 17.078115
+    },
+    "scope": "45 seconds, Large, fifteen opponents, repeated forced clears; final CPU/frame/GPU values are the rolling 600-frame window.",
+    "wholeSamplePeakFrameMs": 66.79999999999973,
+    "wholeSamplePeakCpuMs": 16
+  },
+  "otherChecks": [
+    "Playable core and structural tests",
+    "Stock transparency, dynamic-light capacity and darkness pixel checks",
+    "GPU recovery and checkpoint lifecycle",
+    "Real-time deadline checks",
+    "Packaged test hub and historical application startup"
+  ],
+  "limits": [
+    "Economy curves and the 10 percent offscreen elimination default are initial tunable balance, not final progression.",
+    "The whole soak includes an occasional long preparation/warm-up frame; the final rolling sample was display-limited near 60 FPS.",
+    "Shadows remain coarse player/object boxes; no world-triangle shadow maps.",
+    "Narrative death transfer/endings and light-aware AI perception remain separate work."
+  ]
 }

@@ -1,0 +1,7 @@
+import {startingLoadout,clone,SLOTS} from './equipment.js';
+const GUNS=[[3],[2,3],[3,8],[4,5,8],[5,6,7],[7,9,11,13]];
+const hash=x=>{x=Math.imul(x^(x>>>16),0x45d9f3b);return (x^(x>>>16))>>>0;};
+export function economyLoadout(identity,clears){const tier=Math.max(0,Math.min(1000000,Math.trunc(clears))),seed=hash(Number(BigInt(identity)%4294967295n)),gear=startingLoadout();gear.weapon.weapon=3;if(!tier)return gear;const guns=GUNS[Math.min(GUNS.length-1,Math.floor(tier/2)+1)];gear.weapon={kind:'weapon',weapon:guns[seed%guns.length],mod:tier>=2?(seed%2?'focus':'surge'):null,quality:tier};for(const [i,slot]of SLOTS.entries()){gear[slot].armor=tier>=2&&((seed>>i)%3||tier>=5)?['bastion','plate','siege'][i]:['visor','vest','greaves'][i];gear[slot].quality=tier;gear[slot].mod=tier>=3?(slot==='helmet'&&seed%3===0?'thermal':'ward'):null;}return gear;}
+export function equipmentValue(item){if(item.kind==='weapon'){const rank={3:0,2:1,8:2,4:3,5:4,6:5,7:6,9:7,11:6,13:7};return (item.quality||0)*20+(rank[item.weapon]??0)*2+(item.mod?1:0);}return (item.quality||0)*20+(['bastion','plate','siege'].includes(item.armor)?8:0)+(item.mod?2:0)+(item.condition||0);}
+export function improveLoadout(before,offered){const out=clone(before);for(const slot of ['weapon',...SLOTS])if(equipmentValue(offered[slot])>=equipmentValue(out[slot]))out[slot]=clone(offered[slot]);return out;}
+export const unlockedWeapons=clears=>[...new Set([3,...GUNS.slice(0,Math.min(GUNS.length,Math.floor(Math.min(8,clears)/2)+2)).flat()])];

@@ -3,7 +3,7 @@ import {PROFILE} from '../dos-maze/profile.js';
 import {VERSION,PRESET} from './preset.js';
 const screen=document.getElementById('title-screen'),canvas=document.getElementById('scene'),titleCanvas=document.getElementById('title-scene'),controller=new AbortController(),tools=new URLSearchParams(location.search).has('tools');
 let maze=null,app=null,requested=tools,inputs=0,disposed=false,audioContext=null;
-const launch=globalThis.__EIGENGOTT_LAUNCH={preset:PRESET,checkpointKey:'eigengott.game.v0.1.0.checkpoint',ready(api){app=api;if(requested)activate();else app.standby(true);}};
+const launch=globalThis.__EIGENGOTT_LAUNCH={preset:PRESET,checkpointKey:`eigengott.game.v${VERSION}.checkpoint`,ready(api){app=api;if(requested)activate();else app.standby(true);}};
 const inputTypes=['keydown','pointerdown','pointermove','wheel'];
 function removeInputs(){for(const type of inputTypes)window.removeEventListener(type,start,true);}
 function activate(){if(!app||disposed)return;app.standby(false);document.getElementById('gate').hidden=true;if(tools){document.getElementById('controls').hidden=false;return;}app.play(true);if(audioContext)void app.enableAudio(audioContext);}

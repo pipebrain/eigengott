@@ -10,12 +10,12 @@ fn blocked(p:vec3f,delta:vec3f,id:u32)->bool{
  let enter=max(.001,max(lo.x,max(lo.y,lo.z)));let leave=min(.999,min(hi.x,min(hi.y,hi.z)));return enter<leave;
 }
 fn dynamicLighting(p:vec3f,n:vec3f)->vec3f{
- var value=vec3f(0);let origin=p+normalize(n)*.035;
+ var value=vec3f(0);let samplePoint=select(p,floor(p*4.0)/4.0,frame.palette.y>.5);let origin=samplePoint+normalize(n)*.035;
  if frame.forward.w>0.0&&n.z>0.0{var skyBlocked=false;for(var b=0u;b<min(128u,u32(dynamic.header.y));b++){if blocked(origin,vec3f(0,0,600),b+1u){skyBlocked=true;break;}}if !skyBlocked{value=vec3f(frame.forward.w)*max(0.0,normalize(n).z);}}
  for(var j=0u;j<min(128u,u32(dynamic.header.x));j++){
   let l=dynamic.entries[j];let delta=l.positionRadius.xyz-origin;let squared=dot(delta,delta);if squared>=l.positionRadius.w*l.positionRadius.w{continue;}
   let d=sqrt(max(.000001,squared));let diffuse=max(0.0,dot(normalize(n),delta/d));if diffuse<=0.0{continue;}
   var shadow=false;for(var k=0u;k<4u;k++){shadow=shadow||blocked(origin,delta,l.shadowsA[k])||blocked(origin,delta,l.shadowsB[k]);}if shadow{continue;}
-  let falloff=pow(max(0.0,1.0-d/max(.01,l.positionRadius.w)),2.0);value+=l.colorIntensity.rgb*l.colorIntensity.w*falloff*diffuse;
- }return min(value,vec3f(4));
+  var falloff=pow(max(0.0,1.0-d/max(.01,l.positionRadius.w)),2.0);if frame.palette.y>.5{falloff=floor(falloff*6.0)/6.0;}value+=l.colorIntensity.rgb*l.colorIntensity.w*falloff*select(diffuse,floor(diffuse*4.0)/4.0,frame.palette.y>.5);
+ }return select(min(value,vec3f(4)),floor(min(value,vec3f(4))*6.0)/6.0,frame.palette.y>.5);
 }

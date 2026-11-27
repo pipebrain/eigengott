@@ -34,4 +34,6 @@ jobs:
         run: |
           node playable-test/tools/check-core.mjs
           node playable-test/tools/check-structure.mjs
+          node playable-test/tools/check-weapon-push.mjs
+          node tools/check-progression.mjs
           node audio-previews/tools/check-audio.mjs

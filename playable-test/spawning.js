@@ -1,9 +1,5 @@
-// Deterministic farthest-point sampling over every reachable navigation node.
-// Greedy max-min with a route-distance tie break, not a claimed global packing optimum.
-export function spawnRanking(nav,occupied,excluded=new Set()){
- const anchor=occupied[0],source=nearest(nav,anchor),component=nav.components[source],paths=new Float32Array(nav.count).fill(Infinity),queue=[source];paths[source]=0;
- for(let q=0;q<queue.length;q++)for(const next of nav.edges[queue[q]])if(!Number.isFinite(paths[next])){paths[next]=paths[queue[q]]+nav.tile;queue.push(next);}
- const out=[];for(let i=0;i<nav.count;i++){if(excluded.has(i)||nav.components[i]!==component)continue;const p=Array.from(nav.points.slice(i*3,i*3+3)),separation=Math.min(...occupied.map(q=>Math.hypot(p[0]-q[0],p[1]-q[1],p[2]-q[2])));out.push({node:i,p,separation,path:paths[i]});}
- return out.sort((a,b)=>b.separation-a.separation||b.path-a.path||a.node-b.node);
+// Greedy max-min over all reachable nodes; reuse route/candidate storage for a cohort.
+export function spawnRanking(nav,occupied,excluded=new Set(),context={}){
+ const anchor=occupied[0];if(!context.paths){let source=0,best=Infinity;for(let i=0;i<nav.count;i++){const k=i*3,dx=anchor[0]-nav.points[k],dy=anchor[1]-nav.points[k+1],dz=anchor[2]-nav.points[k+2],d=dx*dx+dy*dy+dz*dz;if(d<best){best=d;source=i;}}context.component=nav.components[source];context.paths=new Float32Array(nav.count).fill(Infinity);const queue=[source];context.paths[source]=0;for(let q=0;q<queue.length;q++)for(const next of nav.edges[queue[q]])if(!Number.isFinite(context.paths[next])){context.paths[next]=context.paths[queue[q]]+nav.tile;queue.push(next);}context.pool=Array.from({length:nav.count},(_,node)=>({node,p:Array.from(nav.points.slice(node*3,node*3+3)),path:context.paths[node],separation:0}));}
+ const out=[];for(let i=0;i<nav.count;i++){if(excluded.has(i)||nav.components[i]!==context.component)continue;const c=context.pool[i],p=c.p;let best=Infinity;for(const q of occupied){const dx=p[0]-q[0],dy=p[1]-q[1],dz=p[2]-q[2],d=dx*dx+dy*dy+dz*dz;if(d<best)best=d;}c.separation=Math.sqrt(best);out.push(c);}return out.sort((a,b)=>b.separation-a.separation||b.path-a.path||a.node-b.node);
 }
-function nearest(nav,p){let best=0,d=Infinity;for(let i=0;i<nav.count;i++){const n=Math.hypot(...p.map((v,k)=>v-nav.points[i*3+k]));if(n<d){d=n;best=i;}}return best;}
