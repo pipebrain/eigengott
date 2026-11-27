@@ -1,10 +1,14 @@
-# EIGENGOTT v0.1.5
+# EIGENGOTT v0.1.6
 
 [Play](https://pipebrain.github.io/eigengott/play.html) · [H tools](https://pipebrain.github.io/eigengott/play.html?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
 
-The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.5.checkpoint`; older saves remain untouched and can be imported explicitly.
+The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.6.checkpoint`; older saves remain untouched and can be imported explicitly.
 
 The root index now provides the shared build menu; the game opens directly at `play.html`.
+
+## v0.1.6 changes
+
+Returning opponents retain their first visible spawn through shared Release. World sounds use native HRTF, softened inverse-square attenuation, corridor routing/damping, four-wall early echoes and basic room reverb. H exposes controls; default propagation is three room hops / 120 m, with fixed voice/reflection/graph budgets. The generator adds an audio audition without changing its accepted M2 geometry. See [sound design](../docs/SOUND_DESIGN.md) for the approximation and limits.
 
 ## Current game rules
 

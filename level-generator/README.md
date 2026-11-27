@@ -10,6 +10,7 @@ A separate, strictly blockout test: 6, 9 or 12 rooms, a main route with branches
 - **Walk / mouse look** captures the mouse. WASD moves, Shift walks, Space jumps, C crouches, Esc releases capture.
 - **3D overview** hides the ceiling visually while collision stays sealed.
 - Click the map or choose a room/hallway destination, then use **AI walk to destination** or **Tour every region** (including ring quadrants and post bypasses). The marker follows the actual controller; manual movement stops the tour.
+- **Enable sound / Sound at selected destination** reuses the v0.1.6 mixer to audition the selected room or hallway. Its voice, distance and room-stage limits are separate playback controls. **Acoustic graph & noise reach** inspects the exported data without playing sound.
 - **Clearance regions & waypoints** inspects the navigation decomposition. **Export package** saves full geometry, semantic plan, routes and reports.
 - **Build menu** returns to the current game / engine / generator selection. Touch movement is not implemented.
 

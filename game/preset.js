@@ -1,2 +1,2 @@
-export const VERSION='0.1.5';
+export const VERSION='0.1.6';
 export const PRESET=Object.freeze({fixedResolution:true,movement:0,regenRate:1,regenDelay:5,chunkyEffects:true,freeRecomposition:true,randomWorkload:true,progression:true,startingWeapon:3,offscreenLoss:.1,selfCount:6174,model:'smarine',skin:'default',injuryOpacity:.67,armorOpacity:.33,hitOpacity:1,enemyDamage:.25,retaliationBias:2,botCountRandom:true,botCountMin:1,botCountMax:7,skill:2,outSeconds:2.5,backSeconds:2.5,turnSeconds:10,heightDeviation:4,darkFraction:.1,skyCoverage:.33,skyScroll:.5,skyParallax:.5,dynamicIntensity:1.5,skyEmission:.65,waveGlow:1,waveVolume:.33,halfLife:6,stretch:3,resolution:480,uiLoop:false,uiMetrics:true,uiKills:false,uiLog:false});

@@ -3,7 +3,7 @@ import {readFile,readdir} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 const root=new URL('../_site/',import.meta.url),manifest=JSON.parse(await readFile(new URL('manifest.json',root),'utf8'));
 const files=new Map(manifest.files.map(f=>[f.path,f]));
-assert.equal(manifest.build.version,'0.1.5');assert.ok(files.has('game/main.js'));assert.ok(files.has('game/preset.js'));
+assert.equal(manifest.build.version,'0.1.6');assert.ok(files.has('game/main.js'));assert.ok(files.has('game/preset.js'));for(const f of ['playable-test/acoustics.js','playable-test/spatial-audio.js'])assert.ok(files.has(f));
 for(const file of ['play.html','level-generator/engine/blockout.wasm','level-generator/engine/shaders/common.wgsl','level-generator/engine/shaders/lighting.wgsl','level-generator/profiles.json','level-generator/catalogue/index.json','level-generator/vendor/earcut.js','level-generator/vendor/polygon-clipping.js','level-generator/licenses/geometry.txt','level-generator/geometry.js','level-generator/plan.js','level-generator/elevation.js','level-generator/terrain-mesh.js','level-generator/acoustics.js'])assert.ok(files.has(file),file+' missing');
 assert.ok(!files.has('level-generator/engine/BASELINE.json'));assert.ok(!files.has('level-generator/engine/source-preset.js'));
 const menu=await readFile(new URL('index.html',root),'utf8');for(const link of ['play.html','engine-test/','level-generator/'])assert.ok(menu.includes(`href="${link}"`));

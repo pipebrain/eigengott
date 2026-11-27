@@ -69,3 +69,7 @@ This is a lumped room/corridor model: inter-node distances follow valid navigati
 ## Verification
 
 `node level-generator/tools/check-acoustics.mjs` verifies a chain with an exactly known three-stage cutoff, cycle/state/cache bounds, inverse-square energy ratios, dB conversion, travel delays, four analytically known image-source reflections, generated graph incidence and ownership, and reflection energy below the arriving direct signal. The regular generator checks also validate the acoustic graph in every qualified candidate and reproduce it from each catalogue seed.
+
+## Viewer audition and native mixer
+
+The generator viewer now reuses the v0.1.6 `Audio`/`SpatialAudio` modules for **Enable sound** and **Sound at selected destination**. Its `AcousticRouter` accepts this schema through `acousticSceneFromContract`. The mixer keeps its own softened distance curve, maximum distance, voice/echo budget and optional late reverb. These native playback gains/reflections are an approximation and are not bit-for-bit results of the pure generator query above. The graph overlay shows topological reach; audible output also depends on the mixer's distance, gain and voice culling. No new world geometry or audio fixtures are added.

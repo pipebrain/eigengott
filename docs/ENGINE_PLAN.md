@@ -358,3 +358,10 @@ Passive player regeneration: 1 HP/sec after five seconds without damage, cap 100
 ## Separate generator M3 — elevation and acoustic contract
 
 The separate blockout generator now compiles seeded room elevations, shallow slopes, true stair risers and terrain-following ceilings into a conforming closed shell. A largest-envelope terrain adapter validates footprint support, headroom and bidirectional room/hallway travel without jumping. The acoustic handoff exposes stable map-local room/corridor IDs, bounded three-stage propagation and at most four finite room-reflection spans. See [LEVEL_GENERATOR.md](LEVEL_GENERATOR.md) and [LEVEL_GENERATOR_AUDIO.md](LEVEL_GENERATOR_AUDIO.md) for the exact generator-side contracts and tested limits; the v0.1.6 mixer owns playback budgets.
+
+
+## Staged spawn lock and bounded spatial acoustics
+
+Finalize returning NPC spawn positions before the first visible staging event. Once visible, their positions remain fixed through player landing recovery and shared Release. Landing recovery may move only the player; AI movement begins after Release. Core coverage replays four Return cycles with repeated landing recovery, plus browser coverage across actual structural replacements.
+
+The live generator now emits connected-cluster acoustic metadata; the separate room/hallway generator derives compatible metadata from its navigation LUT. Native HRTF, softened inverse-square distance attenuation, bounded corridor routing/damping, four-wall early echoes and a shared late-reverb network form the world-audio path. Three room hops / 120 m are default limits; hard source, reflection and graph-work caps are enforced. H exposes controls and generator tools can audition the selected destination. Original ambient/warning/player-death placeholders remain gain-only. See [SOUND_DESIGN.md](SOUND_DESIGN.md) for the implemented acoustic approximation, budgets and deferred stretching proposal.

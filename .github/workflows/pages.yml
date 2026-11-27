@@ -60,6 +60,7 @@ jobs:
           node encounter-test/tools/check-media.mjs
           node encounter-test/tools/check-core.mjs
           node playable-test/tools/check-core.mjs
+          node playable-test/tools/check-acoustics.mjs
           node playable-test/tools/check-structure.mjs
           node playable-test/tools/check-weapon-push.mjs
           node tools/check-progression.mjs
