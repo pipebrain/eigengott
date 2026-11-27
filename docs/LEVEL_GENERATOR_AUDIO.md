@@ -68,3 +68,9 @@ The blockout viewer's Test shot emits stock OpenArena rocket fire, travel and im
 `check-acoustics.mjs` checks exact stage cutoff, finite falloff, dB conversion, reflection geometry and ownership. `check-m4.mjs` checks closed/open door loss, automatic/no-crush traversal, both independent 128 caps under load, listener reclassification, expiry and high-speed sector crossings. Browser checks use a native audio gesture and confirm routed HRTF playback; they do not establish listening quality or physical-device acceptance.
 
 This approximation omits material/frequency-dependent absorption, diffraction and a full acoustic wave equation. Room image-source spans are at most four cardinal walls; actual 3D leg traces reject steps, posts, cores, ceilings and doors that block those paths. Local sample rays inspect other surfaces, but are not a separate audible source per ray. Late reverb remains the native shared approximation. Tune mix, range and hazard/weapon audibility during play review.
+
+## M5 door and sky extension
+
+Schema-5 / `m5.0` packages add `openings`, describing collision-sealed windows, skylights and open-looking ceilings. `skyOpeningAt` identifies them at actual engine ray hits. Local rays terminate there and finite-wall echo paths hitting a window are rejected. No outside source/listener nodes are created. Room anchor height follows the actual centre-floor sector.
+
+Door state changes emit start/finish per moving leaf for both open and close strokes. Full stroke time is 0.25 s. Original synthesized motor-onset and stop-thud buffers play through the existing HRTF mixer and voice cap. A bounded 64-cue queue expires after 0.25 s and is processed after normal propagation updates; it never resets or enlarges the 128/128 budgets to force a new sound through. Active external origins are prioritized, followed by nearby sector cells. Interrupted motion has no false finish event. Parked doors are silent.

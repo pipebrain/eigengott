@@ -1,6 +1,6 @@
 # Level generator — shared design and roadmap
 
-Status: **M4 doors, structural sectors, safe hazard bypasses and dual-resolution acoustics implemented** in the independent prototype. Runtime/source: [`level-generator/`](../level-generator/README.md). [Open test](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/).
+Status: **M5 sealed sky windows/skylights, bounded branching alcoves, descending terraces and faster sounding doors implemented** in the independent prototype. Runtime/source: [`level-generator/`](../level-generator/README.md). [Open test](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/).
 
 ## Confirmed design
 
@@ -11,6 +11,16 @@ Status: **M4 doors, structural sectors, safe hazard bypasses and dual-resolution
 - The broader design permits curves, floor/ceiling changes, ramps/steps, enclosed or sky ceilings, ring rooms/posts and natural structural shapes. Sightlines must be checked against real opaque geometry, not inferred from a bend or height label.
 - Lighting comes from invisible point emitters, sky openings or red lava / green radioactive floor/fall boundaries. Animated feature appearance belongs on structural surfaces; it must not compromise safe connectivity.
 - Resolve design questions with prompts, then record the agreed decisions. Keep private research/reference files local unless separately selected for promotion.
+
+## Implemented M5 additions
+
+The user confirmed visual sky openings sealed to Selves and projectiles, and broad stepped terraces descending toward a flat room centre. Window and skylight masks use the same welded structural shell; no collision triangles are removed. Raised skylight ceiling sectors supply structural reveals. The shared native 3D sky renderer has an optional blockout mode: miniature boxes/pyramids, no texture/cloud detail, three regional scenes and camera parallax. Off-world sky polygons do not enter dungeon collision/navigation.
+
+Door-free wall edges can expand into room-owned sector alcoves, with every admitted alcove represented in the complete safe domain and LUT. Door/corridor sides and inter-room separation are reserved. Limits: two alcoves / 180 m² per room, depth two, 0.1% chance of repeating an admitted branch. Plain rooms retain a 4 m perimeter landing and descend four 0.15625 m steps on 2 m treads to a flat centre. This gives deterministic height logic at walls, entries and skylight sectors.
+
+A door stroke now lasts 0.25 s. Each leaf gets a start and finish cue, generated specifically for this blockout prototype. The state machine suppresses parked repeats and handles interrupted/reversed motion. No-crush occupancy, graph attenuation and the independent 128/128 sound budgets remain mandatory. Sky surfaces absorb reflected sound samples. Schema-5 packages (`m5.0`) supersede M4 packages.
+
+M5 tests validate actual ray/body blocking at each sky opening, forced rare branching, terrace heights, complete navigation, faster door timing and per-leaf event counts. Native browser checks capture window/skylight/open-ceiling views and confirm start/finish cues actually reach the spatial mixer. Collision closure and all-region route qualification remain strict; physical-device acceptance and acoustic/lighting calibration are pending.
 
 ## Implemented M4
 
@@ -37,12 +47,12 @@ High resolution applies to origins in the listener's current room: **128 shared 
 | Prototype review | Inspect elevated blockout scale, curves, rings, posts and noise graph | User play review; preserve 4–12 m width range and all-region connectivity |
 | Polygon/terrain compiler | Curves, cores, posts, slopes and real stairs implemented; stacked sectors and natural variants remain | Shared polygon render/collision boundary, closed non-overlapping geometry, full clearance-domain coverage |
 | M3 broader traversal | Final supported body/armor/weapon profiles, turns, full-region routing and versioned certificates | Every declared region connected for each supported profile; exact endpoint and controller checks |
-| M4 review / remaining structure | Review doors, sectors and hazards; add sky openings and light occlusion later | Safe routes, no-crush doors, measured sight breaks, no details/fixtures |
-| M5 catalogue qualification | Broader seed sweeps, adversarial fixtures and combat pacing review | Retain only passing packages; report rejection rates, duplicates and measured budgets |
+| M5 review / remaining structure | Review doors, sectors and hazards; review sky openings/alcoves/terraces; add light occlusion later | Safe routes, no-crush doors, measured sight breaks, no details/fixtures |
+| Broader catalogue qualification | Broader seed sweeps, adversarial fixtures and combat pacing review | Retain only passing packages; report rejection rates, duplicates and measured budgets |
 | M6 production integration | Staged render/collision/nav/lighting, preserved landing patch, spawn cohort and checkpoint handling | Validate the final composed world; atomic activation, cancellation and recovery |
 | M7 handoff | Integrable v1.2 prototype and reviewed shared documentation | Reproducible build, catalogue, evidence and explicit remaining limitations |
 
-M4 point lights currently use the shadowless case: light may cross walls even when the physical shell is sealed. Stacked sectors, natural variants, sky ceilings, other weapons, arbitrary pitch/crowds, recovery and physical-device behavior remain unverified. See [`level-generator/README.md`](../level-generator/README.md) for commands and exact scope.
+M4 point lights currently use the shadowless case: light may cross walls even when the physical shell is sealed. Stacked sectors, natural variants, playable exteriors, other weapons, arbitrary pitch/crowds, recovery and physical-device behavior remain unverified. See [`level-generator/README.md`](../level-generator/README.md) for commands and exact scope.
 
 ## Publication contract
 

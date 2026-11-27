@@ -1,3 +1,4 @@
+import {skyOpeningAt} from './openings.js';
 // Data-only room/corridor acoustics contract for the independent v0.1.6 mixer.
 import {contains} from './geometry.js';
 import {floorAt,ceilingAt} from './elevation.js';
@@ -8,7 +9,7 @@ const distance=(a,b)=>Math.hypot(...a.map((n,k)=>n-b[k]));
 const stages=value=>{if(!Number.isInteger(value)||value<0||value>MAX_STAGES)throw new Error('Acoustic stage limit must be an integer from 0 to '+MAX_STAGES);return value;};
 
 export function buildAcoustics(plan,structure,nav){
- const graph={schema:ACOUSTIC_SCHEMA,generator:plan.version,seed:plan.seed,defaultStages:DEFAULT_STAGES,maxStages:MAX_STAGES,referenceDistance:1,speedOfSound:343,corridorLossDb:6,coordinates:'metres; x/y plan, z up; Web Audio mapping [x,z,-y]',sectors:plan.sectors,cells:structure.sectorCells.map(c=>({...c,owner:c.sector!==null?plan.sectors[c.sector].room:plan.rooms.length+plan.hallways.findIndex(h=>contains(h.polygons,c.sample))})),doors:plan.doors,elevation:plan.elevation,clearHeight:plan.ceiling,nodes:[],edges:[],portals:[],polygons:structure.polygons,boundary:structure.boundary};
+ const graph={schema:ACOUSTIC_SCHEMA,generator:plan.version,seed:plan.seed,defaultStages:DEFAULT_STAGES,maxStages:MAX_STAGES,referenceDistance:1,speedOfSound:343,corridorLossDb:6,coordinates:'metres; x/y plan, z up; Web Audio mapping [x,z,-y]',openings:plan.openings,sectors:plan.sectors,cells:structure.sectorCells.map(c=>({...c,owner:c.sector!==null?plan.sectors[c.sector].room:plan.rooms.length+plan.hallways.findIndex(h=>contains(h.polygons,c.sample))})),doors:plan.doors,elevation:plan.elevation,clearHeight:plan.ceiling,nodes:[],edges:[],portals:[],polygons:structure.polygons,boundary:structure.boundary};
  for(const room of plan.rooms){
   const walls=[];
   for(const[axis,at]of [[0,room.x0],[0,room.x1],[1,room.y0],[1,room.y1]]){
@@ -17,7 +18,7 @@ export function buildAcoustics(plan,structure,nav){
    let normal=[-(b[1]-a[1])/length,(b[0]-a[0])/length,0];if(normal[0]*(room.cx-a[0])+normal[1]*(room.cy-a[1])<0)normal=normal.map(v=>-v);
    walls.push({a:[...a,room.floorZ],b:[...b,room.floorZ],normal:normal.map(v=>v||0),bottom:room.floorZ,top:room.ceilingZ,energyReflectance:.35});
   }
-  graph.nodes.push({id:'room:'+room.id,kind:'room',owner:room.id,label:room.name,position:[...room.anchor,room.floorZ+1.5],footprint:[[room.outline,...room.obstacles.map(o=>o.outline)]],reflectionWalls:walls,navTarget:nav.targets.find(t=>t.kind==='room'&&t.id===room.id).node});
+  graph.nodes.push({id:'room:'+room.id,kind:'room',owner:room.id,label:room.name,position:[...room.anchor,floorAt(plan,...room.anchor)+1.5],footprint:room.domain,reflectionWalls:walls,navTarget:nav.targets.find(t=>t.kind==='room'&&t.id===room.id).node});
  }
  for(const h of plan.hallways)graph.nodes.push({id:'corridor:'+h.id,kind:'corridor',owner:h.id,label:h.name,position:[...h.anchor,floorAt(plan,...h.anchor)+1.5],footprint:h.polygons,reflectionWalls:[],navTarget:nav.targets.find(t=>t.kind==='hallway'&&t.id===h.id).node});
  graph.edges=graph.nodes.map(()=>[]);
@@ -63,7 +64,7 @@ export function wallReflections(graph,node,source,listener,{referenceDistance=gr
   const n=wall.normal,signed=n.reduce((s,v,k)=>s+v*(source[k]-wall.a[k]),0);if(signed<=.001)continue;
   const image=source.map((v,k)=>v-2*signed*n[k]),ray=listener.map((v,k)=>v-image[k]),den=n.reduce((s,v,k)=>s+v*ray[k],0);if(Math.abs(den)<1e-8)continue;
   const t=n.reduce((s,v,k)=>s+v*(wall.a[k]-image[k]),0)/den;if(t<=0||t>=1)continue;const hit=image.map((v,k)=>v+ray[k]*t),v=wall.b.map((v,k)=>v-wall.a[k]),length2=v.reduce((s,n)=>s+n*n,0),along=v.reduce((s,n,k)=>s+n*(hit[k]-wall.a[k]),0)/length2;
-  if(along<0||along>1||hit[2]<=wall.bottom||hit[2]>=wall.top||!segmentInside(graph,source,hit)||!segmentInside(graph,hit,listener))continue;
+  if(skyOpeningAt(graph,hit,n)||along<0||along>1||hit[2]<=wall.bottom||hit[2]>=wall.top||!segmentInside(graph,source,hit)||!segmentInside(graph,hit,listener))continue;
   const metres=distance(source,hit)+distance(hit,listener),energyGain=(referenceDistance/Math.max(referenceDistance,metres))**2*wall.energyReflectance;
   taps.push({wall:room.reflectionWalls.indexOf(wall),position:hit,distance:metres,delaySeconds:metres/graph.speedOfSound,energyGain,gain:Math.sqrt(energyGain)});
  }return taps;

@@ -1,8 +1,10 @@
+import {makeAlcoves} from './architecture.js';
+import {makeOpenings} from './openings.js';
 import {snap,rectangle,clip} from './geometry.js';
 import {makeSectors} from './sectors.js';
 import {makeDoors} from './doors.js';
 import {makeElevation} from './elevation.js';
-export const GENERATOR_VERSION='m4.0';
+export const GENERATOR_VERSION='m5.0';
 export function random(seed){let s=seed>>>0;return()=>{s=(s+0x6d2b79f5)>>>0;let t=Math.imul(s^s>>>15,s|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296;};}
 const key=(a,b)=>[Math.min(a,b),Math.max(a,b)].join(':');
 export function makePlan(seed,count=9,{widthOverride=null,features=true,elevation=true}={}){
@@ -27,7 +29,7 @@ export function makePlan(seed,count=9,{widthOverride=null,features=true,elevatio
   rooms[e.a].hallways.push(id);rooms[e.b].hallways.push(id);return{id,name:'Hallway '+(id+1),a:e.a,b:e.b,type:e.type,width,points,rects};
  });
  const plan={seed,count,cols,rows,rooms,hallways,main,spacing,ceiling:5.5,version:GENERATOR_VERSION,features};
- addShapes(plan,rng);makeElevation(plan,rng,{elevation});makeSectors(plan,rng);makeDoors(plan);return plan;
+ addShapes(plan,rng);makeAlcoves(plan,rng);makeElevation(plan,rng,{elevation});makeSectors(plan,rng);makeDoors(plan);makeOpenings(plan,rng);return plan;
 }
 
 function roundedRoom(r){

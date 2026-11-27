@@ -5,14 +5,14 @@ const pointInside=(p,poly)=>contains([poly],p);
 const edgeKey=(a,b)=>[pointKey(a),pointKey(b)].sort().join(':');
 
 export function refineOutline(plan,polygons){
- const pts=polygons.flat(2),xs=elevationCuts(plan,'x',Math.min(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[0]))),ys=elevationCuts(plan,'y',Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[1])));
+ const pts=polygons.flat(2),xs=[...elevationCuts(plan,'x',Math.min(...pts.map(p=>p[0])),Math.max(...pts.map(p=>p[0]))),...plan.sectors.flatMap(s=>[s.bounds[0],s.bounds[2]])],ys=[...elevationCuts(plan,'y',Math.min(...pts.map(p=>p[1])),Math.max(...pts.map(p=>p[1]))),...plan.sectors.flatMap(s=>[s.bounds[1],s.bounds[3]])];
  return polygons.map(poly=>poly.map(ring=>{const r=cleanRing(ring),out=[];for(let i=0;i<r.length;i++){const a=r[i],b=r[(i+1)%r.length],ts=[0];for(const[k,cuts]of [[0,xs],[1,ys]])if(a[k]!==b[k])for(const at of cuts){const t=(at-a[k])/(b[k]-a[k]);if(t>1e-8&&t<1-1e-8)ts.push(t);}for(const t of [...new Set(ts)].sort((a,b)=>a-b))out.push(a.map((n,k)=>snap(n+(b[k]-n)*t)));}return cleanRing(out);}));
 }
 
 export function terrainFaces(plan,polygons){
  const p=polygons.flat(2),xs=elevationCuts(plan,'x',Math.min(...p.map(p=>p[0])),Math.max(...p.map(p=>p[0]))),ys=elevationCuts(plan,'y',Math.min(...p.map(p=>p[1])),Math.max(...p.map(p=>p[1]))),tiles=[];
  for(let x=1;x<xs.length;x++)for(let y=1;y<ys.length;y++){const domain=clip.intersection(polygons,[rectangle({x0:xs[x-1],x1:xs[x],y0:ys[y-1],y1:ys[y]})]).map(p=>p.map(r=>cleanRing(r,true)));if(domain.length)tiles.push(...domain);}
- const parts=tiles.flatMap(tile=>partitionSectors(plan,[tile])),partition=parts.flatMap(p=>p.polygons),triangles=conform(triangulate(partition),partition),floorEdges=new Map(),faces=[];let volume=0;
+ const parts=tiles.flatMap(tile=>partitionSectors(plan,[tile])).map(p=>({...p,polygons:p.polygons.map(poly=>poly.map(r=>cleanRing(r,true)).filter(r=>r.length>=3)).filter(poly=>poly.length)})).filter(p=>p.polygons.length),partition=parts.flatMap(p=>p.polygons),triangles=conform(triangulate(partition),partition),floorEdges=new Map(),faces=[];let volume=0;
  for(const t of triangles){const c=t[0].map((_,k)=>t.reduce((s,p)=>s+p[k],0)/3),fp=planeFor(plan,...c),cp=planeFor(plan,...c,true),floor=t.map(([x,y])=>[x,y,snap(fp[0]*x+fp[1]*y+fp[2])]),ceil=t.map(([x,y])=>[x,y,snap(cp[0]*x+cp[1]*y+cp[2])]),part=parts.find(p=>p.sector&&p.sector.polygons.some(poly=>pointInside(c,poly))),material=part?.sector?.hazard==='lava'?1:part?.sector?.hazard==='radiation'?2:0;
  if(ceil.some((p,i)=>p[2]<=floor[i][2]))throw Error('Sector ceiling intersects its floor.');
  volume+=Math.abs((t[1][0]-t[0][0])*(t[2][1]-t[0][1])-(t[1][1]-t[0][1])*(t[2][0]-t[0][0]))/2*floor.reduce((s,p,i)=>s+(ceil[i][2]-p[2])/3,0);

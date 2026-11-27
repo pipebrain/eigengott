@@ -1,4 +1,4 @@
-# Level generator M4 scope
+# Level generator M5 scope
 
 This directory is the published, reproducible generator prototype. The user authorized promoting it to GitHub Pages on 2026-11-27. Private research/reference files remain in the ignored `.local/level-generator/` area and are not part of this source or site package.
 
@@ -7,7 +7,7 @@ This directory is the published, reproducible generator prototype. The user auth
 - Preserve full connectivity of the declared SAFE composite clearance domain, exact LUT endpoints, welded closure and live-engine sweep checks. Do not silently accept a disconnected subset or activate a failed candidate.
 - `engine/BASELINE.json` records the frozen local v0.1.3 source snapshot. The current game may advance independently. Do not silently replace the snapshot with the current game sources.
 - Engine/controller changes require rebuilding WASM and catalogue. Generator/navigation changes require a version bump and catalogue rebuild. Hash mismatches must reject stale packages.
-- Record limitations accurately: M4 is a roofed, single-valued heightfield, with a composite envelope covering the current 18 model allowances and level-pitch machinegun yaw extent. Overhangs, natural variants, all weapons and production Recomposition integration are not complete.
+- Record limitations accurately: M5 is a collision-sealed, single-valued heightfield, with a composite envelope covering the current 18 model allowances and level-pitch machinegun yaw extent. Visual windows/skylights/open ceilings are supported through sealed sky masks. Overhangs, natural variants, all weapons and production Recomposition integration are not complete.
 - Read README.md and `../docs/LEVEL_GENERATOR.md` before extending the prototype. Keep generated verification reports under `.local/level-generator-checks/`.
 
 - Curves are tessellated cubic structural boundaries. Donut cores and posts are full-height exclusions from the same polygon domain used for rendering, collision and navigation; never dressings or disconnected prop colliders.
@@ -23,3 +23,8 @@ This directory is the published, reproducible generator prototype. The user auth
 - Door leaf transforms must be identical in rendering and SAT overlays. All four types open for players and AI, with swept-volume no-crush occupancy. Closed doors add acoustic loss and invalidate propagation caches when aperture changes.
 - Confirmed sound work limits: 128 shared local-room propagation/reflection samples per update and an independent 128 external sector/graph-state evaluations. Neither means voice count or PCM samples. Keep finite event lifetimes, bounded pools, no recursive echo events and six default graph transitions.
 - Hazard damage is identical for all Selves. Solid red lava/heat, solid green radiation; no visual flame/liquid details. State prototype damage tuning and finite radiation range explicitly.
+
+- M5 sky portals preserve every collision triangle. Use actual 3D sky scenes in blockout mode, without texture detail; record off-world sky triangles separately. Sky boundaries absorb acoustic rays, and do not create exterior navigation.
+- Room alcoves reserve door/corridor-bearing wall sides, have bounded area/depth and must all appear in the safe nav/LUT component. Keep the 0.1% repeat chance and forced-repeat test.
+- Terraces descend to a flat centre with real 0.15625 m risers / 2 m treads; keep perimeter/entry floors matched. Normalize all sector/room/hall boundaries to shared fixed-point cuts before triangulation; do not loosen closure tolerances for slivers.
+- Doors take 0.25 s per stroke. Start/finish sounds are per leaf per stroke, no parked repeats or false finish after a reversal. Bound event/cue pools and preserve the established sound budgets.

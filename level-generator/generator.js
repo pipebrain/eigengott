@@ -8,7 +8,8 @@ export {boxCovered} from './geometry.js';
 const centre=p=>[0,1].map(k=>p.reduce((s,v)=>s+v[k],0)/p.length);
 const edgeKey=(a,b)=>[pointKey(a),pointKey(b)].sort().join(':');
 export function compileStructure(plan){
- const additions=[...plan.rooms.map(r=>[r.outline]),...plan.hallways.flatMap(h=>h.polygons)],obstacles=plan.rooms.flatMap(r=>r.obstacles.map(o=>[o.outline]));
+ for(const r of plan.rooms)r.domain=refineOutline(plan,r.domain);for(const s of plan.sectors)s.polygons=refineOutline(plan,s.polygons);for(const h of plan.hallways)h.polygons=refineOutline(plan,h.polygons);
+ const additions=[...plan.rooms.flatMap(r=>r.domain),...plan.hallways.flatMap(h=>h.polygons)],obstacles=plan.rooms.flatMap(r=>r.obstacles.map(o=>[o.outline]));
  let polygons=clip.union(...additions);if(obstacles.length)polygons=clip.difference(polygons,...obstacles);
  // Collision ABI is 1/1024 m. Derive navigation from the exact snapped outline.
  polygons=polygons.map(p=>p.map(r=>cleanRing(r,true)).filter(r=>r.length>=3));
@@ -66,6 +67,7 @@ export function buildNavigation(plan,s,profile){
  for(let a=0;a<polygons.length;a++)for(let b=a+1;b<polygons.length;b++){const at=portal(polygons[a],polygons[b]);if(at){const n=add(at,a);connect(n,b);}}
  const attach=(p,label,kind,id)=>{const region=polygons.findIndex(r=>r.every((a,i)=>cross(a,r[(i+1)%r.length],p)>=-1e-7));if(region<0||!boxCovered(s,...p,radius))throw new Error('Region target lacks clearance: '+label);const node=add(p,region);targets.push({label,kind,id,node,point:points[node]});};
  for(const r of plan.rooms){attach(r.anchor,r.name,'room',r.id);if(r.kind==='donut'){const o=r.obstacles[0],haz=plan.hazards.find(h=>h.wall===o.outline)||plan.hazards.find(h=>h.sector===r.sectors.at(-1)),outline=haz?haz.polygons[0][0]:o.outline,pad=haz?.radius||0,xs=outline.map(v=>v[0]+Math.sign(v[0]-r.cx)*pad),ys=outline.map(v=>v[1]+Math.sign(v[1]-r.cy)*pad);for(const [p,label]of [[[r.cx,(Math.max(...ys)+r.y1)/2],'north'],[[(Math.max(...xs)+r.x1)/2,r.cy],'east'],[[r.cx,(Math.min(...ys)+r.y0)/2],'south'],[[(Math.min(...xs)+r.x0)/2,r.cy],'west']])attach(p,r.name+' · ring '+label,'ring',r.id);}if(r.kind==='posts')for(const sign of [-1,1])attach([r.cx,r.cy+sign*7],r.name+' · posts '+(sign<0?'south':'north'),'post-bypass',r.id);}
+ for(const a of plan.alcoves)attach(a.anchor,'Room '+(a.room+1)+' · alcove '+(a.id+1),'alcove',a.id);
  for(const h of plan.hallways)attach(h.anchor,h.name,'hallway',h.id);
  if(points.length>2048)throw new Error('Waypoint budget exceeded.');
  const visited=new Set([0]),queue=[0];for(let i=0;i<queue.length;i++)for(const[n]of edges[queue[i]])if(!visited.has(n)){visited.add(n);queue.push(n);}if(visited.size!==points.length)throw new Error('Clearance domain is disconnected.');
