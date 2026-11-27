@@ -12,7 +12,7 @@ const build={version:VERSION,commit,short:commit.slice(0,7),builtAt:new Date().t
 const applications=['engine-test','engine-benchmark','arena-fold','arena-fold-2','arena-sweep','encounter-test','playable-test','audio-previews','dos-maze','vector-labyrinth','level-generator'];
 const extensions=new Set(['.html','.css','.js','.wasm','.json','.gz','.bin','.wgsl','.png','.wav','.ogg','.zip','.txt']);
 const subdirectories=new Set(['assets','shaders','presets','licenses']);
-const generatorDirectories=new Map([['level-generator',new Set(['engine','catalogue'])],['level-generator/engine',new Set(['shaders'])]]);
+const generatorDirectories=new Map([['level-generator',new Set(['engine','catalogue','vendor','licenses'])],['level-generator/engine',new Set(['shaders'])]]);
 await rm(out,{recursive:true,force:true});await mkdir(out,{recursive:true});
 async function copyRuntime(relative,depth=0){
   const source=path.join(root,relative),target=path.join(out,relative);await mkdir(target,{recursive:true});

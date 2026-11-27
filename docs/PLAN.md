@@ -133,3 +133,7 @@ Restore warm grey / charcoal / ochre / brown / olive material ramps from the pro
 ## Level generator M1
 
 Published as a separate blockout test with a shared build menu. See [the generator design and roadmap](LEVEL_GENERATOR.md) and [runtime/build commands](../level-generator/README.md). The current milestone is flat 6/9/12-room layouts, random 4–12 m corridors, sealed structure, precomputed navigation and actual-controller route tours. Advanced geometry/features and integration remain later work.
+
+## Level generator M2 — curved structure
+
+The separate generator now compiles curved corridors, rounded donut rooms with solid cores, and full-height posts from a shared polygon domain. The user approved local curve widening within 4–12 m. All free-space components, ring quadrants and post bypasses are retained in the clearance navigation/LUT. See [LEVEL_GENERATOR.md](LEVEL_GENERATOR.md) for performed M2 checks, the imported-flat containment adaptation and remaining sector/elevation integration.

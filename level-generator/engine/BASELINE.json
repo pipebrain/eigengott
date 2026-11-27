@@ -83,5 +83,20 @@
       "snapshot": "engine/source-preset.js",
       "sha256": "4853a568d9c1df83c1a9d94fb9b824e7b2a48615f267c94aee2c61998c9cec0d"
     }
+  ],
+  "generatorAdaptations": [
+    {
+      "file": "engine/src/lib.rs",
+      "change": "M1: load lab adapter and omit unused body-proxy render geometry."
+    },
+    {
+      "file": "engine/src/lab.rs",
+      "change": "M1: flat mesh import and continuous box queries. M2: BVH-accelerated f64 floor-triangle membership for imported flat extrusions."
+    },
+    {
+      "file": "engine/src/physics.rs",
+      "change": "M2: inside() dispatches imported flat levels to lab::flat_contains before the original general 3D parity test. Player movement equations, SAT body sweep and BVH sources are otherwise unchanged.",
+      "sha256": "7eef388b0d9ff783b6fe4dc4c25ab0eb5eaa32c6d4330810bc35a0f90c6b989b"
+    }
   ]
 }

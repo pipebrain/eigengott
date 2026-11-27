@@ -6,7 +6,7 @@ The user authorized making `pipebrain/eigengott` public and enabling GitHub Page
 
 - [Build selection menu](https://pipebrain.github.io/eigengott/)
 - [EIGENGOTT v0.1.4](https://pipebrain.github.io/eigengott/play.html)
-- [Level generator M1](https://pipebrain.github.io/eigengott/level-generator/) · [design and roadmap](LEVEL_GENERATOR.md)
+- [Level generator M2](https://pipebrain.github.io/eigengott/level-generator/) · [design and roadmap](LEVEL_GENERATOR.md)
 - [Test hub](https://pipebrain.github.io/eigengott/tests.html)
 - [Small engine baseline](https://pipebrain.github.io/eigengott/engine-test/) · [open tools](https://pipebrain.github.io/eigengott/engine-test/?tools=1)
 - [Larger arena benchmark](https://pipebrain.github.io/eigengott/engine-benchmark/) · [open tools](https://pipebrain.github.io/eigengott/engine-benchmark/?tools=1)
@@ -51,6 +51,6 @@ Future passing pushes to `main` deploy automatically. Use the **Verify and deplo
 
 ## Level-generator publication
 
-The user authorized promoting the generator prototype and necessary shared documentation on 2026-11-27. `level-generator/` is the canonical shared source; the earlier `.local/level-generator/` research remains ignored. Pages includes only generator HTML/CSS/JS, profiles, the private-snapshot-derived WASM, its two runtime shaders and twelve compressed qualified packages/index. Rust source, baseline metadata, tools, Markdown, local reports and downloaded reference files are excluded from the site artifact. The generator remains explicitly based on frozen v0.1.3 interfaces while the current game advances independently.
+The user authorized promoting the generator prototype and necessary shared documentation on 2026-11-27. `level-generator/` is the canonical shared source; the earlier `.local/level-generator/` research remains ignored. Pages includes only generator HTML/CSS/JS, profiles, the private-snapshot-derived WASM, its two runtime shaders, pinned local geometry JS/licenses and twelve compressed qualified packages/index. Rust source, baseline metadata, tools, Markdown, local reports and downloaded reference files are excluded from the site artifact. The generator remains explicitly based on frozen v0.1.3 interfaces while the current game advances independently.
 
 The verification job also rebuilds the generator WASM, confirms it matches the checked-in binary and catalogue engine/profile/package hashes, and runs its core suite. Browser checks exercise both the project-prefixed staged package and live deployment. Game browser tests now target `play.html`; use `GAME_URL=https://pipebrain.github.io/eigengott/play.html` for live game checks.

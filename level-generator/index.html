@@ -1,7 +1,7 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eigengott · Level Generator M1</title><link rel="stylesheet" href="./style.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eigengott · Level Generator M2</title><link rel="stylesheet" href="./style.css"></head>
 <body>
-<header><div><strong>EIGENGOTT</strong><span class="tag">LEVEL GENERATOR M1</span></div><nav class="actions" aria-label="Build navigation"><a href="../">Build menu</a><a href="../play.html">Current game</a><span id="engine-label">v0.1.3 collision + lighting</span></nav></header>
+<header><div><strong>EIGENGOTT</strong><span class="tag">LEVEL GENERATOR M2</span></div><nav class="actions" aria-label="Build navigation"><a href="../">Build menu</a><a href="../play.html">Current game</a><span id="engine-label">v0.1.3 collision + lighting</span></nav></header>
 <main>
  <section class="tools" aria-label="Generator controls">
   <label>Seed<input id="seed" type="number" min="0" max="4294967295" value="1776" step="1"></label>
@@ -32,5 +32,5 @@
  </section>
  <div id="status" role="status">Loading generator engine snapshot…</div>
  <div id="error" role="alert" hidden></div>
- <p class="scope">M1: flat rooms and dogleg corridors, sealed structural shell, precomputed traversal. Curves, doors, elevation, hazards and sky openings follow later. No surface details or fixtures.</p>
+ <p class="scope">M2: curved corridors, donut rooms and full-height structural posts. Curved sections widen where needed within 4–12 m. Sealed flat shell and precomputed traversal; doors, elevation, hazards and sky openings follow later. No surface details or fixtures. <a href="./licenses/geometry.txt">Open-source licenses</a>.</p>
 </main><script type="module" src="./main.js"></script></body></html>

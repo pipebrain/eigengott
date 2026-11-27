@@ -2,6 +2,19 @@
 use super::*;
 static mut INPUT_POINTS:[i32;MAX_VERTS*3]=[0;MAX_VERTS*3];
 static mut INPUT_TRIS:[u32;MAX_TRIS*3]=[0;MAX_TRIS*3];
+static mut FLAT_IMPORTED:bool=false;
+// The general 3D parity ray deduplicates near-coincident f32 intersections.
+// Closely spaced curved edges can merge distinct crossings and reject an
+// interior point. Imported flat extrusions have an exact, cheaper predicate:
+// membership in any upward floor triangle, evaluated in f64 via the same BVH.
+pub fn flat_contains(a:&Arena,p:V3)->Option<bool>{unsafe{
+ if !FLAT_IMPORTED{return None}if !p.finite()||p.z<=0.0||p.z>=a.room_height as f32/1024.0{return Some(false)}
+ let mut inside=false;spatial::query(a,v(p.x,p.y,-0.00001),v(p.x,p.y,0.00001),|i|{
+  if a.tris[i].kind!=0{return true}let t=a.collision[i].p;
+  let side=|a:V3,b:V3|(b.x as f64-a.x as f64)*(p.y as f64-a.y as f64)-(b.y as f64-a.y as f64)*(p.x as f64-a.x as f64);
+  if side(t[0],t[1])>=-1e-10&&side(t[1],t[2])>=-1e-10&&side(t[2],t[0])>=-1e-10{inside=true;return false}true
+ });Some(inside)
+}}
 #[no_mangle]pub extern "C" fn lab_points()->*mut i32{unsafe{INPUT_POINTS.as_mut_ptr()}}
 #[no_mangle]pub extern "C" fn lab_triangles()->*mut u32{unsafe{INPUT_TRIS.as_mut_ptr()}}
 #[no_mangle]pub extern "C" fn lab_import(vertices:u32,triangles:u32,seed:u32,x:f32,y:f32,height:f32,extent:f32)->u32{unsafe{
@@ -19,7 +32,7 @@ static mut INPUT_TRIS:[u32;MAX_TRIS*3]=[0;MAX_TRIS*3];
   a.collision[i]=CollisionTri{p,normal,lo:p[0].min(p[1]).min(p[2]),hi:p[0].max(p[1]).max(p[2]),pad:0.0};
   for j in 0..3{a.render[a.render_count]=surface::vertex(p[j],v(0.0,0.0,0.0),normal,1.0,if kind==0{100}else if kind==1{101}else{102},0,[-1.0,-1.0]);a.indices[a.index_count]=a.render_count as u32;a.render_count+=1;a.index_count+=1;}
  }
- spatial::build(a);if a.errors!=0{return a.errors}a.geometry_hash=geometry_hash(a);a.ready=true;
+ spatial::build(a);if a.errors!=0{return a.errors}a.geometry_hash=geometry_hash(a);a.ready=true;FLAT_IMPORTED=true;
  surface::PALETTE.fill(0);for i in 0..256{let level=if i==100{190}else if i==101{218}else{205};surface::PALETTE[i*4..i*4+4].copy_from_slice(&[level,level,level,255]);}
  PLAYER=Player::EMPTY;PLAYER.feet=a.spawn;PLAYER.profile=1;ACTIVE=0;CAMERA_MODE=0;ACCUMULATOR=0.0;TIME=0.0;ACTIVATIONS=1;
  if !PLAYER.placement_clear(a,a.spawn){ACTIVE=1;return CLEARANCE}render_state();0

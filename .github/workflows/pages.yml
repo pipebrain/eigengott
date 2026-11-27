@@ -31,7 +31,7 @@ jobs:
           sudo apt-get install -y clang lld
       - name: Check browser and deployment JavaScript
         run: |
-          for source in game/*.js site/*.js tools/build-pages.mjs tools/check-pages.mjs tools/check-release*.mjs tools/check-progression.mjs tools/check-game-soak.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs playable-test/*.js playable-test/tools/*.mjs audio-previews/*.js audio-previews/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js level-generator/*.js level-generator/tools/*.mjs; do
+          for source in game/*.js site/*.js tools/build-pages.mjs tools/check-pages.mjs tools/check-release*.mjs tools/check-progression.mjs tools/check-game-soak.mjs engine-test/*.js engine-benchmark/*.js arena-fold/*.js arena-fold/tools/*.mjs arena-fold-2/*.js arena-fold-2/tools/*.mjs arena-sweep/*.js arena-sweep/tools/*.mjs encounter-test/*.js encounter-test/tools/*.mjs playable-test/*.js playable-test/tools/*.mjs audio-previews/*.js audio-previews/tools/*.mjs dos-maze/*.js vector-labyrinth/*.js level-generator/*.js level-generator/vendor/*.js level-generator/tools/*.mjs; do
             node --check "$source"
           done
       - name: Rebuild accepted engine and benchmark WASM

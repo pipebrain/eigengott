@@ -76,6 +76,7 @@ pub fn shape_clear(a:&Arena,p:V3,q:V3,radius:f32)->bool{
  crate::spatial::query(a,lo,hi,|i|{let tri=a.collision[i];let(x,y)=segment_triangle(p,q,tri.p);if (x-y).len()<radius+tri.pad-0.0004{clear=false;return false}true});clear&&crate::overlay::clear(p,q,radius)
 }
 pub fn inside(a:&Arena,p:V3)->bool{
+ if let Some(inside)=crate::lab::flat_contains(a,p){return inside}
  let end=p+v(207.643,83.057,124.586);let mut hits=[0.0f32;256];let mut count=0;let mut overflow=false;
  crate::groups::all(||crate::spatial::ray(a,p,end,|i|{let tri=a.collision[i];if let Some(t)=segment_hit(p,end,tri.p[0],tri.p[1],tri.p[2],false){
   if t<1e-7{return true}if hits[..count].iter().any(|old|(t-*old).abs()<1e-6){return true}

@@ -68,7 +68,7 @@ await withBrowser(async({origin,cmd,evaluate,wait:shortWait,errors})=>{
   checks.push('Separate audio auditions: original/A/B tracks load without autoplay or gameplay integration');
   await cmd('Page.navigate',{url:new URL('level-generator/',base).href});await wait('window.__generator?.snapshot().ready&&!window.__generator.snapshot().preparing');
   assert.equal(await evaluate('window.__generator.snapshot().build.commit'),commit);assert.equal(await evaluate('window.__generator.snapshot().report.closure.unmatched'),0);
-  assert.equal(await evaluate('window.__generator.snapshot().report.routes.components'),1);
+  assert.equal(await evaluate('window.__generator.snapshot().report.routes.components'),1);assert.equal(await evaluate('window.__generator.snapshot().report.generator'),'m2.0');assert.equal(await evaluate('(()=>{const f=window.__generator.snapshot().report.closure.features;return f.curved>0&&f.donutRooms>0&&f.posts>0;})()'),true);
   await evaluate('document.querySelector("#catalogue").value="0";document.querySelector("#catalogue").dispatchEvent(new Event("change"))');await wait('!window.__generator.snapshot().preparing&&window.__generator.snapshot().report.loadedPrecomputed');
   assert.equal(await evaluate('window.__generator.snapshot().report.widths.every(w=>w>=4&&w<=12)'),true);
   checks.push('Level generator: project-prefix worker/WASM/shader startup, qualified package hash checks and complete navigation');
