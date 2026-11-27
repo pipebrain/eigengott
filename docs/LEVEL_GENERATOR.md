@@ -42,7 +42,7 @@ High resolution applies to origins in the listener's current room: **128 shared 
 | M6 production integration | Staged render/collision/nav/lighting, preserved landing patch, spawn cohort and checkpoint handling | Validate the final composed world; atomic activation, cancellation and recovery |
 | M7 handoff | Integrable v1.2 prototype and reviewed shared documentation | Reproducible build, catalogue, evidence and explicit remaining limitations |
 
-M4 point lights currently use the shadowless case: light may cross walls even when the physical shell is sealed. Stacked sectors, natural variants sky ceilings, other weapons, arbitrary pitch/crowds, recovery and physical-device behavior remain unverified. See [`level-generator/README.md`](../level-generator/README.md) for commands and exact scope.
+M4 point lights currently use the shadowless case: light may cross walls even when the physical shell is sealed. Stacked sectors, natural variants, sky ceilings, other weapons, arbitrary pitch/crowds, recovery and physical-device behavior remain unverified. See [`level-generator/README.md`](../level-generator/README.md) for commands and exact scope.
 
 ## Publication contract
 
