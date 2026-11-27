@@ -6,7 +6,7 @@
     "Large\u2192Small\u2192Medium\u2192Large\u2192Small replacement honors all population ranges, keeps movement during Collapse/void/Return, heals loot health and recovers collision-safe before combat",
     "Surviving copies gain persistent equipment, newly unlocked media prepare before Collapse, and checkpoint restore preserves population, gear and workload",
     "Rendered chunky mode limits displayed channel levels while smooth comparison has continuous gradients; stock texture sampling stays nearest",
-    "Cold-start click still clears the title and starts gameplay with capture/audio and the full population"
+    "Cold-start click clears the title; additional mouse/key input during preparation is safe, with capture/audio and the full population"
   ],
   "rounds": [
     {
