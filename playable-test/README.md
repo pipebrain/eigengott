@@ -46,7 +46,7 @@ Particles cap at 256 and sprite draws at 512. Rocket flare/thrust shader texture
 
 ## Placeholder audio
 
-The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-byte unchanged, at playback rate 1 and detune 0. Ambient and warning use an aggressive **180 ms gain crossfade** at Collapse and Release; the loops are not stopped/restarted at those boundaries. The original death recording remains a one-shot. Pause, hidden-page suspension and explicit mute stop playback normally. No stretching, pitch shift, filters, reverb or procedural auditions are integrated. Existing OpenArena gameplay samples remain original recordings. The newly authorized deletion, insertion and release cues are unmodified OpenArena teleport/respawn samples, positioned at actual sector events through HRTF panners. Wave playback caps at eight voices with a 55 ms event throttle; the total audio pool caps at nineteen voices. H controls wave sound and volume independently. Included source samples, hashes and provenance are in [wave audio notices](licenses/wave-audio.json).
+The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-byte unchanged, at playback rate 1 and detune 0. Ambient and warning use an aggressive **180 ms gain crossfade** at Collapse and Release; the loops are not stopped/restarted at those boundaries. The original death recording remains a one-shot. Pause, hidden-page suspension and explicit mute stop playback normally. No stretching, pitch shift or procedural auditions are integrated. These three placeholder paths bypass world-acoustic processing. Original OpenArena combat/character/footstep and sector-wave samples now use world-position HRTF, softened inverse-square attenuation, bounded room/corridor damping, four-wall reflections and shared reverb. Deletion, insertion and release cues stay tied to actual sector events. Wave playback caps at eight voices with a 55 ms event throttle; the total audio pool caps at nineteen voices. H controls wave sound and volume independently. Included source samples, hashes and provenance are in [wave audio notices](licenses/wave-audio.json).
 
 [Separate audio auditions](../audio-previews/) are still unintegrated. Deferred stretching/ramping is documented in [SOUND_DESIGN.md](../docs/SOUND_DESIGN.md).
 
@@ -105,3 +105,17 @@ Performance evidence is recorded in `evidence/verification.json`; it is a local 
 ## Shared v0.1.1 engine changes
 
 The combined [game build](../game/README.md) enables the 6,022-Self economy, random workload cohorts, shotgun start, chunky effects and unrestricted Recomposition. This standalone route retains its original fixed-population, fixed-workload/protected-clump defaults; H exposes comparisons. The shared engine now supports exact larger population counters and compact progression checkpoints, larger combat lights, nearest stock texture sampling, optional stepped effects and collision-safe gun-driven body displacement. Loot heals health on both routes. See the game notes for current balance rules and acceptance checks.
+
+## Spawn stability and spatial sound
+
+Return finalizes the spread around the landing position before any opposing Self becomes visible. The first staged position stays fixed until AI release; final player landing recovery never respreads visible enemies. Body contact during Return moves the player away from staged enemies rather than displacing those enemies.
+
+H includes a grouped Spatial audio / acoustics section. Defaults: three room hops, 120 m maximum distance, 0.68 transmission per room hop, four-wall early echoes and basic room reverb. Hard limits are 16 spatial voices, four echo-bearing voices / 16 reflection taps and four shared reverb delays. Routing is cached and capped at 64 state visits, updated at 10 Hz. Connected sector clusters supply gameplay acoustic nodes; the separate generator supplies semantic room/hallway nodes from its navigation LUT. These are deliberately simplified acoustics; see [sound design](../docs/SOUND_DESIGN.md) for exact behavior and limits.
+
+Additional checks:
+
+```sh
+node playable-test/tools/check-acoustics.mjs
+node playable-test/tools/check-spatial-browser.mjs
+node playable-test/tools/check-spawn-audio-browser.mjs
+```

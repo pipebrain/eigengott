@@ -354,3 +354,10 @@ Movement profile 0 now means Quake 3; remove the former alternate movement optio
 Adapt id Software's actual PM_SlideMove, PM_StepSlideMove, PM_ClipVelocity and PM_CorrectAllSolid code to body traces. Preserve pinned upstream source, corresponding Rust source and GPL-2.0-or-later notices. Use multi-plane clipping, crease motion, repeated-plane nudges, step-up / down, bounded overlap sampling and a verified prior player position. Test corners, stairs, floor seams and generated ramps across all arena scales. These tests bound regressions; they do not establish universal geometry or complete Quake engine parity.
 
 Passive player regeneration: 1 HP/sec after five seconds without damage, cap 100, hit resets delay, no pause / death healing. Expose rate (including zero to disable) and delay in H. Loot entry's full heal remains.
+
+
+## Staged spawn lock and bounded spatial acoustics
+
+Finalize returning NPC spawn positions before the first visible staging event. Once visible, their positions remain fixed through player landing recovery and shared Release. Landing recovery may move only the player; AI movement begins after Release. Core coverage replays four Return cycles with repeated landing recovery, plus browser coverage across actual structural replacements.
+
+The live generator now emits connected-cluster acoustic metadata; the separate room/hallway generator derives compatible metadata from its navigation LUT. Native HRTF, softened inverse-square distance attenuation, bounded corridor routing/damping, four-wall early echoes and a shared late-reverb network form the world-audio path. Three room hops / 120 m are default limits; hard source, reflection and graph-work caps are enforced. H exposes controls and generator tools can audition the selected destination. Original ambient/warning/player-death placeholders remain gain-only. See [SOUND_DESIGN.md](SOUND_DESIGN.md) for the implemented acoustic approximation, budgets and deferred stretching proposal.

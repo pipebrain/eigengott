@@ -39,3 +39,8 @@ M2 point lights currently use the shadowless case: light may cross walls even wh
 ## Publication contract
 
 The root index is the shared build menu: current game at `play.html`, engine baseline/test hub and generator at `level-generator/`. GitHub Pages stages only explicit runtime paths. Generator Rust/rebuild sources and this roadmap are shared in GitHub; private `.local/` research, downloaded inspiration, local logs and evidence are excluded from the site artifact. Deployment must pass existing engine checks plus generator rebuild, catalogue identity and core validation.
+
+
+## Room acoustics audition
+
+The Room acoustics panel enables positional sound and plays an original OpenArena release cue at the selected room/hallway destination. It accepts the generator’s room/corridor acoustic contract, or derives a compatible scene from room outlines, hallway portals and the validated navigation cost LUT, without altering world polygons, collision or qualified package schema. Room-hop limits, early echo and reverb can be compared in place; diagnostics expose voices, echo taps and graph visits. The generator audition uses a 160 m distance ceiling and three room hops by default. The main game uses connected sector clusters and 120 m, while sharing the renderer/router. Four outer-wall reflections are an approximation for curved rooms, holes and corridors. See [SOUND_DESIGN.md](SOUND_DESIGN.md).

@@ -20,7 +20,7 @@
    <div id="metrics" aria-live="polite">Building and validating…</div>
    <label>Route destination<select id="destination"></select></label>
    <div class="actions"><button id="route" disabled>AI walk to destination</button><button id="tour" disabled>Tour every region</button></div>
-   <p id="route-state" aria-live="polite">Select a room or hallway.</p>
+   <h2>Room acoustics</h2><div class="actions"><button id="audio-enable">Enable sound</button><button id="audio-test" disabled>Sound at selected destination</button></div><label>Maximum room distance<input id="audio-rooms" type="number" min="0" max="6" value="3"></label><label class="check"><input id="audio-echo" type="checkbox" checked>Four-wall echoes</label><label class="check"><input id="audio-reverb" type="checkbox" checked>Room reverb</label><p id="audio-state" aria-live="polite">Enable sound to audition room / corridor propagation.</p><p id="route-state" aria-live="polite">Select a room or hallway.</p>
   </aside>
  </section>
  <section class="bottom">
