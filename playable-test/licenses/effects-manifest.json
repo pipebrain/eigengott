@@ -3,8 +3,8 @@
   "releaseMD5": "9f353d96d7889c377349d692c3905e5b",
   "runtime": {
     "file": "../assets/effects.bin.gz",
-    "sha256": "ec5b870098c4d9d985795b829ed1755c7e6ead76ff18857d3d02d3de3034d6d2",
-    "bytes": 2304402
+    "sha256": "2433ffb91deb36182ad3ab63b24faa2d6c47b41f4c2650b82cc837461081cb92",
+    "bytes": 2294528
   },
   "originalInputs": [
     {
@@ -76,6 +76,22 @@
       "sha256": "fa8d8409b0db3ad4ea8932f324396c0e3fdf8b092e55b2c8b1081eeeb4a2f1d1"
     },
     {
+      "path": "models/weaphits/bfg.tga",
+      "sha256": "c289f7fcaa8070dbb6cdff01c02e8cdec01a3a115fcc707cd1a063704b5f9399"
+    },
+    {
+      "path": "models/weaphits/bfg2.tga",
+      "sha256": "f98c657e1aa5bcb81c60f65d855e89aa46f9436210dce125623b4754f8315961"
+    },
+    {
+      "path": "models/weaphits/bfg3.tga",
+      "sha256": "ff86518cfb554dd1455bd2acbb8f768b27520a6c2e572cc2cfba1573e24685f7"
+    },
+    {
+      "path": "models/weaphits/proxbomb.tga",
+      "sha256": "b1cc9a16a59e53409825296a6522b6f87196e0c1776f93375f4371f75be98157"
+    },
+    {
       "path": "models/weapons/nailgun/glow.tga",
       "sha256": "425b241a4642045bce423c1cd256f3e3f9849788cc75a673d3c1f8a795df4ef1"
     },
@@ -140,8 +156,8 @@
       "sha256": "b6ad687de46a4b37f9c92a5070494e4faafa3a0ccda56df5cef9ca9bb488f9de"
     },
     {
-      "path": "models/weapons2/grapple/hookspec.tga",
-      "sha256": "37797d4ca44c2419a64f88701da6d285804f680e83a5514550d8ba1dc9b0a574"
+      "path": "models/weapons2/grenadel/grenadel.tga",
+      "sha256": "3d9964fbf53d03dba0928b7a6501f478aae71d55d6b2993e1cbbfa12ce487bf7"
     },
     {
       "path": "models/weapons2/grenadel/newgren.tga",
@@ -228,8 +244,8 @@
       "sha256": "fd3f85f891beb9630852d7b4a8be7b25b3a4aeafb356687abe4aabd4a6d0dc20"
     },
     {
-      "path": "scripts/weapon_grapple.shader",
-      "sha256": "37df246a699b28a0cb0275c6ab3d6789c78ae32f699e03febf2b687c38d2ddb6"
+      "path": "scripts/weapon_grenadelauncher.shader",
+      "sha256": "19935643139239a38c027859d886cba8142060f8484617c9fd85923a9ae7f835"
     },
     {
       "path": "scripts/weapon_machinegun.shader",

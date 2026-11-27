@@ -1,3 +1,4 @@
+import {WEAPONS} from './weapons.js';
 export const MAX_LIGHTS=128,MAX_CASTERS=128,MAX_PARTICLES=256,MAX_SPRITES=512;
 const distance=(a,b)=>Math.hypot(...a.map((x,i)=>x-b[i]));
 const boxDistance=(b,p)=>Math.hypot(...p.map((v,i)=>Math.max(0,Math.abs(v-b.c[i])-b.h[i])));
@@ -15,7 +16,7 @@ export class Effects {
   const data=this.lightArray,indices=this.lightIndices,boxes=this.boxData;data.fill(0);boxes.fill(0);this.casterCount=0;if(!settings.dynamicLights||game.sweep?.phase==='turn')return data;
   const eye=game.player.p,list=this.lights.map(l=>({...l,intensity:l.intensity*(1-(this.time-l.born)/l.ttl)}));
   if(settings.environmentLights!==false)for(const l of game.sweep?.environment||[])if(game.sweep.states[l.gid]?.visible)list.push(l);
-  for(const p of game.projectiles)if(['rocket','plasma','bfg'].includes(p.kind)){const w=game.weapon(p.owner);list.push({p:p.p,color:w.color.map(v=>v/255),radius:3,intensity:1.4,priority:1});}
+  for(const p of game.projectiles)if(['rocket','plasma','bfg'].includes(p.kind)){const w=WEAPONS[p.weapon]||game.weapon(p.owner);list.push({p:p.p,color:w.color.map(v=>v/255),radius:3,intensity:1.4,priority:1});}
   for(const l of list)l.distance=distance(l.p,eye);list.sort((a,b)=>b.priority-a.priority||a.distance-b.distance);const active=list.slice(0,Math.min(MAX_LIGHTS,settings.lightBudget??128));data[0]=active.length;
   const casters=[];if(settings.boxShadows!==false){for(const e of game.renderEntities()){if(!e.staged)continue;const r=e.gear.radius;casters.push({c:[e.p[0],e.p[1],e.p[2]+e.height/2+.035],h:[r,r,Math.max(.01,e.height/2-.035)]});}for(const p of game.sweep?.current||[])if(p&&game.sweep.states[p.gid]?.visible)casters.push({c:p.c,h:p.h});}
   casters.sort((a,b)=>boxDistance(a,eye)-boxDistance(b,eye));casters.length=Math.min(casters.length,MAX_CASTERS);this.casterCount=casters.length;data[1]=casters.length;casters.forEach((b,i)=>boxes.set([...b.c.map((v,k)=>v-b.h[k]),0,...b.c.map((v,k)=>v+b.h[k]),0],i*8));

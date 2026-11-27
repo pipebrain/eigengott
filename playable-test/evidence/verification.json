@@ -134,7 +134,8 @@
       "Explicit sky emission lights cutaway geometry",
       "Player/object AABBs reduce world pixel light without mesh shadow maps",
       "128 runtime lights render within the default capacity without WebGPU validation errors",
-      "Real rocket flare contributes color with zero opaque coverage"
+      "Real rocket flare contributes color with zero opaque coverage",
+      "Grenade and proximity-mine solids remain visible; BFG sprite/trail stages remain additive"
     ],
     "darkness": {
       "hash": 2359917829,
@@ -146,29 +147,29 @@
       "height": 360
     },
     "sky": {
-      "hash": 1089723414,
-      "nonzero": 456439,
-      "alpha": 50692980,
-      "rgbSum": 7423539,
+      "hash": 1478737007,
+      "nonzero": 457420,
+      "alpha": 50777895,
+      "rgbSum": 7444213,
       "partialAlphaPixels": 0,
       "width": 645,
       "height": 360
     },
     "shadows": {
       "off": {
-        "hash": 3032566982,
-        "nonzero": 88147,
+        "hash": 1506867167,
+        "nonzero": 88156,
         "alpha": 18415080,
-        "rgbSum": 183843,
+        "rgbSum": 184046,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
       "on": {
-        "hash": 1372539659,
-        "nonzero": 87538,
+        "hash": 1623027897,
+        "nonzero": 87547,
         "alpha": 18415080,
-        "rgbSum": 161920,
+        "rgbSum": 162056,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
@@ -176,20 +177,52 @@
       "casters": 20
     },
     "rocket": {
-      "hash": 3477982806,
-      "nonzero": 37670,
+      "hash": 1874530415,
+      "nonzero": 52374,
       "alpha": 0,
-      "rgbSum": 939059,
+      "rgbSum": 1506274,
       "partialAlphaPixels": 0,
       "width": 645,
       "height": 360
     },
+    "projectiles": [
+      {
+        "weapon": 4,
+        "hash": 1977491546,
+        "nonzero": 2643,
+        "alpha": 185130,
+        "rgbSum": 44491,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      {
+        "weapon": 9,
+        "hash": 2917408300,
+        "nonzero": 315216,
+        "alpha": 0,
+        "rgbSum": 5904615,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      {
+        "weapon": 12,
+        "hash": 1463121435,
+        "nonzero": 6715,
+        "alpha": 423300,
+        "rgbSum": 457030,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      }
+    ],
     "stressTiming": {
-      "scene": 2.252507,
-      "feedback": 2.34288,
-      "present": 3.087286,
+      "scene": 2.196675,
+      "feedback": 2.260382,
+      "present": 2.681792,
       "previews": 0,
-      "total": 7.682673000000001
+      "total": 7.1388490000000004
     }
   },
   "realTimeDeadlines": {

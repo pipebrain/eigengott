@@ -10,7 +10,7 @@ for file in sorted(archive.namelist()):
   pk=zipfile.ZipFile(io.BytesIO(archive.read(file)))
   for name in pk.namelist():
    p=name.lower()
-   if p.endswith('.shader') or p.startswith(('models/powerups/armor/','gfx/','textures/oafx/','textures/oa/muzzle/','textures/flares/','models/ammo/')) or (p.startswith(('models/weapons','textures/sfx/')) and p.endswith(('.tga','.jpg','.png'))):vfs[p]=pk.read(name)
+   if p.endswith('.shader') or p.startswith(('models/powerups/armor/','gfx/','textures/oafx/','textures/oa/muzzle/','textures/flares/','models/ammo/','models/weaphits/')) or (p.startswith(('models/weapons','textures/sfx/')) and p.endswith(('.tga','.jpg','.png'))):vfs[p]=pk.read(name)
 # Reuse only the existing converter's parser definitions, without its file-writing main.
 source=Path('encounter-test/tools/pack-openarena.py').read_text();tree=ast.parse(source)
 for node in tree.body:
@@ -30,7 +30,7 @@ def put(key,data):
  while len(blob)%4:blob.append(0)
  entries.append({'key':key,'offset':len(blob),'bytes':len(data),'sha256':hashlib.sha256(data).hexdigest()});blob.extend(data)
 def resolve(name):
- n=name.lower();base=re.sub(r'\.(tga|jpg|png)$','',n)
+ n=name.lower().replace(chr(92),'/');base=re.sub(r'\.(tga|jpg|png)$','',n)
  for p in [n,base+'.tga',base+'.jpg',base+'.png']:
   if p in vfs:return p
  return None
@@ -45,7 +45,7 @@ def image(name):
   buf=io.BytesIO();im.save(buf,format='PNG');key='fx-'+hashlib.sha256(buf.getvalue()).hexdigest()[:16]+'.png';put(key,buf.getvalue());images[p]=key;manifest[key]={'source':p,'width':im.width,'height':im.height,'alphaMin':im.getextrema()[3][0],'alphaMax':im.getextrema()[3][1]}
  return images[p]
 def stages(shader):
- body=shader_bodies.get(shader.lower(),'');result=[]
+ shader=shader.replace(chr(92),'/');body=shader_bodies.get(shader.lower(),'');result=[]
  if body:used.add(shader_owner[shader.lower()])
  for section in re.findall(r'\{([^{}]*)\}',body):
   amap=re.search(r'\banimmap\s+([\d.]+)\s+([^\n\r{}]+)',section,re.I);mp=re.search(r'\b(?:map|clampmap)\s+([^\s{}]+)',section,re.I)
@@ -63,9 +63,17 @@ armor=[]
 for id in ['red','yel','shard']:
  pack=Pack();part=pack.md3('models/powerups/armor/'+('shard' if id=='shard' else 'armor_'+id)+'.md3');mats=[stages(s['shader']) for s in part['surfaces']];used|=pack.used
  meta={'id':id,'kind':'armor','parts':{'main':part},'materials':{'main':[m[0]['frames'][0] if m else None for m in mats]}};head=json.dumps(meta,separators=(',',':')).encode();head+=b' '*(-len(head)%4);put('armor-'+id,b'EGA1'+struct.pack('<II',len(head),len(pack.blob))+head+pack.blob);armor.append({'id':id,'key':'armor-'+id})
-weapons={}
+weapons={};projectile_sprites={}
 for file in sorted(Path('encounter-test/assets').glob('w-*.bin.gz')):
  data=gzip.decompress(file.read_bytes());n=struct.unpack_from('<I',data,4)[0];meta=json.loads(data[12:12+n]);weapons[str(meta['id'])]={name:[stages(s['shader']) for s in p['surfaces']] for name,p in meta['parts'].items()}
+ if 'projectile' in meta['parts']:
+  part=meta['parts']['projectile'];start=12+n
+  for surface_index,surface in enumerate(part['surfaces']):
+   positions=[struct.unpack_from('<fff',data,start+part['positions']+struct.unpack_from('<I',data,start+part['indices']+(surface['first']+j)*4)[0]*16) for j in range(surface['count'])]
+   low=[min(p[k] for p in positions) for k in range(3)];high=[max(p[k] for p in positions) for k in range(3)]
+   for stage_index,stage in enumerate(weapons[str(meta['id'])]['projectile'][surface_index]):
+    if stage.get('billboard'):projectile_sprites[f"projectile-{meta['id']}-{surface_index}-{stage_index}"]={**stage,'image':stage['frames'][0],'weapon':meta['id'],'offset':[(a+b)/64 for a,b in zip(low,high)],'size':min(1.5,max(.08,max(b-a for a,b in zip(low,high))/64))}
+
 # Known stock effects; resolve actual filenames from the merged release.
 def pick(terms):
  candidates=[p for p in vfs if p.endswith(('.tga','.jpg','.png')) and any(t in p for t in terms)]
@@ -73,6 +81,7 @@ def pick(terms):
  return candidates[0]
 sprite_paths={'smoke':'gfx/misc/smokepuff3.tga' if 'gfx/misc/smokepuff3.tga' in vfs else pick(['smokepuff','smoke']), 'glow':pick(['flare.tga','flare.jpg']), 'spark':pick(['spark']), 'blood':pick(['blood']), 'flash':pick(['muzzley.tga']), 'rocket':'textures/flares/wide.tga'}
 sprites={k:{'image':image(p),'mode':'alpha' if k in ['smoke','blood'] else 'add','source':p} for k,p in sprite_paths.items()}
+sprites.update(projectile_sprites)
 # Quake-style black-background smoke may depend on additive rather than file alpha.
 for key in ['smoke','blood']:
  im=manifest[sprites[key]['image']]

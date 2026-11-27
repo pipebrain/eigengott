@@ -42,7 +42,7 @@ No lightmap is baked, uploaded or sampled by this playable renderer. World surfa
 
 The default light budget and hard capacity are **128**. Short event and projectile lights take priority, followed by nearby environmental emitters. **Box shadows default ON:** up to 128 player/object AABBs, with eight nearby candidates per point light and bounded directional-sky tests. These are deliberately coarse occluders; world triangles do not cast shadows and mesh silhouettes are not traced. No shadow maps are allocated. Loot previews use a separate inspection point emitter so their models stay visible in the void. H exposes emitter, sky, box-shadow and light-budget controls.
 
-Particles cap at 256 and sprite draws at 512. Rocket flare/thrust shader textures now resolve from the stock archive and use additive blending rather than opaque fallbacks. The flare is a camera-facing sprite; solid rocket geometry remains opaque. Clean characters, sprites, item previews and labels stay outside architectural history.
+Particles cap at 256 and sprite draws at 512. Rocket flare/thrust shader textures now resolve from the stock archive and use additive blending rather than opaque fallbacks. Declared projectile billboard stages use camera-facing sprites with their stock color/rotation, texture frames and derived surface bounds; solid rocket, grenade and mine geometry remains opaque. Material lookup normalizes legacy backslash paths. Clean characters, sprites, item previews and labels stay outside architectural history.
 
 ## Placeholder audio
 
