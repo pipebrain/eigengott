@@ -52,7 +52,7 @@ export class Sweep {
    while(this.cursor<count){const id=this.outOrder[this.cursor++];this.visible(id,false);this.emit('delete',id);changed=true;}
    if(changed&&!this.install())throw new Error('Deleted geometry cannot preserve stale solid props.');
    if(fraction>=1){this.fields=[];this.fieldRevision++;this.install();if(!this.sim.engine_void_begin(...this.landing))throw new Error('Invalid void landing anchor.');this.phase='turn';this.elapsed=0;this.lootOpen=true;this.emit('turn');}
-  }else if(this.phase==='turn'){if(this.elapsed+1e-8>=Math.min(5,this.options.turnSeconds))this.startLanding();}
+  }else if(this.phase==='turn'){if(this.elapsed+1e-8>=Math.min(10,this.options.turnSeconds))this.startLanding();}
   else if(this.phase==='landing'){if(this.elapsed>=.65){this.phase='inbound';this.elapsed=0;this.emit('inbound');}}
   else{
    const fraction=Math.min(1,this.elapsed/Math.min(5,this.options.backSeconds));this.radius=this.maxRadius*fraction;

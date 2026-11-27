@@ -3,13 +3,14 @@ import {writeFile} from 'node:fs/promises';
 import {execFileSync} from 'node:child_process';
 import {withBrowser,sleep} from '../dos-maze/tools/browser.mjs';
 const commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),checks=[];
-await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
+await withBrowser(async({origin,cmd,evaluate,wait:shortWait,errors})=>{
   const startup=async expression=>{for(let n=0;n<600;n++){if(await evaluate(expression))return;await sleep(100);}throw new Error('Network startup timed out: '+expression+' '+JSON.stringify(errors));};
+  const wait=startup;
   const base=new URL(process.env.PAGES_URL||`${origin}/_site/`);
   const buildResponse=await fetch(new URL(`build.json?check=${Date.now()}`,base));assert.equal(buildResponse.status,200);
   const build=await buildResponse.json();assert.equal(build.commit,commit);
   await cmd('Emulation.setDeviceMetricsOverride',{width:390,height:844,deviceScaleFactor:1,mobile:false});
-  await cmd('Page.navigate',{url:base.href});await wait('document.querySelector("#build")?.textContent.includes("Build")');
+  await cmd('Page.navigate',{url:new URL('tests.html',base).href});await wait('document.querySelector("#build")?.textContent.includes("Build")');
   assert.equal(await evaluate('document.documentElement.scrollWidth<=innerWidth'),true);
   assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);checks.push('Mobile-width landing page, build identity, and test links');
   await cmd('Emulation.setDeviceMetricsOverride',{width:1376,height:768,deviceScaleFactor:1,mobile:false});

@@ -1,0 +1,2 @@
+export const VERSION='0.1.0';
+export const PRESET=Object.freeze({selfCount:32,model:'smarine',skin:'default',injuryOpacity:.67,armorOpacity:.33,hitOpacity:1,enemyDamage:.25,retaliationBias:2,botCountRandom:true,botCountMin:1,botCountMax:7,skill:2,outSeconds:2.5,backSeconds:2.5,turnSeconds:10,heightDeviation:4,darkFraction:.25,skyCoverage:.33,skyScroll:.5,skyParallax:.5,dynamicIntensity:1,skyEmission:.33,waveGlow:1,waveVolume:.33,halfLife:6,stretch:3,resolution:360,uiLoop:false,uiMetrics:true,uiKills:false,uiLog:false});

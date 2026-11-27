@@ -75,7 +75,7 @@ export class Game {
  if(this.settings.debugRoutes){let lines=0;for(const e of this.bots){const nav=this.navFor(e);let a=cellAt(nav,e.p);if(a<0)a=nearestNode(nav,e.p);const b=nearestNode(nav,this.player.p,nav.components[a]);for(let k=0;k<64&&a>=0&&a!==b&&lines<96;k++){const next=nav.next[a*nav.count+b];if(next===65535)break;const p=Array.from(nav.points.slice(a*3,a*3+3)),q=Array.from(nav.points.slice(next*3,next*3+3));p[2]+=.08;q[2]+=.08;m.line(p,q,.012,rgb(130,150,195));a=next;lines++;}}}
  return m.finish();}
  weapon(owner){const base=WEAPONS[owner.weapon],m=MODS[owner.loadout?.weapon.mod];return {...base,damage:base.damage*(m?.damage||1),splash:(base.splash||0)*(m?.damage||1),delay:base.delay*(m?.delay||1),spread:(base.spread||0)*(m?.spread||1)};}
- lootRemaining(){return this.sweep.phase==='turn'?Math.max(0,Math.min(5,this.sweep.options.turnSeconds)-this.sweep.elapsed):0;}
+ lootRemaining(){return this.sweep.phase==='turn'?Math.max(0,Math.min(10,this.sweep.options.turnSeconds)-this.sweep.elapsed):0;}
  exchange(id,mode='equip',target=''){
   if(this.state!=='intermission'||!this.lootVisible||!this.sweep.lootOpen||this.lootChosen||this.sweep.phase!=='turn'){this.log('Loot selection is closed.');return false;}
   const source=this.loot.find(x=>x.id===id);if(!source)return false;const next=clone(this.player.loadout);const slot=source.kind==='weapon'?'weapon':source.slot;

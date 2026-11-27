@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "url": "http://127.0.0.1:53992/_site/",
+  "version": "0.1.0",
+  "checks": [
+    "DOS-maze owns the black title screen while the prepared game stands by without rendering",
+    "One native key clears the title and starts S_Marine / 32 Selves with every requested value, no second Enter gate and no accidental shot",
+    "Loot remains open beyond five seconds and expires at ten; a fresh 1\u20137 cohort returns on validated replacement structure",
+    "The seven-opponent upper bound fits physically, the next draw can be one, and restoring a checkpoint retains that drawn count",
+    "A native click during cold preparation clears the screen immediately and carries capture/audio activation into direct gameplay"
+  ],
+  "lootMs": 10066,
+  "cohort": 7,
+  "scope": "Local Chrome/Metal packaged working-tree validation; physical-device acceptance pending."
+}
