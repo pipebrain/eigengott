@@ -580,5 +580,12 @@
         15.008331019803634
       ]
     }
+  },
+  "liveVerification": {
+    "commit": "12446ff38c4e2a3d5937686e059e14c0c56180c4",
+    "origin": "https://pipebrain.github.io/eigengott/",
+    "structuralBrowser": true,
+    "playableBrowser": true,
+    "note": "Native gameplay capture is explicitly reacquired before asserting combat ambience after Release."
   }
 }
