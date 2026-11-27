@@ -1,8 +1,8 @@
 {
   "passed": true,
-  "version": "0.1.1",
+  "version": "0.1.2",
   "checks": [
-    "DOS-maze first-input launch applies the 6022-Self preset; all first-arena actors hold shotguns and Large supports fifteen opponents",
+    "DOS-maze first-input launch applies the 6174-Self preset; all first-arena actors hold shotguns and Large supports fifteen opponents",
     "Large\u2192Small\u2192Medium\u2192Large\u2192Small replacement honors all population ranges, keeps movement during Collapse/void/Return, heals loot health and recovers collision-safe before combat",
     "Surviving copies gain persistent equipment, newly unlocked media prepare before Collapse, and checkpoint restore preserves population, gear and workload",
     "Rendered chunky mode limits displayed channel levels while smooth comparison has continuous gradients; stock texture sampling stays nearest",
@@ -12,7 +12,7 @@
     {
       "profile": 0,
       "count": 1,
-      "remaining": 5410,
+      "remaining": 5547,
       "position": [
         -7.5,
         -7.5,
@@ -23,7 +23,7 @@
     {
       "profile": 1,
       "count": 5,
-      "remaining": 4873,
+      "remaining": 4997,
       "position": [
         -3,
         0,
@@ -34,22 +34,22 @@
     {
       "profile": 2,
       "count": 15,
-      "remaining": 4386,
+      "remaining": 4498,
       "position": [
-        4,
-        8,
-        -0.36916816234588623
+        4.000431537628174,
+        7.999244689941406,
+        -0.3851785957813263
       ],
       "tier": 3
     },
     {
       "profile": 0,
       "count": 3,
-      "remaining": 3938,
+      "remaining": 4038,
       "position": [
-        4.497867584228516,
-        7.4981889724731445,
-        2.2184906005859375
+        4.5,
+        7.5,
+        2.26250958442688
       ],
       "tier": 4
     }
@@ -70,14 +70,41 @@
     ],
     "lit": 635395
   },
-  "scope": "Local Chrome / Metal packaged working-tree checks; physical-device acceptance pending.",
+  "scope": "Local Chrome/Metal packaged working-tree checks; physical-device acceptance pending.",
   "populationEconomy": {
     "passed": true,
     "checks": [
-      "6022 finite Selves with bounded equipment materialization and shotgun-only first encounter",
-      "Clears strengthen surviving copies and reduce offscreen population exactly once; player gear still requires loot",
+      "6174 exact starting Selves with at most 48 materialized equipment records and shotgun-only first encounter",
       "Exact large counters, no resurrected identities, bounded checkpoints and validated round trips",
-      "Upgrades retain one gun, three armor pieces and at most one fragment per item"
+      "Survivors improve equipped items once per clear; player gear still requires loot and each item retains at most one fragment",
+      "Complete 6174-to-one runs at three cohort sizes keep exact accounting, unique identities, bounded storage and restorable checkpoints",
+      "Explicitly imported 6022-copy saves retain their population and progress; new runs use 6174"
+    ],
+    "fullRuns": [
+      {
+        "cohortSize": 3,
+        "clears": 68,
+        "actualCombatEliminations": 204,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19757,
+        "elapsedMs": 42.22
+      },
+      {
+        "cohortSize": 7,
+        "clears": 50,
+        "actualCombatEliminations": 350,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19758,
+        "elapsedMs": 36.82
+      },
+      {
+        "cohortSize": 15,
+        "clears": 39,
+        "actualCombatEliminations": 583,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19763,
+        "elapsedMs": 141.59
+      }
     ]
   },
   "weaponPush": {
@@ -139,7 +166,7 @@
       "previews": 0,
       "total": 17.078115
     },
-    "scope": "45 seconds, Large, fifteen opponents, repeated forced clears; final CPU/frame/GPU values are the rolling 600-frame window.",
+    "scope": "Historical v0.1.1 6022-Self/15-opponent sample; runtime engine unchanged in v0.1.2. Final timing values are a rolling 600-frame window.",
     "wholeSamplePeakFrameMs": 66.79999999999973,
     "wholeSamplePeakCpuMs": 16
   },

@@ -1,12 +1,12 @@
-# EIGENGOTT v0.1.1
+# EIGENGOTT v0.1.2
 
 [Play](https://pipebrain.github.io/eigengott/) · [H tools](https://pipebrain.github.io/eigengott/?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
 
-The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.1.checkpoint`; older saves remain untouched and can be imported explicitly.
+The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.2.checkpoint`; older saves remain untouched and can be imported explicitly.
 
 ## Current game rules
 
-- The clarified starting population is **6,022 Selves including the player**. First-arena actors all hold shotguns. Player upgrades still come from the single loot choice: one held gun and three worn armor pieces, at most one fragment per item.
+- The clarified starting population is **6,174 Selves including the player**. First-arena actors all hold shotguns. Player upgrades still come from the single loot choice: one held gun and three worn armor pieces, at most one fragment per item.
 - Each new arena independently rolls Small (~20 m, 1–3 opponents), Medium (75 m, 3–7) or Large (196 m, 3–15). The remaining population caps the cohort. Geometry, traversal and a fitting spawn cohort validate before Collapse; final placement spreads enemies relative to the player's safe return position.
 - Collapse and Return leave player movement and look enabled. Cursor selection during void loot coexists with keyboard movement/look. There are no player/return forcefields in this mode. Floor removal can cause a real fall. A changed footprint can leave old XY outside the new arena: before Release, prefer a valid existing position, otherwise place the player at the nearest fitting sector support, clear of enemies. Input is not disabled while generation runs. The protected-clump comparison remains available in the standalone test.
 - Loot entry restores health to 100 and clears old projectiles/damage flashes. Armor wear remains. The default loot window is ten seconds; Collapse and Return each default to 2.5 seconds.

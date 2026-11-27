@@ -101,8 +101,15 @@ The release preset is authoritative in `game/preset.js`: 32 total Selves, S_Mari
 
 ## Game v0.1.1 — population, movement and chunky combat
 
-The user clarified the starting game population as **6,022**, including the player. The release starts all first-arena actors with shotguns. Every new composition randomly selects Small (1–3), Medium (3–7), or Large (3–15) opponents, capped by remaining Selves. Recomposition keeps movement/look enabled, removes player forcefields, allows falls and footprint changes, and proves a clear supported player position before combat Release. Enemies are spread relative to that final position. Canonical collision/navigation still validate before Collapse; failed candidates retain the active world.
+The v0.1.1 build used 6,022; the corrected starting population is **6,174**, including the player (v0.1.2). The release starts all first-arena actors with shotguns. Every new composition randomly selects Small (1–3), Medium (3–7), or Large (3–15) opponents, capped by remaining Selves. Recomposition keeps movement/look enabled, removes player forcefields, allows falls and footprint changes, and proves a clear supported player position before combat Release. Enemies are spread relative to that final position. Canonical collision/navigation still validate before Collapse; failed candidates retain the active world.
 
 Loot entry restores full health without repairing worn armor. Surviving NPCs improve equipped guns/armor/fragments after clears; the player still needs loot. Exact population counters and a bounded live equipment pool replace the 65-copy test cap. The initial tunable offscreen elimination rate is 10% of the unmaterialized population per clear, exposed in H. Item quality uses logarithmic combat scaling; this is prototype balance, with narrative death transfer/endings still pending.
 
 Combat lights are wider/brighter. The game defaults to nearest textures, stepped light/alpha/colour levels and blocky HUD/weapon effects. Gun collision separates the body safely from surfaces instead of pinning movement or simply removing physical gun clearance. Audio placeholders and processing remain unchanged. Historical accepted applications stay intact. [Current game details and verification](../game/README.md).
+
+
+## Population correction — v0.1.2
+
+The user corrected the intended Kaprekar motif to **6,174 total Selves**, including the player. New games use that exact count. The economy retains its bounded 48-record live pool and exact population counters; no actor/equipment allocation scales with all 6,174 copies. Full-run tests now verify accounting, upgrades, unique identities, checkpoint round trips and bounded storage through convergence. Existing imported checkpoints retain their own populations and progress.
+
+Additional local reference/media sources are available under `src-inspiration/assets` and `src-inspiration/games` (armor, props, sound/music, skies, textures, weapons and reference games). They remain local inputs; this population-only correction adds no runtime media or rendering cost.
