@@ -1,6 +1,7 @@
 #![no_std]
 #![allow(static_mut_refs)]
 mod math;
+mod q3move;
 mod world;
 mod validate;
 mod physics;
@@ -95,7 +96,7 @@ static mut CAMERA:Player=Player::EMPTY;
   let motion=f*((bits&1!=0) as i32 as f32-(bits&2!=0) as i32 as f32)+r*((bits&8!=0) as i32 as f32-(bits&4!=0) as i32 as f32)+up*((bits&16!=0) as i32 as f32-(bits&32!=0) as i32 as f32);
   CAMERA.feet=CAMERA.feet+motion.unit()*dt*if bits&64!=0{60.0}else{20.0};render_state();return
  }if FREE_TRANSITION&&!physics::inside(a,PLAYER.feet+v(0.0,0.0,PLAYER.height()*0.5)){PLAYER.yaw+=clamp(look_x,-2000.0,2000.0)*0.002;PLAYER.pitch=clamp(PLAYER.pitch-look_y*0.002,-1.44,1.44);}else{PLAYER.look(a,look_x,look_y);}
- if dt.is_finite()&&dt>0.0{ACCUMULATOR+=dt.min(0.1);let mut steps=0;while ACCUMULATOR+1e-9>=physics::STEP&&steps<12{PLAYER.step(a,bits);ACCUMULATOR-=physics::STEP;TIME+=physics::STEP;steps+=1}}
+ if dt.is_finite()&&dt>0.0{ACCUMULATOR+=dt.min(0.1);let mut steps=0;while ACCUMULATOR+1e-9>=physics::STEP&&steps<12{PLAYER.step(a,bits,!FREE_TRANSITION);ACCUMULATOR-=physics::STEP;TIME+=physics::STEP;steps+=1}}
  render_state();
 }}
 #[no_mangle]pub extern "C" fn engine_view(width:f32,height:f32){unsafe{if width.is_finite()&&height.is_finite()&&width>0.0&&height>0.0{ASPECT=width/height;render_state()}}}
@@ -194,7 +195,7 @@ static mut BENCH:Bench=Bench{words:[0;32]};
  let a=&ARENAS[0];BENCH.words.fill(0);BENCH.words[..16].copy_from_slice(&[a.profile,a.n as u32,a.atlas_size as u32,a.density as u32,a.detail,a.requested_lights as u32,a.texels,a.rays,a.ray_steps,a.node_count as u32,a.intersection_pairs,core::mem::size_of::<Arena>() as u32,PLAYER.profile,CAMERA_MODE,MAX_TRIS as u32,MAX_FACES as u32]);BENCH.words.as_ptr()
 }}
 #[no_mangle]pub extern "C" fn engine_profile(profile:u32){unsafe{
- PLAYER.profile=profile.min(1);PLAYER.velocity=v(0.0,0.0,0.0);PLAYER.previous=0;
+ let _=profile;PLAYER.profile=0;PLAYER.velocity=v(0.0,0.0,0.0);PLAYER.previous=0;
  if ACTIVE<1&&!PLAYER.placement_clear(&ARENAS[0],PLAYER.feet){
   PLAYER.feet=ARENAS[0].spawn;PLAYER.grounded=false;
   if !PLAYER.placement_clear(&ARENAS[0],PLAYER.feet){PLAYER.yaw=0.0;PLAYER.pitch=0.0;}
@@ -207,7 +208,7 @@ static mut BENCH:Bench=Bench{words:[0;32]};
 }}
 #[no_mangle]pub extern "C" fn engine_inherit_player(x:f32,y:f32,z:f32,vx:f32,vy:f32,vz:f32,yaw:f32,pitch:f32,time:f64,profile:u32,steps:u32)->u32{unsafe{
  if ACTIVE>=1{return 0}let mut p=PLAYER;p.feet=v(x,y,z);p.velocity=v(vx,vy,vz);p.yaw=yaw;p.pitch=pitch;p.profile=profile.min(1);p.steps=steps;
- let retained=if p.feet.finite()&&p.velocity.finite()&&yaw.is_finite()&&pitch.is_finite()&&p.placement_clear(&ARENAS[0],p.feet){PLAYER=p;1}else{PLAYER.profile=profile.min(1);PLAYER.steps=steps;0};
+ let retained=if p.feet.finite()&&p.velocity.finite()&&yaw.is_finite()&&pitch.is_finite()&&p.placement_clear(&ARENAS[0],p.feet){PLAYER=p;1}else{let _=profile;PLAYER.profile=0;PLAYER.steps=steps;0};
  TIME=if time.is_finite(){time.max(0.0)}else{0.0};ACCUMULATOR=0.0;render_state();retained
 }}
 // The trusted same-build worker transfers only an internal linear-memory image.
@@ -228,10 +229,10 @@ static mut BENCH:Bench=Bench{words:[0;32]};
 static mut ACTOR:[f32;32]=[0.0;32];
 static mut TRACE:[f32;12]=[0.0;12];
 #[no_mangle]pub extern "C" fn actor_input()->*mut f32{unsafe{ACTOR.as_mut_ptr()}}
-unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR[1],ACTOR[2]);p.velocity=v(ACTOR[3],ACTOR[4],ACTOR[5]);p.yaw=ACTOR[6];p.pitch=ACTOR[7];p.grounded=ACTOR[8]>0.5;p.crouched=ACTOR[9]>0.5;p.body_radius=ACTOR[10].max(0.34).min(4.0);p.body_height=ACTOR[11].max(1.0).min(8.0);p.eye_height=ACTOR[12].max(0.6).min(p.body_height-0.05);p.gun_length=ACTOR[13].max(0.3).min(4.0);p.gun_radius=ACTOR[14].max(0.1).min(1.5);p.profile=ACTOR[15]as u32;p.previous=ACTOR[16]as u32;p.gun_start=ACTOR[17];p.gun_right=ACTOR[18];p.gun_down=ACTOR[19];p.box_body=ACTOR[20]>0.5;p.gun_pivot=ACTOR[21];p.crouch_height=ACTOR[22].max(0.6).min(p.body_height);p.speed_scale=if ACTOR[23]>0.0{ACTOR[23].max(0.4).min(1.4)}else{1.0};p}
+unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR[1],ACTOR[2]);p.velocity=v(ACTOR[3],ACTOR[4],ACTOR[5]);p.yaw=ACTOR[6];p.pitch=ACTOR[7];p.grounded=ACTOR[8]>0.5;p.crouched=ACTOR[9]>0.5;p.body_radius=ACTOR[10].max(0.34).min(4.0);p.body_height=ACTOR[11].max(1.0).min(8.0);p.eye_height=ACTOR[12].max(0.6).min(p.body_height-0.05);p.gun_length=ACTOR[13].max(0.3).min(4.0);p.gun_radius=ACTOR[14].max(0.1).min(1.5);p.profile=0;p.previous=ACTOR[16]as u32;p.gun_start=ACTOR[17];p.gun_right=ACTOR[18];p.gun_down=ACTOR[19];p.box_body=ACTOR[20]>0.5;p.gun_pivot=ACTOR[21];p.crouch_height=ACTOR[22].max(0.6).min(p.body_height);p.speed_scale=if ACTOR[23]>0.0{ACTOR[23].max(0.4).min(1.4)}else{1.0};p}
 #[no_mangle]pub extern "C" fn actor_clear()->u32{unsafe{if ACTIVE>=1||!ACTOR[..23].iter().all(|n|n.is_finite()){return 0}let p=actor_player();p.placement_clear(&ARENAS[0],p.feet)as u32}}
 #[no_mangle]pub extern "C" fn actor_tick(bits:u32,dx:f32,dy:f32)->u32{unsafe{
- if ACTIVE>=1||!ACTOR[..23].iter().all(|n|n.is_finite()){return 0}let mut p=actor_player();let a=&ARENAS[0];if !p.placement_clear(a,p.feet){return 0}p.look(a,dx,dy);let before=p;p.step(a,bits);if !p.placement_clear(a,p.feet){p=before;}
+ if ACTIVE>=1||!ACTOR[..23].iter().all(|n|n.is_finite()){return 0}let mut p=actor_player();let a=&ARENAS[0];if !crate::q3move::recover(&mut p,a){return 0}p.look(a,dx,dy);let before=p;p.step(a,bits,true);if !p.placement_clear(a,p.feet){p=before;}
  ACTOR[..10].copy_from_slice(&[p.feet.x,p.feet.y,p.feet.z,p.velocity.x,p.velocity.y,p.velocity.z,p.yaw,p.pitch,p.grounded as u32 as f32,p.crouched as u32 as f32]);ACTOR[16]=p.previous as f32;1
 }}
 #[no_mangle]pub extern "C" fn engine_equipment(radius:f32,height:f32,eye:f32,length:f32,gun_radius:f32,start:f32,right:f32,down:f32,boxed:u32,pivot:f32,crouch_height:f32)->u32{unsafe{

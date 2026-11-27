@@ -1,5 +1,5 @@
 //! Continuous SAT for a conservative character-specific axis-aligned envelope.
-//! The original capsule movement profile remains available for comparison.
+//! Capsule and box body traces are independent of movement parameter profiles.
 use crate::{math::*,world::*,physics,overlay,spatial};
 fn axes(tri:[V3;3])->[V3;13]{let e=[tri[1]-tri[0],tri[2]-tri[1],tri[0]-tri[2]];let basis=[v(1.0,0.0,0.0),v(0.0,1.0,0.0),v(0.0,0.0,1.0)];let mut out=[v(0.0,0.0,0.0);13];out[..3].copy_from_slice(&basis);out[3]=e[0].cross(e[1]);for i in 0..3{for j in 0..3{out[4+i*3+j]=e[i].cross(basis[j]);}}out}
 fn interval(tri:[V3;3],axis:V3)->(f32,f32){let a=tri[0].dot(axis);let b=tri[1].dot(axis);let c=tri[2].dot(axis);(a.min(b.min(c)),a.max(b.max(c)))}

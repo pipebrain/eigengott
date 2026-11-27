@@ -5,7 +5,7 @@ The user authorized making `pipebrain/eigengott` public and enabling GitHub Page
 ## Links
 
 - [Build selection menu](https://pipebrain.github.io/eigengott/)
-- [EIGENGOTT v0.1.4](https://pipebrain.github.io/eigengott/play.html)
+- [EIGENGOTT v0.1.5](https://pipebrain.github.io/eigengott/play.html)
 - [Level generator M2](https://pipebrain.github.io/eigengott/level-generator/) · [design and roadmap](LEVEL_GENERATOR.md)
 - [Test hub](https://pipebrain.github.io/eigengott/tests.html)
 - [Small engine baseline](https://pipebrain.github.io/eigengott/engine-test/) · [open tools](https://pipebrain.github.io/eigengott/engine-test/?tools=1)
@@ -23,7 +23,7 @@ The user authorized making `pipebrain/eigengott` public and enabling GitHub Page
 
 `.github/workflows/pages.yml` validates every push to `main` and also checks pull requests. Its verification job installs the pinned Rust toolchain and freestanding C compiler, reproducibly rebuilds the two engine, two fold-candidate and procedural-sweep and encounter WASM binaries, rebuilds DOS-maze, and runs all engine/fold/encounter/title checks and imported-media integrity checks. The separate deployment job depends on successful verification and only runs for `main`, never pull requests. It publishes the verified artifact to the `github-pages` environment. Failed verification leaves the previous live build in place.
 
-`tools/build-pages.mjs` stages `_site/` from an explicit runtime allowlist. The website contains the root build menu, the v0.1.4 game entry at `play.html`, the separate `tests.html` hub, and the eleven applications, their runtime assets/presets/shaders/WASM, and build/file metadata. Original runtime source, development tools, evidence, local files, and repository metadata are excluded from the site artifact. The encounter media credits, original conversion inputs and relevant available authoring-source archives are included separately under `encounter-test/licenses/`; gameplay does not download these archives. The public GitHub repository separately exposes its tracked source/history.
+`tools/build-pages.mjs` stages `_site/` from an explicit runtime allowlist. The website contains the root build menu, the v0.1.5 game entry at `play.html`, the separate `tests.html` hub, and the eleven applications, their runtime assets/presets/shaders/WASM, and build/file metadata. Original runtime source, development tools, evidence, local files, and repository metadata are excluded from the site artifact. The encounter media credits, original conversion inputs and relevant available authoring-source archives are included separately under `encounter-test/licenses/`; gameplay does not download these archives. The public GitHub repository separately exposes its tracked source/history.
 
 The build stamp includes the game release version, full commit, short commit, repository URL, and build date. It appears on the hub and inside each H menu. Engine and DOS diagnostics include the same deployment metadata; benchmark report exports carry it as well. `build.json` identifies the deployment, and `manifest.json` records staged file sizes and SHA-256 hashes. The H-menu metadata and `?tools=1` behavior are hosting additions; simulation, geometry, rendering defaults, and the accepted small baseline's buffers are unchanged.
 

@@ -6,7 +6,7 @@ static mut BOXES:[Box3;MAX]=unsafe{core::mem::zeroed()};
 static mut COUNT:usize=0;
 static mut CONTACT:[u32;2]=[0;2];
 static mut PROXIES:[f32;16]=[0.0;16];
-pub fn shapes(p:Player)->[Capsule;2]{let radius=p.radius();let(a,b,r)=p.gun(p.feet);[Capsule{p:p.feet+p.up*radius,q:p.feet+p.up*(p.height()-radius),r:radius},Capsule{p:a,q:b,r:r.max(0.30)}]}
+pub fn shapes(p:Player)->[Capsule;2]{let radius=p.radius();let body=Capsule{p:p.feet+p.up*radius,q:p.feet+p.up*(p.height()-radius),r:radius};[body,body]}
 pub fn clear(p:V3,q:V3,r:f32)->bool{unsafe{
  let r=if r<0.25{0.30}else{r};let s=Capsule{p,q,r};let e=v(r,r,r);let lo=p.min(q)-e;let hi=p.max(q)+e;
  for b in &BOXES[..COUNT]{let(bl,bh)=b.bounds();if boxes::overlap(lo,hi,bl,bh)&&boxes::separation(s,*b)< -0.0001{return false}}true
@@ -27,7 +27,7 @@ pub fn install(count:u32,p:Player,check_player:bool)->u32{unsafe{
  for i in 0..count{let r=&INPUT[i*8..i*8+8];if !r.iter().all(|x|x.is_finite())||r[3..6].iter().any(|x|*x<=0.0||*x>512.0)||r[6]<1.0||r[6]>3.0||r[7]<0.0||r[7]>16000000.0{return 1}
   let b=Box3{center:v(r[0],r[1],r[2]),half:v(r[3],r[4],r[5]),id:((r[6]as u32)<<24)|(r[7]as u32),..Box3::EMPTY};
   if check_player{if p.box_body{let half=v(p.radius(),p.radius(),p.height()*0.5);let center=p.feet+v(0.0,0.0,half.z);let(lo,hi)=b.bounds();let a=center-half;let z=center+half;if a.x<hi.x-0.0001&&z.x>lo.x+0.0001&&a.y<hi.y-0.0001&&z.y>lo.y+0.0001&&a.z<hi.z-0.0001&&z.z>lo.z+0.0001{return 2}}
-  for(index,s)in shapes.iter().enumerate(){if p.box_body&&index==0{continue}let e=v(s.r,s.r,s.r);let(lo,hi)=b.bounds();if boxes::overlap(s.p.min(s.q)-e,s.p.max(s.q)+e,lo,hi)&&boxes::separation(*s,b)< -0.0001{return 2}}}
+  for(index,s)in shapes[..1].iter().enumerate(){if p.box_body&&index==0{continue}let e=v(s.r,s.r,s.r);let(lo,hi)=b.bounds();if boxes::overlap(s.p.min(s.q)-e,s.p.max(s.q)+e,lo,hi)&&boxes::separation(*s,b)< -0.0001{return 2}}}
  }
  for i in 0..count{let r=&INPUT[i*8..i*8+8];BOXES[i]=Box3{center:v(r[0],r[1],r[2]),half:v(r[3],r[4],r[5]),id:((r[6]as u32)<<24)|(r[7]as u32),..Box3::EMPTY};}COUNT=count;0
 }}

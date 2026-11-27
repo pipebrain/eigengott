@@ -137,3 +137,14 @@ Published as a separate blockout test with a shared build menu. See [the generat
 ## Level generator M2 — curved structure
 
 The separate generator now compiles curved corridors, rounded donut rooms with solid cores, and full-height posts from a shared polygon domain. The user approved local curve widening within 4–12 m. All free-space components, ring quadrants and post bypasses are retained in the clearance navigation/LUT. See [LEVEL_GENERATOR.md](LEVEL_GENERATOR.md) for performed M2 checks, the imported-flat containment adaptation and remaining sector/elevation integration.
+
+
+## Display, regeneration and Quake III body movement — v0.1.5
+
+640×480 is the internal raster, not a forced window aspect. Fill the available screen, without bars; calculate projection from the actual display aspect. Verify equal world distances have equal displayed pixel lengths at wide and portrait sizes while world / effect buffers remain 640×480. Apply the same aspect correction to 3D loot previews.
+
+Movement profile 0 now means Quake 3; remove the former alternate movement option from current game controls. Other values are reserved for later movement parameters. Existing saved movement values normalize to 0. Disable weapon collision bounds everywhere: placement, turning, stepping, object installation, protection proxies and diagnostic hulls. Body / armor collision remains character-specific; muzzle traces still prevent shooting through walls.
+
+Adapt id Software's actual PM_SlideMove, PM_StepSlideMove, PM_ClipVelocity and PM_CorrectAllSolid code to body traces. Preserve pinned upstream source, corresponding Rust source and GPL-2.0-or-later notices. Use multi-plane clipping, crease motion, repeated-plane nudges, step-up / down, bounded overlap sampling and a verified prior player position. Test corners, stairs, floor seams and generated ramps across all arena scales. These tests bound regressions; they do not establish universal geometry or complete Quake engine parity.
+
+Passive player regeneration: 1 HP/sec after five seconds without damage, cap 100, hit resets delay, no pause / death healing. Expose rate (including zero to disable) and delay in H. Loot entry's full heal remains.

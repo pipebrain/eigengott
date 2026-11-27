@@ -11,7 +11,8 @@
     "NPC and own-player death models remain through MD3 clips, emit particles/lights, then finish once",
     "Stock red/yellow armor and shard MD3s, transparent smoke and additive weapon stages retain validated source data",
     "User WAV files preserved byte-for-byte; only aggressive gain crossfading is applied, with no rate ramp, detune or timbral effects",
-    "All 13 stock weapons and all 6 armor pieces are selectable in the free void; the player remains at floor height and returns collision-safe without a fit-based loot veto"
+    "All 13 stock weapons and all 6 armor pieces are selectable in the free void; the player remains at floor height and returns collision-safe without a fit-based loot veto",
+    "Slow health regeneration waits five seconds after damage, heals 1 HP/sec, resets on another hit, caps at 100 and never heals paused or dead players"
   ],
   "audio": [
     {
