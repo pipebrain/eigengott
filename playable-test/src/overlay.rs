@@ -20,12 +20,14 @@ pub fn sweep(p:V3,q:V3,r:f32,delta:V3)->Option<(f32,V3,u32)>{unsafe{
 }}
 pub fn contact(id:u32){unsafe{if id>>24<3{CONTACT[0]=CONTACT[0].wrapping_add(1);CONTACT[1]=id;}}}
 #[no_mangle]pub extern "C" fn overlay_input()->*mut f32{unsafe{INPUT.as_mut_ptr()}}
-pub fn install(count:u32,p:Player)->u32{unsafe{
+// Void presentation can cross props. Always validate records; defer player
+// overlap checks only while that player is explicitly nonphysical.
+pub fn install(count:u32,p:Player,check_player:bool)->u32{unsafe{
  let count=count as usize;if count>MAX{return 1}let shapes=shapes(p);
  for i in 0..count{let r=&INPUT[i*8..i*8+8];if !r.iter().all(|x|x.is_finite())||r[3..6].iter().any(|x|*x<=0.0||*x>512.0)||r[6]<1.0||r[6]>3.0||r[7]<0.0||r[7]>16000000.0{return 1}
   let b=Box3{center:v(r[0],r[1],r[2]),half:v(r[3],r[4],r[5]),id:((r[6]as u32)<<24)|(r[7]as u32),..Box3::EMPTY};
-  if p.box_body{let half=v(p.radius(),p.radius(),p.height()*0.5);let center=p.feet+v(0.0,0.0,half.z);let(lo,hi)=b.bounds();let a=center-half;let z=center+half;if a.x<hi.x-0.0001&&z.x>lo.x+0.0001&&a.y<hi.y-0.0001&&z.y>lo.y+0.0001&&a.z<hi.z-0.0001&&z.z>lo.z+0.0001{return 2}}
-  for(index,s)in shapes.iter().enumerate(){if p.box_body&&index==0{continue}let e=v(s.r,s.r,s.r);let(lo,hi)=b.bounds();if boxes::overlap(s.p.min(s.q)-e,s.p.max(s.q)+e,lo,hi)&&boxes::separation(*s,b)< -0.0001{return 2}}
+  if check_player{if p.box_body{let half=v(p.radius(),p.radius(),p.height()*0.5);let center=p.feet+v(0.0,0.0,half.z);let(lo,hi)=b.bounds();let a=center-half;let z=center+half;if a.x<hi.x-0.0001&&z.x>lo.x+0.0001&&a.y<hi.y-0.0001&&z.y>lo.y+0.0001&&a.z<hi.z-0.0001&&z.z>lo.z+0.0001{return 2}}
+  for(index,s)in shapes.iter().enumerate(){if p.box_body&&index==0{continue}let e=v(s.r,s.r,s.r);let(lo,hi)=b.bounds();if boxes::overlap(s.p.min(s.q)-e,s.p.max(s.q)+e,lo,hi)&&boxes::separation(*s,b)< -0.0001{return 2}}}
  }
  for i in 0..count{let r=&INPUT[i*8..i*8+8];BOXES[i]=Box3{center:v(r[0],r[1],r[2]),half:v(r[3],r[4],r[5]),id:((r[6]as u32)<<24)|(r[7]as u32),..Box3::EMPTY};}COUNT=count;0
 }}

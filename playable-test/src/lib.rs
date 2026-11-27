@@ -87,7 +87,7 @@ static mut CAMERA:Player=Player::EMPTY;
 }}
 #[no_mangle]pub extern "C" fn engine_tick(dt:f64,bits:u32,look_x:f32,look_y:f32){unsafe{
  if ACTIVE>=1{return}let a=&ARENAS[ACTIVE];
- if VOID{if FREE_TRANSITION{PLAYER.yaw+=clamp(look_x,-2000.0,2000.0)*0.002;PLAYER.pitch=clamp(PLAYER.pitch-look_y*0.002,-1.44,1.44);let(r,f,_)=PLAYER.basis();let motion=v(f.x,f.y,0.0).unit()*((bits&1!=0)as i32 as f32-(bits&2!=0)as i32 as f32)+r*((bits&8!=0)as i32 as f32-(bits&4!=0)as i32 as f32);let dt=dt.max(0.0).min(0.1)as f32;PLAYER.velocity.x=motion.x*6.0;PLAYER.velocity.y=motion.y*6.0;PLAYER.feet.x+=PLAYER.velocity.x*dt;PLAYER.feet.y+=PLAYER.velocity.y*dt;}let delta=if dt.is_finite(){dt.max(0.0).min(0.1) as f32}else{0.0};PLAYER.velocity.z=(PLAYER.velocity.z-22.0*delta).max(-24.0);PLAYER.feet.z+=PLAYER.velocity.z*delta;PLAYER.grounded=false;TIME+=delta as f64;render_state();return}
+ if VOID{if FREE_TRANSITION{PLAYER.yaw+=clamp(look_x,-2000.0,2000.0)*0.002;PLAYER.pitch=clamp(PLAYER.pitch-look_y*0.002,-1.44,1.44);let(r,f,_)=PLAYER.basis();let motion=v(f.x,f.y,0.0).unit()*((bits&1!=0)as i32 as f32-(bits&2!=0)as i32 as f32)+r*((bits&8!=0)as i32 as f32-(bits&4!=0)as i32 as f32);let dt=dt.max(0.0).min(0.1)as f32;PLAYER.velocity.x=motion.x*6.0;PLAYER.velocity.y=motion.y*6.0;PLAYER.feet.x+=PLAYER.velocity.x*dt;PLAYER.feet.y+=PLAYER.velocity.y*dt;}let delta=if dt.is_finite(){dt.max(0.0).min(0.1) as f32}else{0.0};if FREE_TRANSITION{PLAYER.velocity.z=0.0;PLAYER.feet.z=PLAYER.feet.z.max(LANDING.z);}else{PLAYER.velocity.z=(PLAYER.velocity.z-22.0*delta).max(-24.0);PLAYER.feet.z+=PLAYER.velocity.z*delta;}PLAYER.grounded=false;TIME+=delta as f64;render_state();return}
  if CAMERA_MODE!=0&&CAMERA_MODE!=3{
   let dt=if dt.is_finite(){dt.max(0.0).min(0.1) as f32}else{0.0};
   if CAMERA_MODE==1{CAMERA.yaw+=clamp(look_x,-2000.0,2000.0)*0.002;CAMERA.pitch=clamp(CAMERA.pitch-look_y*0.002,-1.55,1.55);}
@@ -219,7 +219,7 @@ static mut BENCH:Bench=Bench{words:[0;32]};
 
 #[no_mangle]pub extern "C" fn atlas_size()->u32{unsafe{ARENAS[0].atlas_size as u32}}
 
-#[no_mangle]pub extern "C" fn overlay_commit(count:u32)->u32{unsafe{overlay::install(count,PLAYER)}}
+#[no_mangle]pub extern "C" fn overlay_commit(count:u32)->u32{unsafe{overlay::install(count,PLAYER,!(VOID&&FREE_TRANSITION))}}
 #[no_mangle]pub extern "C" fn player_proxies()->*const f32{unsafe{overlay::proxies(PLAYER)}}
 #[no_mangle]pub extern "C" fn engine_proxy_clear(x:f32,y:f32,z:f32,yaw:f32,pitch:f32)->u32{unsafe{if ACTIVE>=1||![x,y,z,yaw,pitch].iter().all(|v|v.is_finite()){return 0}let mut p=PLAYER;p.feet=v(x,y,z);p.yaw=yaw;p.pitch=pitch;p.placement_clear(&ARENAS[0],p.feet)as u32}}
 
@@ -236,7 +236,7 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
 }}
 #[no_mangle]pub extern "C" fn engine_equipment(radius:f32,height:f32,eye:f32,length:f32,gun_radius:f32,start:f32,right:f32,down:f32,boxed:u32,pivot:f32,crouch_height:f32)->u32{unsafe{
  if ACTIVE>=1||![radius,height,eye,length,gun_radius,start,right,down,pivot,crouch_height].iter().all(|n|n.is_finite())||radius<0.34||radius>4.0||height<1.0||height>8.0||eye<0.6||eye>height||length<0.3||length>4.0||gun_radius<0.1||gun_radius>1.5{return 0}
- let mut p=PLAYER;p.body_radius=radius;p.body_height=height;p.eye_height=eye;p.gun_length=length;p.gun_radius=gun_radius;p.gun_start=start;p.gun_right=right;p.gun_down=down;p.box_body=boxed!=0;p.gun_pivot=pivot;p.crouch_height=crouch_height.max(0.6).min(height);let valid=if VOID{let mut q=p;q.feet=LANDING;groups::all(||q.placement_clear(&ARENAS[0],q.feet))}else{p.placement_clear(&ARENAS[0],p.feet)};if !valid{return 0}PLAYER=p;render_state();1
+ let mut p=PLAYER;p.body_radius=radius;p.body_height=height;p.eye_height=eye;p.gun_length=length;p.gun_radius=gun_radius;p.gun_start=start;p.gun_right=right;p.gun_down=down;p.box_body=boxed!=0;p.gun_pivot=pivot;p.crouch_height=crouch_height.max(0.6).min(height);let valid=if VOID{true}else{p.placement_clear(&ARENAS[0],p.feet)};if !valid{return 0}PLAYER=p;render_state();1
 }}
 #[no_mangle]pub extern "C" fn engine_impulse(x:f32,y:f32,z:f32){unsafe{if [x,y,z].iter().all(|n|n.is_finite()){PLAYER.velocity=PLAYER.velocity+v(x,y,z);}}}
 #[no_mangle]pub extern "C" fn engine_pose_ptr()->*const f32{unsafe{ACTOR[..20].copy_from_slice(&[PLAYER.feet.x,PLAYER.feet.y,PLAYER.feet.z,PLAYER.velocity.x,PLAYER.velocity.y,PLAYER.velocity.z,PLAYER.yaw,PLAYER.pitch,PLAYER.grounded as u32 as f32,PLAYER.crouched as u32 as f32,PLAYER.radius(),PLAYER.height(),(PLAYER.eye()-PLAYER.feet).z,PLAYER.gun_length,PLAYER.gun_radius,PLAYER.profile as f32,PLAYER.previous as f32,PLAYER.gun_start,PLAYER.gun_right,PLAYER.gun_down]);ACTOR.as_ptr()}}

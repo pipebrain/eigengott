@@ -319,3 +319,10 @@ Combat lights are wider/brighter. The game defaults to nearest textures, stepped
 The user corrected the intended Kaprekar motif to **6,174 total Selves**, including the player. New games use that exact count. The economy retains its bounded 48-record live pool and exact population counters; no actor/equipment allocation scales with all 6,174 copies. Full-run tests now verify accounting, upgrades, unique identities, checkpoint round trips and bounded storage through convergence. Existing imported checkpoints retain their own populations and progress.
 
 Additional local reference/media sources are available under `src-inspiration/assets` and `src-inspiration/games` (armor, props, sound/music, skies, textures, weapons and reference games). They remain local inputs; this population-only correction adds no runtime media or rendering cost.
+
+
+## Recomposition and loot corrections — v0.1.3
+
+Keep the live scene drawing through Collapse, void loot and Return, including the no-choice timeout. Free-void falling is a feedback presentation: never accelerate the physical player below the upcoming floor. Place the newly equipped body and weapon on a validated visible landing clump before reconstruction spreads outward. Collision checks against the nonphysical void player cannot prevent remaining prop records from updating; normal placement and combat collision remain checked.
+
+All displayed loot can be selected. Every stock gun and armor piece has an actual-WASM safe-return regression. Square item bounds drift and bounce; title-font labels drift nearby, avoid other labels, may overlap items, and attach with at most two axis-aligned one-pixel segments. Bounded layout tests cover one to five items in desktop and portrait shapes. New defaults use 10% dark basins, dynamic-light intensity 1.5 and sky emission 0.65, retaining genuinely unlit spaces and no lightmaps.

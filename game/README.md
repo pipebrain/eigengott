@@ -1,22 +1,22 @@
-# EIGENGOTT v0.1.2
+# EIGENGOTT v0.1.3
 
 [Play](https://pipebrain.github.io/eigengott/) · [H tools](https://pipebrain.github.io/eigengott/?tools=1) · [Historical tests](https://pipebrain.github.io/eigengott/tests.html)
 
-The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.2.checkpoint`; older saves remain untouched and can be imported explicitly.
+The accepted DOS-maze title clears on the first real input and starts the S_Marine/default game. The arena prepares behind the title and stands by until input; early input carries capture/audio activation through loading. There is no second Enter-run gate. Browser gesture rules still govern pointer capture and audio. H retains the development tools. Release checkpoints use `eigengott.game.v0.1.3.checkpoint`; older saves remain untouched and can be imported explicitly.
 
 ## Current game rules
 
 - The clarified starting population is **6,174 Selves including the player**. First-arena actors all hold shotguns. Player upgrades still come from the single loot choice: one held gun and three worn armor pieces, at most one fragment per item.
 - Each new arena independently rolls Small (~20 m, 1–3 opponents), Medium (75 m, 3–7) or Large (196 m, 3–15). The remaining population caps the cohort. Geometry, traversal and a fitting spawn cohort validate before Collapse; final placement spreads enemies relative to the player's safe return position.
-- Collapse and Return leave player movement and look enabled. Cursor selection during void loot coexists with keyboard movement/look. There are no player/return forcefields in this mode. Floor removal can cause a real fall. A changed footprint can leave old XY outside the new arena: before Release, prefer a valid existing position, otherwise place the player at the nearest fitting sector support, clear of enemies. Input is not disabled while generation runs. The protected-clump comparison remains available in the standalone test.
-- Loot entry restores health to 100 and clears old projectiles/damage flashes. Armor wear remains. The default loot window is ten seconds; Collapse and Return each default to 2.5 seconds.
+- Collapse and Return leave player movement and look enabled. Cursor selection during void loot coexists with keyboard movement/look. There are no player/return forcefields in this mode. The feedback conveys falling while the free-void player remains at or above the future landing floor. Return places the equipped player onto a visible, validated clump before the outward wave; the live scene continues through selection and timeout without an Enter-run gate. A changed footprint can leave old XY outside the new arena: before Release, prefer a valid existing position, otherwise place the player at the nearest fitting sector support, clear of enemies. Input is not disabled while generation runs. The protected-clump comparison remains available in the standalone test.
+- Loot entry restores health to 100 and clears old projectiles/damage flashes. Armor wear remains. Every displayed weapon or armor piece can be chosen; landing clearance is resolved after selection, rather than vetoing loot. Items drift and collide using square screen bounds. Labels follow nearby, avoid other labels, may cross models, and connect to their items with at most two orthogonal one-pixel segments. The default loot window is ten seconds; Collapse and Return each default to 2.5 seconds.
 - Every cleared arena improves surviving NPC equipment. Weapon families unlock progressively, armor improves, and one-fragment choices remain. Internal item quality increases each clear with logarithmic combat scaling. Player gear is not upgraded for free. The first balance rule removes 10% of the still-unmaterialized offscreen population per clear; H exposes this rate, including zero. Final actual opponents remain available for combat. This is a tunable prototype economy, not final progression balance or the narrative death-transfer/endings.
 
 Population accounting uses exact integer counters and a bounded equipment pool (48 live records for large populations), rather than allocating thousands of complete actors. IDs are never reused. Compact version-2 checkpoints preserve the counter, equipment, progression, full structural blueprint and workload; version-1 test checkpoints remain readable.
 
 ## Presentation and collision
 
-Muzzle lights now reach 9 m, impacts 7.5 m and projectile lights 9 m, with brighter intensities and short trailing emitters. The 128-light, 256-particle and 512-sprite limits remain. No lightmaps or new audio processing are introduced.
+Muzzle lights now reach 9 m, impacts 7.5 m and projectile lights 9 m, with brighter intensities and short trailing emitters. The 128-light, 256-particle and 512-sprite limits remain. Default dark basins are reduced to 10%, dynamic intensity is 1.5, and sky emission is 0.65. Unlit areas still require emitters: no ambient cheat, lightmaps or new audio processing are introduced.
 
 Chunky mode defaults ON: nearest texture sampling, stepped spatial illumination and event-light decay, low-step sprite alpha, stepped weapon effects and blocky injury/armor/directional overlays. Final presentation colour is quantized. H can compare stepped and smooth effects. Transparent/additive stock materials remain transparent/additive.
 
@@ -31,9 +31,11 @@ node playable-test/tools/check-structure.mjs
 node playable-test/tools/check-weapon-push.mjs
 node tools/check-progression.mjs
 node tools/check-release.mjs
+node playable-test/tools/check-loot-motion.mjs
 node tools/build-pages.mjs
 node tools/check-pages.mjs
 node tools/check-release-browser.mjs
+node tools/check-recomposition-browser.mjs
 node tools/check-game-soak.mjs
 node tools/check-pages-browser.mjs
 GAME_URL=https://pipebrain.github.io/eigengott/ node tools/check-release-browser.mjs

@@ -36,4 +36,5 @@ jobs:
           node playable-test/tools/check-structure.mjs
           node playable-test/tools/check-weapon-push.mjs
           node tools/check-progression.mjs
+          node playable-test/tools/check-loot-motion.mjs
           node audio-previews/tools/check-audio.mjs

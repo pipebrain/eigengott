@@ -62,6 +62,7 @@ jobs:
           node playable-test/tools/check-weapon-push.mjs
           node tools/check-progression.mjs
           node tools/check-release.mjs
+          node playable-test/tools/check-loot-motion.mjs
           node audio-previews/tools/check-audio.mjs
           node dos-maze/tools/check-generator.mjs
           node dos-maze/tools/check-animation.mjs

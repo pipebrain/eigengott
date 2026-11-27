@@ -1,9 +1,10 @@
 {
   "passed": true,
-  "version": "0.1.2",
+  "version": "0.1.3",
+  "url": "http://127.0.0.1:55836/_site/",
   "checks": [
     "DOS-maze first-input launch applies the 6174-Self preset; all first-arena actors hold shotguns and Large supports fifteen opponents",
-    "Large\u2192Small\u2192Medium\u2192Large\u2192Small replacement honors all population ranges, keeps movement during Collapse/void/Return, heals loot health and recovers collision-safe before combat",
+    "Large→Small→Medium→Large→Small replacement honors all population ranges, keeps movement during Collapse/void/Return, heals loot health and recovers collision-safe before combat",
     "Surviving copies gain persistent equipment, newly unlocked media prepare before Collapse, and checkpoint restore preserves population, gear and workload",
     "Rendered chunky mode limits displayed channel levels while smooth comparison has continuous gradients; stock texture sampling stays nearest",
     "Cold-start click clears the title; additional mouse/key input during preparation is safe, with capture/audio and the full population"
@@ -15,8 +16,8 @@
       "remaining": 5547,
       "position": [
         -7.5,
-        -7.5,
-        2.571713447570801
+        -4.5,
+        2.7975096702575684
       ],
       "tier": 1
     },
@@ -25,9 +26,9 @@
       "count": 5,
       "remaining": 4997,
       "position": [
-        -3,
-        0,
-        -0.3973884880542755
+        -36,
+        -33,
+        -0.5987145900726318
       ],
       "tier": 2
     },
@@ -36,9 +37,9 @@
       "count": 15,
       "remaining": 4498,
       "position": [
-        4.000431537628174,
-        7.999244689941406,
-        -0.3851785957813263
+        -95.99967193603516,
+        -91.99935150146484,
+        3.4636380672454834
       ],
       "tier": 3
     },
@@ -47,9 +48,9 @@
       "count": 3,
       "remaining": 4038,
       "position": [
-        4.5,
-        7.5,
-        2.26250958442688
+        -7.5,
+        -4.5,
+        2.6671204566955566
       ],
       "tier": 4
     }
@@ -60,51 +61,272 @@
       8,
       8
     ],
-    "lit": 276401
+    "lit": 356652
   },
   "smooth": {
     "levels": [
       256,
       256,
-      254
+      256
     ],
-    "lit": 635395
+    "lit": 635855
   },
-  "scope": "Local Chrome/Metal packaged working-tree checks; physical-device acceptance pending.",
-  "populationEconomy": {
+  "recomposition": {
     "passed": true,
     "checks": [
-      "6174 exact starting Selves with at most 48 materialized equipment records and shotgun-only first encounter",
-      "Exact large counters, no resurrected identities, bounded checkpoints and validated round trips",
-      "Survivors improve equipped items once per clear; player gear still requires loot and each item retains at most one fragment",
-      "Complete 6174-to-one runs at three cohort sizes keep exact accounting, unique identities, bounded storage and restorable checkpoints",
-      "Explicitly imported 6022-copy saves retain their population and progress; new runs use 6174"
+      "Collapse keeps drawing while actual sector groups are removed",
+      "The free void never lowers the player beneath the next landing floor",
+      "Five floating stock models and title-font labels remain readable on desktop and portrait; every leader has at most two orthogonal segments",
+      "Native armor selection starts an unobstructed live rebuild; geometry becomes visible progressively before combat",
+      "No-choice timeout also rebuilds without a mouse-capture or pause gate"
     ],
-    "fullRuns": [
+    "stable": {
+      "z": 2.7394156455993652,
+      "floor": 2.7244157560962226,
+      "landing": 2.7157413959503174
+    },
+    "layouts": [
       {
-        "cohortSize": 3,
-        "clears": 68,
-        "actualCombatEliminations": 204,
-        "maxRecords": 48,
-        "maxCheckpointBytes": 19757,
-        "elapsedMs": 42.22
+        "width": 1376,
+        "height": 768,
+        "labels": [
+          {
+            "id": "self-00003:weapon",
+            "text": "SHOTGUN",
+            "x": 410,
+            "y": 204,
+            "width": 77.68852459016394,
+            "height": 28,
+            "leader": [
+              [
+                459,
+                268,
+                459,
+                218
+              ],
+              [
+                459,
+                218,
+                459,
+                218
+              ]
+            ]
+          },
+          {
+            "id": "self-00002:helmet",
+            "text": "OPEN VISOR",
+            "x": 643,
+            "y": 114,
+            "width": 98.64918032786886,
+            "height": 28,
+            "leader": [
+              [
+                727,
+                160,
+                727,
+                128
+              ],
+              [
+                727,
+                128,
+                727,
+                128
+              ]
+            ]
+          },
+          {
+            "id": "self-00002:weapon",
+            "text": "SHOTGUN",
+            "x": 913,
+            "y": 201,
+            "width": 77.68852459016394,
+            "height": 28,
+            "leader": [
+              [
+                931,
+                215,
+                931,
+                215
+              ],
+              [
+                931,
+                215,
+                931,
+                215
+              ]
+            ]
+          },
+          {
+            "id": "self-00003:torso",
+            "text": "LIGHT VEST",
+            "x": 388,
+            "y": 392,
+            "width": 97.73114754098361,
+            "height": 28,
+            "leader": [
+              [
+                451,
+                435,
+                451,
+                406
+              ],
+              [
+                451,
+                406,
+                451,
+                406
+              ]
+            ]
+          },
+          {
+            "id": "self-00003:legs",
+            "text": "LIGHT GREAVES",
+            "x": 611,
+            "y": 313,
+            "width": 130.12459016393444,
+            "height": 28,
+            "leader": [
+              [
+                710,
+                378,
+                710,
+                327
+              ],
+              [
+                710,
+                327,
+                710,
+                327
+              ]
+            ]
+          }
+        ]
       },
       {
-        "cohortSize": 7,
-        "clears": 50,
-        "actualCombatEliminations": 350,
-        "maxRecords": 48,
-        "maxCheckpointBytes": 19758,
-        "elapsedMs": 36.82
-      },
-      {
-        "cohortSize": 15,
-        "clears": 39,
-        "actualCombatEliminations": 583,
-        "maxRecords": 48,
-        "maxCheckpointBytes": 19763,
-        "elapsedMs": 141.59
+        "width": 390,
+        "height": 844,
+        "labels": [
+          {
+            "id": "self-00003:weapon",
+            "text": "SHOTGUN",
+            "x": 58,
+            "y": 152,
+            "width": 77.68852459016394,
+            "height": 28,
+            "leader": [
+              [
+                112,
+                217,
+                112,
+                166
+              ],
+              [
+                112,
+                166,
+                112,
+                166
+              ]
+            ]
+          },
+          {
+            "id": "self-00002:helmet",
+            "text": "OPEN VISOR",
+            "x": 210,
+            "y": 134,
+            "width": 98.64918032786886,
+            "height": 28,
+            "leader": [
+              [
+                288,
+                176,
+                288,
+                148
+              ],
+              [
+                288,
+                148,
+                288,
+                148
+              ]
+            ]
+          },
+          {
+            "id": "self-00002:weapon",
+            "text": "SHOTGUN",
+            "x": 107,
+            "y": 372,
+            "width": 77.68852459016394,
+            "height": 28,
+            "leader": [
+              [
+                122,
+                386,
+                122,
+                386
+              ],
+              [
+                122,
+                386,
+                122,
+                386
+              ]
+            ]
+          },
+          {
+            "id": "self-00003:torso",
+            "text": "LIGHT VEST",
+            "x": 220,
+            "y": 306,
+            "width": 97.73114754098361,
+            "height": 28,
+            "leader": [
+              [
+                289,
+                353,
+                289,
+                320
+              ],
+              [
+                289,
+                320,
+                289,
+                320
+              ]
+            ]
+          },
+          {
+            "id": "self-00003:legs",
+            "text": "LIGHT GREAVES",
+            "x": 17,
+            "y": 442,
+            "width": 130.12459016393444,
+            "height": 28,
+            "leader": [
+              [
+                110,
+                505,
+                110,
+                456
+              ],
+              [
+                110,
+                456,
+                110,
+                456
+              ]
+            ]
+          }
+        ]
       }
+    ]
+  },
+  "lootMotion": {
+    "passed": true,
+    "samples": 72000,
+    "collisions": 537,
+    "checks": [
+      "Square item bounds drift, collide, separate and remain on screen for 30 seconds across 1–5 items and four viewport shapes",
+      "Labels stay distinct while drifting near items; corner boxes and two-segment leaders use integer orthogonal geometry"
     ]
   },
   "weaponPush": {
@@ -136,7 +358,7 @@
       -1.1396687030792236
     ]
   },
-  "soak": {
+  "historicalPerformance": {
     "passed": true,
     "seconds": 45,
     "profile": 2,
@@ -170,17 +392,193 @@
     "wholeSamplePeakFrameMs": 66.79999999999973,
     "wholeSamplePeakCpuMs": 16
   },
-  "otherChecks": [
-    "Playable core and structural tests",
-    "Stock transparency, dynamic-light capacity and darkness pixel checks",
-    "GPU recovery and checkpoint lifecycle",
-    "Real-time deadline checks",
-    "Packaged test hub and historical application startup"
-  ],
+  "scope": "Local Chrome/Metal packaged v0.1.3 checks; physical-device acceptance pending.",
+  "populationEconomy": {
+    "passed": true,
+    "checks": [
+      "6174 exact starting Selves with at most 48 materialized equipment records and shotgun-only first encounter",
+      "Exact large counters, no resurrected identities, bounded checkpoints and validated round trips",
+      "Survivors improve equipped items once per clear; player gear still requires loot and each item retains at most one fragment",
+      "Complete 6174-to-one runs at three cohort sizes keep exact accounting, unique identities, bounded storage and restorable checkpoints",
+      "Explicitly imported 6022-copy saves retain their population and progress; new runs use 6174"
+    ],
+    "fullRuns": [
+      {
+        "cohortSize": 3,
+        "clears": 68,
+        "actualCombatEliminations": 204,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19757,
+        "elapsedMs": 37
+      },
+      {
+        "cohortSize": 7,
+        "clears": 50,
+        "actualCombatEliminations": 350,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19758,
+        "elapsedMs": 27.3
+      },
+      {
+        "cohortSize": 15,
+        "clears": 39,
+        "actualCombatEliminations": 583,
+        "maxRecords": 48,
+        "maxCheckpointBytes": 19763,
+        "elapsedMs": 19.95
+      }
+    ]
+  },
   "limits": [
-    "Economy curves and the 10 percent offscreen elimination default are initial tunable balance, not final progression.",
-    "The whole soak includes an occasional long preparation/warm-up frame; the final rolling sample was display-limited near 60 FPS.",
-    "Shadows remain coarse player/object boxes; no world-triangle shadow maps.",
-    "Narrative death transfer/endings and light-aware AI perception remain separate work."
-  ]
+    "Population simulation and layout tests are deterministic checks, not device performance measurements.",
+    "The 45-second soak is historical v0.1.1 timing, not a new v0.1.3 performance claim.",
+    "Physical-device acceptance and touch locomotion remain pending."
+  ],
+  "lighting": {
+    "passed": true,
+    "checks": [
+      "No emitters and no sky emission produce exactly black world RGB",
+      "Explicit sky emission lights cutaway geometry",
+      "Player/object AABBs reduce world pixel light without mesh shadow maps",
+      "128 runtime lights render within the default capacity without WebGPU validation errors",
+      "Real rocket flare contributes color with zero opaque coverage",
+      "Grenade and proximity-mine solids remain visible; BFG sprite/trail stages remain additive"
+    ],
+    "darkness": {
+      "center": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "hash": 2359917829,
+      "nonzero": 232200,
+      "alpha": 59211000,
+      "rgbSum": 0,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    },
+    "sky": {
+      "center": [
+        0,
+        0,
+        0,
+        255
+      ],
+      "hash": 802698239,
+      "nonzero": 666863,
+      "alpha": 55317150,
+      "rgbSum": 2982936,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    },
+    "shadows": {
+      "off": {
+        "center": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "hash": 3838439055,
+        "nonzero": 91097,
+        "alpha": 20646075,
+        "rgbSum": 268195,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "on": {
+        "center": [
+          0,
+          0,
+          0,
+          0
+        ],
+        "hash": 1153850936,
+        "nonzero": 90605,
+        "alpha": 20646075,
+        "rgbSum": 236820,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "casters": 34
+    },
+    "rocket": {
+      "center": [
+        255,
+        255,
+        255,
+        0
+      ],
+      "hash": 1404408007,
+      "nonzero": 52225,
+      "alpha": 0,
+      "rgbSum": 1502526,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    },
+    "projectiles": [
+      {
+        "weapon": 4,
+        "center": [
+          5,
+          5,
+          5,
+          255
+        ],
+        "hash": 1222565908,
+        "nonzero": 2106,
+        "alpha": 185130,
+        "rgbSum": 49397,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      {
+        "weapon": 9,
+        "center": [
+          255,
+          255,
+          255,
+          0
+        ],
+        "hash": 2983817360,
+        "nonzero": 323644,
+        "alpha": 0,
+        "rgbSum": 5916133,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      {
+        "weapon": 12,
+        "center": [
+          255,
+          255,
+          255,
+          255
+        ],
+        "hash": 3499600244,
+        "nonzero": 6589,
+        "alpha": 423300,
+        "rgbSum": 603321,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      }
+    ],
+    "stressTiming": {
+      "sky": 0.23562300000000003,
+      "scene": 2.801582,
+      "feedback": 2.862748,
+      "present": 3.695236,
+      "previews": 0,
+      "total": 9.595189
+    }
+  }
 }
