@@ -15,11 +15,11 @@ for(const app of manifest.applications){
   for(const file of ['index.html','main.js','style.css'])assert.ok(files.has(`${app}/${file}`),`${app}/${file} missing`);
   const html=await readFile(new URL(`${app}/index.html`,root),'utf8');assert.ok(html.includes(manifest.build.commit));assert.match(html,/src="\.\.\/deployment.js"/);
 }
-const relativeReferences=/(?:from\s*|import\s*|src=|href=)["'](\.?\.?\/[^"']+|[^/:"'\s]+\.(?:js|css|wasm))["']/g;
+const relativeReferences=/(?:from\s*|import\s*|src=|href=)["'](\.?\.?\/[^"']+|[^/:"'\s]+\/[^"']+|[^/:"'\s]+\.(?:html|js|css|wasm))["']/g;
 for(const item of manifest.files.filter(f=>/\.(?:html|js|css)$/.test(f.path))){
   const code=await readFile(new URL(item.path,root),'utf8');
   for(const [,reference]of code.matchAll(relativeReferences)){
-    if(reference.includes('${'))continue;const url=new URL(reference,new URL(item.path,root));const relative=decodeURIComponent(url.pathname.slice(root.pathname.length));
+    if(reference.includes('${')||reference.startsWith('#'))continue;const url=new URL(reference,new URL(item.path,root));const relative=decodeURIComponent(url.pathname.slice(root.pathname.length));
     if(url.pathname.endsWith('/'))assert.ok(files.has(relative+'index.html'),`${item.path}: missing ${reference}`);
     else assert.ok(files.has(relative),`${item.path}: missing ${reference}`);
   }
