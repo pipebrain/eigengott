@@ -9,6 +9,9 @@ mod spatial;
 mod boxes;
 mod overlay;
 mod body;
+mod groups;
+static mut VOID:bool=false;
+static mut LANDING:V3=V3{x:0.0,y:0.0,z:0.0};
 use math::*;
 use world::*;
 use physics::Player;
@@ -60,7 +63,7 @@ static mut CAMERA:Player=Player::EMPTY;
 // This module is an isolated arena factory/player, not a multi-arena transaction.
 // The host preserves the active instance while a worker builds another instance.
 #[no_mangle]pub extern "C" fn engine_build(seed:u32,fault:u32,profile:u32,lights:u32,density:u32,detail:u32)->u32{unsafe{
- ACTIVE=1;PENDING=0;SERIAL=SERIAL.wrapping_add(1).max(1);ACTIVATIONS=0;PLAYER=Player::EMPTY;CAMERA_MODE=0;ACCUMULATOR=0.0;TIME=0.0;CONFIG=[profile.min(2),lights,density,detail];
+ groups::reset();VOID=false;ACTIVE=1;PENDING=0;SERIAL=SERIAL.wrapping_add(1).max(1);ACTIVATIONS=0;PLAYER=Player::EMPTY;CAMERA_MODE=0;ACCUMULATOR=0.0;TIME=0.0;CONFIG=[profile.min(2),lights,density,detail];
  if !PALETTE_READY{surface::palette();PALETTE_READY=true;}engine_prepare(seed,fault)
 }}
 #[no_mangle]pub extern "C" fn engine_prepare(seed:u32,fault:u32)->u32{unsafe{
@@ -68,7 +71,8 @@ static mut CAMERA:Player=Player::EMPTY;
  host_progress(1);let start=host_now();a.generate(seed,SERIAL,fault,CONFIG[0],CONFIG[1],CONFIG[2],CONFIG[3]);let generated=host_now();
  host_progress(2);validate::validate(a);a.geometry_hash=geometry_hash(a);let validated=host_now();
  host_progress(3);if a.errors==0{surface::mesh(a)}let meshed=host_now();
- host_progress(4);if a.errors==0{surface::bake(a)}let baked=host_now();
+ host_progress(4);// Dynamic emitters only: no lightmap bake.
+ let baked=host_now();
  let mut player=Player::EMPTY;player.feet=a.spawn;if a.errors==0&&!player.placement_clear(a,a.spawn){a.errors|=CLEARANCE}
  a.phase_ms=[(generated-start) as f32,(validated-generated) as f32,(meshed-validated) as f32,(baked-meshed) as f32];a.ready=a.errors==0;a.errors
 }}
@@ -81,6 +85,7 @@ static mut CAMERA:Player=Player::EMPTY;
 }}
 #[no_mangle]pub extern "C" fn engine_tick(dt:f64,bits:u32,look_x:f32,look_y:f32){unsafe{
  if ACTIVE>=1{return}let a=&ARENAS[ACTIVE];
+ if VOID{let delta=if dt.is_finite(){dt.max(0.0).min(0.1) as f32}else{0.0};PLAYER.velocity.z=(PLAYER.velocity.z-22.0*delta).max(-24.0);PLAYER.feet.z+=PLAYER.velocity.z*delta;PLAYER.grounded=false;TIME+=delta as f64;render_state();return}
  if CAMERA_MODE!=0&&CAMERA_MODE!=3{
   let dt=if dt.is_finite(){dt.max(0.0).min(0.1) as f32}else{0.0};
   if CAMERA_MODE==1{CAMERA.yaw+=clamp(look_x,-2000.0,2000.0)*0.002;CAMERA.pitch=clamp(CAMERA.pitch-look_y*0.002,-1.55,1.55);}
@@ -229,7 +234,7 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
 }}
 #[no_mangle]pub extern "C" fn engine_equipment(radius:f32,height:f32,eye:f32,length:f32,gun_radius:f32,start:f32,right:f32,down:f32,boxed:u32,pivot:f32,crouch_height:f32)->u32{unsafe{
  if ACTIVE>=1||![radius,height,eye,length,gun_radius,start,right,down,pivot,crouch_height].iter().all(|n|n.is_finite())||radius<0.34||radius>4.0||height<1.0||height>8.0||eye<0.6||eye>height||length<0.3||length>4.0||gun_radius<0.1||gun_radius>1.5{return 0}
- let mut p=PLAYER;p.body_radius=radius;p.body_height=height;p.eye_height=eye;p.gun_length=length;p.gun_radius=gun_radius;p.gun_start=start;p.gun_right=right;p.gun_down=down;p.box_body=boxed!=0;p.gun_pivot=pivot;p.crouch_height=crouch_height.max(0.6).min(height);if !p.placement_clear(&ARENAS[0],p.feet){return 0}PLAYER=p;render_state();1
+ let mut p=PLAYER;p.body_radius=radius;p.body_height=height;p.eye_height=eye;p.gun_length=length;p.gun_radius=gun_radius;p.gun_start=start;p.gun_right=right;p.gun_down=down;p.box_body=boxed!=0;p.gun_pivot=pivot;p.crouch_height=crouch_height.max(0.6).min(height);let valid=if VOID{let mut q=p;q.feet=LANDING;groups::all(||q.placement_clear(&ARENAS[0],q.feet))}else{p.placement_clear(&ARENAS[0],p.feet)};if !valid{return 0}PLAYER=p;render_state();1
 }}
 #[no_mangle]pub extern "C" fn engine_impulse(x:f32,y:f32,z:f32){unsafe{if [x,y,z].iter().all(|n|n.is_finite()){PLAYER.velocity=PLAYER.velocity+v(x,y,z);}}}
 #[no_mangle]pub extern "C" fn engine_pose_ptr()->*const f32{unsafe{ACTOR[..20].copy_from_slice(&[PLAYER.feet.x,PLAYER.feet.y,PLAYER.feet.z,PLAYER.velocity.x,PLAYER.velocity.y,PLAYER.velocity.z,PLAYER.yaw,PLAYER.pitch,PLAYER.grounded as u32 as f32,PLAYER.crouched as u32 as f32,PLAYER.radius(),PLAYER.height(),(PLAYER.eye()-PLAYER.feet).z,PLAYER.gun_length,PLAYER.gun_radius,PLAYER.profile as f32,PLAYER.previous as f32,PLAYER.gun_start,PLAYER.gun_right,PLAYER.gun_down]);ACTOR.as_ptr()}}
@@ -247,3 +252,16 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
 #[no_mangle]pub extern "C" fn actor_proxies()->*const f32{unsafe{overlay::proxies(actor_player())}}
 
 #[no_mangle]pub extern "C" fn engine_speed_scale(scale:f32){unsafe{if scale.is_finite(){PLAYER.speed_scale=scale.max(0.4).min(1.4);}}}
+
+// The void is a deliberate gameplay state, never an invalid collision recovery.
+#[no_mangle]pub extern "C" fn engine_void_begin(x:f32,y:f32,z:f32)->u32{unsafe{
+ if ACTIVE>=1||VOID||![x,y,z].iter().all(|v|v.is_finite()){return 0}let mut p=PLAYER;p.feet=v(x,y,z);
+ if !groups::all(||p.placement_clear(&ARENAS[0],p.feet)){return 0}LANDING=p.feet;VOID=true;PLAYER.velocity=v(0.0,0.0,-1.0);PLAYER.grounded=false;CAMERA_MODE=0;render_state();1
+}}
+#[no_mangle]pub extern "C" fn engine_void_land()->u32{unsafe{
+ if ACTIVE>=1||!VOID{return 0}let mut p=PLAYER;p.feet=LANDING;
+ if !p.placement_clear(&ARENAS[0],p.feet){return 0}
+ for lift in [0.7,0.4,0.15,0.0]{let q=LANDING+v(0.0,0.0,lift);if p.placement_clear(&ARENAS[0],q){p.feet=q;break}}
+ p.velocity=v(0.0,0.0,-2.0);p.grounded=false;PLAYER=p;VOID=false;ACCUMULATOR=0.0;render_state();1
+}}
+#[no_mangle]pub extern "C" fn engine_void_active()->u32{unsafe{VOID as u32}}

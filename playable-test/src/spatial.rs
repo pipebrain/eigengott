@@ -38,6 +38,6 @@ fn traverse(a:&Arena,intersects:impl Fn(Node)->bool,visit:&mut impl FnMut(usize)
  while count>0{
   count-=1;let node=a.nodes[stack[count] as usize];if !intersects(node){continue}
   if node.count&BRANCH!=0{stack[count]=node.first;stack[count+1]=node.count&!BRANCH;count+=2;}
-  else{for i in node.first..node.first+node.count{if !visit(a.order[i as usize] as usize){return}}}
+  else{for i in node.first..node.first+node.count{let id=a.order[i as usize] as usize;if crate::groups::visible(a,a.tris[id].owner as usize)&&!visit(id){return}}}
  }
 }

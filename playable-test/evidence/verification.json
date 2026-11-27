@@ -1,18 +1,19 @@
 {
   "date": "2026-11-27",
-  "scope": "Local Chrome 158 / Metal automated checks; physical-device acceptance pending",
+  "scope": "Local Chrome / Metal automated checks and development soak; physical-device acceptance pending",
   "core": {
     "passed": true,
     "checks": [
       "Finite identities, exactly-once deaths, validated checkpoints and slot compatibility",
-      "One-gun economy, twelve real equipment drops, single-fragment transfer, armor effects and atomic clearance rollback",
-      "Deletion expires originating loot; shared Release clears the pool and stages existing surviving identities without population growth",
+      "Outside-in collapse deletes actual collision and rendered groups; anchor clump is last and the real player falls into a fully empty void",
+      "One random complete-item replacement is atomic and clearance checked; rejected or missed choices preserve equipment, unchosen loot is lost, landing causes no damage and reconstruction releases the next encounter",
+      "Unselected loot times out at five seconds; deletion and reconstruction each finish within five simulation/real-time seconds, independent of legacy slow-motion controls",
       "Final opposing death completes the finite run and prevents another ordinary Recomposition",
       "Armor movement multiplier affects real WASM physics; memory remains fixed at 32 MiB",
       "Stuck recovery chooses a clear direction, holds it briefly and keeps live actor motion finite",
       "NPC and own-player death models remain through MD3 clips, emit particles/lights, then finish once",
       "Stock red/yellow armor and shard MD3s, transparent smoke and additive weapon stages retain validated source data",
-      "User WAV files preserved byte-for-byte; playback has no rate ramp, detune or DSP effects"
+      "User WAV files preserved byte-for-byte; only aggressive gain crossfading is applied, with no rate ramp, detune or timbral effects"
     ],
     "audio": [
       {
@@ -35,67 +36,23 @@
   "browser": {
     "passed": true,
     "checks": [
-      "Finite run, one equipped gun, shared accepted DOS-maze generator and WebGPU startup",
-      "Native combat entry unlocks raw audio; encounter clear releases the cursor and opens live 3D equipment previews",
-      "Native drag transfers fragments and equipment onto the Self; incompatible body slots retain the original gear",
-      "The actual MD3 Self rotates and body drop targets follow the projected geometry",
-      "Player and equipment stay outside shared maze / architectural feedback history",
-      "Watching/reopening the wave does not restart or pause the selection deadline",
-      "GPU recovery preserves ledger, loadout, item pool and in-flight Recomposition",
-      "Shared Release closes loot, stages existing living identities and writes the next encounter checkpoint",
-      "New run and validated checkpoint restore preserve identities and equipped fragments",
-      "Last opposing death ends the finite run instead of starting another ordinary wave",
-      "Damage reduces protection and health while driving the layered injury / directional feedback",
-      "Own-player death animation, particles and shadowless light precede the end panel; supplied death recording plays once at original rate and pitch",
-      "All development weapons load on demand after the compact startup",
-      "Portrait / landscape resizing rebuilds bounded maze and history targets without WebGPU errors"
+      "Compact native WebGPU/WASM startup uses dynamic-only lighting, 128-light capacity and the accepted DOS-maze field by default",
+      "Outside-in deletion reaches an empty falling void; cursor release exposes only three drifting drops, while original loops crossfade over 180 ms",
+      "Loot uses live 3D models, title-style glyph masks, one-pixel orthogonal corner boxes and no more than two leader segments per label",
+      "Portrait loot retains three bounded models and labels without horizontal overflow",
+      "Loot models and labels remain outside the owned feedback history",
+      "GPU recovery preserves the void, item pool, one-choice guard and deadline",
+      "A harmless miss then one native item click commits one replacement; landing is safe, outward rebuilding completes and shared Release saves the next encounter",
+      "No-choice loot expires after five real seconds and preserves gear despite legacy slow-motion settings",
+      "Checkpoints retain the selected gear; the last opposing death ends the finite run without another loot wave",
+      "Injury, death animation, particle/light presentation and original death recording remain functional",
+      "Portrait/landscape targets resize correctly; all thirteen development weapons still load on demand"
     ]
   },
-  "lifecycle": {
-    "passed": true,
-    "checks": [
-      "Malformed checkpoint rejection preserves the active run",
-      "Boundary checkpoint restores player injury as well as identities and equipment",
-      "Stale character preparation cannot mutate a newer validated arena",
-      "Pause and page freeze preserve the selection deadline without catch-up or background sound",
-      "Missing WebGPU fails before downloading media"
-    ]
-  },
-  "soak": {
-    "passed": true,
-    "seconds": 30,
-    "cleared": 6,
-    "encounters": 7,
-    "remaining": 29,
-    "shots": 51,
-    "hits": 48,
-    "cpu": {
-      "samples": 600,
-      "median": 0.5,
-      "p95": 1.0999999940395355,
-      "p99": 1.699999988079071,
-      "max": 3.2999999821186066
-    },
-    "frame": {
-      "samples": 600,
-      "median": 16.69999999999709,
-      "p95": 16.799999999999272,
-      "p99": 16.80000000000291,
-      "max": 16.80000000000291
-    },
-    "gpu": {
-      "scene": 0.338162,
-      "feedback": 0.192247,
-      "present": 0.71278,
-      "previews": 0,
-      "total": 1.243189
-    }
-  },
-  "performanceContext": "Soak samples recorded during development validation, not an isolated benchmark or universal device budget.",
   "effects": {
     "passed": true,
     "checks": [
-      "An event light changes actual world pixels above the static lightmap",
+      "An event light illuminates an otherwise black arena, with no lightmap or ambient fill",
       "Stock smoke has partial alpha; sprites stay outside architectural feedback",
       "Additive flashes contribute light/color without opaque coverage or black rectangles",
       "Depth-tested billboards remain occluded behind structural walls",
@@ -103,17 +60,19 @@
     ],
     "lights": {
       "off": {
-        "hash": 1811949681,
-        "nonzero": 928800,
+        "hash": 2359917829,
+        "nonzero": 232200,
         "alpha": 59211000,
+        "rgbSum": 0,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
       "on": {
-        "hash": 3203997046,
-        "nonzero": 928800,
+        "hash": 3199911357,
+        "nonzero": 434742,
         "alpha": 59211000,
+        "rgbSum": 6053000,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
@@ -125,14 +84,16 @@
         "hash": 988451583,
         "nonzero": 27443,
         "alpha": 301141,
+        "rgbSum": 397781,
         "partialAlphaPixels": 6949,
         "width": 645,
         "height": 360
       },
       "history": {
-        "hash": 1157966621,
-        "nonzero": 1625400,
+        "hash": 3846378949,
+        "nonzero": 232200,
         "alpha": 0,
+        "rgbSum": 0,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
@@ -141,14 +102,16 @@
         "hash": 566219845,
         "nonzero": 0,
         "alpha": 0,
+        "rgbSum": 0,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
       "hiddenHistory": {
-        "hash": 1157966621,
-        "nonzero": 1625400,
+        "hash": 3846378949,
+        "nonzero": 232200,
         "alpha": 0,
+        "rgbSum": 0,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
@@ -158,56 +121,137 @@
       "hash": 396451575,
       "nonzero": 9450,
       "alpha": 0,
+      "rgbSum": 653950,
       "partialAlphaPixels": 0,
       "width": 645,
       "height": 360
     }
   },
-  "audioPreviews": {
-    "integrated": false,
-    "files": 6,
-    "fileChecks": {
-      "passed": true,
-      "files": 6,
-      "format": "48 kHz / stereo / 16-bit PCM",
-      "clippedSamples": 0,
-      "integrated": false
+  "lighting": {
+    "passed": true,
+    "checks": [
+      "No emitters and no sky emission produce exactly black world RGB",
+      "Explicit sky emission lights cutaway geometry",
+      "Player/object AABBs reduce world pixel light without mesh shadow maps",
+      "128 runtime lights render within the default capacity without WebGPU validation errors",
+      "Real rocket flare contributes color with zero opaque coverage"
+    ],
+    "darkness": {
+      "hash": 2359917829,
+      "nonzero": 232200,
+      "alpha": 59211000,
+      "rgbSum": 0,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
     },
-    "browser": {
-      "passed": true,
-      "url": "http://127.0.0.1:54570/audio-previews/",
-      "checks": [
-        "Nine original / A / B audition controls load without autoplay",
-        "Native browser playback decodes ambient, warning and death previews at original playback rate",
-        "One audition plays at a time; stop resets all tracks",
-        "Portrait page fits without horizontal overflow"
-      ],
-      "tracks": [
-        {
-          "src": "http://127.0.0.1:54570/audio-previews/assets/ambient-loop-a.wav",
-          "duration": null,
-          "rate": 1,
-          "loop": true,
-          "error": null,
-          "playing": 1
-        },
-        {
-          "src": "http://127.0.0.1:54570/audio-previews/assets/warn-loop-a.wav",
-          "duration": null,
-          "rate": 1,
-          "loop": true,
-          "error": null,
-          "playing": 1
-        },
-        {
-          "src": "http://127.0.0.1:54570/audio-previews/assets/death-a.wav",
-          "duration": 1.984,
-          "rate": 1,
-          "loop": false,
-          "error": null,
-          "playing": 1
-        }
-      ]
+    "sky": {
+      "hash": 1089723414,
+      "nonzero": 456439,
+      "alpha": 50692980,
+      "rgbSum": 7423539,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    },
+    "shadows": {
+      "off": {
+        "hash": 3032566982,
+        "nonzero": 88147,
+        "alpha": 18415080,
+        "rgbSum": 183843,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "on": {
+        "hash": 1372539659,
+        "nonzero": 87538,
+        "alpha": 18415080,
+        "rgbSum": 161920,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "casters": 20
+    },
+    "rocket": {
+      "hash": 3477982806,
+      "nonzero": 37670,
+      "alpha": 0,
+      "rgbSum": 939059,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    },
+    "stressTiming": {
+      "scene": 2.252507,
+      "feedback": 2.34288,
+      "present": 3.087286,
+      "previews": 0,
+      "total": 7.682673000000001
     }
-  }
+  },
+  "realTimeDeadlines": {
+    "passed": true,
+    "checks": [
+      "Wave and loot deadlines use real frame time at an imposed five frames per second, independent of capped fixed-step physics"
+    ],
+    "phases": {
+      "collapseMs": 1123,
+      "lootMs": 919,
+      "returnMs": 1024
+    }
+  },
+  "lifecycle": {
+    "passed": true,
+    "checks": [
+      "Malformed checkpoint rejection preserves the active run",
+      "Boundary checkpoint restores player injury as well as identities and equipment",
+      "Stale character preparation cannot mutate a newer validated arena",
+      "Pause and page freeze preserve the selection deadline without catch-up or background sound",
+      "Missing WebGPU fails before downloading media"
+    ]
+  },
+  "largeArenaSoak": {
+    "passed": true,
+    "seconds": 30,
+    "cleared": 6,
+    "encounters": 6,
+    "remaining": 29,
+    "shots": 52,
+    "hits": 49,
+    "cpu": {
+      "samples": 600,
+      "median": 1.5999999940395355,
+      "p95": 2.5999999940395355,
+      "p99": 2.9000000059604645,
+      "max": 5.199999988079071
+    },
+    "frame": {
+      "samples": 600,
+      "median": 16.69999999999709,
+      "p95": 16.700000000000728,
+      "p99": 16.799999999999272,
+      "max": 16.80000000000291
+    },
+    "gpu": {
+      "scene": 0.240955,
+      "feedback": 0.255955,
+      "present": 0.937486,
+      "previews": 0,
+      "total": 1.434396
+    }
+  },
+  "preservation": {
+    "acceptedEngineBenchmarkFoldSweepEncounterAndTitleApps": "unchanged",
+    "originalWAVs": "unchanged",
+    "proceduralAudioPreviews": "not integrated"
+  },
+  "limits": [
+    "Structural blueprint remains fixed; group rendering and collision disappear/return together with compatible interior changes.",
+    "Point-light shadows use up to eight nearby AABBs per light, at most 128 casters; no world-mesh shadows.",
+    "128-light capacity check was functional; its timing sample ran alongside other browser checks and is not an isolated benchmark.",
+    "Sky emission is an explicit directional cutaway emitter; regional 3D sky scenes remain future work."
+  ]
 }

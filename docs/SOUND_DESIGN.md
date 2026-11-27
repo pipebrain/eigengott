@@ -28,3 +28,7 @@ References: [Web Audio buffer sources and playback rate](https://www.w3.org/TR/w
 The user authorized generating previews separately before integrating them. `audio-previews/` contains original/A/B listening controls and six procedural candidates derived from the recordings' envelope and spectral statistics. The offline generator, output levels, source hashes and reproduction notes are included there. See [audio preview notes](../audio-previews/README.md) and [listen on Pages](https://pipebrain.github.io/eigengott/audio-previews/).
 
 These previews do not replace any runtime file. The game continues playing the original placeholders at rate 1.0 and detune 0 with no DSP effects. Selecting an audition and any later in-engine processing remain separate user decisions.
+
+## Approved gain crossfade — 2026-11-27
+
+For the falling-void playable revision, the user authorized aggressive crossfading of the original ambient and warning placeholders. Use a 180 ms gain envelope in each direction; keep loop source continuity across Collapse/Release, playback rate 1 and detune 0. This narrowly supersedes the former prohibition on all envelopes. No time stretching, ramped playback speed, filters, pitch changes or generated auditions are integrated. The deferred stretching/ramping design above remains a proposal.

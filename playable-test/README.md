@@ -16,13 +16,15 @@ Default inventory is one equipped gun and three worn armor slots: helmet, torso 
 
 Six original armor presets trade protection against movement and, for the heavy helmet, viewport restriction. Protection depletes under damage; injury persists through the current run. Five fragment prototypes provide tighter patterns, stronger/slower shots, thermal silhouettes, extra protection or lighter movement. Thermal rendering identifies visible living opposing models; it does not reveal actors through opaque geometry. It is a prototype heat tint, not a thermal simulation or completed AI darkness/perception system.
 
-After the encounter clears, the equipment interface releases mouse capture and displays actual rotating weapon meshes and stock OpenArena armor pickup meshes. Point to an item to compare it. Drag equipment onto the actual selected MD3 Self; compatible helmet, torso, legs or weapon targets highlight. Drag a fragment handle separately to transfer it. Drag empty model space to rotate the Self; projected body targets follow the model. Invalid drops return to the pool, and disappearing options or Release cancel unfinished drags. Displaced equipment/mods remain in the temporary pool with the source cluster's expiry. There is no backpack or loose-mod inventory. Exchanges validate the expanded character envelope and held weapon atomically; blocked swaps preserve both current gear and source items.
+After the encounter clears, a prepared outside-in Collapse deletes every occupied sector group from the outer arena toward the player's captured XY. Ordering varies within radial bands; the landing clump disappears last. Deletion applies to both rendering and triangle collision, including group-owned props and environmental emitters. Collapse lasts at most five real seconds.
 
-Armor previews use the stock red/yellow OpenArena MD3 pickup models; fragments use the stock armor shard. They are role placeholders, not new modular worn meshes. Production interchangeable worn armor meshes, hand inspection animations and helmet construction remain later work. Mod installation reports a development status message as requested.
+Once all groups are gone, the actual player falls under controlled gravity through the void. Only a few randomly sampled equipment drops drift near the POV: three by default, including a random weapon when one is available. Rendered MD3 models carry one-pixel orthogonal corner boxes, a single title-style label and a leader of at most two orthogonal segments. The accepted DOS-maze WASM supplies the monochrome field. The title study uses custom Gothic glyphs rather than a font file; the labels reuse its six custom glyphs and condensed serif fallback.
 
-The pool belongs to defeated Selves in the current encounter. Items expire when their originating cluster is deleted; protected/surviving-cluster options remain until shared Release. Opponents play their selected MD3 death clips, dissolve with stock-sprite particles and a short shadowless light, then disappear. Own-player death remains visible before the end panel and lowers the first-person camera above floor level. Watching the wave with **L** hides the interface; reopening does not reset its deadline. Selection ends at the same fixed boundary that closes the intermission and releases all fields/enemies. The page attempts to restore mouse capture automatically after a normally played encounter; browsers that require another gesture display the Enter button. Opening H cancels automatic recapture.
+Click one item to replace the corresponding equipped item, including its installed fragment. A missed click is harmless. Only one successful selection is permitted; unchosen items are discarded. No selection after five real seconds preserves the current loadout. Equipment changes are atomic and check the canonical landing geometry and solid props before committing, even while the player is below the arena.
 
-Simulation and the wave run at 0.35 speed during selection by default. Mouse/UI and preview rotation remain responsive. The debug loop HUD shows remaining real-time selection seconds. This loot-screen direction replaces the proposed physical pickup and run-to-item warning phase.
+Selection or timeout restores the landing clump beneath the same captured XY. A short collision-driven fall lands without damage, then Return rebuilds outward within five real seconds. Shared Release clears fields and enables the next encounter. A seam-spanning body/weapon envelope restores the adjacent cells as one safe landing clump. The prior drag-to-Self interface, cluster-expiring loot choices and slow-motion selection have been superseded in this separate test. Legacy speed inputs do not extend the phase deadlines.
+
+Stock red/yellow OpenArena armor pickup MD3s remain placeholders for armor roles; the stock shard remains available in the asset pack. Production modular worn armor meshes and inspection animations remain later work. Death animations, particles/lights, exactly-once accounting and final-opponent precedence are preserved.
 
 ## Shared labyrinth and feedback
 
@@ -32,31 +34,35 @@ Two explicitly owned history textures alternate each frame. Clean characters, gu
 
 This is a shared effect module and composition, not a claim that the entire 3D world, vector generation, history and equipment rendering fit in one shader invocation. The accepted title app remains unchanged.
 
-Injury uses a persistent red procedural edge layer; armor uses its preset tint and remaining condition; incoming hits create a brief brighter directional flash. Their opacity controls are independent in H. Cast shadows remain disabled. Bounded event lights add to the static lightmap and illuminate rendered world faces, props and characters. Default light budget is 16, capped at 32. Particle simulation caps at 256 and instanced sprite draws at 512. Muzzle flashes preserve stock additive/animated texture stages; smoke uses alpha blending with depth tests and no depth writes. Effects no longer use opaque placeholder cubes. The material converter supports the selected blend, animation, constant-color and UV rotation/scroll stages; it is not a full Quake shader-language implementation.
+Injury uses a persistent red procedural edge layer; armor uses its preset tint and remaining condition; incoming damage produces a short directional flash. The falling selection suppresses these overlays and development HUDs so only the feedback and drops remain.
 
-## Audio: deliberately unprocessed
+## Dynamic-only lighting
 
-The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` are copied byte-for-byte into `assets/`. Combat uses ambient; loot adds the warning loop; player death uses the one-shot recording. Playback rate is always **1.0**, detune **0**. Master gain/mute are the only signal-level controls. Existing OpenArena weapon/footstep/pain cues also play as raw samples through a bounded eight-voice transient pool. No pitch shifting, time stretching, speed ramps, filters, reverb, distortion, compressor, spatial processing or synthesized effects are applied. Gameplay slow motion does not slow audio.
+No lightmap is baked, uploaded or sampled by this playable renderer. World surfaces, props and animated bodies use runtime point emitters with no ambient/key/fill or fog illumination. With environmental emitters OFF, sky emission zero and no event light, world RGB is exactly black. Environmental lights disappear and return with their owning groups. Cutaway sky emission is explicit and defaults to zero; it is a simple directional sky emitter, not the later regional 3D skybox system.
 
-Standalone procedural A/B candidates are available at [Audio auditions](https://pipebrain.github.io/eigengott/audio-previews/); they are not imported or integrated by this runtime. The supplied recordings are placeholders, not newly designed sounds or guaranteed finished loop seams. The original audio remains the user's design. The deferred stretching/ramping proposal is recorded in [SOUND_DESIGN.md](../docs/SOUND_DESIGN.md), linked from both engine planning documents. Audio never determines the simulation's Release boundary. Pause/hiding/reset stop sources; only an unlocked audio context can start playback.
+The default light budget and hard capacity are **128**. Short event and projectile lights take priority, followed by nearby environmental emitters. **Box shadows default ON:** up to 128 player/object AABBs, with eight nearby candidates per point light and bounded directional-sky tests. These are deliberately coarse occluders; world triangles do not cast shadows and mesh silhouettes are not traced. No shadow maps are allocated. Loot previews use a separate inspection point emitter so their models stay visible in the void. H exposes emitter, sky, box-shadow and light-budget controls.
 
-## Persistence and controls
+Particles cap at 256 and sprite draws at 512. Rocket flare/thrust shader textures now resolve from the stock archive and use additive blending rather than opaque fallbacks. The flare is a camera-facing sprite; solid rocket geometry remains opaque. Clean characters, sprites, item previews and labels stay outside architectural history.
 
-Automatic checkpoints are saved in browser storage at safe encounter/load/reset boundaries. Export returns the last boundary checkpoint; Import/Resume validate identities and equipment and reconstruct a safe arena before activation. Mid-wave geometry, exact actor positions and in-flight projectiles are not serialized. A checkpoint resumes an encounter from a validated placement. Browser storage failures remain playable with explicit export available.
+## Placeholder audio
 
-- WASD / mouse: move and look. Space: jump. C: crouch. Shift: walk.
-- Mouse 1 / Ctrl: attack. Mouse 2 / Alt: strafe. Mouse 3: zoom.
-- H: tools. L: show/hide equipment during Recomposition. N: manual development wave.
-- Number keys / wheel select additional guns only when the development inventory is enabled.
-- F: fullscreen. Esc: release capture. Backtick: development console.
+The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-byte unchanged, at playback rate 1 and detune 0. Ambient and warning use an aggressive **180 ms gain crossfade** at Collapse and Release; the loops are not stopped/restarted at those boundaries. The original death recording remains a one-shot. Pause, hidden-page suspension and explicit mute stop playback normally. No stretching, pitch shift, filters, reverb or procedural auditions are integrated. Existing OpenArena gameplay samples remain original recordings.
 
-Default-on loop/metrics/kill/log overlays remain development UI, with independent H toggles. Equipment comparisons use qualitative descriptions by default; numeric state is available in diagnostics. Touch inspection and item selection are supported through normal UI; touch movement is not implemented.
+[Separate audio auditions](../audio-previews/) are still unintegrated. Deferred stretching/ramping is documented in [SOUND_DESIGN.md](../docs/SOUND_DESIGN.md).
+
+## Controls
+
+- H: tools; **Clear encounter → loot [dev]** starts the new full sequence.
+- During the void: click one drifting item; selection closes after five seconds.
+- WASD / arrows: movement; mouse: look; mouse 1 / Ctrl: attack; Space: jump; C: crouch; Shift: walk.
+- F: fullscreen; Esc: release capture; backtick: development console.
+- All thirteen weapons remain available through the development inventory option.
 
 ## Physics, AI and remaining engine work
 
 Body envelopes remain character-specific and conservative. Armor adds bounded radius/height; movement penalties use a real WASM speed multiplier. Worker navigation uses the largest prototype armor allowance for each model. Held weapon/body selection must fit live structural and overlay collision. Bot recovery tries clear local directions and briefly retains a successful direction, with configurable reaction time and damage. It is not a complete botlib or balanced production AI.
 
-The accepted structural topology/BVH remains fixed. Current Recomposition replaces compatible interiors/materials, with the protected player support intact. Height-rich actual structural replacement, full composed-world validation/navigation, the surface editor and placement-role flags, detailed visual surfaces over simple collision planes, and multiple regional 3D sky scenes remain the following engine stage.
+The accepted structural topology/BVH remains fixed. Recomposition now temporarily removes all sector-group rendering and collision, then restores the same validated structural blueprint with compatible interior changes. Height-rich actual structural replacement, full composed-world validation/navigation, the surface editor and placement-role flags, detailed visual surfaces over simple collision planes, and multiple regional 3D sky scenes remain the following engine stage.
 
 ## Verification
 
@@ -67,6 +73,8 @@ node playable-test/tools/check-browser.mjs
 node playable-test/tools/check-soak.mjs
 node playable-test/tools/check-lifecycle.mjs
 node playable-test/tools/check-effects-browser.mjs
+node playable-test/tools/check-lighting-browser.mjs
+node playable-test/tools/check-deadline-browser.mjs
 node audio-previews/tools/check-audio.mjs
 node audio-previews/tools/check-browser.mjs
 node tools/build-pages.mjs
@@ -75,8 +83,6 @@ node tools/check-pages-browser.mjs
 PLAYABLE_URL=https://pipebrain.github.io/eigengott/playable-test/ node playable-test/tools/check-browser.mjs
 ```
 
-Core checks cover exactly-once identities, validated checkpoints, equipment compatibility, actual drops, atomic swap rejection, cluster expiry, shared Release, final-opponent precedence, armor speed in physical simulation, fixed 32 MiB memory, AI recovery and unchanged WAV bytes/no audio processing. Browser checks cover native entry/audio unlock, hover and button exchanges with rendered 3D previews, shared history isolation, non-resetting selection, GPU recovery, checkpoints, completion, damage feedback and resize.
+Core checks cover finite identities, atomic one-choice replacement, real collision deletion, falling, deadlines, safe landing, shared Release, final-opponent precedence, fixed 32 MiB memory, AI recovery, source assets and unchanged WAV bytes. Browser checks exercise native click selection, misses, timeout, portrait layout, feedback isolation, recovery, checkpoints, death and resize. Pixel checks verify zero-light darkness, explicit sky illumination, AABB shadows, 128-light capacity, rocket transparency, smoke alpha and animated death frames.
 
-The recorded 30-second local Chrome/Metal soak used a 196 m arena with six opponents, completing six transitions / seven encounters with 51 shots and 48 hits. Its final frame window measured CPU median/p95 0.50/1.10 ms and frame p95 16.8 ms. These are development soak samples recorded alongside other validation, not an isolated benchmark, a device-wide performance guarantee or physical-device acceptance. See `evidence/verification.json` and screenshots.
-
-Additional armor/effect conversion inputs, GPL notices, hashes and available Blender/MM3D authoring sources accompany the [stock effects pack](licenses/index.html). Pixel checks verify real dynamic illumination, partial alpha, additive coverage, wall occlusion and animated death frames. Native-pointer checks verify fragment/equipment drags, invalid-slot rollback and model rotation.
+Performance evidence is recorded in `evidence/verification.json`; it is a local development sample, not physical-device acceptance. Existing engine, benchmark, encounter and title applications remain unchanged. Stock media inputs, GPL notices, authoring sources and hashes accompany [licenses](licenses/index.html).

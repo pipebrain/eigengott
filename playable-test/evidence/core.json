@@ -2,14 +2,15 @@
   "passed": true,
   "checks": [
     "Finite identities, exactly-once deaths, validated checkpoints and slot compatibility",
-    "One-gun economy, twelve real equipment drops, single-fragment transfer, armor effects and atomic clearance rollback",
-    "Deletion expires originating loot; shared Release clears the pool and stages existing surviving identities without population growth",
+    "Outside-in collapse deletes actual collision and rendered groups; anchor clump is last and the real player falls into a fully empty void",
+    "One random complete-item replacement is atomic and clearance checked; rejected or missed choices preserve equipment, unchosen loot is lost, landing causes no damage and reconstruction releases the next encounter",
+    "Unselected loot times out at five seconds; deletion and reconstruction each finish within five simulation/real-time seconds, independent of legacy slow-motion controls",
     "Final opposing death completes the finite run and prevents another ordinary Recomposition",
     "Armor movement multiplier affects real WASM physics; memory remains fixed at 32 MiB",
     "Stuck recovery chooses a clear direction, holds it briefly and keeps live actor motion finite",
     "NPC and own-player death models remain through MD3 clips, emit particles/lights, then finish once",
     "Stock red/yellow armor and shard MD3s, transparent smoke and additive weapon stages retain validated source data",
-    "User WAV files preserved byte-for-byte; playback has no rate ramp, detune or DSP effects"
+    "User WAV files preserved byte-for-byte; only aggressive gain crossfading is applied, with no rate ramp, detune or timbral effects"
   ],
   "audio": [
     {

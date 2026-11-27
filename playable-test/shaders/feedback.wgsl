@@ -7,6 +7,6 @@
  let uv=feedbackCoordinates(i.uv,frame.view.z,frame.feedback.z,frame.eyeTime.w,frame.play.y);var old=vec3f(0);if all(uv>=vec2f(0))&&all(uv<vec2f(1)){old=textureLoad(previous,vec2i(uv*frame.render.xy),0).rgb;}
  let decay=exp(-.69314718*frame.view.z/max(.05,frame.feedback.y));let line=labyrinth(maze,i.uv*vec2f(textureDimensions(maze)),frame.play.y,frame.eyeTime.w);
  // Keep clean actors out of history. Loot temporarily admits subdued architecture.
- let fresh=mix(vec3f(1),vec3f(.76,.79,.70),.3)*line*select(.55,.22,loot);let scene=select(vec3f(0),solid.rgb*.11,loot);
+ let fresh=select(vec3f(line),vec3f(.76,.79,.70)*line*.55,frame.style.x>.5);let scene=select(vec3f(0),solid.rgb*.11,loot&&frame.style.x>.5);
  return vec4f(max(old*decay,max(fresh,scene)),1);
 }

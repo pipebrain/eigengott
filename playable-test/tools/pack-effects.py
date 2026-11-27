@@ -10,7 +10,7 @@ for file in sorted(archive.namelist()):
   pk=zipfile.ZipFile(io.BytesIO(archive.read(file)))
   for name in pk.namelist():
    p=name.lower()
-   if p.endswith('.shader') or p.startswith(('models/powerups/armor/','gfx/','textures/oafx/','textures/oa/muzzle/')) or (p.startswith(('models/weapons','textures/sfx/')) and p.endswith(('.tga','.jpg','.png'))):vfs[p]=pk.read(name)
+   if p.endswith('.shader') or p.startswith(('models/powerups/armor/','gfx/','textures/oafx/','textures/oa/muzzle/','textures/flares/','models/ammo/')) or (p.startswith(('models/weapons','textures/sfx/')) and p.endswith(('.tga','.jpg','.png'))):vfs[p]=pk.read(name)
 # Reuse only the existing converter's parser definitions, without its file-writing main.
 source=Path('encounter-test/tools/pack-openarena.py').read_text();tree=ast.parse(source)
 for node in tree.body:
@@ -54,7 +54,7 @@ def stages(shader):
   b=re.search(r'blendfunc\s+([^\n\r{}]+)',section,re.I);blend=(b[1].lower().strip() if b else '')
   mode='add' if blend=='add' or 'gl_one gl_one' in blend or 'gl_src_alpha gl_one'==blend else 'alpha' if blend and blend!='filter' and 'gl_dst_color' not in blend else 'cutout' if 'alphafunc' in section.lower() else 'opaque'
   color=re.search(r'rgbgen\s+const\s*\(\s*([\d.]+)\s+([\d.]+)\s+([\d.]+)',section,re.I);rot=re.search(r'tcmod\s+rotate\s+(-?[\d.]+)',section,re.I);scroll=re.search(r'tcmod\s+scroll\s+(-?[\d.]+)\s+(-?[\d.]+)',section,re.I)
-  result.append({'frames':frames,'fps':float(amap[1]) if amap else 0,'mode':mode,'unlit':mode=='add','color':[float(color[i]) for i in [1,2,3]] if color else [1,1,1],'rotate':float(rot[1]) if rot else 0,'scroll':[float(scroll[1]),float(scroll[2])] if scroll else [0,0]})
+  result.append({'frames':frames,'fps':float(amap[1]) if amap else 0,'mode':mode,'billboard':bool(re.search(r'deformvertexes\s+autosprite\b',body,re.I)),'unlit':mode=='add','color':[float(color[i]) for i in [1,2,3]] if color else [1,1,1],'rotate':float(rot[1]) if rot else 0,'scroll':[float(scroll[1]),float(scroll[2])] if scroll else [0,0]})
  if not result:
   key=image(shader)
   if key:result=[{'frames':[key],'fps':0,'mode':'cutout','unlit':False,'color':[1,1,1],'rotate':0,'scroll':[0,0]}]
@@ -71,7 +71,7 @@ def pick(terms):
  candidates=[p for p in vfs if p.endswith(('.tga','.jpg','.png')) and any(t in p for t in terms)]
  candidates.sort(key=lambda p:(not p.startswith('gfx/'),len(p),p));assert candidates,terms
  return candidates[0]
-sprite_paths={'smoke':'gfx/misc/smokepuff3.tga' if 'gfx/misc/smokepuff3.tga' in vfs else pick(['smokepuff','smoke']), 'glow':pick(['flare.tga','flare.jpg']), 'spark':pick(['spark']), 'blood':pick(['blood']), 'flash':pick(['muzzley.tga'])}
+sprite_paths={'smoke':'gfx/misc/smokepuff3.tga' if 'gfx/misc/smokepuff3.tga' in vfs else pick(['smokepuff','smoke']), 'glow':pick(['flare.tga','flare.jpg']), 'spark':pick(['spark']), 'blood':pick(['blood']), 'flash':pick(['muzzley.tga']), 'rocket':'textures/flares/wide.tga'}
 sprites={k:{'image':image(p),'mode':'alpha' if k in ['smoke','blood'] else 'add','source':p} for k,p in sprite_paths.items()}
 # Quake-style black-background smoke may depend on additive rather than file alpha.
 for key in ['smoke','blood']:

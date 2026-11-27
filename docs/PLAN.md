@@ -71,3 +71,11 @@ The user supplied three audio placeholders and explicitly prohibited audio effec
 ## Playable presentation revision
 
 2026-11-27: stock armor / sprite assets, transparent and additive materials, shadowless event lights, MD3 death animations, and native pointer drag-to-Self loot in `playable-test/`. Add standalone procedural audio auditions in `audio-previews/`; keep runtime recordings unchanged until the user selects replacements. See [engine direction](ENGINE_PLAN.md#playable-presentation-revision--2026-11-27) and [sound design](SOUND_DESIGN.md).
+
+## Playable falling-void revision — 2026-11-27
+
+The latest approved direction supersedes drag-to-Self loot, lightmap shading and shadowless-only lighting in `playable-test/`. Collapse deletes all occupied groups outside-in within five real seconds; the captured body/weapon clump disappears last. Rendering and triangle collision share one visibility mask. The player then falls through pure monochrome DOS-maze feedback while three random drops drift near the POV. One successful click replaces a complete item, including its installed fragment; misses are harmless and unchosen loot is lost. A five-second timeout preserves gear. Restore the clearance-checked landing clump beneath the original XY, land without damage, then rebuild outward within five seconds and share Release. The full structural blueprint remains validated and fixed; this does not implement new structural topology generation.
+
+Use 128 runtime lights by default, no baked or sampled lightmaps and no ambient fill. Environmental emitters follow group visibility. Explicit cutaway sky emission defaults to zero. Coarse player/object AABB shadows are allowed; no triangle shadow maps. Rocket flare/thrust shader references must resolve and blend additively. H retains independent lighting, shadow, phase and performance controls. Labels reuse the title study's glyph style, with one-pixel orthogonal corners and at most two leader segments.
+
+Only the supplied audio placeholders remain integrated. The newly authorized processing is a short gain-only ambient/warning crossfade; rate, pitch and timbre are unchanged. Procedural auditions remain separate. See [sound design](SOUND_DESIGN.md) and [current playable test](../playable-test/README.md).

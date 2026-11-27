@@ -57,7 +57,7 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
   await evaluate('window.__playable.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1,lootSlow:1});window.__playable.clearEncounter()');
   await wait('window.__playable.snapshot().sweep.completed===1');
-  assert.equal(await evaluate('(()=>{const s=window.__playable.snapshot();return s.game.run.remaining===10&&s.game.encounter===2&&s.game.inventory.length===1&&s.game.loot.items.length===0&&s.sweep.fields===0&&s.audio.processing==="none";})()'),true);
+  assert.equal(await evaluate('(()=>{const s=window.__playable.snapshot();return s.game.run.remaining===10&&s.game.encounter===2&&s.game.inventory.length===1&&s.game.loot.items.length===0&&s.sweep.fields===0&&s.audio.processing==="gain-crossfade-only";})()'),true);
   checks.push('Playable run: finite ledger, one-gun loot / Release, shared maze and original-speed audio configuration');
   await cmd('Page.navigate',{url:new URL('audio-previews/',base).href});await wait('document.querySelectorAll("audio").length===9');
   assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);assert.equal(await evaluate('[...document.querySelectorAll("audio")].every(a=>a.paused&&a.preload==="none")'),true);

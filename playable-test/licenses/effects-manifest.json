@@ -3,8 +3,8 @@
   "releaseMD5": "9f353d96d7889c377349d692c3905e5b",
   "runtime": {
     "file": "../assets/effects.bin.gz",
-    "sha256": "289196a13bc38bf9046ffb8d12b4d0bcc9ad5d823000c3899c2e12db74701260",
-    "bytes": 2210164
+    "sha256": "ec5b870098c4d9d985795b829ed1755c7e6ead76ff18857d3d02d3de3034d6d2",
+    "bytes": 2304402
   },
   "originalInputs": [
     {
@@ -42,6 +42,10 @@
     {
       "path": "gfx/misc/smokepuff3.tga",
       "sha256": "974365b6a3a9e7badba1e577ecd3cad4c52bf9f1db950bb1b3bcac0cd8ef843a"
+    },
+    {
+      "path": "models/ammo/rocket/rocket.tga",
+      "sha256": "c4e6d74a38618226ecedc58ce306e9c995d9cbe0986550e781b2c9cef309e87d"
     },
     {
       "path": "models/powerups/armor/armor_red.md3",
@@ -258,6 +262,26 @@
     {
       "path": "scripts/weapon_shotgun.shader",
       "sha256": "dfb18fbf0d0295eb3bd25aebca271dfa9a65d67ef7bbe46929477b30f5402ba4"
+    },
+    {
+      "path": "textures/flares/flarey.tga",
+      "sha256": "60b8b1c095c44a97b8059004e60abf550a46abce76980b769a78005e797802d9"
+    },
+    {
+      "path": "textures/flares/lava.tga",
+      "sha256": "47bca573e9661d53f184b236bea81c8ed8ad1b6c9973906b942217cee59e55f8"
+    },
+    {
+      "path": "textures/flares/newflare.tga",
+      "sha256": "9d09fce1e6c21afaf3bff8a3828543d529287457ede0d3057046dfe99092b37e"
+    },
+    {
+      "path": "textures/flares/twilightflare.tga",
+      "sha256": "99e3dfeb81a5abc5c092f79ab246260e43c6085497612febfb4bacd44b49b10b"
+    },
+    {
+      "path": "textures/flares/wide.tga",
+      "sha256": "417b0df226f585dde59650e5f9e8c974ff3cb8b52d5ce1f814e5620ab747fb4e"
     },
     {
       "path": "textures/oa/muzzle/muz1.tga",
