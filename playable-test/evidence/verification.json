@@ -44,6 +44,7 @@
       "Last opposing death ends the finite run instead of starting another ordinary wave",
       "Damage reduces protection and health while driving the layered injury / directional feedback",
       "Supplied death recording plays once at original rate and pitch",
+      "All development weapons load on demand after the compact startup",
       "Portrait / landscape resizing rebuilds bounded maze and history targets without WebGPU errors"
     ]
   },

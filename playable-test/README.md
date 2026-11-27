@@ -12,7 +12,7 @@ A Self has a persistent identity and can die only once in the run ledger. Stagin
 
 ## Equipment and loot
 
-Default inventory is one equipped gun and three worn armor slots: helmet, torso and legs. Each item permits one installed fragment. The starting gun is a machinegun. Opponents initially distribute machinegun, shotgun and plasma archetypes; all thirteen imported weapons remain available through an explicit development inventory toggle.
+Default inventory is one equipped gun and three worn armor slots: helmet, torso and legs. Each item permits one installed fragment. The starting gun is a machinegun. Opponents initially distribute machinegun, shotgun and plasma archetypes; only those three weapon models load at startup. All thirteen imported weapons remain available through an explicit development inventory toggle, which prepares the additional media before enabling selection.
 
 Six original armor presets trade protection against movement and, for the heavy helmet, viewport restriction. Protection depletes under damage; injury persists through the current run. Five fragment prototypes provide tighter patterns, stronger/slower shots, thermal silhouettes, extra protection or lighter movement. Thermal rendering identifies visible living opposing models; it does not reveal actors through opaque geometry. It is a prototype heat tint, not a thermal simulation or completed AI darkness/perception system.
 

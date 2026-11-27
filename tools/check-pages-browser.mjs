@@ -4,6 +4,7 @@ import {execFileSync} from 'node:child_process';
 import {withBrowser,sleep} from '../dos-maze/tools/browser.mjs';
 const commit=execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),checks=[];
 await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
+  const startup=async expression=>{for(let n=0;n<600;n++){if(await evaluate(expression))return;await sleep(100);}throw new Error('Network startup timed out: '+expression+' '+JSON.stringify(errors));};
   const base=new URL(process.env.PAGES_URL||`${origin}/_site/`);
   const buildResponse=await fetch(new URL(`build.json?check=${Date.now()}`,base));assert.equal(buildResponse.status,200);
   const build=await buildResponse.json();assert.equal(build.commit,commit);
@@ -44,14 +45,14 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await evaluate('window.__sweep.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1});window.__sweep.trigger()');await wait('window.__sweep.snapshot().sweep.completed===1');
   assert.equal(await evaluate('(()=>{const s=window.__sweep.snapshot().sweep;return !s.lootOpen&&s.fields===0&&s.remainingBodies===0&&s.enemies.length>0&&s.enemies.every(e=>e.released&&e.release===s.release);})()'),true);
   checks.push('Procedural sweep: deployed identity, tools URL, worker preparation and shared field release');
-  await cmd('Page.navigate',{url:new URL('encounter-test/?test&tools=1',base).href});await wait('window.__encounter?.snapshot().ready&&!window.__encounter.snapshot().preparing');
+  await cmd('Page.navigate',{url:new URL('encounter-test/?test&tools=1',base).href});await startup('window.__encounter?.snapshot().ready&&!window.__encounter.snapshot().preparing');
   assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('window.__encounter.snapshot().build.commit'),commit);
   assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
   await evaluate('window.__encounter.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1});window.__encounter.targetFixture();window.__encounter.test.game.bots[0].health=1;window.__encounter.selectWeapon(2);window.__encounter.actions(1);window.__encounter.play(true);window.__encounter.actions(1)');
   await wait('window.__encounter.snapshot().sweep.completed===1');await evaluate('window.__encounter.actions(0);window.__encounter.play(false)');
   assert.equal(await evaluate('(()=>{const s=window.__encounter.snapshot();return s.settings.physicalModels&&s.game.encounter===2&&s.game.alive===3&&s.game.bodies===0&&s.sweep.fields===0&&s.media.characters===18&&s.media.weapons===13;})()'),true);
   checks.push('Interactive encounter: imported roster, physical envelopes, automatic combat / Recomposition and deployed identity');
-  await cmd('Page.navigate',{url:new URL('playable-test/?test&tools=1',base).href});await wait('window.__playable?.snapshot().ready&&!window.__playable.snapshot().preparing');
+  await cmd('Page.navigate',{url:new URL('playable-test/?test&tools=1',base).href});await startup('window.__playable?.snapshot().ready&&!window.__playable.snapshot().preparing');
   assert.equal(await evaluate('document.querySelector("#controls").hidden'),false);assert.equal(await evaluate('window.__playable.snapshot().build.commit'),commit);
   assert.equal(await evaluate('document.querySelector("[data-deployment-build]").dataset.deploymentBuild'),commit);
   await evaluate('window.__playable.configure({outSeconds:.5,backSeconds:.5,turnSeconds:.1,lootSlow:1});window.__playable.clearEncounter()');
