@@ -59,6 +59,9 @@ await withBrowser(async({origin,cmd,evaluate,wait,errors})=>{
   await wait('window.__playable.snapshot().sweep.completed===1');
   assert.equal(await evaluate('(()=>{const s=window.__playable.snapshot();return s.game.run.remaining===10&&s.game.encounter===2&&s.game.inventory.length===1&&s.game.loot.items.length===0&&s.sweep.fields===0&&s.audio.processing==="none";})()'),true);
   checks.push('Playable run: finite ledger, one-gun loot / Release, shared maze and original-speed audio configuration');
+  await cmd('Page.navigate',{url:new URL('audio-previews/',base).href});await wait('document.querySelectorAll("audio").length===9');
+  assert.equal(await evaluate('globalThis.__EIGENGOTT_BUILD.commit'),commit);assert.equal(await evaluate('[...document.querySelectorAll("audio")].every(a=>a.paused&&a.preload==="none")'),true);
+  checks.push('Separate audio auditions: original/A/B tracks load without autoplay or gameplay integration');
   const {identifier}=await cmd('Page.addScriptToEvaluateOnNewDocument',{source:'Object.defineProperty(document,"exitPointerLock",{value:undefined,configurable:true});Object.defineProperty(Element.prototype,"requestPointerLock",{value:undefined,configurable:true});'});
   for(const [app,handle]of [['engine-test','__ENGINE_TEST'],['engine-benchmark','__ARENA_BENCHMARK']]){
     await cmd('Page.navigate',{url:new URL(`${app}/?tools=1`,base).href});await wait(`window.${handle}?.ready`);

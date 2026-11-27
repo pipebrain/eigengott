@@ -1,5 +1,5 @@
 {
-  "date": "2026-11-26",
+  "date": "2026-11-27",
   "scope": "Local Chrome 158 / Metal automated checks; physical-device acceptance pending",
   "core": {
     "passed": true,
@@ -10,6 +10,8 @@
       "Final opposing death completes the finite run and prevents another ordinary Recomposition",
       "Armor movement multiplier affects real WASM physics; memory remains fixed at 32 MiB",
       "Stuck recovery chooses a clear direction, holds it briefly and keeps live actor motion finite",
+      "NPC and own-player death models remain through MD3 clips, emit particles/lights, then finish once",
+      "Stock red/yellow armor and shard MD3s, transparent smoke and additive weapon stages retain validated source data",
       "User WAV files preserved byte-for-byte; playback has no rate ramp, detune or DSP effects"
     ],
     "audio": [
@@ -35,7 +37,8 @@
     "checks": [
       "Finite run, one equipped gun, shared accepted DOS-maze generator and WebGPU startup",
       "Native combat entry unlocks raw audio; encounter clear releases the cursor and opens live 3D equipment previews",
-      "Mouse hover compares models; DOM fragment transfer and weapon exchange preserve equipped-only inventory",
+      "Native drag transfers fragments and equipment onto the Self; incompatible body slots retain the original gear",
+      "The actual MD3 Self rotates and body drop targets follow the projected geometry",
       "Player and equipment stay outside shared maze / architectural feedback history",
       "Watching/reopening the wave does not restart or pause the selection deadline",
       "GPU recovery preserves ledger, loadout, item pool and in-flight Recomposition",
@@ -43,7 +46,7 @@
       "New run and validated checkpoint restore preserve identities and equipped fragments",
       "Last opposing death ends the finite run instead of starting another ordinary wave",
       "Damage reduces protection and health while driving the layered injury / directional feedback",
-      "Supplied death recording plays once at original rate and pitch",
+      "Own-player death animation, particles and shadowless light precede the end panel; supplied death recording plays once at original rate and pitch",
       "All development weapons load on demand after the compact startup",
       "Portrait / landscape resizing rebuilds bounded maze and history targets without WebGPU errors"
     ]
@@ -64,29 +67,147 @@
     "cleared": 6,
     "encounters": 7,
     "remaining": 29,
-    "shots": 64,
-    "hits": 46,
+    "shots": 51,
+    "hits": 48,
     "cpu": {
       "samples": 600,
-      "median": 1.199999988079071,
-      "p95": 2,
-      "p99": 3.199999988079071,
-      "max": 11.799999982118607
+      "median": 0.5,
+      "p95": 1.0999999940395355,
+      "p99": 1.699999988079071,
+      "max": 3.2999999821186066
     },
     "frame": {
       "samples": 600,
       "median": 16.69999999999709,
-      "p95": 16.700000000004366,
+      "p95": 16.799999999999272,
       "p99": 16.80000000000291,
       "max": 16.80000000000291
     },
     "gpu": {
-      "scene": 0.334577,
-      "feedback": 0.20783,
-      "present": 0.602949,
+      "scene": 0.338162,
+      "feedback": 0.192247,
+      "present": 0.71278,
       "previews": 0,
-      "total": 1.145356
+      "total": 1.243189
     }
   },
-  "performanceContext": "Soak samples recorded during development validation, not an isolated benchmark or universal device budget."
+  "performanceContext": "Soak samples recorded during development validation, not an isolated benchmark or universal device budget.",
+  "effects": {
+    "passed": true,
+    "checks": [
+      "An event light changes actual world pixels above the static lightmap",
+      "Stock smoke has partial alpha; sprites stay outside architectural feedback",
+      "Additive flashes contribute light/color without opaque coverage or black rectangles",
+      "Depth-tested billboards remain occluded behind structural walls",
+      "MD3 death frames visibly animate before the dissolving model is removed"
+    ],
+    "lights": {
+      "off": {
+        "hash": 1811949681,
+        "nonzero": 928800,
+        "alpha": 59211000,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "on": {
+        "hash": 3203997046,
+        "nonzero": 928800,
+        "alpha": 59211000,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "count": 1
+    },
+    "transparency": {
+      "actor": {
+        "hash": 988451583,
+        "nonzero": 27443,
+        "alpha": 301141,
+        "partialAlphaPixels": 6949,
+        "width": 645,
+        "height": 360
+      },
+      "history": {
+        "hash": 1157966621,
+        "nonzero": 1625400,
+        "alpha": 0,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "hiddenActor": {
+        "hash": 566219845,
+        "nonzero": 0,
+        "alpha": 0,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "hiddenHistory": {
+        "hash": 1157966621,
+        "nonzero": 1625400,
+        "alpha": 0,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      }
+    },
+    "additive": {
+      "hash": 396451575,
+      "nonzero": 9450,
+      "alpha": 0,
+      "partialAlphaPixels": 0,
+      "width": 645,
+      "height": 360
+    }
+  },
+  "audioPreviews": {
+    "integrated": false,
+    "files": 6,
+    "fileChecks": {
+      "passed": true,
+      "files": 6,
+      "format": "48 kHz / stereo / 16-bit PCM",
+      "clippedSamples": 0,
+      "integrated": false
+    },
+    "browser": {
+      "passed": true,
+      "url": "http://127.0.0.1:54570/audio-previews/",
+      "checks": [
+        "Nine original / A / B audition controls load without autoplay",
+        "Native browser playback decodes ambient, warning and death previews at original playback rate",
+        "One audition plays at a time; stop resets all tracks",
+        "Portrait page fits without horizontal overflow"
+      ],
+      "tracks": [
+        {
+          "src": "http://127.0.0.1:54570/audio-previews/assets/ambient-loop-a.wav",
+          "duration": null,
+          "rate": 1,
+          "loop": true,
+          "error": null,
+          "playing": 1
+        },
+        {
+          "src": "http://127.0.0.1:54570/audio-previews/assets/warn-loop-a.wav",
+          "duration": null,
+          "rate": 1,
+          "loop": true,
+          "error": null,
+          "playing": 1
+        },
+        {
+          "src": "http://127.0.0.1:54570/audio-previews/assets/death-a.wav",
+          "duration": 1.984,
+          "rate": 1,
+          "loop": false,
+          "error": null,
+          "playing": 1
+        }
+      ]
+    }
+  }
 }

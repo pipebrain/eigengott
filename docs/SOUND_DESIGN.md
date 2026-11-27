@@ -22,3 +22,9 @@ A future normalized intermission progression can drive the chosen audio envelope
 This proposal is **not enabled or implemented** in the playable milestone. Await a later explicit request before adding audio effects.
 
 References: [Web Audio buffer sources and playback rate](https://www.w3.org/TR/webaudio/#AudioBufferSourceNode), [AudioWorklet](https://www.w3.org/TR/webaudio/#AudioWorklet).
+
+## Standalone procedural auditions — 2026-11-27
+
+The user authorized generating previews separately before integrating them. `audio-previews/` contains original/A/B listening controls and six procedural candidates derived from the recordings' envelope and spectral statistics. The offline generator, output levels, source hashes and reproduction notes are included there. See [audio preview notes](../audio-previews/README.md) and [listen on Pages](https://pipebrain.github.io/eigengott/audio-previews/).
+
+These previews do not replace any runtime file. The game continues playing the original placeholders at rate 1.0 and detune 0 with no DSP effects. Selecting an audition and any later in-engine processing remain separate user decisions.

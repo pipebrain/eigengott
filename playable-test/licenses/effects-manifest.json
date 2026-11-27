@@ -1,0 +1,299 @@
+{
+  "upstream": "OpenArena 0.8.8",
+  "releaseMD5": "9f353d96d7889c377349d692c3905e5b",
+  "runtime": {
+    "file": "../assets/effects.bin.gz",
+    "sha256": "289196a13bc38bf9046ffb8d12b4d0bcc9ad5d823000c3899c2e12db74701260",
+    "bytes": 2210164
+  },
+  "originalInputs": [
+    {
+      "path": "gfx/2d/bloodspew.tga",
+      "sha256": "1cbc4732c6aac5b231dc3b16ea8e1d4f4f6cd03722339d85db3b1eae2a35a912"
+    },
+    {
+      "path": "gfx/fx/detail/d_met.tga",
+      "sha256": "294a1ea8c14073ab71e7f8b372640a80b0dcc6f58e63f07c38356446794547d8"
+    },
+    {
+      "path": "gfx/fx/detail/d_met2.tga",
+      "sha256": "25ec0e561a0a58f311f4a1542731f18e8c20899040776b14e2b6434ba86b2b09"
+    },
+    {
+      "path": "gfx/fx/flares/wide.tga",
+      "sha256": "417b0df226f585dde59650e5f9e8c974ff3cb8b52d5ce1f814e5620ab747fb4e"
+    },
+    {
+      "path": "gfx/fx/spec/gunmetal.tga",
+      "sha256": "06c80fa4119aa3a6c02fcb0bdf9836a237bdf6e401281865752b61514de7be5f"
+    },
+    {
+      "path": "gfx/fx/spec/robawt.tga",
+      "sha256": "68a24ef9c984e0b087d5a57ba8e9c82da5709f506939dedc4799b30ce2ba78e4"
+    },
+    {
+      "path": "gfx/fx/spec/spots.tga",
+      "sha256": "af106305f67bf02deaf143d85d0f95e13de9b5375e2519bdfb805ebd21d87c78"
+    },
+    {
+      "path": "gfx/misc/flare.jpg",
+      "sha256": "19cb54a1f489b1ed475caed16f24034c257bf2a0560763190bfeb1c0ed7e2380"
+    },
+    {
+      "path": "gfx/misc/smokepuff3.tga",
+      "sha256": "974365b6a3a9e7badba1e577ecd3cad4c52bf9f1db950bb1b3bcac0cd8ef843a"
+    },
+    {
+      "path": "models/powerups/armor/armor_red.md3",
+      "sha256": "8da337c009ef55c95259c49c3e3031a6048407e65ffd8ddd04ac27bac5c7b6c1"
+    },
+    {
+      "path": "models/powerups/armor/armor_yel.md3",
+      "sha256": "3c8755ceae779f3047b0ef7db86686daf081088e1a29a1ab975b2cdbb58d8f2b"
+    },
+    {
+      "path": "models/powerups/armor/redarmor.tga",
+      "sha256": "6bc0171bfc0f016a52d39207d9f7eb8f3d91dce2d387a0b0ee7ac1c1e34716de"
+    },
+    {
+      "path": "models/powerups/armor/shard.jpg",
+      "sha256": "fc50e8fd860b7a6f47a037e0be22485386a635a91a03d3ae7c54db0c641e25bd"
+    },
+    {
+      "path": "models/powerups/armor/shard.md3",
+      "sha256": "00dc4b5e31b4797c6372763c353731e9e71b42f8217f7b5b6c150be5960cfdc0"
+    },
+    {
+      "path": "models/powerups/armor/shard_env.jpg",
+      "sha256": "38838afd17df852725535dfa720b940c6e0fc413518b9eefe02a2b52e2d33510"
+    },
+    {
+      "path": "models/powerups/armor/yellowarmor.tga",
+      "sha256": "fa8d8409b0db3ad4ea8932f324396c0e3fdf8b092e55b2c8b1081eeeb4a2f1d1"
+    },
+    {
+      "path": "models/weapons/nailgun/glow.tga",
+      "sha256": "425b241a4642045bce423c1cd256f3e3f9849788cc75a673d3c1f8a795df4ef1"
+    },
+    {
+      "path": "models/weapons/nailgun/nailfire.tga",
+      "sha256": "dd6cc00903fc0da6b1114689840a8ee878e9c7e5269b79b442777c2b07611124"
+    },
+    {
+      "path": "models/weapons/nailgun/nailgun.tga",
+      "sha256": "cb2dc5aea32b7df31ebbb40765324752bd3b4c38c8c3051713a9f7b65fde28cb"
+    },
+    {
+      "path": "models/weapons/nailgun/shineycrys.tga",
+      "sha256": "72fc87d3da88a0b6c601cc8d8797c3e6427a20c29a45e5c673e24f157a3cfab2"
+    },
+    {
+      "path": "models/weapons/proxmine/prox.tga",
+      "sha256": "14e3c679dda7abe38913d5cb419bbce39932aa48003975596cdfe4f881ed9e0b"
+    },
+    {
+      "path": "models/weapons/vulcan/muzzy.tga",
+      "sha256": "71b7a19ccedf323403acd8f0b64d41e2744ef9f90708ab5ae61fb6df5971a3aa"
+    },
+    {
+      "path": "models/weapons/vulcan/skin.tga",
+      "sha256": "2a3d2b4121c05bb179daa986eff5e0fbaa128cc3d2a9a23ec0159688fc6e0f1a"
+    },
+    {
+      "path": "models/weapons2/bfg/bfgbody.tga",
+      "sha256": "e0e3a0d5ccc5bfff3fd061f82d4d5ea1315ee9f949763e86b5235bf9c9f6e60a"
+    },
+    {
+      "path": "models/weapons2/bfg/bfgtube.tga",
+      "sha256": "2039b04a1016dda30a044b770e5ab4b7ee93a618a30febf96cd83ed4d090a8b3"
+    },
+    {
+      "path": "models/weapons2/bfg/bubbles.tga",
+      "sha256": "ff684d383698d85972ba1165cfb19d73117ce6c0116535ecba3e798243a7e81b"
+    },
+    {
+      "path": "models/weapons2/bfg/f_bfg2.tga",
+      "sha256": "ca83017ee94d01ec4ad805cb1914a25cdee9128d021d0214a5a798d5a7c48060"
+    },
+    {
+      "path": "models/weapons2/bfg/f_bfg3.tga",
+      "sha256": "ff86518cfb554dd1455bd2acbb8f768b27520a6c2e572cc2cfba1573e24685f7"
+    },
+    {
+      "path": "models/weapons2/gauntlet/gauntlet1.tga",
+      "sha256": "475e371d098e76727b086691c9d74bfd53117a555052129d38861e374a0bf8fd"
+    },
+    {
+      "path": "models/weapons2/gauntlet/gauntlet2.tga",
+      "sha256": "6fb3ade81db26795e2ecdff204b35eb303544cce852578eedcdaa01c5001eba8"
+    },
+    {
+      "path": "models/weapons2/grapple/hook.tga",
+      "sha256": "2cf1b39e00dbc1e1f326e0c0c3edde6184772b3de8d89ce7b2b2407b0412b5dd"
+    },
+    {
+      "path": "models/weapons2/grapple/hookgun.tga",
+      "sha256": "b6ad687de46a4b37f9c92a5070494e4faafa3a0ccda56df5cef9ca9bb488f9de"
+    },
+    {
+      "path": "models/weapons2/grapple/hookspec.tga",
+      "sha256": "37797d4ca44c2419a64f88701da6d285804f680e83a5514550d8ba1dc9b0a574"
+    },
+    {
+      "path": "models/weapons2/grenadel/newgren.tga",
+      "sha256": "2d61caa889800b5297b1bcb5a632b2c4928debdc78de472acb915b80e0afc1d0"
+    },
+    {
+      "path": "models/weapons2/lightning/muzzle1.tga",
+      "sha256": "d914104e2e8539105a9653d27881bde77af8bbcb75b5e0ae70c59c3cadf0b3ab"
+    },
+    {
+      "path": "models/weapons2/lightning/muzzle2.tga",
+      "sha256": "94f035ef4b419ddd0e839a1877645d6662afcf941e5ec591a4a02f9fb652f1d4"
+    },
+    {
+      "path": "models/weapons2/lightning/muzzle3.tga",
+      "sha256": "4c001d6655ce5c4df5baab21e3c61f0be5db6d582840a4f88b009cca69855346"
+    },
+    {
+      "path": "models/weapons2/lightning/skinlightning.tga",
+      "sha256": "e7cee7417d54d632d211198f70d6c73fae56ae9b72d979e967b77fe75e62a609"
+    },
+    {
+      "path": "models/weapons2/machinegun/f_machinegun2.tga",
+      "sha256": "918f6f6e9d8c1813468a8d5c0199eb86bdc218fb55f82ac23cb89681b2a96e55"
+    },
+    {
+      "path": "models/weapons2/machinegun/f_machinegun3.jpg",
+      "sha256": "a8c16dec5fccf5d368d4da78c233cebbf4c0377ab5baa7493386837c2bfed1cb"
+    },
+    {
+      "path": "models/weapons2/machinegun/mgun.tga",
+      "sha256": "61dfdd5ebe4476aa97a3a99a0ef2a01d8fd07d97e255b2d71598348ef32dfeaf"
+    },
+    {
+      "path": "models/weapons2/machinegun/sight.tga",
+      "sha256": "cc2a5c142dde302e8da085d0fd00d8f337ca679e5ae9eab670e0eda51ca36d52"
+    },
+    {
+      "path": "models/weapons2/plasma/skin.tga",
+      "sha256": "b38c0177056ec58c76318b6398f7c2ac34d04096e3cf7d4cf7be1b783f7a2c4f"
+    },
+    {
+      "path": "models/weapons2/railgun/f_railgun2.jpg",
+      "sha256": "ce4185651927020f314553fbd7a1fae8cd4a21d387c7318a565a0292800423a7"
+    },
+    {
+      "path": "models/weapons2/railgun/scrolly.tga",
+      "sha256": "c7ea3870fd32f38768eeb7a62b2feae576c9cbc33ed9a1d9deba783e75ca2557"
+    },
+    {
+      "path": "models/weapons2/railgun/skin.tga",
+      "sha256": "63124ed65c0e3c0bdbf718246add301ba3c068094d55b640a675857be30389c7"
+    },
+    {
+      "path": "models/weapons2/rocketl/skin.tga",
+      "sha256": "fe9638fbbee7a6db2f51410bac518e73eaeda72948229747966e7a445c0b302d"
+    },
+    {
+      "path": "models/weapons2/shotgun/muzzley.tga",
+      "sha256": "15b567e047477b7e327f9f00a3e33c12f037ee7f1a47dd14facea3d52018a148"
+    },
+    {
+      "path": "models/weapons2/shotgun/shotgun.tga",
+      "sha256": "71d411f97fd1992ac1680deb05b3d8fa4c96846ad5251a3e7ce5c78aa772b2e3"
+    },
+    {
+      "path": "models/weapons2/shotgun/shotgun_laser.jpg",
+      "sha256": "8742fdb67ec041563ec05f2150cc5cb56cc2d878c2464cb718ec6a28b65b6716"
+    },
+    {
+      "path": "scripts/oanew.shader",
+      "sha256": "1040dcc755fc13e0028160c43c919533a67f2f56380921448389654be84078e0"
+    },
+    {
+      "path": "scripts/weapon_bfg.shader",
+      "sha256": "2c063eded5a94df05a728ab4f292daecb27256caaa11145e663ad10757a9bdc6"
+    },
+    {
+      "path": "scripts/weapon_chaingun.shader",
+      "sha256": "c2ed0c26fec7726906e9012d0a6b8684c72908bd755460e14ff3827ae2ef25e6"
+    },
+    {
+      "path": "scripts/weapon_gauntlet.shader",
+      "sha256": "fd3f85f891beb9630852d7b4a8be7b25b3a4aeafb356687abe4aabd4a6d0dc20"
+    },
+    {
+      "path": "scripts/weapon_grapple.shader",
+      "sha256": "37df246a699b28a0cb0275c6ab3d6789c78ae32f699e03febf2b687c38d2ddb6"
+    },
+    {
+      "path": "scripts/weapon_machinegun.shader",
+      "sha256": "586d8db081cb08d034c3591401910ef4110413f03b4c83118711237a7e25b0d8"
+    },
+    {
+      "path": "scripts/weapon_nailgun.shader",
+      "sha256": "4b16648a3d0c454b05f93f70c5ff0137d1d37c246b209362d520630ea55c2c87"
+    },
+    {
+      "path": "scripts/weapon_newmuzzle.shader",
+      "sha256": "41e157b608ef96466167d7bcff08ef1ddac2b903de33b6d244dde282dd793b72"
+    },
+    {
+      "path": "scripts/weapon_plasma.shader",
+      "sha256": "4963da9c170a5dac882726a43aa27fd378166f575b901f7403d530332c5a696b"
+    },
+    {
+      "path": "scripts/weapon_proxbomb.shader",
+      "sha256": "fdd356542a5db5699488732f1ba6f9f16536b041034ce11ec786433a51a00d7b"
+    },
+    {
+      "path": "scripts/weapon_railgun.shader",
+      "sha256": "6d97bbaf20875ccbf25b0cfc36f06d1baaba0a94b6e080506784941765474fcb"
+    },
+    {
+      "path": "scripts/weapon_rocketlauncher.shader",
+      "sha256": "bf9e9a135a60d39d0d63ebe3f8d2362e5c54b2c675d527c11bb0f7297b8f8d50"
+    },
+    {
+      "path": "scripts/weapon_shotgun.shader",
+      "sha256": "dfb18fbf0d0295eb3bd25aebca271dfa9a65d67ef7bbe46929477b30f5402ba4"
+    },
+    {
+      "path": "textures/oa/muzzle/muz1.tga",
+      "sha256": "57711f65f4c7c078e804ac763f1bfc551c576fa42f33b04b3cb6ca48b8b0d45b"
+    },
+    {
+      "path": "textures/oa/muzzle/muz2.tga",
+      "sha256": "2bc63754ca3f4977ea5afb715cd0955349319d41d51e449668a6bbd4891b34e4"
+    },
+    {
+      "path": "textures/oa/muzzle/muz3.tga",
+      "sha256": "981b379b466a86e9ffa59fc034b4b281ca7f3178d2257fc12171801cd8a86efb"
+    },
+    {
+      "path": "textures/oa/muzzle/muz4.tga",
+      "sha256": "cc1955bba3a3d94b3f4dc386e05bf5f69c7c77636799a621f389b9078ed2a3d6"
+    },
+    {
+      "path": "textures/oa/muzzle/muz5.tga",
+      "sha256": "c3dad2d6b2c38813701aaa02513d9e7cfe168876e25feaa45cde65a40e43c359"
+    },
+    {
+      "path": "textures/oa/muzzle/muz6.tga",
+      "sha256": "633a763283e59f3458c3bc35e190141e6556fc5e0b115f25889f445a5ef4509b"
+    },
+    {
+      "path": "textures/oa/muzzle/muz7.tga",
+      "sha256": "541118e0816fe53f61825f80ebee8424e29d0049fb6bf7aa4b26470e52b93813"
+    },
+    {
+      "path": "textures/oa/muzzle/muz8.tga",
+      "sha256": "958e7e18874c08a987c1012a2f4ab2b8512c7c7b2af35eebb2aa105e695d547a"
+    },
+    {
+      "path": "textures/oafx/spark1.tga",
+      "sha256": "15108ff80d7270596597baa03d865ed1a34247e154513d3485f4516ea7839e0a"
+    }
+  ]
+}

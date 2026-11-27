@@ -5,8 +5,8 @@ export function tag(part,name,a,b,t){const rows=part.tags[name];if(!rows?.length
 export function framePair(part,clip,time){if(!clip)return [0,0,0];let [start,count,loop,fps,reverse]=clip;count=Math.max(1,count);let f=Math.max(0,time)*Math.max(1,fps),i=Math.floor(f),t=f-i;const frame=n=>{if(n>=count)n=loop?count-loop+(n-count)%loop:count-1;if(reverse)n=count-1-n;return Math.max(0,Math.min(part.frames-1,start+n));};return [frame(i),frame(i+1),t];}
 export function actorPose(asset,weapon,entity,time){
  const meta=asset.meta,anim=meta.animations,dead=entity.dead,elapsed=dead?time-entity.deathAt:time-(entity.animStart||0),speed=Math.hypot(...(entity.velocity||[0,0,0]).slice(0,2)),crouch=entity.crouched;
- const lowerClip=dead?0:!entity.grounded?18:crouch?(speed>.1?13:23):speed>.1?(speed>2?15:14):22;
- const upperClip=dead?0:time-(entity.lastShot??-100)<.35?(entity.weapon===1?8:7):time-(entity.gestureAt??-100)<2?6:entity.weapon===1?12:11;
+ const lowerClip=dead?(entity.deathClip||0):!entity.grounded?18:crouch?(speed>.1?13:23):speed>.1?(speed>2?15:14):22;
+ const upperClip=dead?(entity.deathClip||0):time-(entity.lastShot??-100)<.35?(entity.weapon===1?8:7):time-(entity.gestureAt??-100)<2?6:entity.weapon===1?12:11;
  const lower=framePair(meta.parts.lower,anim[lowerClip],elapsed),upper=framePair(meta.parts.upper,anim[upperClip],dead?elapsed:time-(upperClip===7||upperClip===8?entity.lastShot:upperClip===6?entity.gestureAt:0));
  const scale=1/32,c=Math.cos(entity.yaw),s=Math.sin(entity.yaw),root=[s*scale,c*scale,0,0,-c*scale,s*scale,0,0,0,0,scale,0,...entity.p,1];root[14]+=asset.lift;
  const torso=multiply(root,tag(meta.parts.lower,'tag_torso',...lower));
@@ -14,7 +14,7 @@ export function actorPose(asset,weapon,entity,time){
  const parts=[{name:'lower',matrix:root,frames:lower},{name:'upper',matrix:upperWorld,frames:upper},{name:'head',matrix:head,frames:[0,0,0]}];let gun=null,muzzle=point(upperWorld,[24,-5,-2]),direction=[Math.sin(entity.yaw)*Math.cos(pitch),Math.cos(entity.yaw)*Math.cos(pitch),Math.sin(pitch)];
  if(weapon){const matrix=multiply(upperWorld,tag(meta.parts.upper,'tag_weapon',...upper));gun={matrix,parts:[{name:'main',matrix,frames:[0,0,0]}]};const w=weapon.meta.parts;
   if(w.barrel){const roll=(time-entity.lastShot<.3)?time*25:0,cr=Math.cos(roll),sr=Math.sin(roll),rotation=[1,0,0,0,0,cr,sr,0,0,-sr,cr,0,0,0,0,1];gun.parts.push({name:'barrel',matrix:multiply(multiply(matrix,tag(w.main,'tag_barrel',0,0,0)),rotation),frames:[0,0,0]});}
-  const flash=multiply(matrix,tag(w.main,'tag_flash',0,0,0));if(w.flash&&time-entity.lastShot<.06)gun.parts.push({name:'flash',matrix:flash,frames:[0,0,0],flash:true});muzzle=point(flash,[0,0,0]);direction=[matrix[0],matrix[1],matrix[2]];const len=Math.hypot(...direction)||1;direction=direction.map(v=>v/len);
+  const flash=multiply(matrix,tag(w.main,'tag_flash',0,0,0));if(!dead&&w.flash&&time-entity.lastShot<.06)gun.parts.push({name:'flash',matrix:flash,frames:[0,0,0],flash:true});muzzle=point(flash,[0,0,0]);direction=[matrix[0],matrix[1],matrix[2]];const len=Math.hypot(...direction)||1;direction=direction.map(v=>v/len);
  }
  return {parts,gun,muzzle,direction};
 }

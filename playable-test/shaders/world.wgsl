@@ -12,7 +12,7 @@ struct Output { @location(0) world:vec4f,@location(1) actor:vec4f }
  let body=(i.flags&4u)!=0u;let state=groups[min(i.group,arrayLength(&groups)-1)];if !body&&state.x==0u{discard;}if !body&&frame.view.w>.5&&i.n.z<-.8{discard;}
  let base=textureLoad(palette,vec2i(i32(i.material),0),0).rgb;var illumination=vec3f(.18,.16,.135);
  if i.uv.x>=0{illumination=textureSampleLevel(lightmap,nearest,i.uv,0).rgb;}else{for(var j=0u;j<arrayLength(&lights);j++){let delta=lights[j].position.xyz-i.p;let d=dot(delta,delta);illumination+=lights[j].color.rgb*lights[j].color.a*max(0.0,dot(normalize(i.n),normalize(delta)))/(1.0+d*.22);}}
- var color=base*illumination*i.ao;if (i.flags&1u)!=0u{color=base;}
+ illumination+=dynamicLighting(i.p,i.n);var color=base*illumination*i.ao;if (i.flags&1u)!=0u{color=base;}
  if !body {let tint=array<vec3f,6>(vec3f(.95,1,.95),vec3f(1,.95,.84),vec3f(.86,.95,1),vec3f(1,.88,.88),vec3f(.96,1,.83),vec3f(.83,.91,.85));color*=tint[state.z%6u];}
  let ring=exp(-abs(length(i.p.xy-frame.fold.xy)-frame.sweep.y)*.7);if frame.sweep.x==2.0||frame.sweep.x==4.0 {color+=vec3f(.13,.17,.13)*ring*frame.sweep.w;}
  let fog=1-exp(-length(frame.eyeTime.xyz-i.p)*.006);color=mix(color,vec3f(.009,.01,.009),fog);if frame.palette.x>.5{color=vec3f(dot(color,vec3f(.299,.587,.114)));}

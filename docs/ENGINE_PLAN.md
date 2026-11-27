@@ -276,3 +276,11 @@ Proceed in `playable-test/`, preserving all accepted applications. Implement the
 Use the user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` unprocessed at original speed and pitch. **Do not implement audio effects.** The deferred stretching/ramping proposal and audio ownership are recorded in [SOUND_DESIGN.md](SOUND_DESIGN.md).
 
 Subsequent engine work remains: height-rich Structural Recomposition with synchronized collision/navigation/rendering and protected support; the surface workbench and wall/floor/ceiling placement permissions; detailed visual surfaces over simple structural collision planes; and multiple simple, region-selected 3D sky scenes. These are not claimed as completed by the equipment milestone. Full narrative death transfer/endings and production armor attachment/animation remain follow-up gameplay work.
+
+## Playable presentation revision — 2026-11-27
+
+The user approved updating only `playable-test/`: stock OpenArena sprites and alpha/additive material stages, shadowless event lighting, restored MD3 death presentation, then drag-to-player equipment using the stock armor pickup models. Dead entities remain rendered through their selected death clip, dissolve with particles and emit a short point light before removal. Own-player death lowers the first-person camera safely and delays the end panel until presentation finishes. Identity/death accounting remains immediate and exactly once.
+
+The loot interface uses the actual selected MD3 Self, projected body targets, separately draggable fragments, compatible-target highlighting and atomic clearance-checked drops. The stock red/yellow armor pickups are placeholders for armor roles; modular worn armor authoring is not implied. GPU geometry/textures, particles, sprites and lights remain bounded, recoverable and excluded from world history where appropriate. Full legacy Quake shader-language fidelity and dynamic shadows are not introduced.
+
+Procedural sound candidates are generated separately in `audio-previews/` for audition. Do not integrate them without the user's selection. The current runtime audio and deferred processing design remain documented in [SOUND_DESIGN.md](SOUND_DESIGN.md).

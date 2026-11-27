@@ -67,3 +67,7 @@ Next: Structural Recomposition with actual walls/floors/ceilings/ramps/openings 
 Build a separate `playable-test/`: finite Self ledger and checkpoints, one equipped gun, armor/mod exchanges through a timed 3D loot interface, shared maze/history feedback, damage feedback and bounded AI recovery. Preserve the accepted encounter and engine apps. See [ENGINE_PLAN.md](ENGINE_PLAN.md#separate-playable-milestone-equipment-and-a-finite-run).
 
 The user supplied three audio placeholders and explicitly prohibited audio effects in this milestone. Deferred speed/pitch/stretch-ramping design: [SOUND_DESIGN.md](SOUND_DESIGN.md). Height-rich structural replacement, surface authoring/joining and multiple sky scenes follow the equipment slice.
+
+## Playable presentation revision
+
+2026-11-27: stock armor / sprite assets, transparent and additive materials, shadowless event lights, MD3 death animations, and native pointer drag-to-Self loot in `playable-test/`. Add standalone procedural audio auditions in `audio-previews/`; keep runtime recordings unchanged until the user selects replacements. See [engine direction](ENGINE_PLAN.md#playable-presentation-revision--2026-11-27) and [sound design](SOUND_DESIGN.md).

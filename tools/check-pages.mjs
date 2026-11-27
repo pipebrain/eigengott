@@ -29,5 +29,7 @@ assert.ok(files.has('arena-fold-2/wave.wasm'));assert.ok(files.has('arena-fold-2
 assert.ok(files.has('arena-sweep/engine.wasm'));assert.ok(files.has('arena-sweep/worker.js'));assert.ok(files.has('arena-sweep/shaders/objects.wgsl'));
 for(const file of ['engine.wasm','worker.js','media-worker.js','assets/catalog.json','licenses/index.html','licenses/manifest.json'])assert.ok(files.has('encounter-test/'+file));
 for(const file of ['engine.wasm','shaders/labyrinth.wgsl','preview.js','assets/ambient-loop.wav','assets/warn-loop.wav','assets/death.wav'])assert.ok(files.has('playable-test/'+file));
-assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','encounter-test','playable-test','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
+for(const file of ['assets/effects.bin.gz','shaders/sprites.wgsl','shaders/lighting.wgsl','licenses/source-effects.zip','licenses/armor-authoring.zip'])assert.ok(files.has('playable-test/'+file));
+for(const file of ['assets/manifest.json','assets/ambient-loop-a.wav','assets/warn-loop-b.wav','assets/death-a.wav'])assert.ok(files.has('audio-previews/'+file));
+assert.deepEqual((await readdir(root)).sort(),['build.json','deployment.js','dos-maze','engine-benchmark','engine-test','arena-fold','arena-fold-2','arena-sweep','encounter-test','playable-test','audio-previews','index.html','main.js','manifest.json','style.css','vector-labyrinth'].sort());
 console.log(JSON.stringify({passed:true,build:manifest.build.short,applications:manifest.applications,files:manifest.files.length,bytes:manifest.files.reduce((sum,f)=>sum+f.bytes,0)},null,2));

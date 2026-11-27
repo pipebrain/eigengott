@@ -2,9 +2,9 @@ name: Playable equipment milestone checks
 on:
   push:
     branches: [main]
-    paths: ['playable-test/**', '.github/workflows/playable-tests.yml']
+    paths: ['playable-test/**', 'audio-previews/**', '.github/workflows/playable-tests.yml']
   pull_request:
-    paths: ['playable-test/**', '.github/workflows/playable-tests.yml']
+    paths: ['playable-test/**', 'audio-previews/**', '.github/workflows/playable-tests.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -33,3 +33,4 @@ jobs:
       - name: Verify media, character envelopes, weapons, routes and automatic encounters
         run: |
           node playable-test/tools/check-core.mjs
+          node audio-previews/tools/check-audio.mjs

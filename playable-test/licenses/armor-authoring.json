@@ -1,0 +1,23 @@
+{
+  "revision": 951,
+  "files": [
+    {
+      "path": "armor.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newarmor/armor.blend",
+      "bytes": 143396,
+      "sha256": "90e9b897cfc33304bcb389bae2d1728b69c93dea4c9ca6574b233678fcfef224"
+    },
+    {
+      "path": "armorshard.blend",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newarmor/armorshard.blend",
+      "bytes": 122520,
+      "sha256": "6ae0e7e292824461e9cb9c255bc648255cbc46a28d46ba34ad8e481264d4a244"
+    },
+    {
+      "path": "newshard.mm3d",
+      "url": "https://openarena.ws/svn/!svn/bc/951/source/assets/models/newarmor/newshard.mm3d",
+      "bytes": 10248,
+      "sha256": "739d3cb4ee18ef99b727cf340d6e6b7a136c7cd64c91c0d4695b9f8710fde4e4"
+    }
+  ]
+}
