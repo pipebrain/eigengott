@@ -58,6 +58,7 @@ jobs:
           node encounter-test/tools/check-media.mjs
           node encounter-test/tools/check-core.mjs
           node playable-test/tools/check-core.mjs
+          node playable-test/tools/check-structure.mjs
           node audio-previews/tools/check-audio.mjs
           node dos-maze/tools/check-generator.mjs
           node dos-maze/tools/check-animation.mjs

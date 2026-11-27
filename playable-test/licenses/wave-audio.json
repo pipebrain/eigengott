@@ -1,0 +1,25 @@
+{
+  "upstream": "OpenArena 0.8.8",
+  "releaseMD5": "9f353d96d7889c377349d692c3905e5b",
+  "samples": [
+    {
+      "file": "../assets/wave-delete.wav",
+      "upstreamPath": "sound/world/teleout.wav",
+      "sha256": "4fb3fbf7d6314a74366830ae80aa248c20212319ed42edd6e050be06ab3c1c12",
+      "bytes": 48444
+    },
+    {
+      "file": "../assets/wave-insert.wav",
+      "upstreamPath": "sound/world/telein.wav",
+      "sha256": "c6360f76f5edc0adbaf76aec2c87ad778149a8320c6e5eeeda15eb44f95ad208",
+      "bytes": 122188
+    },
+    {
+      "file": "../assets/wave-release.wav",
+      "upstreamPath": "sound/items/respawn1.wav",
+      "sha256": "870c57ef07eb82cb7bc4b1853a2f40a6177ff19fa13e00a9ba47798452d6c512",
+      "bytes": 26348
+    }
+  ],
+  "conversion": "none; original WAV bytes"
+}

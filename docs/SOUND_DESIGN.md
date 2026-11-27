@@ -32,3 +32,8 @@ These previews do not replace any runtime file. The game continues playing the o
 ## Approved gain crossfade — 2026-11-27
 
 For the falling-void playable revision, the user authorized aggressive crossfading of the original ambient and warning placeholders. Use a 180 ms gain envelope in each direction; keep loop source continuity across Collapse/Release, playback rate 1 and detune 0. This narrowly supersedes the former prohibition on all envelopes. No time stretching, ramped playback speed, filters, pitch changes or generated auditions are integrated. The deferred stretching/ramping design above remains a proposal.
+
+
+## Approved positional wave cues — 2026-11-27
+
+The user explicitly approved OpenArena transition/energy samples for the restored sector waves. The playable test copies original `world/teleout.wav`, `world/telein.wav` and `items/respawn1.wav` without modifying the recordings. Deletion/insertion/release events place them at actual world coordinates with listener-relative HRTF panning and distance attenuation. Cap at eight wave voices, throttle dense sector events to 55 ms and cancel stale playback across pause/reset/recovery. H controls wave enablement and gain. This adds spatial playback only; it does not authorize processing the user's placeholders or integrating procedural auditions. Source inputs, hashes and GPL notices accompany [wave audio](../playable-test/licenses/wave-audio.json).

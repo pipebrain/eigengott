@@ -10,10 +10,7 @@ pub fn validate(a:&mut Arena){
  let mut visited=[false;CELLS];let mut queue=[0usize;CELLS];
  for id in 0..cells{
   if a.cells[id].open==0{continue}let cell=a.cells[id];let x=id%n;let y=id/n;
-  for p in [a.grid(x,y,false),a.grid(x+1,y,false),a.grid(x+1,y+1,false),a.grid(x,y+1,false)]{
-   let p=p.point();let f=cell.floor[0]*p.x+cell.floor[1]*p.y+cell.floor[2];let c=cell.ceiling[0]*p.x+cell.ceiling[1]*p.y+cell.ceiling[2];
-   if !f.is_finite()||!c.is_finite()||c-f<2.0||(f-p.z).abs()>0.0001||(c-(a.room_height as f32/1024.0-p.z)).abs()>0.0001{a.errors|=BAD_SECTOR}
-  }
+  for (xx,yy) in [(x,y),(x+1,y),(x+1,y+1),(x,y+1)]{let p=a.grid(xx,yy,false).point();let f=cell.floor[0]*p.x+cell.floor[1]*p.y+cell.floor[2];let c=cell.ceiling[0]*p.x+cell.ceiling[1]*p.y+cell.ceiling[2];if !f.is_finite()||!c.is_finite()||c-f<2.0||(f-p.z).abs()>0.0001||(c-a.grid(xx,yy,true).point().z).abs()>0.0001{a.errors|=BAD_SECTOR}}
   for e in 0..4{
    let xx=x as i32+[0,1,0,-1][e];let yy=y as i32+[-1,0,1,0][e];
    let expected=if xx>=0&&yy>=0&&xx<n as i32&&yy<n as i32&&a.cells[yy as usize*n+xx as usize].open!=0{yy*n as i32+xx}else{-1};
@@ -60,6 +57,5 @@ pub fn validate(a:&mut Arena){
    hit|=segment_hit(b.p[edge],b.p[(edge+1)%3],t.p[0],t.p[1],t.p[2],true).is_some();
   }if hit{crossings+=1}true
  });}a.intersections=crossings;a.intersection_pairs=pairs;if crossings>0{a.errors|=INTERSECTION}
- let id=2*n+n/2;let mut spawn=a.center(id);spawn.z=a.floor_at(id,spawn)+0.03;a.spawn=spawn;
- if !crate::physics::capsule_clear(a,spawn,v(0.0,0.0,1.0),1.75,0.28){a.errors|=CLEARANCE}
+ let mut found=false;for id in 0..n*n{if a.cells[id].open==0{continue}let x=id%n;let y=id/n;if x==0||y==0||x+1==n||y+1==n{continue}if ![-1i32,0,1].iter().all(|dy|[-1i32,0,1].iter().all(|dx|a.cells[(y as i32+dy)as usize*n+(x as i32+dx)as usize].open!=0)){continue}let mut p=a.center(id);p.z=a.floor_at(id,p)+0.035;if crate::physics::capsule_clear(a,p,v(0.0,0.0,1.0),1.75,0.28){a.spawn=p;found=true;break;}}if !found{a.errors|=CLEARANCE}
 }

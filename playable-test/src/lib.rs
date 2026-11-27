@@ -10,6 +10,7 @@ mod boxes;
 mod overlay;
 mod body;
 mod groups;
+mod terrain;
 static mut VOID:bool=false;
 static mut LANDING:V3=V3{x:0.0,y:0.0,z:0.0};
 use math::*;
@@ -265,3 +266,10 @@ unsafe fn actor_player()->Player{let mut p=Player::EMPTY;p.feet=v(ACTOR[0],ACTOR
  p.velocity=v(0.0,0.0,-2.0);p.grounded=false;PLAYER=p;VOID=false;ACCUMULATOR=0.0;render_state();1
 }}
 #[no_mangle]pub extern "C" fn engine_void_active()->u32{unsafe{VOID as u32}}
+
+#[no_mangle]pub extern "C" fn actor_clear_full()->u32{unsafe{if ACTIVE>=1{return 0}let p=actor_player();groups::all(||p.placement_clear(&ARENAS[0],p.feet))as u32}}
+
+#[no_mangle]pub extern "C" fn terrain_knots()->*const i32{unsafe{ARENAS[0].floor_x.as_ptr()}}
+#[no_mangle]pub extern "C" fn engine_apply_actor()->u32{unsafe{if ACTIVE>=1{return 0}let p=actor_player();if !p.placement_clear(&ARENAS[0],p.feet){return 0}PLAYER=p;ACCUMULATOR=0.0;render_state();1}}
+#[no_mangle]pub extern "C" fn terrain_tile()->u32{unsafe{ARENAS[0].tile as u32}}
+#[no_mangle]pub extern "C" fn terrain_height()->u32{unsafe{ARENAS[0].room_height as u32}}

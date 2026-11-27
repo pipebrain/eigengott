@@ -69,10 +69,10 @@
         "height": 360
       },
       "on": {
-        "hash": 3199911357,
-        "nonzero": 434742,
+        "hash": 3286703849,
+        "nonzero": 583309,
         "alpha": 59211000,
-        "rgbSum": 6053000,
+        "rgbSum": 14238398,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
@@ -147,34 +147,34 @@
       "height": 360
     },
     "sky": {
-      "hash": 1478737007,
-      "nonzero": 457420,
-      "alpha": 50777895,
-      "rgbSum": 7444213,
+      "hash": 2155918458,
+      "nonzero": 343873,
+      "alpha": 55264110,
+      "rgbSum": 799441,
       "partialAlphaPixels": 0,
       "width": 645,
       "height": 360
     },
     "shadows": {
       "off": {
-        "hash": 1506867167,
-        "nonzero": 88156,
-        "alpha": 18415080,
-        "rgbSum": 184046,
+        "hash": 1063069406,
+        "nonzero": 90747,
+        "alpha": 20646075,
+        "rgbSum": 178638,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
       "on": {
-        "hash": 1623027897,
-        "nonzero": 87547,
-        "alpha": 18415080,
-        "rgbSum": 162056,
+        "hash": 73782525,
+        "nonzero": 90252,
+        "alpha": 20646075,
+        "rgbSum": 157773,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
-      "casters": 20
+      "casters": 34
     },
     "rocket": {
       "hash": 1874530415,
@@ -188,18 +188,18 @@
     "projectiles": [
       {
         "weapon": 4,
-        "hash": 1977491546,
-        "nonzero": 2643,
+        "hash": 258075939,
+        "nonzero": 2097,
         "alpha": 185130,
-        "rgbSum": 44491,
+        "rgbSum": 33490,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       },
       {
         "weapon": 9,
-        "hash": 2917408300,
-        "nonzero": 315216,
+        "hash": 4194907224,
+        "nonzero": 315220,
         "alpha": 0,
         "rgbSum": 5904615,
         "partialAlphaPixels": 0,
@@ -208,21 +208,22 @@
       },
       {
         "weapon": 12,
-        "hash": 1463121435,
-        "nonzero": 6715,
+        "hash": 3896557661,
+        "nonzero": 6556,
         "alpha": 423300,
-        "rgbSum": 457030,
+        "rgbSum": 436868,
         "partialAlphaPixels": 0,
         "width": 645,
         "height": 360
       }
     ],
     "stressTiming": {
-      "scene": 2.196675,
-      "feedback": 2.260382,
-      "present": 2.681792,
+      "sky": 0.12154,
+      "scene": 2.433629,
+      "feedback": 2.484462,
+      "present": 2.995288,
       "previews": 0,
-      "total": 7.1388490000000004
+      "total": 8.034919
     }
   },
   "realTimeDeadlines": {
@@ -231,9 +232,9 @@
       "Wave and loot deadlines use real frame time at an imposed five frames per second, independent of capped fixed-step physics"
     ],
     "phases": {
-      "collapseMs": 1123,
+      "collapseMs": 1120,
       "lootMs": 919,
-      "returnMs": 1024
+      "returnMs": 1026
     }
   },
   "lifecycle": {
@@ -250,31 +251,35 @@
     "passed": true,
     "seconds": 30,
     "cleared": 6,
+    "compositionRevision": 8,
+    "checkpointBytes": 144373,
     "encounters": 6,
     "remaining": 29,
-    "shots": 52,
-    "hits": 49,
+    "shots": 20,
+    "hits": 38,
     "cpu": {
       "samples": 600,
-      "median": 1.5999999940395355,
-      "p95": 2.5999999940395355,
-      "p99": 2.9000000059604645,
-      "max": 5.199999988079071
+      "median": 3,
+      "p95": 4.199999988079071,
+      "p99": 5.0999999940395355,
+      "max": 7.0999999940395355
     },
     "frame": {
       "samples": 600,
-      "median": 16.69999999999709,
+      "median": 16.700000000000728,
       "p95": 16.700000000000728,
       "p99": 16.799999999999272,
       "max": 16.80000000000291
     },
     "gpu": {
-      "scene": 0.240955,
-      "feedback": 0.255955,
-      "present": 0.937486,
+      "sky": 0.267245,
+      "scene": 0.830862,
+      "feedback": 0.795613,
+      "present": 1.694183,
       "previews": 0,
-      "total": 1.434396
-    }
+      "total": 3.587903
+    },
+    "scope": "Isolated local Chrome/Metal, 196 m, six NPCs, 65 initial Selves, repeated forced clears; final rolling 600-frame timing window. No other browser check ran concurrently."
   },
   "preservation": {
     "acceptedEngineBenchmarkFoldSweepEncounterAndTitleApps": "unchanged",
@@ -282,9 +287,298 @@
     "proceduralAudioPreviews": "not integrated"
   },
   "limits": [
-    "Structural blueprint remains fixed; group rendering and collision disappear/return together with compatible interior changes.",
+    "Structural generation retains the grid and footprint with a protected landing patch; stacked/spiral maps and population-driven partial structural persistence remain pending.",
+    "AI infighting and stuck recovery are prototypes; darkness does not yet affect AI perception and distance-maximized spawns do not guarantee line-of-sight safety.",
     "Point-light shadows use up to eight nearby AABBs per light, at most 128 casters; no world-mesh shadows.",
-    "128-light capacity check was functional; its timing sample ran alongside other browser checks and is not an isolated benchmark.",
-    "Sky emission is an explicit directional cutaway emitter; regional 3D sky scenes remain future work."
-  ]
+    "128-light pixel/stress check ran alongside other browser checks; its timing is functional evidence rather than an isolated benchmark.",
+    "Three fixed-resolution miniature sky scenes are prototype approximations; no recursive portals or production sky authoring.",
+    "Physical-device and longer play-session acceptance remain pending."
+  ],
+  "structuralCore": {
+    "passed": true,
+    "checks": [
+      "Small, medium and large layouts regenerate sealed connected geometry with real floor/ceiling variation, dark basins and sky ceilings; no lightmap charts or bake",
+      "Farthest reachable spawn placement spreads the default cohort across the whole arena; nearest-Self selection and recent-damage retaliation support infighting",
+      "A genuinely different structure preserves the complete landing clump, canonical height knots, sky roles and equipped player clearance",
+      "Full structural blueprints reproduce exactly for checkpoints instead of assuming the new seed alone reproduces a preserved patch",
+      "Low basin interiors have zero environmental light contribution; visible sky ceilings still block physical traces",
+      "Leak, binding, winding, intersection/capacity and malformed blueprint failures are rejected before activation",
+      "Zero height deviation produces a usable flat arena rather than classifying every cell as a dark basin",
+      "Original OpenArena wave recordings match their packaged provenance hashes"
+    ],
+    "samples": [
+      {
+        "seed": 11,
+        "hash": 167291791,
+        "cells": 168,
+        "minFloor": -2.7709960527718067,
+        "maxFloor": 1.72851556353271,
+        "heightSpan": 4.499511616304517,
+        "darkCells": 8,
+        "skyCells": 48,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 0,
+        "width": 22.75
+      },
+      {
+        "seed": 94,
+        "hash": 2263112593,
+        "cells": 164,
+        "minFloor": -2.7587890485301614,
+        "maxFloor": 2.2919923001900315,
+        "heightSpan": 5.050781348720193,
+        "darkCells": 29,
+        "skyCells": 44,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 0,
+        "width": 21.125
+      },
+      {
+        "seed": 291,
+        "hash": 3699162690,
+        "cells": 167,
+        "minFloor": -2.093750089406967,
+        "maxFloor": 1.2500000149011612,
+        "heightSpan": 3.3437501043081284,
+        "darkCells": 10,
+        "skyCells": 64,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 0,
+        "width": 19.5
+      },
+      {
+        "seed": 11,
+        "hash": 2992392200,
+        "cells": 562,
+        "minFloor": -2.6875,
+        "maxFloor": 3.0000001043081284,
+        "heightSpan": 5.687500104308128,
+        "darkCells": 31,
+        "skyCells": 201,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 1,
+        "width": 75
+      },
+      {
+        "seed": 94,
+        "hash": 2888607410,
+        "cells": 564,
+        "minFloor": -3.71875,
+        "maxFloor": 2.218750014901161,
+        "heightSpan": 5.937500014901161,
+        "darkCells": 70,
+        "skyCells": 176,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 1,
+        "width": 75
+      },
+      {
+        "seed": 291,
+        "hash": 4023478941,
+        "cells": 569,
+        "minFloor": -2.53125,
+        "maxFloor": 2.5937501192092896,
+        "heightSpan": 5.1250001192092896,
+        "darkCells": 65,
+        "skyCells": 176,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 1,
+        "width": 75
+      },
+      {
+        "seed": 11,
+        "hash": 4166894354,
+        "cells": 2127,
+        "minFloor": -3.1875,
+        "maxFloor": 3.5,
+        "heightSpan": 6.6875,
+        "darkCells": 130,
+        "skyCells": 678,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 2,
+        "width": 196
+      },
+      {
+        "seed": 94,
+        "hash": 3237150981,
+        "cells": 2130,
+        "minFloor": -3.71875,
+        "maxFloor": 3.5625,
+        "heightSpan": 7.28125,
+        "darkCells": 258,
+        "skyCells": 645,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 2,
+        "width": 196
+      },
+      {
+        "seed": 291,
+        "hash": 978421743,
+        "cells": 2119,
+        "minFloor": -3.21875,
+        "maxFloor": 3.125,
+        "heightSpan": 6.34375,
+        "darkCells": 169,
+        "skyCells": 647,
+        "leaks": 0,
+        "components": 1,
+        "errors": 0,
+        "profile": 2,
+        "width": 196
+      }
+    ],
+    "spawnSeparation": [
+      101.82745560237164,
+      72.00031830824675,
+      72.00009039963538
+    ]
+  },
+  "structuralBrowser": {
+    "passed": true,
+    "checks": [
+      "Native startup has connected height-rich geometry, dark basins, sealed regional sky ceilings and arena-wide spawns",
+      "New render/collision/navigation activate together only in the empty void, after full staging and staged-candidate device recovery; 3D wave curtains and bounded positional cues follow distinct sector positions",
+      "Outward return restores the new structure safely and releases a prevalidated spread cohort; checkpoint round-trip preserves the exact composed blueprint",
+      "A deliberately leaking next candidate is rejected while the current arena, player and GPU resources remain usable",
+      "Three distinct rendered miniature scenes respond to scaled camera movement and independently scrolling sky textures; a sealed ceiling samples the correct sky view at the actual world pixel",
+      "The small arena option generates and plays with the same spread, physics and structural validation contracts"
+    ],
+    "composition": {
+      "seed": 3473247572,
+      "hash": 2217050241,
+      "cells": 566,
+      "minFloor": -3.4375,
+      "maxFloor": 2.59375,
+      "heightSpan": 6.03125,
+      "darkCells": 84,
+      "skyCells": 179,
+      "leaks": 0,
+      "components": 1,
+      "errors": 0,
+      "fromHash": 2888607410,
+      "workerMs": 63.599999994039536,
+      "retries": 0,
+      "fallback": false
+    },
+    "sky": {
+      "scenes": [
+        {
+          "center": [
+            32,
+            38,
+            35,
+            255
+          ],
+          "hash": 3816361278,
+          "nonzero": 131072,
+          "alpha": 8355840,
+          "rgbSum": 4299815,
+          "partialAlphaPixels": 0,
+          "width": 256,
+          "height": 128
+        },
+        {
+          "center": [
+            39,
+            31,
+            25,
+            255
+          ],
+          "hash": 2565134723,
+          "nonzero": 131072,
+          "alpha": 8355840,
+          "rgbSum": 3898742,
+          "partialAlphaPixels": 0,
+          "width": 256,
+          "height": 128
+        },
+        {
+          "center": [
+            26,
+            29,
+            40,
+            255
+          ],
+          "hash": 23842653,
+          "nonzero": 131072,
+          "alpha": 8355840,
+          "rgbSum": 3869200,
+          "partialAlphaPixels": 0,
+          "width": 256,
+          "height": 128
+        }
+      ],
+      "moved": {
+        "center": [
+          32,
+          38,
+          35,
+          255
+        ],
+        "hash": 4054599385,
+        "nonzero": 131072,
+        "alpha": 8355840,
+        "rgbSum": 4296492,
+        "partialAlphaPixels": 0,
+        "width": 256,
+        "height": 128
+      }
+    },
+    "surface": {
+      "world": {
+        "center": [
+          80,
+          95,
+          86,
+          255
+        ],
+        "hash": 717060076,
+        "nonzero": 763997,
+        "alpha": 59211000,
+        "rgbSum": 16046801,
+        "partialAlphaPixels": 0,
+        "width": 645,
+        "height": 360
+      },
+      "scene": {
+        "center": [
+          80,
+          95,
+          86,
+          255
+        ],
+        "hash": 2703286056,
+        "nonzero": 131072,
+        "alpha": 8355840,
+        "rgbSum": 4743485,
+        "partialAlphaPixels": 0,
+        "width": 256,
+        "height": 128
+      }
+    },
+    "small": {
+      "width": 19.5,
+      "spawnDistances": [
+        21.278853545868696,
+        15.011995200024515,
+        15.008331019803634
+      ]
+    }
+  }
 }

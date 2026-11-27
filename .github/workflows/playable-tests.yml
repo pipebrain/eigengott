@@ -33,4 +33,5 @@ jobs:
       - name: Verify media, character envelopes, weapons, routes and automatic encounters
         run: |
           node playable-test/tools/check-core.mjs
+          node playable-test/tools/check-structure.mjs
           node audio-previews/tools/check-audio.mjs

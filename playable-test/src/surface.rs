@@ -30,50 +30,35 @@ pub fn quad(a:&mut Arena,p:[V3;4],d:[V3;4],normal:V3,ao:f32,mat:u32,flags:u32,lm
 }
 fn tangent(face:Face)->V3{let d=face.p[3].point()-face.p[0].point();v(d.x,d.y,0.0).unit()}
 fn project(face:Face,p:V3)->[f32;2]{if face.kind==2{[(p-face.p[0].point()).dot(tangent(face)),p.z]}else{[p.x,p.y]}}
-fn uv(face:Face,p:V3,density:f32,atlas:usize)->[f32;2]{let p=project(face,p);[(face.chart[0] as f32+p[0]*density-face.origin[0])/atlas as f32,(face.chart[1] as f32+p[1]*density-face.origin[1])/atlas as f32]}
+fn uv(_face:Face,_p:V3,_density:f32,_atlas:usize)->[f32;2]{[-1.0,-1.0]}
+
 fn world_point(a:&Arena,face:Face,u:f32,w:f32)->V3{
  if face.kind==2{let mut p=face.p[0].point()+tangent(face)*u;p.z=w;p}
  else{let c=a.cells[face.owner as usize];let f=if face.kind==0{c.floor}else{c.ceiling};v(u,w,f[0]*u+f[1]*w+f[2])}
 }
 pub fn mesh(a:&mut Arena){
  a.render_count=0;a.index_count=0;a.light_count=0;
- let density=a.density;let atlas=a.atlas_size;let mut shelf_x=0;let mut shelf_y=0;let mut row=0;
- // Explicit one-luxel guards keep nearest samples inside their parent chart.
- for i in 0..a.face_count{
-  let mut f=a.faces[i];let mut lo=[1e9f32;2];let mut hi=[-1e9f32;2];
-  for p in f.p{let q=project(f,p.point());for k in 0..2{lo[k]=lo[k].min(q[k]);hi[k]=hi[k].max(q[k]);}}
-  f.origin=[floor(lo[0]*density) as f32-1.0,floor(lo[1]*density) as f32-1.0];
-  let width=(ceil(hi[0]*density)-f.origin[0] as i32+2) as u32;let height=(ceil(hi[1]*density)-f.origin[1] as i32+2) as u32;
-  f.chart=[0,0,width,height];a.texels+=width*height;a.faces[i]=f;
- }
- let mut order=[0usize;MAX_FACES];for i in 0..a.face_count{order[i]=i;}
- if a.profile!=0{let faces=&a.faces;order[..a.face_count].sort_unstable_by(|x,y|faces[*y].chart[3].cmp(&faces[*x].chart[3]).then(faces[*y].chart[2].cmp(&faces[*x].chart[2])).then(x.cmp(y)));}
- for &i in &order[..a.face_count]{let [_,_,width,height]=a.faces[i].chart;
-  if width>atlas as u32||height>atlas as u32{a.errors|=CAPACITY;return}
-  if shelf_x+width>atlas as u32{shelf_x=0;shelf_y+=row;row=0}
-  if shelf_y+height>atlas as u32{a.errors|=CAPACITY;return}
-  a.faces[i].chart=[shelf_x,shelf_y,width,height];shelf_x+=width;row=row.max(height);
- }
+ let density=a.density;let atlas=a.atlas_size;a.texels=0;
  let mut scores=[u32::MAX;MAX_LIGHTS];let mut selected=[usize::MAX;MAX_LIGHTS];
- for i in 0..a.face_count{if a.faces[i].kind!=2{continue}let score=hash(a.seed^(i as u32).wrapping_mul(1777));
+ for i in 0..a.face_count{if a.faces[i].kind!=2||a.cells[a.faces[i].owner as usize].floor[3]>0.5{continue}let score=hash(a.seed^(i as u32).wrapping_mul(1777));
   for k in 0..a.requested_lights{if score<scores[k]{for j in (k+1..a.requested_lights).rev(){scores[j]=scores[j-1];selected[j]=selected[j-1]}scores[k]=score;selected[k]=i;break}}
  }
  // Larger benchmark fixtures keep one visible landmark ahead of the spawn.
  // The accepted small fixture retains its original exact light selection.
  if a.profile!=0{
   let mut nearest=usize::MAX;let mut distance=f32::MAX;
-  for i in 0..a.face_count{let f=a.faces[i];if f.kind!=2{continue}let center=(f.p[0].point()+f.p[2].point())*0.5;
+  for i in 0..a.face_count{let f=a.faces[i];if f.kind!=2||a.cells[f.owner as usize].floor[3]>0.5{continue}let center=(f.p[0].point()+f.p[2].point())*0.5;
    if center.y<a.spawn.y{continue}let d=(center-a.spawn).len2();if d<distance{distance=d;nearest=i;}
   }
   if nearest!=usize::MAX{if let Some(index)=selected[..a.requested_lights].iter().position(|i|*i==nearest){selected.swap(0,index);}else{selected[0]=nearest;}}
  }
  for i in selected[..a.requested_lights].iter().copied(){if i==usize::MAX{continue}let f=&mut a.faces[i];f.emitter=true;
-  let p=(f.p[1].point()+f.p[2].point())*0.5+f.normal*0.16-v(0.0,0.0,0.40);let material=match hash(i as u32^a.seed)%3{0=>223,1=>255,_=>31};let c=color(material);
-  a.lights[a.light_count]=Light{position:[p.x,p.y,p.z],radius:if a.profile==0{9.0}else{24.0},color:[c.x,c.y,c.z],intensity:7.0};a.light_count+=1;
+  let mut p=(f.p[0].point()+f.p[3].point())*0.5+f.normal*0.16;p.z+=2.2;let material=match hash(i as u32^a.seed)%3{0=>223,1=>255,_=>31};let c=color(material);
+  a.lights[a.light_count]=Light{position:[p.x,p.y,p.z],radius:8.0,color:[c.x,c.y,c.z],intensity:7.0};a.light_count+=1;
  }
  for i in 0..a.face_count{
   let f=a.faces[i];unsafe{CURRENT_OWNER=f.owner+1;}
-  if f.kind!=2{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,1.0,if f.kind==0{86}else{151},0,p.map(|p|uv(f,p,density,atlas)));continue}
+  if f.kind!=2{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,1.0,if f.kind==0{86}else{151},if f.kind==1&&a.cells[f.owner as usize].ceiling[3]>0.5{8|(((a.cells[f.owner as usize].ceiling[3]as u32)-1)<<4)}else{0},p.map(|p|uv(f,p,density,atlas)));continue}
   let left=f.p[0].point();let right=f.p[3].point();let top_left=f.p[1].point();let top_right=f.p[2].point();let dir=tangent(f);let length=(v(right.x,right.y,0.0)-v(left.x,left.y,0.0)).len();
   if a.detail==0{let p=f.p.map(|p|p.point());quad(a,p,[v(0.0,0.0,0.0);4],f.normal,0.9,119,0,p.map(|p|uv(f,p,density,atlas)));continue}
   let normal_us=[0.0,0.12,length-0.12,length,0.0,0.0,0.0];
@@ -91,7 +76,7 @@ pub fn mesh(a:&mut Arena){
   }}
   if f.emitter{
    let material=match hash(i as u32^a.seed)%3{0=>223,1=>255,_=>31};
-   let base=(top_left+top_right)*0.5-v(0.0,0.0,0.4);let r=dir*((length-0.5)*0.5);let up=v(0.0,0.0,0.028);
+   let base=(left+right)*0.5+v(0.0,0.0,2.2);let r=dir*((length-0.5)*0.5);let up=v(0.0,0.0,0.028);
    let front=[base-r-up,base-r+up,base+r+up,base+r-up];let displacement=[f.normal*0.10;4];
    quad(a,front,displacement,f.normal,1.0,material,EMISSIVE|DRESSING,front.map(|p|uv(f,p,density,atlas)));
    for e in 0..4{let n=(e+1)%4;let p=[front[e],front[n],front[n],front[e]];let d=[f.normal*0.10,f.normal*0.10,f.normal*0.05,f.normal*0.05];

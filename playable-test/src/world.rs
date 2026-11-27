@@ -51,6 +51,7 @@ pub const RIBBED:SurfacePreset=SurfacePreset{id:1,inward_relief:0.12,bottom_trim
 #[repr(C,align(16))]
 pub struct Arena{
  pub n:usize,pub profile:u32,pub atlas_size:usize,pub density:f32,pub detail:u32,pub requested_lights:usize,pub seed:u32,pub id:u32,pub errors:u32,pub ready:bool,pub tile:i32,pub room_height:i32,pub axis:bool,
+ pub floor_x:[i32;N+1],pub floor_y:[i32;N+1],pub ceil_x:[i32;N+1],pub ceil_y:[i32;N+1],
  pub cells:[Cell;CELLS],pub open_count:usize,
  pub vertices:[I3;MAX_VERTS],pub vertex_count:usize,pub tris:[Tri;MAX_TRIS],pub tri_count:usize,
  pub faces:[Face;MAX_FACES],pub face_count:usize,pub collision:[CollisionTri;MAX_TRIS],
@@ -64,12 +65,8 @@ pub struct Arena{
 impl Arena{
  pub fn grid(&self,x:usize,y:usize,top:bool)->I3{
   let xx=x as i32*self.tile-self.n as i32*self.tile/2;let yy=y as i32*self.tile-self.n as i32*self.tile/2;
-  let along=if self.axis{xx}else{yy};let floor=if self.profile==0{((along.abs()-3*self.tile)/4).max(0).min(1024)}else{
-   // Piecewise planar terraces: integer knots, continuous shared ramps.
-   let terrace=|q:i32| {let k=(q.abs()/self.tile).min(12);let rise=if k<4{0}else if k<8{k-4}else{4};rise*512};
-   terrace(xx)+terrace(yy)
-  };
-  I3{x:xx,y:yy,z:if top{self.room_height-floor}else{floor}}
+  let z=if top{self.room_height+self.ceil_x[x]+self.ceil_y[y]}else{self.floor_x[x]+self.floor_y[y]};I3{x:xx,y:yy,z}
+
  }
  pub fn center(&self,id:usize)->V3{let x=id%self.n;let y=id/self.n;let a=self.grid(x,y,false).point();let b=self.grid(x+1,y+1,true).point();(a+b)*0.5}
  pub fn floor_at(&self,id:usize,p:V3)->f32{let f=self.cells[id].floor;f[0]*p.x+f[1]*p.y+f[2]}
@@ -97,7 +94,7 @@ impl Arena{
   self.weld.fill(0);self.node_count=0;self.texels=0;self.rays=0;self.ray_steps=0;self.intersection_pairs=0;
   self.seed=seed;self.id=id;self.errors=0;self.ready=false;self.open_count=0;self.vertex_count=0;self.tri_count=0;self.face_count=0;self.render_count=0;self.index_count=0;self.light_count=0;self.wire_count=0;
   self.unmatched=0;self.nonmanifold=0;self.components=0;self.intersections=0;
-  self.tile=if profile==0{1536+(seed%3) as i32*128}else if profile==1{3072}else{4096};self.room_height=if profile==0{4608+((seed>>3)&3) as i32*256}else{12288};self.axis=(seed&8)!=0;
+  self.tile=if profile==0{1536+(seed%3) as i32*128}else if profile==1{3072}else{4096};self.room_height=if profile==0{4608+((seed>>3)&3) as i32*256}else{12288};self.axis=(seed&8)!=0;crate::terrain::prepare(self);
   for y in 0..n{for x in 0..n{
    let stripe=((x==4||x==8)&&y>0&&y<n-1&&y!=2&&y!=6&&y!=10)||((y==4||y==8)&&x>0&&x<n-1&&x!=2&&x!=6&&x!=10);
    let pillar=x==6&&y==6||((seed&1)!=0&&(x==2||x==10)&&(y==2||y==10));
@@ -109,8 +106,9 @@ impl Arena{
    let open=!(stripe||pillar||(fault==5&&y==n/2));let i=y*n+x;
    let a=self.grid(x,y,false).point();let dx=self.grid(x+1,y,false).point().z-a.z;let dy=self.grid(x,y+1,false).point().z-a.z;let size=self.tile as f32/1024.0;
    let f=[dx/size,dy/size,a.z-dx/size*a.x-dy/size*a.y,0.0];
-   self.cells[i]=Cell{open:open as u32,neighbors:[-1;4],floor:f,ceiling:[-f[0],-f[1],self.room_height as f32/1024.0-f[2],0.0]};if open{self.open_count+=1}
+   let ca=self.grid(x,y,true).point();let cx=self.grid(x+1,y,true).point().z-ca.z;let cy=self.grid(x,y+1,true).point().z-ca.z;let ceiling=[cx/size,cy/size,ca.z-cx/size*ca.x-cy/size*ca.y,0.0];self.cells[i]=Cell{open:open as u32,neighbors:[-1;4],floor:f,ceiling};
   }}
+  crate::terrain::occupy(self);if fault==5{for x in 0..n{self.cells[n/2*n+x].open=0;}}
   let dx=[0,1,0,-1];let dy=[-1,0,1,0];
   for y in 0..n{for x in 0..n{let i=y*n+x;if self.cells[i].open==0{continue}
    for edge in 0..4{let xx=x as i32+dx[edge];let yy=y as i32+dy[edge];if xx>=0&&yy>=0&&xx<n as i32&&yy<n as i32{let j=yy as usize*n+xx as usize;if self.cells[j].open!=0{self.cells[i].neighbors[edge]=j as i32}}}
@@ -120,12 +118,12 @@ impl Arena{
    for e in 0..4{if self.cells[i].neighbors[e]<0{let next=(e+1)%4;self.face([floor[e],ceil[e],ceil[next],floor[next]],2,i)}}
   }}
   if fault==1&&self.tri_count>0{self.tri_count-=1}
-  if fault==2{self.cells[2*n+n/2].ceiling=[0.0,0.0,-1.0,0.0]}
+  if fault==2{if let Some(c)=self.cells[..n*n].iter_mut().find(|c|c.open!=0){c.ceiling=[0.0,0.0,-100.0,0.0]}}
   if fault==3&&self.tri_count<MAX_TRIS{self.tris[self.tri_count]=self.tris[0];self.tri_count+=1}
-  if fault==4{self.cells[2*n+n/2].neighbors[1]=-1}
+  if fault==4{'outer:for c in self.cells[..n*n].iter_mut(){if c.open!=0{for e in 0..4{if c.neighbors[e]>=0{c.neighbors[e]=-1;break 'outer}}}}}
   if fault==6{self.errors|=CAPACITY}
   if fault==7{self.tris[0].ids[0]=MAX_VERTS as u32}
   if fault==8{self.tris[0].ids.swap(0,1)}
-  if fault==9{self.cells[2*n+n/2].ceiling[2]+=0.25}
+  if fault==9{if let Some(c)=self.cells[..n*n].iter_mut().find(|c|c.open!=0){c.ceiling[2]+=0.25}}
  }
 }

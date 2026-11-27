@@ -1,9 +1,12 @@
+// Highest support under the entire body footprint, including interior ramp knots.
+export function supportHeight(sim,nav,x,y,r=.34){return gridSupport(new DataView(sim.memory.buffer,sim.active_cells_ptr(),nav.n*nav.n*52),nav.n,nav.tile,nav.half,x,y,r);}
+function gridSupport(data,n,tile,half,x,y,r){const axes=(v)=>{const a=[v-r,v,v+r];for(let k=Math.ceil((v-r+half)/tile);k*tile-half<v+r;k++)a.push(k*tile-half);return a;};let high=-Infinity;for(const xx of axes(x))for(const yy of axes(y)){const gx=Math.floor((xx+half)/tile),gy=Math.floor((yy+half)/tile);if(gx<0||gy<0||gx>=n||gy>=n)return Infinity;const at=(gy*n+gx)*52;if(!data.getUint32(at,true))return Infinity;high=Math.max(high,data.getFloat32(at+20,true)*xx+data.getFloat32(at+24,true)*yy+data.getFloat32(at+28,true));}return high+.035;}
 // Immutable all-pairs next-hop tables are built in a worker after validation.
 // Clearance samples use the same WASM body envelope as live movement.
 export function buildNavigation(sim,profile=null,blockedCells=[]){
  const words=new Uint32Array(sim.memory.buffer,sim.bench_ptr(),16),n=words[1],stats=new Float32Array(sim.memory.buffer,sim.stats_ptr()+128,32),tile=stats[16]/n,half=stats[16]/2,data=new DataView(sim.memory.buffer,sim.active_cells_ptr(),n*n*52),blocked=new Set(blockedCells),ids=[],lookup=new Int32Array(n*n).fill(-1),positions=[];
  const floor=(x,y)=>{const gx=Math.floor((x+half)/tile),gy=Math.floor((y+half)/tile);if(gx<0||gy<0||gx>=n||gy>=n)return -Infinity;const id=gy*n+gx;if(!data.getUint32(id*52,true))return -Infinity;return data.getFloat32(id*52+20,true)*x+data.getFloat32(id*52+24,true)*y+data.getFloat32(id*52+28,true);};
- const at=(x,y)=>{const r=profile?.radius||.34;return [x,y,Math.max(...[[0,0],[-r,-r],[r,-r],[-r,r],[r,r]].map(([dx,dy])=>floor(x+dx,y+dy)))+.035];};
+ const at=(x,y)=>[x,y,gridSupport(data,n,tile,half,x,y,profile?.radius||.34)];
  const clear=p=>{if(!profile)return true;if(!p.every(Number.isFinite))return false;const a=new Float32Array(sim.memory.buffer,sim.actor_input(),32);a.fill(0);a.set([...p,0,0,0,0,0,0,0,profile.radius,profile.height,profile.eye||1.5625,.3,.1,0,0,0,0,.2,+profile.boxed,profile.eye||1.5625,profile.crouchHeight||1.25]);return !!sim.actor_clear();};
  for(let id=0;id<n*n;id++){if(!data.getUint32(id*52,true)||blocked.has(id))continue;const p=at((id%n+.5)*tile-half,(Math.floor(id/n)+.5)*tile-half);if(!clear(p))continue;lookup[id]=ids.length;ids.push(id);positions.push(...p);}
  const count=ids.length;if(!count)throw new Error('No navigation space fits the selected character envelope.');const points=new Float32Array(positions),edges=ids.map(()=>[]);

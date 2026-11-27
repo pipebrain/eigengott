@@ -8,7 +8,7 @@ A separate vanilla JS / raw WebGPU / Rust WebAssembly gameplay slice. The accept
 
 Enter a finite run with thirteen Selves, including the player, and three opposing Selves per encounter by default. Defeat opponents, select equipment during Recomposition, then re-enter combat after shared Release. H includes **Clear encounter → loot [dev]** for immediate equipment inspection, a firing lane, invulnerability, AI freeze, damage/reaction controls and model selection.
 
-A Self has a persistent identity and can die only once in the run ledger. Staging draws from living identities instead of creating an unlimited new population. Remaining population drives structural persistence through coherence: the existing compatible-interior wave affects progressively less architecture. The last opposing death completes the prototype run without another ordinary wave. Player death ends this prototype run. Narrative death transfer, the original final endings, multiplayer and production progression are later work; this test does not replace those design contracts.
+A Self has a persistent identity and can die only once in the run ledger. Staging draws from living identities instead of creating an unlimited new population. The compatible-interior comparison mode retains its coherence control. The structural mode currently replaces the complete arena outside the reserved landing clump; population-driven partial structural persistence remains later work. The last opposing death completes the prototype run without another ordinary wave. Player death ends this prototype run. Narrative death transfer, the original final endings, multiplayer and production progression are later work; this test does not replace those design contracts.
 
 ## Equipment and loot
 
@@ -16,7 +16,7 @@ Default inventory is one equipped gun and three worn armor slots: helmet, torso 
 
 Six original armor presets trade protection against movement and, for the heavy helmet, viewport restriction. Protection depletes under damage; injury persists through the current run. Five fragment prototypes provide tighter patterns, stronger/slower shots, thermal silhouettes, extra protection or lighter movement. Thermal rendering identifies visible living opposing models; it does not reveal actors through opaque geometry. It is a prototype heat tint, not a thermal simulation or completed AI darkness/perception system.
 
-After the encounter clears, a prepared outside-in Collapse deletes every occupied sector group from the outer arena toward the player's captured XY. Ordering varies within radial bands; the landing clump disappears last. Deletion applies to both rendering and triangle collision, including group-owned props and environmental emitters. Collapse lasts at most five real seconds.
+After the encounter clears, a worker generates and validates replacement structure and traversal tables. Its geometry, props and physically fitting spawn cohort are staged before a prepared outside-in Collapse deletes every occupied sector group from the outer arena toward the player's captured XY. Ordering varies within radial bands; the landing clump disappears last. Deletion applies to both rendering and triangle collision, including group-owned props and environmental emitters. Collapse lasts at most five real seconds.
 
 Once all groups are gone, the actual player falls under controlled gravity through the void. Only a few randomly sampled equipment drops drift near the POV: three by default, including a random weapon when one is available. Rendered MD3 models carry one-pixel orthogonal corner boxes, a single title-style label and a leader of at most two orthogonal segments. The accepted DOS-maze WASM supplies the monochrome field. The title study uses custom Gothic glyphs rather than a font file; the labels reuse its six custom glyphs and condensed serif fallback.
 
@@ -38,15 +38,15 @@ Injury uses a persistent red procedural edge layer; armor uses its preset tint a
 
 ## Dynamic-only lighting
 
-No lightmap is baked, uploaded or sampled by this playable renderer. World surfaces, props and animated bodies use runtime point emitters with no ambient/key/fill or fog illumination. With environmental emitters OFF, sky emission zero and no event light, world RGB is exactly black. Environmental lights disappear and return with their owning groups. Cutaway sky emission is explicit and defaults to zero; it is a simple directional sky emitter, not the later regional 3D skybox system.
+No lightmap is baked, uploaded or sampled by this playable renderer. World surfaces, props and animated bodies use runtime point emitters with no ambient/key/fill or fog illumination. With environmental emitters OFF, sky emission zero and no event light, world RGB is exactly black. Environmental lights disappear and return with their owning groups. Regional sky emission is explicit and defaults to 0.35. Sky openings use bounded runtime point emitters with their scene palette. Low-basin fixtures are omitted and nearby emitter radii are clipped before they reach basin interiors; event lights can still illuminate those areas.
 
-The default light budget and hard capacity are **128**. Short event and projectile lights take priority, followed by nearby environmental emitters. **Box shadows default ON:** up to 128 player/object AABBs, with eight nearby candidates per point light and bounded directional-sky tests. These are deliberately coarse occluders; world triangles do not cast shadows and mesh silhouettes are not traced. No shadow maps are allocated. Loot previews use a separate inspection point emitter so their models stay visible in the void. H exposes emitter, sky, box-shadow and light-budget controls.
+The default light budget and hard capacity are **128**. Short event and projectile lights take priority, followed by nearby environmental emitters. **Box shadows default ON:** up to 128 player/object AABBs, with eight nearby candidates per point light and an optional debug cutaway-sky test. These are deliberately coarse occluders; world triangles do not cast shadows and mesh silhouettes are not traced. No shadow maps are allocated. Loot previews use a separate inspection point emitter so their models stay visible in the void. H exposes emitter, sky, box-shadow and light-budget controls.
 
 Particles cap at 256 and sprite draws at 512. Rocket flare/thrust shader textures now resolve from the stock archive and use additive blending rather than opaque fallbacks. Declared projectile billboard stages use camera-facing sprites with their stock color/rotation, texture frames and derived surface bounds; solid rocket, grenade and mine geometry remains opaque. Material lookup normalizes legacy backslash paths. Clean characters, sprites, item previews and labels stay outside architectural history.
 
 ## Placeholder audio
 
-The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-byte unchanged, at playback rate 1 and detune 0. Ambient and warning use an aggressive **180 ms gain crossfade** at Collapse and Release; the loops are not stopped/restarted at those boundaries. The original death recording remains a one-shot. Pause, hidden-page suspension and explicit mute stop playback normally. No stretching, pitch shift, filters, reverb or procedural auditions are integrated. Existing OpenArena gameplay samples remain original recordings.
+The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-byte unchanged, at playback rate 1 and detune 0. Ambient and warning use an aggressive **180 ms gain crossfade** at Collapse and Release; the loops are not stopped/restarted at those boundaries. The original death recording remains a one-shot. Pause, hidden-page suspension and explicit mute stop playback normally. No stretching, pitch shift, filters, reverb or procedural auditions are integrated. Existing OpenArena gameplay samples remain original recordings. The newly authorized deletion, insertion and release cues are unmodified OpenArena teleport/respawn samples, positioned at actual sector events through HRTF panners. Wave playback caps at eight voices with a 55 ms event throttle; the total audio pool caps at nineteen voices. H controls wave sound and volume independently. Included source samples, hashes and provenance are in [wave audio notices](licenses/wave-audio.json).
 
 [Separate audio auditions](../audio-previews/) are still unintegrated. Deferred stretching/ramping is documented in [SOUND_DESIGN.md](../docs/SOUND_DESIGN.md).
 
@@ -62,13 +62,27 @@ The user's `ambient-loop.wav`, `warn-loop.wav` and `death.wav` remain byte-for-b
 
 Body envelopes remain character-specific and conservative. Armor adds bounded radius/height; movement penalties use a real WASM speed multiplier. Worker navigation uses the largest prototype armor allowance for each model. Held weapon/body selection must fit live structural and overlay collision. Bot recovery tries clear local directions and briefly retains a successful direction, with configurable reaction time and damage. It is not a complete botlib or balanced production AI.
 
-The accepted structural topology/BVH remains fixed. Recomposition now temporarily removes all sector-group rendering and collision, then restores the same validated structural blueprint with compatible interior changes. Height-rich actual structural replacement, full composed-world validation/navigation, the surface editor and placement-role flags, detailed visual surfaces over simple collision planes, and multiple regional 3D sky scenes remain the following engine stage.
+### Structural Recomposition
+
+The default now generates genuinely different room occupancy, partitions, openings, floor/ceiling heights and sky roles on the same sector grid and footprint. Small (~20 m), Medium (75 m) and Large (196 m) are selectable in H. Canonical shared height knots produce planar collision surfaces, ramp gradients and welded floor/ceiling seams. The landing clump preserves occupancy, height knots, props and sky roles. Generation rejects leaks, bad bindings/winding, intersections, capacity failures and insufficient physically traversable connectivity before Collapse. Bounded retries can fall back to open space outside the protected patch; failures retain the active arena and report the failing seed.
+
+Render geometry, triangle collision, navigation and emitter ownership switch together in the fully empty void. Return inserts the new groups outward from the original XY and activates the prevalidated NPC positions as their groups restore. Checkpoints store the full composed blueprint, actor state and props: a seed alone cannot reproduce a composition containing an older protected patch. H provides structural enablement, height deviation, dark-basin fraction, a deliberate leak-rejection fixture and diagnostics. A compatibility toggle retains the prior interior-only comparison mode.
+
+Every encounter places opposing Selves by greedy max-min sampling over all reachable navigation nodes, checking each actual body/weapon envelope and previous placements. It maximizes the next placement's distance from the existing cohort; it is not a global optimal-packing proof or a line-of-sight fairness guarantee. AI selects among all opposing Selves by distance and decaying recent damage, enabling infighting; H controls retaliation bias. AI still uses line of sight without light-aware stealth perception.
+
+### Regional 3D skies and wave presentation
+
+Three miniature box/pyramid scenes render to fixed 256 × 128 views. A scaled world camera supplies parallax; two small tiled cloud layers scroll independently. Sky-design reference: [id Software's Quake sky renderer](https://github.com/id-Software/Quake/blob/master/WinQuake/gl_warp.c). Geometry and textures here are original procedural approximations. Visible sky ceilings remain sealed collision surfaces, blocking actors and projectiles. Sky emission, coverage, scrolling, parallax and scene rendering have H controls. These are simple regional scenes, not portal-recursive or production sky authoring tools.
+
+Deletion and insertion events restore travelling 3D maze curtains and glow, with independent H effect/glow controls. There is no moving world architecture. Dynamic-only lighting, 128-light capacity, coarse box shadows and owned feedback remain intact. The surface editor, placement-role authoring, complex visual relief, stacked/spiral layouts, light-aware AI and population-driven partial structural persistence remain later work.
 
 ## Verification
 
 ```sh
 sh playable-test/tools/build-wasm.sh
 node playable-test/tools/check-core.mjs
+node playable-test/tools/check-structure.mjs
+node playable-test/tools/check-structure-browser.mjs
 node playable-test/tools/check-browser.mjs
 node playable-test/tools/check-soak.mjs
 node playable-test/tools/check-lifecycle.mjs
@@ -83,6 +97,6 @@ node tools/check-pages-browser.mjs
 PLAYABLE_URL=https://pipebrain.github.io/eigengott/playable-test/ node playable-test/tools/check-browser.mjs
 ```
 
-Core checks cover finite identities, atomic one-choice replacement, real collision deletion, falling, deadlines, safe landing, shared Release, final-opponent precedence, fixed 32 MiB memory, AI recovery, source assets and unchanged WAV bytes. Browser checks exercise native click selection, misses, timeout, portrait layout, feedback isolation, recovery, checkpoints, death and resize. Pixel checks verify zero-light darkness, explicit sky illumination, AABB shadows, 128-light capacity, rocket transparency, smoke alpha and animated death frames.
+Core checks cover finite identities, atomic one-choice replacement, real collision deletion, falling, deadlines, safe landing, shared Release, final-opponent precedence, fixed 32 MiB memory, AI recovery, source assets and unchanged WAV bytes. Browser checks exercise native click selection, misses, timeout, portrait layout, feedback isolation, recovery, checkpoints, death and resize. Structural checks cover all three sizes, exact protected geometry, full-blueprint reproduction, sealed sky traces, dark-basin light exclusion, spread spawns and NPC retaliation. Browser checks also cover atomic replacement, rejected candidates, distinct miniature skies, parallax, cloud scrolling and Small play. Pixel checks verify zero-light darkness, explicit sky illumination, AABB shadows, 128-light capacity, rocket transparency, smoke alpha and animated death frames.
 
 Performance evidence is recorded in `evidence/verification.json`; it is a local development sample, not physical-device acceptance. Existing engine, benchmark, encounter and title applications remain unchanged. Stock media inputs, GPL notices, authoring sources and hashes accompany [licenses](licenses/index.html).

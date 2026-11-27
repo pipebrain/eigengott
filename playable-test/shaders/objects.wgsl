@@ -11,5 +11,5 @@ fn lit(i:Surface)->vec3f{let color=i.color.rgb*(dynamicLighting(i.p,i.n));return
  let kind=i.flags>>24;let key=i.flags&16777215u;let hit=select(0.0,frame.effects.y,u32(frame.effects.x)==key&&kind==1u);let show=frame.effects.z>.5;
  if kind==1u&&hit<=0.0&&!show{discard;}
  let coords=vec2f(i.p.x+i.p.y,i.p.z);let noise=hash(floor(coords*70.0)+floor(frame.eyeTime.w*24.0));let line=step(.80,fract(coords.y*31.0+noise*.2));let mazeLine=labyrinth(maze,coords*72.0,frame.play.y,frame.eyeTime.w);let alpha=min(.65,frame.effects.w*(select(.10,.45,kind==1u)+hit*.7+select(0.0,.2,show))*(.2+mazeLine*.8)*select(.25,1.0,noise>.35));
- var o:Output;o.world=vec4f(0);o.actor=vec4f(vec3f(.7,.82,.71)*alpha,alpha);return o;
+ let wave=kind>=3u;let waveAlpha=select(alpha,min(.65,frame.sweep.w*(.1+mazeLine*.5)*select(.4,1.0,noise>.35)),wave);var o:Output;o.world=vec4f(0);o.actor=vec4f(select(vec3f(.7,.82,.71),vec3f(1),wave)*waveAlpha,waveAlpha);return o;
 }
