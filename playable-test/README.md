@@ -20,7 +20,7 @@ After the encounter clears, the equipment interface releases mouse capture and d
 
 Armor previews are placeholder geometry. Production interchangeable worn armor meshes, hand inspection animations and helmet construction remain later work. Mod installation reports a development status message as requested.
 
-The pool belongs to defeated Selves in the current encounter. Items expire when their originating cluster is deleted; protected/surviving-cluster options remain until shared Release. Opponents disappear instead of leaving corpse meshes in this test. Watching the wave with **L** hides the interface; reopening does not reset its deadline. Selection ends at the same fixed boundary that closes the intermission and releases all fields/enemies.
+The pool belongs to defeated Selves in the current encounter. Items expire when their originating cluster is deleted; protected/surviving-cluster options remain until shared Release. Opponents disappear instead of leaving corpse meshes in this test. Watching the wave with **L** hides the interface; reopening does not reset its deadline. Selection ends at the same fixed boundary that closes the intermission and releases all fields/enemies. The page attempts to restore mouse capture automatically after a normally played encounter; browsers that require another gesture display the Enter button. Opening H cancels automatic recapture.
 
 Simulation and the wave run at 0.35 speed during selection by default. Mouse/UI and preview rotation remain responsive. The debug loop HUD shows remaining real-time selection seconds. This loot-screen direction replaces the proposed physical pickup and run-to-item warning phase.
 
