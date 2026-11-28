@@ -1,76 +1,63 @@
-# Level generator M5
+# Level generator M6
 
-[Open generator](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/) · [Roadmap](../docs/LEVEL_GENERATOR.md)
+[Open level test](https://pipebrain.github.io/eigengott/level-generator/) · [Build menu](https://pipebrain.github.io/eigengott/) · [Design](../docs/LEVEL_GENERATOR.md)
 
-A structural blockout prototype with 6, 9 or 12 rooms, a main route, random branches and loops, curved and straight corridors, donut cores and posts. Corridor targets remain seeded random **4–12 m**, with permitted local curve widening inside that range. Room sizes, corridor lengths and branch counts vary by seed.
+A strictly structural blockout generator. M6 replaces the previous curved/donut layouts with **orthogonal geometry throughout**, including room sectors, corridor turns, traps, columns and the blockout sky scenes. Floors and ceilings are flat; steps use real vertical risers. No invisible ramps, special donut-room generator, fixtures, textures, trim or decorative world polygons.
 
-M4 adds independent flat room floor/ceiling sectors, small reachable platforms and escapable step-down pits, 2 m inaccessible platforms and 4 m lethal pits. Red means lava/heat; green means radiation. Some donut cores are damaging full-height liquid-fall boundaries surrounded by liquid pits. These are existing structural surfaces, without decorative meshes, liquid tessellation, fixtures, trim or textures. Hazard point lights have corresponding colors. All other surfaces remain grey.
+## Layout rules
 
-Stairs use actual risers, straight flights, broad **16 m flat turning landings**, matching room entry heights and independently **sloped ceilings over the flights**. Ramps may curve. Turning stair corridors remain orthogonal. Current half-flight risers are at most 0.15625 m; supported limits remain 0.25 m step and 0.2 grade. There is no invisible ramp.
+The maximum placement grid is **12×12 cells**. Internal room sectors are separate from that grid. Select automatic sizing or a fixed size up to 12, and 6/9/12/16 initial room cells. Adjacent room pairs may combine, so the final room count can be lower than the requested cell count. Combined rooms retain their contributing cell identities.
 
-Doors use grey structural leaves. All four types—up, down, horizontal split and vertical split—share exact rendering/SAT boxes. They open automatically for the manual player or AI walker, hold near a Self and reopen rather than close through an occupied swept volume. The v0.1.3 snapshot already provided the dynamic collision overlay; M4 reuses it without changing the WASM controller. Doors retract into enclosing solid boundaries; no separate frames or pockets are dressed onto the mesh.
+Every room joins the corridor network. A complete hallway network must connect at least two distinct rooms. Adjacent corridor cells may join, branch and form loops. Shared room walls are actual structural separators; they are removed only for admitted room combinations. Small structural corner junctions prevent diagonal point contacts from becoming invalid mesh edges. Connectivity is verified independently of visual adjacency.
 
-## M5 sky, branching and height rules
+Clear corridor and doorway widths remain **4–12 m**. Straight runs and turns are all rectangular. Hallway ceilings have one uniform flat height. Room/feature/alcove ceilings may have different flat heights, joined by vertical soffits. No generated face is sloped. The shared sky renderer uses boxes only in this viewer, preserving the current game's normal rendering option.
 
-Windows, skylights and fully open-looking ceilings show three miniature **3D sky scenes**, with camera parallax. The sky uses plain boxes/pyramids and a flat sky gradient; texture/cloud detail is disabled in this viewer. Its 540 triangles are rendered off-world, separate from the dungeon mesh. Sky masks lie on the sealed structural boundary: Selves and projectiles cannot leave through them. Raised ceiling sectors form skylight reveals without trim or fixtures. These are visual sky openings, not a playable exterior.
+## Features and decaying adjacent decisions
 
-Door-free wall edges have a seeded chance of forming open sector alcoves. Corridor-bearing wall sides are reserved, including door pockets. Alcoves stay at the room perimeter floor height, have 8–12 m mouths, are at least 4 m deep and must join the complete safe navigation domain. Each room admits at most two alcoves and 180 m² additional area. An admitted alcove has a **0.1%** repeat-branch chance, capped at depth two. A forced-repeat fixture verifies the rare path without relying on luck.
+**Feature** is the common object. Each feature has a room-relative rectangular mask and combinable `trap`, `waterfall`, `column`, `relief` flags, referenced from `sector.flatDetail`. There is no donut-specific geometry or fixed room assignment.
 
-Plain rooms use four broad terraces descending toward a flat centre: **0.15625 m risers, 2 m treads, total drop 0.625 m**. The outer 4 m floor band stays at corridor/alcove entry height. Skylight ceilings rise locally by 0.5 m over a flat centre sector. Existing optional pits/platforms retain their explicit safe/unsafe rules.
+The count budget is `floor(roomFloorArea / density)`, capped at eight features per room; density defaults to **512 m² per feature** and is adjustable in the viewer. A separate **20% floor coverage cap** applies. Structural wall area is excluded. Desired feature count is sampled within the budget, and a feature is admitted only if it fits the area limit, entrance reservations, separation and safe route requirements. Coverage counts each outer mask once, including any nested relief steps.
 
-Doors now take **0.25 s** for a full stroke. Each physical leaf emits one original synthesized start cue and one finish cue per opening or closing stroke. Reversals start a new motion and do not fabricate a completion for the interrupted stroke. Parked doors are silent. The 64-event queue is bounded; cues wait at most 0.25 s for the regular sound propagation pass, which preserves the separate 128/128 work budgets and existing voice caps. Sky boundaries absorb sample rays and reject reflected echo legs rather than acting like a solid acoustic ceiling.
+Masks scale with room dimensions and may be placed anywhere legal. They do not have to be centred. Columns use raised sector floors; traps may use lethal liquid pits. Waterfall flags use existing vertical sector boundaries, with solid red lava or green radioactive surfaces. Relief features use flat tiers and real 0.15625 m steps. Surface-library dressing remains a separate system.
 
-## Controls
+All spatial style proposals use a shared directed inheritance rule:
 
-- Generate a seed, choose 6/9/12 rooms, or load a qualified package.
-- **Walk / mouse look** captures the mouse. WASD moves, Shift walks, Space jumps, C crouches, Esc releases capture.
-- **AI walk to destination / Tour every region** uses the actual controller and opens route doors. The map includes all ring quadrants and post bypasses. Manual movement cancels a tour.
-- **3D overview / Inspection cutaway** hides ceilings visually while collision remains sealed.
-- **Enable sound** then **Sound at selected destination** auditions room/corridor propagation. **Test shot**, or left click while captured, sends an invisible diagnostic projectile: firing, each entered sector and wall impact emit sound. No projectile/world dressing geometry is added.
-- Health and burning status are shown below the destination controls. **Return to start** restores health. Hazards apply identically to the player and AI walker.
-- Sound diagnostics show independent local and external work counters. The native mixer's 16 voices and four echo-enabled voices remain separate limits.
-- **Export package** saves geometry, semantic sectors/doors/hazards, safe navigation LUTs and certificates. Touch movement is not implemented.
+```text
+next probability = parent sector's CURRENT probability / 2
+1/8 → 1/16 → 1/32 → 1/64 …
+```
 
-## Safe navigation and geometry
+Success and failure do not reset the probability to one. A decision records its value, probability, parent, source, depth and whether the parent's value was inherited. A flag rolls directly against the current reduced probability. A rejected size/category inheritance samples a different legal proposal; its propagation probability still continues to decay. If only one legal value exists, that constrained fallback is recorded explicitly. One parent per decision prevents cyclic redecay. The mechanism covers corridor/door dimensions, opening sizes/presence, ceiling heights, alcove dimensions/steps, feature flags/scale/material/count proposals, and merge probabilities. Legal size/step ranges, count/coverage limits and connected collision-free routes remain hard constraints; they are never halved or bypassed by a roll.
 
-One welded, oriented floor/wall/ceiling shell is compiled from exact snapped polygons and independent piecewise floor/ceiling planes. Sector risers and ceiling soffits are structural. Closure checks require every edge to have exactly two opposing incidences and compare signed shell volume to the integrated sector volume. Cores and posts remain actual exclusions shared by rendering, collision and navigation.
+Alcoves vary their mouth width, depth, clear height and floor offset. Each connection differs from its parent floor by at most one 0.15625 m step; clear height is at least 3 m. The existing bounds remain two alcoves / 180 m² per room, depth two and 0.1% repeat-branch chance. Door/corridor entrances and other room geometry are reserved.
 
-The required navigation domain is now explicitly **safe traversable space**, excluding unreachable platforms and lethal sectors, with a 2 m standoff around radioactive features. The complete domain is then eroded by the composite AABB plus 12 mm. No connected subset is silently substituted. Every room, hallway, donut quadrant and post bypass must be represented in one component, with exact endpoints, full all-pairs next-hop/cost validation and continuous live-engine terrain traversal witnesses. Optional unreachable/lethal feature sectors are deliberately outside this promise. Reachable platforms and shallow escapable pits remain in it.
+## Collision, navigation, sky and sound
 
-The composite half-width **1.84336 m** and height **2.50789 m** contain the current 18 model navigation allowances and level-pitch machinegun yaw extents. Bounded step traversal uses full-footprint floor support and continuous lift/forward/down SAT. M4 retains the captured **v0.1.3-based** controller/BVH adapter; it does not establish current game-controller parity. [BASELINE.json](engine/BASELINE.json) records original hashes and adaptations. WASM remains fixed at 32 MiB.
+One welded oriented shell is shared by rendering and collision, with exact fixed-point floor/wall/ceiling boundaries, real risers and soffits. Every edge needs two opposite incidences, and signed shell volume must match the integrated sector volume. All faces must be axis-aligned. Failed or superseded candidates retain the active world.
 
-Qualified schema-5 packages use generator identity `m5.0` and engine/profile/package hashes. Failed and superseded candidates retain the active world. Closed door states are runtime state; static LUT qualification assumes passable doors, while separate live-controller tests verify automatic traversal and both directions for every generated door at 4 m and 12 m fixtures.
+The entire declared safe domain is eroded by the largest composite AABB plus 12 mm. Optional lethal traps and inaccessible columns are excluded, with radioactive standoff. Every room, hallway, alcove and reachable feature must belong to one component. Complete all-pairs LUTs and continuous 3D terrain traversal witnesses are validated. The composite half-width **1.84336 m**, height **2.50789 m** covers current allowances for 18 models and level-pitch machinegun yaw extents. This uses the frozen v0.1.3-based adapter, not current game-controller parity; see [BASELINE.json](engine/BASELINE.json). WASM stays fixed at 32 MiB.
 
-## Environmental rules
+Windows, skylights and open-looking ceilings show miniature 3D sky scenes while remaining sealed to Selves/projectiles. Sky boundaries absorb local sound samples. The scenes add only off-world box geometry; they do not enter the dungeon mesh or AI graph. Sky/point lighting is still approximate and lacks wall occlusion.
 
-Fatal liquid pits kill on liquid contact. Nonfatal heat contact deals 45 health/s; sustained exposure increases ignition probability. Burning persists for four seconds after ignition and drains 18 health/s after leaving heat. Radiation has a 2 m finite range from a full hull to the source surface, quadratic falloff and stronger 100 health/s contact damage. These are prototype tuning values, shared by all Selves. Radiation has a finite zero-dose boundary so safe AI bypasses can be proven. No armor, resistance or player-specific exemption is applied here.
+Automatic doors open in 0.25 s, hold/reopen around any occupied collision bounds and use identical render/SAT leaf transforms. Each leaf emits start/finish for each stroke, with no parked repetition or false completion after reversal. Closed doors reduce graph transmission. Local sound retains **128 shared propagation/reflection samples** and a separate **128 external graph/sector evaluations** per update, independent of mixer voices. See [audio contract](../docs/LEVEL_GENERATOR_AUDIO.md).
 
-## Sound handoff
+## Controls and reproducible checks
 
-[LEVEL_GENERATOR_AUDIO.md](../docs/LEVEL_GENERATOR_AUDIO.md) defines the data contract, room/corridor graph, structural sector cells, dynamic door loss and the two work budgets. Default travel remains **three room→corridor→room stages / six transitions**. A closed door adds 24 dB loss; aperture reduces that loss. Strongest-route selection keeps bounded Pareto labels for distance and transmission, so an open alternate route can win.
-
-High resolution applies only to origins in the listener's current room. It shares **128 propagation/reflection work samples per 10 Hz update** across sounds. Low resolution has its own **128 external graph-state/sector evaluations per update**. These counts are not PCM samples or voice counts. High rays use actual 3D engine collision, including steps, ceilings, posts and doors; finite image-source echoes validate both 3D legs. Remote output uses bounded room/corridor propagation. Recording playback, HRTF and optional late reverb reuse v0.1.6 modules through an optional routing binding. The main game keeps its existing router unless supplied this binding.
-
-## Build and verify
+Generate a seed, choose layout size and feature density, or load a qualified schema-6 package (`m6.0`). Walk uses WASD/mouse, Shift, Space, C and Esc. Map selection, AI walk/tour, overview, safe-domain overlay, sound audition, diagnostic shot and package export remain available. Enable audio to hear door/fire/flight/impact cues. Room merging is reflected in the actual room count and preserved cell metadata.
 
 ```sh
-node level-generator/tools/build-profiles.mjs
-sh level-generator/tools/build-wasm.sh
 node level-generator/tools/check-core.mjs
+node level-generator/tools/check-m6.mjs
 node level-generator/tools/check-acoustics.mjs
-node level-generator/tools/check-m4.mjs
-node level-generator/tools/check-m5.mjs
 node level-generator/tools/build-catalogue.mjs
 node level-generator/tools/check-catalogue.mjs
 node level-generator/tools/check-browser.mjs
+node level-generator/tools/check-m6-browser.mjs
 node level-generator/tools/check-acoustics-browser.mjs
-node level-generator/tools/check-m5-browser.mjs
 node tools/build-pages.mjs
 node tools/check-pages.mjs
 ```
 
-Rust is pinned at 1.100.0. Reports and screenshots are ignored under `.local/level-generator-checks/`; research remains private under `.local/level-generator/`. Geometry vendor code and [licenses](licenses/geometry.txt) remain pinned and local. GitHub Pages stages runtime files only.
+Rebuild profiles/WASM with the existing pinned build tools when their owning sources change. Reports and screenshots remain ignored under `.local/level-generator-checks/`; research stays in `.local/level-generator/`. The site package includes runtime files only. Preserve the pinned geometry [licenses](licenses/geometry.txt).
 
-## Limits
-
-This is a collision-sealed, single-valued heightfield with visual sky openings. Natural variants, stacked rooms, production sector-list/Recomposition integration, all weapons/pitches, dynamic crowds and physical-device acceptance remain pending. The AI demonstration uses one actual walker, not a crowd. Point lights currently lack wall occlusion and may spill through walls. The sound model is a bounded approximation, with event/voice culling under load, not a full wave-equation solver or calibrated environmental audio simulation. Combat pacing and damage balance require user play review.
+Remaining work: production sector/Recomposition integration, physical devices, crowds, other weapons/pitches, lighting occlusion, feature/alcove combat pacing and acoustic/damage calibration. These tests establish bounded prototype behavior, not exhaustive gameplay acceptance.

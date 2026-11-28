@@ -21,7 +21,7 @@ export function terrainFaces(plan,polygons){
  for(const edges of floorEdges.values()){
   if(edges.length===1){const e=edges[0];wall(e,e.za,e.zb,e.ca,e.cb,'wall',e.material);}
   else if(edges.length===2){const [a,b]=edges;
-   if(a.za+a.zb!==b.za+b.zb){const low=a.za+a.zb<b.za+b.zb?a:b,high=low===a?b:a;wall(low,low.za,low.zb,high.zb,high.za,'riser',low.material);}
+   if(a.za+a.zb!==b.za+b.zb){const low=a.za+a.zb<b.za+b.zb?a:b,high=low===a?b:a;wall(low,low.za,low.zb,high.zb,high.za,'riser',low.material||high.material);}
    if(a.ca+a.cb!==b.ca+b.cb){const low=a.ca+a.cb<b.ca+b.cb?a:b,high=low===a?b:a;wall(high,low.cb,low.ca,high.ca,high.cb,'ceiling-riser');}
   }else throw new Error('Non-manifold terrain partition.');
  }

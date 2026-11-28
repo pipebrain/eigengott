@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eigengott · Level Generator M5</title><link rel="stylesheet" href="./style.css"></head>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Eigengott · Level Generator M6</title><link rel="stylesheet" href="./style.css"></head>
 <body>
-<header><div><strong>EIGENGOTT</strong><span class="tag">LEVEL GENERATOR M5</span></div><nav class="actions" aria-label="Build navigation"><a href="../">Build menu</a><a href="../play.html">Current game</a><span id="engine-label">v0.1.3-based terrain + lighting</span></nav></header>
+<header><div><strong>EIGENGOTT</strong><span class="tag">LEVEL GENERATOR M6</span></div><nav class="actions" aria-label="Build navigation"><a href="../">Build menu</a><a href="../play.html">Current game</a><span id="engine-label">v0.1.3-based terrain + lighting</span></nav></header>
 <main>
  <section class="tools" aria-label="Generator controls">
   <label>Seed<input id="seed" type="number" min="0" max="4294967295" value="1776" step="1"></label>
-  <label>Rooms<select id="rooms"><option>6</option><option selected>9</option><option>12</option></select></label>
+  <label>Room cells<select id="rooms"><option>6</option><option selected>9</option><option>12</option><option>16</option></select></label><label>Layout grid<select id="grid-size"><option value="0">Auto · max 12×12</option><option>5</option><option>6</option><option>7</option><option>8</option><option>10</option><option>12</option></select></label><label>m² per feature<input id="feature-density" type="number" min="128" max="4096" step="128" value="512"></label>
   <button id="generate">Generate</button><button id="random">Random seed</button>
   <label>Qualified seeds<select id="catalogue"><option value="">Choose a seed</option></select></label>
   <button id="export" disabled>Export package</button>
@@ -35,5 +35,5 @@
  </section>
  <div id="status" role="status">Loading generator engine snapshot…</div>
  <div id="error" role="alert" hidden></div>
- <p class="scope">M5: sector heights, lethal pits, sloped connections, real steps, curved corridors, donut rooms and full-height posts. Corridors stay within 4–12 m. Sealed terrain, precomputed traversal and a bounded acoustic graph with an optional v0.1.6 sound audition. Automatic doors, flat turning landings, sloped stair ceilings and red/green hazards. Sealed 3D sky windows/skylights, bounded alcoves and descending terraces. No surface details or fixtures. <a href="./licenses/geometry.txt">Open-source licenses</a>.</p>
+ <p class="scope">M6: sector heights, lethal pits, orthogonal rooms and shared corridor networks in at most 12×12 layout cells. Corridors stay within 4–12 m. Sealed terrain, precomputed traversal and a bounded acoustic graph with an optional v0.1.6 sound audition. Automatic doors, uniform flat ceilings, legal steps and red/green hazards. Sealed sky openings, variable alcoves and area-budgeted sector features. No surface details or fixtures. <a href="./licenses/geometry.txt">Open-source licenses</a>.</p>
 </main><script type="module" src="./main.js"></script></body></html>

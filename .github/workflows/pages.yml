@@ -68,8 +68,7 @@ jobs:
           node playable-test/tools/check-loot-motion.mjs
           node level-generator/tools/check-core.mjs
           node level-generator/tools/check-acoustics.mjs
-          node level-generator/tools/check-m4.mjs
-          node level-generator/tools/check-m5.mjs
+          node level-generator/tools/check-m6.mjs
           node level-generator/tools/check-catalogue.mjs
           node audio-previews/tools/check-audio.mjs
           node dos-maze/tools/check-generator.mjs

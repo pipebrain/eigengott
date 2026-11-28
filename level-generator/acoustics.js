@@ -23,7 +23,7 @@ export function buildAcoustics(plan,structure,nav){
  for(const h of plan.hallways)graph.nodes.push({id:'corridor:'+h.id,kind:'corridor',owner:h.id,label:h.name,position:[...h.anchor,floorAt(plan,...h.anchor)+1.5],footprint:h.polygons,reflectionWalls:[],navTarget:nav.targets.find(t=>t.kind==='hallway'&&t.id===h.id).node});
  graph.edges=graph.nodes.map(()=>[]);
  for(const h of plan.hallways){const corridor=plan.rooms.length+h.id;
-  for(const id of[h.a,h.b]){const room=plan.rooms[id],end=h.points.reduce((best,p)=>distance(p,room.anchor)<distance(best,room.anchor)?p:best,h.points[0]),portal=graph.portals.length;
+  for(const id of h.rooms){const room=plan.rooms[id],end=h.ports.find(p=>p.room===id).position,portal=graph.portals.length;
    graph.portals.push({id:portal,room:id,corridor:h.id,position:[...end,floorAt(plan,...end)+1.5]});
    const a=graph.nodes[id].navTarget,b=graph.nodes[corridor].navTarget,length=nav.cost[a*nav.count+b];if(!Number.isFinite(length)||length<=0)throw new Error('Acoustic connection lacks a valid navigation path.');
    for(const[from,to]of [[id,corridor],[corridor,id]])graph.edges[from].push({to,portal,distance:length,lossDb:graph.corridorLossDb/2,doors:plan.doors.filter(d=>d.hallway===h.id&&d.room===id).map(d=>d.id)});

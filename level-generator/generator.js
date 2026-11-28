@@ -9,7 +9,7 @@ const centre=p=>[0,1].map(k=>p.reduce((s,v)=>s+v[k],0)/p.length);
 const edgeKey=(a,b)=>[pointKey(a),pointKey(b)].sort().join(':');
 export function compileStructure(plan){
  for(const r of plan.rooms)r.domain=refineOutline(plan,r.domain);for(const s of plan.sectors)s.polygons=refineOutline(plan,s.polygons);for(const h of plan.hallways)h.polygons=refineOutline(plan,h.polygons);
- const additions=[...plan.rooms.flatMap(r=>r.domain),...plan.hallways.flatMap(h=>h.polygons)],obstacles=plan.rooms.flatMap(r=>r.obstacles.map(o=>[o.outline]));
+ const additions=[...plan.rooms.flatMap(r=>r.domain),...plan.hallways.flatMap(h=>h.polygons)],obstacles=[...plan.rooms.flatMap(r=>r.obstacles.map(o=>[o.outline])),...(plan.dividers||[]).flatMap(d=>d.polygons)];
  let polygons=clip.union(...additions);if(obstacles.length)polygons=clip.difference(polygons,...obstacles);
  // Collision ABI is 1/1024 m. Derive navigation from the exact snapped outline.
  polygons=polygons.map(p=>p.map(r=>cleanRing(r,true)).filter(r=>r.length>=3));
@@ -30,9 +30,9 @@ export function validateStructure(plan,s){
  let unmatched=0,nonmanifold=0,winding=0;for(const [count,balance]of edges.values()){if(count===1)unmatched++;if(count>2)nonmanifold++;if(balance!==0)winding++;}
  const volume=-volume6/6,expected=s.volume;
  if(unmatched||nonmanifold||winding||volume6>=0||Math.abs(volume-expected)>Math.max(.001,expected*1e-8))throw new Error('Enclosure validation failed: '+JSON.stringify({unmatched,nonmanifold,winding,volume,expected}));
- if(plan.rooms.some(r=>!r.hallways.length)||plan.hallways.some(h=>h.a===h.b||!plan.rooms[h.a]||!plan.rooms[h.b]||h.width<4||h.width>12||h.sectionWidths.some(w=>w<4||w>12)))throw new Error('Room/hallway incidence or width invalid.');
+ if(plan.rooms.some(r=>!r.hallways.length)||plan.hallways.some(h=>new Set(h.rooms).size<2||h.rooms.some(id=>!plan.rooms[id])||h.width<4||h.width>12||h.sectionWidths.some(w=>w<4||w>12)))throw new Error('Room/hallway incidence or width invalid.');
  for(const r of plan.rooms)for(const o of r.obstacles)if(contains(s.polygons,centre(o.outline)))throw new Error('Structural obstacle was not subtracted.');
- return{unmatched,nonmanifold,winding,enclosedVolume:volume,floorArea:s.floorArea,vertices:s.points.length/3,triangles:s.triangles.length/3,structuralRoles:['floor','ceiling','wall','riser','ceiling-riser'],decorativeTriangles:0,features:plan.summary,proof:'Polygon union minus cores/posts; conforming piecewise-planar terrain, real risers and ceilings; welded oriented shell.'};
+ return{unmatched,nonmanifold,winding,enclosedVolume:volume,floorArea:s.floorArea,vertices:s.points.length/3,triangles:s.triangles.length/3,structuralRoles:['floor','ceiling','wall','riser','ceiling-riser'],decorativeTriangles:0,features:plan.summary,proof:'Orthogonal rooms and shared hallway network; structural shared-wall/corner separators; flat sectors and real steps; welded oriented shell.'};
 }
 // Greedily merge adjacent nav triangles only when their complete union is convex.
 function convexRegions(triangles){
@@ -66,7 +66,8 @@ export function buildNavigation(plan,s,profile){
  const add=(p,region)=>{const id=points.length;points.push(liftPoint(p));edges.push([]);owners.push(region);connect(id,region);return id;};
  for(let a=0;a<polygons.length;a++)for(let b=a+1;b<polygons.length;b++){const at=portal(polygons[a],polygons[b]);if(at){const n=add(at,a);connect(n,b);}}
  const attach=(p,label,kind,id)=>{const region=polygons.findIndex(r=>r.every((a,i)=>cross(a,r[(i+1)%r.length],p)>=-1e-7));if(region<0||!boxCovered(s,...p,radius))throw new Error('Region target lacks clearance: '+label);const node=add(p,region);targets.push({label,kind,id,node,point:points[node]});};
- for(const r of plan.rooms){attach(r.anchor,r.name,'room',r.id);if(r.kind==='donut'){const o=r.obstacles[0],haz=plan.hazards.find(h=>h.wall===o.outline)||plan.hazards.find(h=>h.sector===r.sectors.at(-1)),outline=haz?haz.polygons[0][0]:o.outline,pad=haz?.radius||0,xs=outline.map(v=>v[0]+Math.sign(v[0]-r.cx)*pad),ys=outline.map(v=>v[1]+Math.sign(v[1]-r.cy)*pad);for(const [p,label]of [[[r.cx,(Math.max(...ys)+r.y1)/2],'north'],[[(Math.max(...xs)+r.x1)/2,r.cy],'east'],[[r.cx,(Math.min(...ys)+r.y0)/2],'south'],[[(Math.min(...xs)+r.x0)/2,r.cy],'west']])attach(p,r.name+' · ring '+label,'ring',r.id);}if(r.kind==='posts')for(const sign of [-1,1])attach([r.cx,r.cy+sign*7],r.name+' · posts '+(sign<0?'south':'north'),'post-bypass',r.id);}
+ for(const r of plan.rooms)attach(r.anchor,r.name,'room',r.id);
+ for(const f of plan.roomFeatures)if(f.structure==='mask'||f.structure==='relief')attach([(f.box.x0+f.box.x1)/2,(f.box.y0+f.box.y1)/2],'Feature '+(f.id+1),'feature',f.id);
  for(const a of plan.alcoves)attach(a.anchor,'Room '+(a.room+1)+' · alcove '+(a.id+1),'alcove',a.id);
  for(const h of plan.hallways)attach(h.anchor,h.name,'hallway',h.id);
  if(points.length>2048)throw new Error('Waypoint budget exceeded.');
